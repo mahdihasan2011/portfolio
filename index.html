@@ -1,903 +1,1407 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Mahdi Hasan</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="It's Mahdi Hasan, I'm a Software Engineer with over 2 years of professional experience in web development with laravel." />
-	<meta name="keywords" content="Mahdi Hasan, Software Engineer, Web Developer, Laravel Developer, Freelancer" />
-	<meta name="author" content="Mahdi Hasan" />
+<!DOCTYPE html>
+<html lang="en">
 
-  	<!-- Facebook and Twitter integration -->
-	<meta property="og:title" content=""/>
-	<meta property="og:image" content=""/>
-	<meta property="og:url" content=""/>
-	<meta property="og:site_name" content=""/>
-	<meta property="og:description" content=""/>
-	<meta name="twitter:title" content="" />
-	<meta name="twitter:image" content="" />
-	<meta name="twitter:url" content="" />
-	<meta name="twitter:card" content="" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahdi's Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
 
-	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-	<link rel="shortcut icon" href="favicon.ico">
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .profile-title,
+        .mobile-profile-title,
+        .display-5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
 
-	<!-- <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet"> -->
-	<!-- <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700" rel="stylesheet"> -->
-	
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<!-- Flexslider  -->
-	<link rel="stylesheet" href="css/flexslider.css">
-	<!-- Flaticons  -->
-	<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
-	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
+        .sidebar .profile-title,
+        .sidebar .profile-subtitle,
+        .sidebar .nav-link {
+            font-family: 'Poppins', sans-serif;
+        }
 
-	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
+        .mobile-profile-title,
+        .mobile-profile-subtitle,
+        .mobile-nav .nav-link {
+            font-family: 'Poppins', sans-serif;
+        }
 
-	</head>
-	<body>
-	<div id="colorlib-page">
-		<div class="container-wrap">
-		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-		<aside id="colorlib-aside" role="complementary" class="border js-fullheight">
-			<div class="text-center">
-				<div class="author-img" style="background-image: url(images/picture3.jpeg);"></div>
-				<h1 id="colorlib-logo"><a href="index.html">Mahdi Hasan</a></h1>
-				<span class="position"><a href="#">Software Developer</a>, Freelancer</span>
-			</div>
-			<nav id="colorlib-main-menu" role="navigation" class="navbar">
-				<div id="navbar" class="collapse">
-					<ul>
-						<li class="active"><a href="#" data-nav-section="home">Home</a></li>
-						<li><a href="#" data-nav-section="about">About</a></li>
-						<!-- <li><a href="#" data-nav-section="services">Services</a></li> -->
-						<li><a href="#" data-nav-section="skills">Skills</a></li>
-						<li><a href="#" data-nav-section="education">Education</a></li>
-						<li><a href="#" data-nav-section="experience">Experience</a></li>
-						<li><a href="#" data-nav-section="blog">Work</a></li>
-						<!-- <li><a href="#" data-nav-section="blog">Blog</a></li> -->
-						<li><a href="#" data-nav-section="contact">Contact</a></li>
-					</ul>
-				</div>
-			</nav>
+        /* --- General & Light Mode Styles --- */
+        :root {
+            --primary-bg: #e9ecef;
+            --secondary-bg: #ffffff;
+            --primary-text: #212529;
+            --secondary-text: #495057;
+            --border-color: #dee2e6;
+            --accent-color: #0d6efd;
+            --sidebar-width: 350px;
+        }
 
-			<div class="colorlib-footer">
-				<p>
-					<small>Copyright &copy;
-						<script>document.write(new Date().getFullYear());</script> 
-						All rights reserved | Developed by 
-						<a href="https://mahdisaikat.github.io/portfolio/">Mahdi Hasan</a>
-					</small>
-				</p>
-				<ul>
-					<li>
-						<a href="#" target="_blank">
-							<i class="icon-facebook2"></i>
-						</a>
-					</li>
-					<li>
-						<a href="#" target="_blank">
-							<i class="icon-twitter2"></i>
-						</a>
-					</li>
-					<li>
-						<a href="#" target="_blank">
-							<i class="icon-instagram"></i>
-						</a>
-					</li>
-					<li>
-						<a href="https://www.linkedin.com/in/mahdisaikat/" target="_blank">
-							<i class="icon-linkedin2"></i>
-						</a>
-					</li>
-				</ul>
-			</div>
+        body {
+            color: var(--primary-text);
+            transition: background-color 0.4s, color 0.4s;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
 
-		</aside>
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
 
-		<div id="colorlib-main">
-			<section id="colorlib-hero" class="js-fullheight" data-section="home">
-				<div class="flexslider js-fullheight">
-					<ul class="slides">
-				   	<li style="background-image: url(images/pic2.jpeg);">
-				   		<div class="overlay"></div>
-				   		<div class="container-fluid">
-				   			<div class="row">
-					   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
-					   				<div class="slider-text-inner js-fullheight">
-					   					<div class="desc">
-						   					<h1>Hi! <br>It's Mahdi Hasan</h1>
-						   					<h2>
-						   						I'm a Software Engineer, Here is my linkedin profile link 
-						   						<a href="https://www.linkedin.com/in/mahdisaikat/">
-													Mahdi Hasan
-						   						</a>
-						   					</h2>
-												<p><a href="images/Mahdi-Hasan-Resume.pdf" class="btn btn-primary btn-learn" target="_blank">View My Resume <i class="icon-link2"></i></a></p>
-										</div>
-					   				</div>
-					   			</div>
-					   		</div>
-				   		</div>
-				   	</li>
-				   	<li style="background-image: url(images/pic2.jpeg);">
-				   		<div class="overlay"></div>
-				   		<div class="container-fluid">
-				   			<div class="row">
-					   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
-					   				<div class="slider-text-inner">
-					   					<div class="desc">
-						   					<h1>I'm a<br>professional Web Developer </h1>
-												<h2>
-													I've over 2 years of professional experience in web development with laravel.<br> My github link
-													<a href="https://github.com/mahdisaikat" target="_blank">Mahdi Hasan
-													</a>
-												</h2>
-												<p><a href="images/Mahdi-Hasan-Resume.pdf" class="btn btn-primary btn-learn" download>Download My Resume <i class="icon-download"></i></a></p>
-											</div>
-					   				</div>
-					   			</div>
-					   		</div>
-				   		</div>
-				   	</li>
-				  	</ul>
-			  	</div>
-			</section>
+            50% {
+                background-position: 100% 50%;
+            }
 
-			<section class="colorlib-about" data-section="about">
-				<div class="colorlib-narrow-content">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
-								<div class="col-md-12">
-									<div class="about-desc">
-										<span class="heading-meta">About Me</span>
-										<h2 class="colorlib-heading">Who Am I?</h2>
-										<p>Hi I'm <strong>Mahdi Hasan</strong>. I've completed my graduation in Computer Science & Engineering from International University of Business Agriculture & Technology, Uttara, Dhaka.</p>
-										<p> I have been workng as a laravel developer for last couple of years with several software firms and I've been working also as a freelance developer.</p>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
-									<div class="services color-1">
-										<span class="icon2"><i class="icon-monitor"></i></span>
-										<h3>Software Development</h3>
-									</div>
-								</div>
-								<div class="col-md-3 animate-box" data-animate-effect="fadeInRight">
-									<div class="services color-2">
-										<span class="icon2"><i class="icon-globe-outline"></i></span>
-										<h3>Web Development</h3>
-									</div>
-								</div>
-								<div class="col-md-3 animate-box" data-animate-effect="fadeInTop">
-									<div class="services color-3">
-										<span class="icon2"><i class="icon-data"></i></span>
-										<h3>Database Deployment</h3>
-									</div>
-								</div>
-								<div class="col-md-3 animate-box" data-animate-effect="fadeInBottom">
-									<div class="services color-4">
-										<span class="icon2"><i class="icon-phone3"></i></span>
-										<h3>Api Integration for Apps</h3>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
-									<div class="hire">
-										<h2>I am glad to inform you that I've done <br>100+ projects sucessfully!</h2>
-										<a href="#" class="btn-hire">Hire me</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+            100% {
+                background-position: 0% 50%;
+            }
+        }
 
+        /* --- Dark Mode Styles --- */
+        body.dark-mode {
+            --primary-bg: #1a1a1a;
+            --secondary-bg: #2c2c2c;
+            --primary-text: #e0e0e0;
+            --secondary-text: #a0a0a0;
+            --border-color: #444;
+            --accent-color: #4dabf7;
+        }
 
-			
-			<!-- <section class="colorlib-services" data-section="services">
-				<div class="colorlib-narrow-content">
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<span class="heading-meta">What I do?</span>
-							<h2 class="colorlib-heading">Here are some of my expertise</h2>
-						</div>
-					</div>
-					<div class="row row-pt-md">
-						<div class="col-md-4 text-center animate-box">
-							<div class="services color-1">
-								<span class="icon">
-									<i class="icon-bulb"></i>
-								</span>
-								<div class="desc">
-									<h3>Innovative Ideas</h3>
-									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 text-center animate-box">
-							<div class="services color-2">
-								<span class="icon">
-									<i class="icon-data"></i>
-								</span>
-								<div class="desc">
-									<h3>Software</h3>
-									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 text-center animate-box">
-							<div class="services color-3">
-								<span class="icon">
-									<i class="icon-phone3"></i>
-								</span>
-								<div class="desc">
-									<h3>Application</h3>
-									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 text-center animate-box">
-							<div class="services color-4">
-								<span class="icon">
-									<i class="icon-layers2"></i>
-								</span>
-								<div class="desc">
-									<h3>Graphic Design</h3>
-									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 text-center animate-box">
-							<div class="services color-5">
-								<span class="icon">
-									<i class="icon-data"></i>
-								</span>
-								<div class="desc">
-									<h3>Software</h3>
-									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 text-center animate-box">
-							<div class="services color-6">
-								<span class="icon">
-									<i class="icon-phone3"></i>
-								</span>
-								<div class="desc">
-									<h3>Application</h3>
-									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section> -->
-			
-			<div id="colorlib-counter" class="colorlib-counters" style="background-image: url(images/cover_bg_1.jpg);" data-stellar-background-ratio="0.5">
-				<div class="overlay"></div>
-				<div class="colorlib-narrow-content">
-					<div class="row">
-					</div>
-					<div class="row">
-						<div class="col-md-3 text-center animate-box">
-							<span class="colorlib-counter js-counter" data-from="0" data-to="25" data-speed="5000" data-refresh-interval="50"></span>
-							<span class="colorlib-counter-label">Live Works</span>
-						</div>
-						<div class="col-md-3 text-center animate-box">
-							<span class="colorlib-counter js-counter" data-from="0" data-to="7" data-speed="5000" data-refresh-interval="50"></span>
-							<span class="colorlib-counter-label">Current Projects</span>
-						</div>
-						<div class="col-md-3 text-center animate-box">
-							<span class="colorlib-counter js-counter" data-from="0" data-to="14" data-speed="5000" data-refresh-interval="50"></span>
-							<span class="colorlib-counter-label">Happy Clients</span>
-						</div>
-						<div class="col-md-3 text-center animate-box">
-							<span class="colorlib-counter js-counter" data-from="0" data-to="103" data-speed="5000" data-refresh-interval="50"></span>
-							<span class="colorlib-counter-label">Completed Projects</span>
-						</div>
-					</div>
-				</div>
-			</div>
+        /* --- Scrollbar --- */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
 
-			<section class="colorlib-skills" data-section="skills">
-				<div class="colorlib-narrow-content">
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<span class="heading-meta">My Specialty</span>
-							<h2 class="colorlib-heading animate-box">My Skills</h2>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
-							<p>Programming is very important thing .....</p>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="progress-wrap">
-								<h3>Php</h3>
-								<div class="progress">
-								 	<div class="progress-bar color-1" role="progressbar" aria-valuenow="75"
-								  	aria-valuemin="0" aria-valuemax="100" style="width:75%">
-								    <span>75%</span>
-								  	</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInRight">
-							<div class="progress-wrap">
-								<h3>Laravel</h3>
-								<div class="progress">
-								 	<div class="progress-bar color-2" role="progressbar" aria-valuenow="85"
-								  	aria-valuemin="0" aria-valuemax="100" style="width:85%">
-								    <span>85%</span>
-								  	</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="progress-wrap">
-								<h3>MySQL</h3>
-								<div class="progress">
-								 	<div class="progress-bar color-6" role="progressbar" aria-valuenow="85"
-								  	aria-valuemin="0" aria-valuemax="100" style="width:85%">
-								    <span>85%</span>
-								  	</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInRight">
-							<div class="progress-wrap">
-								<h3>jQuery</h3>
-								<div class="progress">
-								 	<div class="progress-bar color-4" role="progressbar" aria-valuenow="75"
-								  	aria-valuemin="0" aria-valuemax="100" style="width:75%">
-								    <span>75%</span>
-								  	</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="progress-wrap">
-								<h3>HTML5</h3>
-								<div class="progress">
-								 	<div class="progress-bar color-3" role="progressbar" aria-valuenow="80"
-								  	aria-valuemin="0" aria-valuemax="100" style="width:80%">
-								    <span>80%</span>
-								  	</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInRight">
-							<div class="progress-wrap">
-								<h3>Ajax</h3>
-								<div class="progress">
-								 	<div class="progress-bar color-6" role="progressbar" aria-valuenow="80"
-								  	aria-valuemin="0" aria-valuemax="100" style="width:80%">
-								    <span>80%</span>
-								  	</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="progress-wrap">
-								<h3>CSS3</h3>
-								<div class="progress">
-								 	<div class="progress-bar color-5" role="progressbar" aria-valuenow="80"
-								  	aria-valuemin="0" aria-valuemax="100" style="width:80%">
-								    <span>80%</span>
-								  	</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="progress-wrap">
-								<h3>JavaScript</h3>
-								<div class="progress">
-								 	<div class="progress-bar color-7" role="progressbar" aria-valuenow="80"
-								  	aria-valuemin="0" aria-valuemax="100" style="width:80%">
-								    <span>80%</span>
-								  	</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+        ::-webkit-scrollbar-track {
+            background: var(--primary-bg);
+        }
 
-			<section class="colorlib-education" data-section="education">
-				<div class="colorlib-narrow-content">
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<span class="heading-meta">Education</span>
-							<h2 class="colorlib-heading animate-box">Education</h2>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
-							<div class="fancy-collapse-panel">
-								<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-									<div class="panel panel-default">
-									    <div class="panel-heading" role="tab" id="headingOne">
-									        <h4 class="panel-title">
-									            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><b>Bachelor of Science in Computer Science & Engineering</b>,
-												<i>2013 - 2017</i>
-									            </a>
-									        </h4>
-									    </div>
-									    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-									         <div class="panel-body">
-									      		<ul>
-													<li>International University of Business Agriculture and Technology</li>
-													<ul>- 4 Embankment Drive Road,Sector-10, Uttara Model Town, Dhaka-1230.</ul>
-													<!-- <li>4 Embankment Drive Road,Sector-10, Uttara Model Town, Dhaka-1230.</li> -->
-													<!-- <li>Fall 2013 - Fall 2017</li> -->
-													<!-- <li>CGPA : 2.89</li> -->
-													
-												</ul>
-									            <!-- <div class="row">
-										      		<div class="col-md-6">
-										      			<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
-										      		</div>
-										      		<div class="col-md-6">
-										      			<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-										      		</div>
-										      		<p class="col-lg-12">
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--accent-color);
+            border-radius: 20px;
+        }
 
-													</p>
-										      	</div> -->
-									         </div>
-									    </div>
-									</div>
-									<div class="panel panel-default">
-									    <div class="panel-heading" role="tab" id="headingTwo">
-									        <h4 class="panel-title">
-									            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><b>Higher Secondary Certificate</b>, <i>2012</i></a>
-									        </h4>
-									    </div>
-									    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-									        <div class="panel-body">
-									            <!-- <p>Far far away, behind the word <strong>mountains</strong>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p> -->
-													<ul>
-														<li>Dr. Mahbubur Rahman Mollah College</li>
-														<ul>- Demra Road, college Gate Matuail, Dhaka-1362</ul>
-														<!-- <li>GPA : <b>5.00</b></li> -->
-													</ul>
-									        </div>
-									    </div>
-									</div>
-									<div class="panel panel-default">
-									    <div class="panel-heading" role="tab" id="headingThree">
-									        <h4 class="panel-title">
-									            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><b>Secondary School Certificate</b>, <i>2010</i></a>
-									        </h4>
-									    </div>
-									    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-									        <div class="panel-body">
-									            <!-- <p>Far far away, behind the word <strong>mountains</strong>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>	 -->
-									            <ul>
-													<li>Shamsul Hoque Khan School & College</li>
-													<ul>- Paradogair, Konapara, Demra, Dhaka-1362</ul>
-													<!-- <li>GPA : <b>5.00</b></li> -->
-												</ul>
-									        </div>
-									    </div>
-									</div>
+        /* --- Sidebar Styles --- */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background-color: var(--secondary-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.5rem;
+            transition: all 0.4s;
+            z-index: 1000;
+        }
 
-									<!-- <div class="panel panel-default">
-									    <div class="panel-heading" role="tab" id="headingFour">
-									        <h4 class="panel-title">
-									            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Diploma in Information Technology
-									            </a>
-									        </h4>
-									    </div>
-									    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-									        <div class="panel-body">
-									            <p>Far far away, behind the word <strong>mountains</strong>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>	
-									        </div>
-									    </div>
-									</div> -->
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--secondary-text);
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 1001;
+        }
 
-									<!-- <div class="panel panel-default">
-									    <div class="panel-heading" role="tab" id="headingFive">
-									        <h4 class="panel-title">
-									            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">High School Secondary Education
-									            </a>
-									        </h4>
-									    </div>
-									    <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-									        <div class="panel-body">
-									            <p>Far far away, behind the word <strong>mountains</strong>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>	
-									        </div>
-									    </div>
-									</div> -->
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+        .theme-toggle:hover {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
 
-			<section class="colorlib-experience" data-section="experience">
-				<div class="colorlib-narrow-content">
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<span class="heading-meta">Experience</span>
-							<h2 class="colorlib-heading animate-box">Work Experience</h2>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-				         <div class="timeline-centered">
-					        <article class="timeline-entry animate-box" data-animate-effect="fadeInLeft">
-					            <div class="timeline-entry-inner">
+        .theme-toggle .bi-sun {
+            display: none;
+        }
 
-					               <div class="timeline-icon color-4">
-					                  <i class="icon-pen2"></i>
-					               </div>
+        .theme-toggle .bi-moon {
+            display: inline-block;
+        }
 
-					               <div class="timeline-label">
-					                  <h2><a href="#">Web Developer</a> <span>Remote Job</span></h2>
-					                  <p>As of February, 2021 I've started working at <strong>Tiyasha Software</strong>, Bengaluru, Karnataka 560060, India. Here we work remotely with the team on several technologies.</p>
-					               </div>
-					            </div>
-							</article>
+        body.dark-mode .theme-toggle .bi-sun {
+            display: inline-block;
+        }
 
-							<article class="timeline-entry animate-box" data-animate-effect="fadeInLeft">
-					            <div class="timeline-entry-inner">
+        body.dark-mode .theme-toggle .bi-moon {
+            display: none;
+        }
 
-					               <div class="timeline-icon color-1">
-					                  <i class="icon-pen2"></i>
-					               </div>
+        .sidebar .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            margin-top: 2rem;
+        }
 
-					               <div class="timeline-label">
-					                  <h2><a href="#">Laravel Developer</a> <span>Currently Working</span></h2>
-					                  <p>Since June, 2020 I'm working as a laravel developer at <strong>Field Booster Limited</strong>, Bashundhara R/A, Dhaka-1229, Bangladesh.</p>
-					               </div>
-					            </div>
-					         </article>
+        .sidebar .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--border-color);
+            margin-bottom: 1rem;
+            object-fit: cover;
+        }
 
+        .sidebar .profile-title {
+            color: var(--primary-text);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
 
-					         <article class="timeline-entry animate-box" data-animate-effect="fadeInRight">
-					            <div class="timeline-entry-inner">
-					               <div class="timeline-icon color-2">
-					                  <i class="icon-pen2"></i>
-					               </div>
-					               <div class="timeline-label">
-					               	<h2><a href="#">Junior Laravel Developer</a> <span>2018-2020</span></h2>
-					                  <p>For last 2 years I've been working as a junior laravel developer at <b>Creative Software Limited</b>, Elephant Road, Dhaka.</p>
-					               </div>
-					            </div>
-					         </article>
+        .sidebar .profile-subtitle {
+            font-size: 0.9rem;
+            color: var(--secondary-text);
+        }
 
-					         <article class="timeline-entry animate-box" data-animate-effect="fadeInLeft">
-					            <div class="timeline-entry-inner">
-					               <div class="timeline-icon color-3">
-					                  <i class="icon-pen2"></i>
-					               </div>
-					               <div class="timeline-label">
-					               	<h2><a href="#">Intern Software Developer</a> <span>2017-2018</span></h2>
-					                  <p>I've worked at Dhaka Center NIC Limited as an intern software developer from October 2017 to January 2018.</p>
-					               </div>
-					            </div>
-					         </article>
+        .sidebar .skills {
+            margin: 2rem 0;
+            text-align: center;
+        }
 
-					         <!-- <article class="timeline-entry animate-box" data-animate-effect="fadeInTop">
-					            <div class="timeline-entry-inner">
-					               <div class="timeline-icon color-4">
-					                  <i class="icon-pen2"></i>
-					               </div>
-					               <div class="timeline-label">
-					               	<h2><a href="#">Creative Designer</a> <span>2017-2018</span></h2>
-					                  <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-					               </div>
-					            </div>
-					         </article> -->
+        .sidebar .skills .badge {
+            margin: 2px;
+        }
 
-					         <article class="timeline-entry animate-box" data-animate-effect="fadeInLeft">
-					            <div class="timeline-entry-inner">
-					               <div class="timeline-icon color-5">
-					                  <i class="icon-pen2"></i>
-					               </div>
-					               <div class="timeline-label">
-					               	<h2><a href="#">Freelancer</a> <span>2018-Continuing</span></h2>
-					                  <p>Since my graduation I've working as a freelance web & software developer with verious clients and still continuing my career as a freelance developer.</p>
-					               </div>
-					            </div>
-					         </article>
+        .sidebar .nav-link {
+            color: var(--secondary-text);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            transition: color 0.2s, background-color 0.2s;
+            border-radius: 5px;
+        }
 
-					         <article class="timeline-entry begin animate-box" data-animate-effect="fadeInBottom">
-					            <div class="timeline-entry-inner">
-					               <div class="timeline-icon color-none">
-					               </div>
-					            </div>
-					         </article>
-					      </div>
-					   </div>
-				   </div>
-				</div>
-			</section>
+        .sidebar .nav-link:hover {
+            color: var(--accent-color);
+        }
 
-			<!-- <section class="colorlib-work" data-section="work">
-				<div class="colorlib-narrow-content">
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<span class="heading-meta">My Work</span>
-							<h2 class="colorlib-heading animate-box">Recent Work</h2>
-						</div>
-					</div>
-					<div class="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
-						<div class="col-md-12">
-							<p class="work-menu"><span><a href="#" class="active">Graphic Design</a></span> <span><a href="#">Web Design</a></span> <span><a href="#">Software</a></span> <span><a href="#">Apps</a></span></p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(images/img-1.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="work.html">Work 01</a></h3>
-										<span>Website</span>
-										<p class="icon">
-											<span><a href="#"><i class="icon-share3"></i></a></span>
-											<span><a href="#"><i class="icon-eye"></i> 100</a></span>
-											<span><a href="#"><i class="icon-heart"></i> 49</a></span>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInRight">
-							<div class="project" style="background-image: url(images/img-2.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="work.html">Work 02</a></h3>
-										<span>Animation</span>
-										<p class="icon">
-											<span><a href="#"><i class="icon-share3"></i></a></span>
-											<span><a href="#"><i class="icon-eye"></i> 100</a></span>
-											<span><a href="#"><i class="icon-heart"></i> 49</a></span>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInTop">
-							<div class="project" style="background-image: url(images/img-3.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="work.html">Work 03</a></h3>
-										<span>Illustration</span>
-										<p class="icon">
-											<span><a href="#"><i class="icon-share3"></i></a></span>
-											<span><a href="#"><i class="icon-eye"></i> 100</a></span>
-											<span><a href="#"><i class="icon-heart"></i> 49</a></span>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInBottom">
-							<div class="project" style="background-image: url(images/img-4.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="work.html">Work 04</a></h3>
-										<span>Application</span>
-										<p class="icon">
-											<span><a href="#"><i class="icon-share3"></i></a></span>
-											<span><a href="#"><i class="icon-eye"></i> 100</a></span>
-											<span><a href="#"><i class="icon-heart"></i> 49</a></span>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(images/img-5.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="work.html">Work 05</a></h3>
-										<span>Graphic, Logo</span>
-										<p class="icon">
-											<span><a href="#"><i class="icon-share3"></i></a></span>
-											<span><a href="#"><i class="icon-eye"></i> 100</a></span>
-											<span><a href="#"><i class="icon-heart"></i> 49</a></span>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInRight">
-							<div class="project" style="background-image: url(images/img-6.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="work.html">Work 06</a></h3>
-										<span>Web Design</span>
-										<p class="icon">
-											<span><a href="#"><i class="icon-share3"></i></a></span>
-											<span><a href="#"><i class="icon-eye"></i> 100</a></span>
-											<span><a href="#"><i class="icon-heart"></i> 49</a></span>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 animate-box">
-							<p><a href="#" class="btn btn-primary btn-lg btn-load-more">Load more <i class="icon-reload"></i></a></p>
-						</div>
-					</div>
-				</div>
-			</section>
- -->
-			<section class="colorlib-blog" data-section="blog">
-				<div class="colorlib-narrow-content">
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<span class="heading-meta">Projects I'm Currently Working On</span>
-							<h2 class="colorlib-heading">Recent Projects</h2>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="blog-entry">
-								<a href="blog.html" class="blog-img"><img src="images/pos.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
-								<div class="desc">
-									<span><small>Laravel </small> | <small> MySQL </small> | <small> 
-										<!-- <i class="icon-bubble3"></i>  -->
-									Ajax </small> | <small> Jquery </small></span>
-									<h3><a href="blog.html">Point of Sales Software</a></h3>
-									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInRight">
-							<div class="blog-entry">
-								<a href="blog.html" class="blog-img"><img src="images/ecommerce.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
-								<div class="desc">
-									<span><small>Laravel </small> | <small> MySQL </small> | <small> Ajax</small> | <small> JavaScript </small></span>
-									<h3><a href="blog.html">E-commerce Software</a></h3>
-									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="blog-entry">
-								<a href="blog.html" class="blog-img"><img src="images/crm1.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
-								<div class="desc">
-									<span><small>Laravel </small> | <small> MySQL </small> | Ajax</small></span>
-									<h3><a href="blog.html">Customer Relationship Management Software</a></h3>
-									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 animate-box">
-							<p><a href="#" class="btn btn-primary btn-lg btn-load-more">More Coming Soon.. <i class="icon-reload"></i></a></p>
-						</div>
-					</div>
-				</div>
-			</section>
+        .sidebar .nav-link.active {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
 
-			<section class="colorlib-contact" data-section="contact">
-				<div class="colorlib-narrow-content">
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<span class="heading-meta">Get in Touch</span>
-							<h2 class="colorlib-heading">Contact</h2>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
-								<div class="colorlib-icon">
-									<i class="icon-mail"></i>
-								</div>
-								<div class="colorlib-text">
-									<p><a href="mail://mahdi.saikat@gmail.com">mahdi.saikat@gmail.com</a></p>
-								</div>
-							</div>
+        .sidebar-footer {
+            margin-top: auto;
+            text-align: center;
+        }
 
-							<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
-								<div class="colorlib-icon">
-									<i class="icon-linkedin2"></i>
-								</div>
-								<div class="colorlib-text">
-									<p><a href="https://www.linkedin.com/in/mahdisaikat/">mahdisaikat</a></p>
-								</div>
-							</div>
-						</div>	
-						<div class="col-md-6">
-							<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
-								<div class="colorlib-icon">
-									<i class="icon-phone"></i>
-								</div>
-								<div class="colorlib-text">
-									<p><a href="tel://+8801307607635">+880 13 076 076 35</a></p>
-								</div>
-							</div>
-							<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
-								<div class="colorlib-icon">
-									<i class="icon-map"></i>
-								</div>
-								<div class="colorlib-text">
-									<p>
-										Asiatic Shopping Mall, Konapara, Jatrabari, Dhaka-1362, Bangladesh.
-									</p>
-								</div>
-							</div>
-						</div>
-						<!-- <div class="col-md-6 col-md-push-1">
-							<div class="row">
-								<div class="col-md-10 col-md-offset-1 col-md-pull-1 animate-box" data-animate-effect="fadeInRight">
-									<form action="">
-										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Name">
-										</div>
-										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Email">
-										</div>
-										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Subject">
-										</div>
-										<div class="form-group">
-											<textarea name="" id="message" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
-										</div>
-										<div class="form-group">
-											<input type="submit" class="btn btn-primary btn-send-message" value="Send Message">
-										</div>
-									</form>
-								</div>
-								
-							</div>
-						</div> -->
-					</div>
-				</div>
-			</section>
+        .sidebar-footer a {
+            font-size: 1.5rem;
+            color: var(--secondary-text);
+            margin: 0 0.75rem;
+            transition: color 0.2s;
+        }
 
-		</div><!-- end:colorlib-main -->
-	</div><!-- end:container-wrap -->
-	</div><!-- end:colorlib-page -->
+        .sidebar-footer a:hover {
+            color: var(--accent-color);
+        }
 
-	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<!-- Flexslider -->
-	<script src="js/jquery.flexslider-min.js"></script>
-	<!-- Owl carousel -->
-	<script src="js/owl.carousel.min.js"></script>
-	<!-- Counters -->
-	<script src="js/jquery.countTo.js"></script>
-	
-	
-	<!-- MAIN JS -->
-	<script src="js/main.js"></script>
+        /* --- Main Content & Sections --- */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 2rem 3rem;
+        }
 
-	</body>
+        .content-section {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--secondary-bg);
+            padding: 3rem;
+            margin-bottom: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .content-section {
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-card,
+        .experience-item {
+            background-color: var(--primary-bg);
+            border: 1px solid var(--border-color);
+            height: 100%;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 10px;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .project-card:hover {
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Project Card Titles */
+        .project-card .card-title {
+            color: var(--primary-text);
+        }
+
+        .project-card .card-text {
+            color: var(--secondary-text);
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tech-item {
+            background-color: rgba(13, 110, 253, 0.1);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--accent-color);
+        }
+
+        body.dark-mode .tech-item {
+            background-color: rgba(77, 171, 247, 0.2);
+        }
+
+        /* GitHub Contributions */
+        .github-contributions {
+            margin-top: 3rem;
+            background-color: var(--primary-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .github-contributions img {
+            width: 100%;
+            border-radius: 6px;
+        }
+
+        /* --- Animation --- */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Mobile Header Styles --- */
+        .mobile-header {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--secondary-bg);
+            z-index: 1001;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .mobile-header-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .mobile-profile {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .mobile-profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+            margin-right: 1rem;
+            object-fit: cover;
+        }
+
+        .mobile-profile-info {
+            flex: 1;
+        }
+
+        .mobile-profile-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--primary-text);
+        }
+
+        .mobile-profile-subtitle {
+            font-size: 0.8rem;
+            color: var(--secondary-text);
+            margin-bottom: 0;
+        }
+
+        .mobile-social-links {
+            display: flex;
+            align-items: center;
+            margin: 0 1rem;
+            gap: 1rem;
+        }
+
+        .mobile-social-links a {
+            color: var(--secondary-text);
+            font-size: 1.2rem;
+            transition: color 0.2s;
+        }
+
+        .mobile-social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .mobile-dark-mode {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--secondary-text);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .mobile-dark-mode:hover {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        .mobile-dark-mode .bi-sun {
+            display: none;
+        }
+
+        .mobile-dark-mode .bi-moon {
+            display: inline-block;
+        }
+
+        body.dark-mode .mobile-dark-mode .bi-sun {
+            display: inline-block;
+        }
+
+        body.dark-mode .mobile-dark-mode .bi-moon {
+            display: none;
+        }
+
+        .mobile-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            margin: 0.5rem 0;
+            justify-content: center;
+        }
+
+        .mobile-skills .badge {
+            font-size: 0.7rem;
+            padding: 0.25em 0.4em;
+        }
+
+        .mobile-nav {
+            display: flex;
+            justify-content: space-between;
+            margin: 0.5rem 0;
+        }
+
+        .mobile-nav .nav-link {
+            padding: 0.5rem 0.25rem;
+            font-size: 0.9rem;
+            color: var(--secondary-text);
+            text-align: center;
+            flex: 1;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .mobile-nav .nav-link:hover,
+        .mobile-nav .nav-link.active {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+        }
+
+        /* Contact Form Styles */
+        #contact form input,
+        #contact form select,
+        #contact form textarea {
+            background-color: var(--primary-bg);
+            color: var(--primary-text);
+            border: 1px solid var(--border-color);
+        }
+
+        #contact form input:focus,
+        #contact form select:focus,
+        #contact form textarea:focus {
+            background-color: var(--primary-bg);
+            color: var(--primary-text);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+
+        body.dark-mode #contact form input:focus,
+        body.dark-mode #contact form select:focus,
+        body.dark-mode #contact form textarea:focus {
+            box-shadow: 0 0 0 0.25rem rgba(77, 171, 247, 0.25);
+        }
+
+        #contact form label {
+            color: var(--primary-text);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 1.5rem;
+                margin-top: 180px;
+            }
+
+            .content-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .mobile-header {
+                display: block;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .mobile-header {
+                height: auto;
+                padding: 0.75rem;
+            }
+
+            .mobile-profile-pic {
+                width: 45px;
+                height: 45px;
+            }
+
+            .mobile-profile-title {
+                font-size: 1rem;
+            }
+
+            .mobile-profile-subtitle {
+                font-size: 0.75rem;
+            }
+
+            .mobile-nav .nav-link {
+                font-size: 0.8rem;
+            }
+
+            .mobile-social-links {
+                gap: 0.75rem;
+                margin: 0 0.5rem;
+            }
+
+            .main-content {
+                margin-top: 200px;
+            }
+
+            .github-contributions {
+                padding: 1rem;
+            }
+        }
+
+        .lead {
+            font-size: 0.9rem;
+        }
+
+        .skills-list {
+            list-style-type: none;
+            padding-left: 1rem;
+        }
+
+        .skills-list li {
+            padding: 0.25rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .skills-list li:before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            /* color: var(--bs-primary); */
+        }
+
+        /* Add to your stylesheet */
+        .text-highlight {
+            color: var(--bs-primary);
+            font-weight: 600;
+        }
+
+        .about-card {
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-content {
+            text-align: center;
+            /* margin-top: 3rem; */
+            /* padding-top: 1.5rem; */
+            /* border-top: 1px solid var(--border-color); */
+            color: var(--secondary-text);
+        }
+
+        .skills-section {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 1.2rem 0.5rem;
+            /* reduced from 2.5rem 1rem */
+            color: #f5f5f5;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .skills-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+            /* reduced */
+            background: linear-gradient(90deg, #00b4db, #0083b0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* GRID */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem 1rem;
+            /* tighter spacing */
+        }
+
+        /* ITEM */
+        .skill-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 8px;
+            padding: 0.7rem 0.9rem;
+            /* reduced */
+            transition: all 0.25s ease;
+        }
+
+        .skill-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* HEADER */
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.4rem;
+        }
+
+        .skill-header i {
+            font-size: 1rem;
+            color: #00b4db;
+        }
+
+        .skill-header span {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .skill-value {
+            font-size: 0.8rem;
+            color: #bbb;
+        }
+
+        /* PROGRESS BAR */
+        .skill-bar {
+            height: 5px;
+            /* slightly thinner */
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skill-fill {
+            height: 100%;
+            width: 0;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #00b4db, #0083b0, #00b4db);
+            animation: fillAnim 1.3s ease forwards;
+        }
+
+        @keyframes fillAnim {
+            to {
+                width: var(--value);
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#nav-menu" data-bs-offset="100">
+
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <div class="mobile-header-content">
+            <div class="mobile-top-row">
+                <div class="mobile-profile">
+                    <img src="/mahdi.jpg" alt="Profile Picture" class="mobile-profile-pic" id="mobile-github-avatar">
+                    <div class="mobile-profile-info">
+                        <h4 class="mobile-profile-title" id="mobile-github-name">Mahdi Hasan</h4>
+                        <p class="mobile-profile-subtitle" id="mobile-profile-subtitle-text">Software Developer</p>
+                    </div>
+                </div>
+
+                <div class="mobile-social-links">
+                    <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" target="_blank" aria-label="Mail"><i class="fas fa-envelope"></i></a>
+                </div>
+
+                <button class="mobile-dark-mode" id="mobileThemeToggle">
+                    <i class="bi bi-moon"></i>
+                    <i class="bi bi-sun"></i>
+                </button>
+            </div>
+
+            <div class="mobile-skills">
+                <span class="badge rounded-pill text-bg-primary">JavaScript</span>
+                <span class="badge rounded-pill text-bg-secondary">PHP</span>
+                <span class="badge rounded-pill text-bg-success">Laravel</span>
+                <span class="badge rounded-pill text-bg-warning">Vue Js</span>
+                <span class="badge rounded-pill text-bg-danger">MySQL</span>
+                <span class="badge rounded-pill text-bg-info">Bootstrap</span>
+            </div>
+
+            <div class="mobile-nav">
+                <a class="nav-link" href="#about">About</a>
+                <a class="nav-link" href="#experience">Experience</a>
+                <a class="nav-link" href="#education">Education</a>
+                <a class="nav-link" href="#projects">Projects</a>
+                <a class="nav-link" href="#contact">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <button class="theme-toggle" id="themeToggle">
+            <i class="bi bi-moon"></i>
+            <i class="bi bi-sun"></i>
+        </button>
+        <div class="profile-header">
+            <img src="/mahdi.jpg" alt="Profile Picture" class="profile-pic" id="github-avatar">
+            <h3 class="profile-title" id="github-name">Mahdi Hasan</h3>
+            <p class="profile-subtitle" id="profile-subtitle-text">Software Developer</p>
+        </div>
+        <ul class="nav flex-column" id="nav-menu">
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+            <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+            <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        {{-- <div class="skills">
+            <span class="badge rounded-pill text-bg-primary">JavaScript</span>
+            <span class="badge rounded-pill text-bg-secondary">PHP</span>
+            <span class="badge rounded-pill text-bg-success">Laravel</span>
+            <span class="badge rounded-pill text-bg-warning">Vue Js</span>
+            <span class="badge rounded-pill text-bg-danger">MySQL</span>
+            <span class="badge rounded-pill text-bg-info">Bootstrap</span>
+        </div> --}}
+
+        <section class="skills-section">
+            {{-- <h3 class="skills-title">Technical Skills</h3> --}}
+
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <i class="fab fa-php"></i>
+                        <span>PHP</span>
+                        <span class="skill-value">75%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="--value:75%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <i class="fab fa-laravel"></i>
+                        <span>Laravel&nbsp;</span>
+                        <span class="skill-value">85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="--value:85%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <i class="fas fa-database"></i>
+                        <span>MySQL</span>
+                        <span class="skill-value">85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="--value:85%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <i class="fab fa-js"></i>
+                        <span>JS</span>
+                        <span class="skill-value">80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="--value:80%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <i class="fab fa-html5"></i>
+                        <span>HTML5</span>
+                        <span class="skill-value">80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="--value:80%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <i class="fab fa-css3-alt"></i>
+                        <span>CSS3</span>
+                        <span class="skill-value">80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="--value:80%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <i class="fas fa-code"></i>
+                        <span>jQuery</span>
+                        <span class="skill-value">75%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="--value:75%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <i class="fas fa-retweet"></i>
+                        <span>Ajax</span>
+                        <span class="skill-value">80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="--value:80%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="sidebar-footer">
+            <!-- LinkedIn -->
+            <a href="https://bd.linkedin.com/in/mahdihasan2011" target="_blank" aria-label="LinkedIn"><i
+                    class="fab fa-linkedin-in"></i></a>
+
+            <!-- Twitter/X -->
+            {{-- <a href="#" target="_blank" aria-label="Twitter" class="icon-link">
+                <i class="fa-brands fa-square-x-twitter"></i>
+                <i class="fa-brands fa-x-twitter"></i>
+            </a> --}}
+
+            <!-- GitHub -->
+            <a href="https://github.com/mahdihasan2011" id="github-profile-link" target="_blank" aria-label="GitHub"><i
+                    class="fab fa-github"></i></a>
+
+            <!-- Email -->
+            <a href="mailto:mmahdihasan2011@gmail.com" aria-label="Mail"><i class="fas fa-envelope"></i></a>
+
+            {{-- <a href="#" target="_blank" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a> --}}
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <section id="about" class="content-section fade-in-up">
+            <h2 class="display-5 mb-5">About Me</h2>
+            <div class="project-card p-4">
+                <p class="lead mb-4">
+                    Full-stack developer with 7 years of experience crafting scalable web applications.
+                    I bridge the gap between robust backends (PHP/Laravel/MySQL) and intuitive frontends
+                    (JavaScript/React/Vue),
+                    delivering secure, high-performance solutions that users love.
+                </p>
+
+                <div class="d-flex flex-wrap gap-3 mb-4">
+                    {{-- <a href="/Mahdi_Hasan_Resume.pdf" class="btn btn-primary" download="Mahdi_Hasan_Resume.pdf">
+                        <i class="fas fa-download me-2"></i> Download Resume
+                    </a> --}}
+                    <a href="/Mahdi_Hasan_Resume.pdf" class="btn btn-primary" target="_blank">
+                        <i class="fas fa-file-pdf me-2"></i> My Resume
+                    </a>
+                    <a href="#contact" class="btn btn-outline-primary">
+                        <i class="fas fa-paper-plane me-2"></i> Contact Me
+                    </a>
+                </div>
+
+                <!-- Skills/Highlights Section (Optional) -->
+                <div class="row mt-3">
+                    <div class="col-md-6 mt-3">
+                        <h5><i class="fas fa-code me-2 text-primary"></i>Technical Strengths</h5>
+                        <ul class="skills-list">
+                            <li><strong>Backend:</strong> PHP, Laravel, MySQL, APIs</li>
+                            <li><strong>Frontend:</strong> JavaScript, React/Vue, Bootstrap</li>
+                            <li><strong>DevOps:</strong> Docker, AWS, CI/CD</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <h5><i class="fas fa-medal me-2 text-primary"></i>Delivery Focus</h5>
+                        <ul class="skills-list">
+                            <li>User-centric solutions</li>
+                            <li>Agile/Scrum workflows</li>
+                            <li>Clean, maintainable code advocate</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="content-section fade-in-up">
+            <h2 class="display-5 mb-5">Experience</h2>
+            <div class="project-card experience-item p-4 mb-4">
+                <h5>Software Developer at Vivacom BD.</h5>
+                <p class="text-secondary"><em>Jan 2023 - Present</em></p>
+                <ul>
+                    <li>Leading the development of a new client-facing financial dashboard using React and TypeScript.
+                    </li>
+                    <li>Mentoring junior developers and conducting code reviews to ensure code quality and standards.
+                    </li>
+                </ul>
+            </div>
+            <div class="project-card experience-item p-4 mb-4">
+                <h5>Software Developer at Fieldboosters Ltd.</h5>
+                <p class="text-secondary"><em>Jan 2020 - Dec 2022</em></p>
+                <ul>
+                    <li>Developed and maintained features for a large-scale e-commerce platform using Vue Js and
+                        Laravel.</li>
+                    <li>Collaborated with product teams to translate requirements into technical specifications.</li>
+                </ul>
+            </div>
+            <div class="project-card experience-item p-4">
+                <h5>Junior Software Developer at Creative Software Ltd.</h5>
+                <p class="text-secondary"><em>Aug 2018 - Dec 2019</em></p>
+                <ul>
+                    <li>Developed and maintained features in client's software using PHP and Laravel.</li>
+                    <li>Gather clients requirements and analysis following Software Development Life Cycle.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="education" class="content-section fade-in-up">
+            <h2 class="display-5 mb-5">Education</h2>
+
+            <div class="project-card p-4 mb-4">
+                <h5>Master of Science in Computer Science & Engineering</h5>
+                <p class="text-secondary"><em>Jahangirnagar University, Fall 2022
+                        -
+                        Fall 2023</em></p>
+                <ul>
+                </ul>
+            </div>
+
+            <div class="project-card p-4 mb-4">
+                <h5>Bachelor of Science in Computer Science & Engineering</h5>
+                <p class="text-secondary"><em>International University of Business Agriculture and Technology, Fall 2013
+                        -
+                        Fall 2017</em></p>
+                <ul>
+                </ul>
+            </div>
+        </section>
+
+        <section id="projects" class="content-section fade-in-up">
+            <h2 class="display-5 mb-5">Projects</h2>
+            <div class="row" id="projects-container">
+                <!-- POS System -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card project-card p-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Retail POS System</h5>
+                            <p class="card-text small text-secondary">
+                                A comprehensive Point of Sale system with inventory management, sales tracking,
+                                and customer relationship features. Supports barcode scanning, multiple payment
+                                methods, and real-time reporting.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-primary">Java</span>
+                                    <span class="badge bg-success ms-1"><i class="fas fa-star"></i> 128</span>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- E-commerce Platform -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card project-card p-3">
+                        <div class="card-body">
+                            <h5 class="card-title">E-commerce Platform</h5>
+                            <p class="card-text small text-secondary">
+                                Full-featured online marketplace with product management, shopping cart,
+                                payment gateway integration, and admin dashboard. Supports multi-vendor
+                                operations and real-time analytics.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-primary">React</span>
+                                    <span class="badge bg-primary">Node.js</span>
+                                    <span class="badge bg-success ms-1"><i class="fas fa-star"></i> 245</span>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Complaint Management System -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card project-card p-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Complaint Management System</h5>
+                            <p class="card-text small text-secondary">
+                                Enterprise-level ticketing system for tracking customer complaints with
+                                automated workflows, SLA monitoring, and resolution tracking. Includes
+                                customer portal and mobile app for field technicians.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-primary">Python</span>
+                                    <span class="badge bg-primary">Django</span>
+                                    <span class="badge bg-success ms-1"><i class="fas fa-star"></i> 87</span>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Risk Management Solution -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card project-card p-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Risk Management</h5>
+                            <p class="card-text small text-secondary">
+                                AI-powered risk assessment platform for institutions with
+                                real-time monitoring, predictive analytics, and compliance reporting.
+                                Integrates with multiple data sources for comprehensive risk profiling.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-primary">Python</span>
+                                    <span class="badge bg-primary">TensorFlow</span>
+                                    <span class="badge bg-success ms-1"><i class="fas fa-star"></i> 156</span>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Money Transfer System -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card project-card p-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Digital Money Transfer</h5>
+                            <p class="card-text small text-secondary">
+                                Secure peer-to-peer payment system with multi-currency support,
+                                transaction tracking, and fraud detection. Features include
+                                scheduled payments, recurring transfers, and API for third-party integration.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-primary">Java</span>
+                                    <span class="badge bg-primary">Spring Boot</span>
+                                    <span class="badge bg-success ms-1"><i class="fas fa-star"></i> 203</span>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FX Trade Management -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card project-card p-3">
+                        <div class="card-body">
+                            <h5 class="card-title">FX Trade Platform</h5>
+                            <p class="card-text small text-secondary">
+                                Foreign exchange trading system with real-time market data,
+                                automated trading strategies, and risk management tools.
+                                Includes trader dashboard, historical analysis, and regulatory reporting.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-primary">C#</span>
+                                    <span class="badge bg-primary">.NET Core</span>
+                                    <span class="badge bg-success ms-1"><i class="fas fa-star"></i> 112</span>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hiring Platform -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card project-card p-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Skilled Professional Hiring System</h5>
+                            <p class="card-text small text-secondary">
+                                AI-driven recruitment platform connecting companies with skilled professionals.
+                                Features include skills assessment, video interviewing, and candidate matching
+                                algorithms with 85% accuracy rate.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-primary">React</span>
+                                    <span class="badge bg-primary">Node.js</span>
+                                    <span class="badge bg-success ms-1"><i class="fas fa-star"></i> 178</span>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ride-hailing App -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card project-card p-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Ride-Hailing Service</h5>
+                            <p class="card-text small text-secondary">
+                                Uber-like transportation platform with real-time GPS tracking,
+                                fare calculation, and payment processing. Includes driver and
+                                passenger apps with rating system and trip history.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-primary">Flutter</span>
+                                    <span class="badge bg-primary">Firebase</span>
+                                    <span class="badge bg-success ms-1"><i class="fas fa-star"></i> 231</span>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Smart Parking -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card project-card p-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Smart Parking Solution</h5>
+                            <p class="card-text small text-secondary">
+                                IoT-based parking management system with license plate recognition,
+                                space availability tracking, and mobile payment. Reduced parking
+                                search time by 65% in pilot deployments.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-primary">Python</span>
+                                    <span class="badge bg-primary">Raspberry Pi</span>
+                                    <span class="badge bg-success ms-1"><i class="fas fa-star"></i> 94</span>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ISP Management -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card project-card p-3">
+                        <div class="card-body">
+                            <h5 class="card-title">ISP Management System</h5>
+                            <p class="card-text small text-secondary">
+                                Comprehensive solution for internet service providers featuring
+                                customer management, bandwidth monitoring, billing automation,
+                                and ticketing system. Handles 50,000+ subscribers with 99.9% uptime.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-primary">PHP</span>
+                                    <span class="badge bg-primary">Laravel</span>
+                                    <span class="badge bg-success ms-1"><i class="fas fa-star"></i> 142</span>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="github-contributions project-card fade-in -up">
+                <h3 class="mb-4">My GitHub Contributions</h3>
+                <p>Here's a visualization of my coding activity over the past year:</p>
+                <img id="github-contributions-chart" src="" alt="GitHub Contributions Chart" class="img-fluid">
+                <div class="text-center mt-3">
+                    <a href="https://github.com/your-github-username" id="github-profile-link-2" target="_blank"
+                        class="btn btn-outline-primary">
+                        <i class="fab fa-github"></i> View Full GitHub Profile
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="content-section fade-in-up">
+            <h2 class="display-5">Get In Touch</h2>
+            <p class="lead text-secondary mb-5">Have a question or want to work together? Feel free to reach out!</p>
+
+            <div class="row">
+                <!-- Contact Form -->
+                <div class="col-12 col-md-6 mb-5">
+                    <form id="contactForm">
+                        <div class="mb-3">
+                            <label for="nameInput" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="nameInput" required>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col-6">
+                                <label for="emailInput" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="emailInput" required>
+                            </div>
+                            <div class="col-6">
+                                <label for="phoneInput" class="form-label">Phone</label>
+                                <input type="text" class="form-control" id="phoneInput" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="subjectInput" class="form-label">Subject</label>
+                            <select class="form-control" id="subjectInput">
+                                <option value="" selected disabled>Select a topic</option>
+                                <option>Project Inquiry</option>
+                                <option>Job Opportunity</option>
+                                <option>Collaboration</option>
+                                <option>General Question</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="messageTextarea" class="form-label">Message</label>
+                            <textarea class="form-control" id="messageTextarea" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-2">Send Message</button>
+                    </form>
+                </div>
+
+                <!-- Map -->
+                <div class="col-12 col-md-6">
+                    <h5 class="mb-3">Location</h5>
+                    <div class="ratio ratio-4x3">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.509773020634!2d90.40409601536258!3d23.804093992289303!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c7c08f3ab429%3A0x5e888a2c8c34a1c2!2sDhaka!5e0!3m2!1sen!2sbd!4v1718796358823"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer-content">
+            <p>
+                <small>Copyright &copy;
+                    2018 -
+                    <script>document.write(new Date().getFullYear());</script> |
+                    All rights reserved | Developed by
+                    <a class="text-decoration-none" href="https://github.com/mahdihasan2011" target="_blank">Mahdi
+                        Hasan</a>
+                </small>
+            </p>
+        </footer>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // --- CONFIGURATION ---
+            const GITHUB_USERNAME = 'mahdihasan2011';
+
+            // --- DARK MODE TOGGLE ---
+            function toggleDarkMode(isDark) {
+                $('body').toggleClass('dark-mode', isDark);
+                localStorage.setItem('theme', isDark ? 'dark-mode' : 'light-mode');
+            }
+
+            // Initialize dark mode
+            const currentTheme = localStorage.getItem('theme');
+            const isDarkMode = currentTheme === 'dark-mode';
+            toggleDarkMode(isDarkMode);
+
+            // Theme toggle buttons
+            $('#themeToggle, #mobileThemeToggle').on('click', function () {
+                const isDark = !$('body').hasClass('dark-mode');
+                toggleDarkMode(isDark);
+            });
+
+            // --- SMOOTH SCROLLING ---
+            $('a[href^="#"]').on('click', function (e) {
+                e.preventDefault();
+                const targetId = $(this).attr('href');
+                const targetOffset = $(targetId).offset().top;
+                $('html, body').animate({ scrollTop: targetOffset - 160 }, 800);
+
+                // Add active class to clicked nav item
+                $('.mobile-nav .nav-link').removeClass('active');
+                $(this).addClass('active');
+            });
+
+            // --- GITHUB API INTEGRATION ---
+            const userApiUrl = `https://api.github.com/users/${GITHUB_USERNAME}`;
+            const reposApiUrl = `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&direction=desc`;
+
+            $.ajax({
+                url: userApiUrl, success: user => {
+                    const name = user.name || user.login;
+                    $('#github-name').text(name);
+                    $('#mobile-github-name').text(name);
+                    $('#github-avatar').attr('src', user.avatar_url);
+                    $('#mobile-github-avatar').attr('src', user.avatar_url);
+                    $('#github-profile-link').attr('href', user.html_url);
+                    $('#github-profile-link-2').attr('href', user.html_url);
+                    if (user.bio) $('#github-bio').text(user.bio);
+
+                    // Load GitHub contributions chart
+                    $('#github-contributions-chart').attr('src', `https://ghchart.rshah.org/${GITHUB_USERNAME}`);
+                }
+            });
+
+            // --- SCROLL-TRIGGERED ANIMATIONS ---
+            const animatedElements = $('.fade-in-up');
+            function checkAnimations() {
+                animatedElements.each(function () {
+                    const rect = this.getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom >= 0) {
+                        $(this).addClass('visible');
+                    }
+                });
+            }
+            $(window).on('scroll', checkAnimations);
+            checkAnimations(); // Initial check
+
+            // --- PROFILE SUBTITLE ROTATOR ---
+            const subtitles = ["Software Developer", "Laravel Developer", "Software Engineer", "Freelance Web Developer", "Web Developer"];
+            let currentSubtitleIndex = 0;
+
+            function rotateSubtitle() {
+                $('#profile-subtitle-text').fadeOut(400, function () {
+                    $(this).text(subtitles[currentSubtitleIndex]).fadeIn(400);
+                });
+                $('#mobile-profile-subtitle-text').fadeOut(400, function () {
+                    $(this).text(subtitles[currentSubtitleIndex]).fadeIn(400);
+                });
+                currentSubtitleIndex = (currentSubtitleIndex + 1) % subtitles.length;
+            }
+            setInterval(rotateSubtitle, 5000); // Change every 5 seconds
+
+        });
+
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // --- Replace with your own Bot Token and Chat ID ---
+            const BOT_TOKEN = '8289585552:AAEPZbLgJXH1Kf0OIzpQJmwasgqpMX3ETkg';
+            const CHAT_ID = '8553087905';
+
+            // --- Collect form data ---
+            const name = document.getElementById('nameInput').value;
+            const phone = document.getElementById('phoneInput').value;
+            const email = document.getElementById('emailInput').value;
+            const subject = document.getElementById('subjectInput').value;
+            const message = document.getElementById('messageTextarea').value;
+
+            // --- Create Telegram message ---
+            const text = `
+                📋 *New Contact Form Portfolio Site*
+
+                👤 *Name:* ${name}
+                📞 *Phone:* ${phone}
+                📧 *Email:* ${email}
+                📝 *Subject:* ${subject}
+                💬 *Message:* ${message}
+
+                ⏰ ${new Date().toLocaleString()}
+            `;
+
+            // --- Send to Telegram ---
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: text,
+                    parse_mode: 'Markdown'
+                })
+            })
+                .then(res => {
+                    if (res.ok) {
+                        document.getElementById('contactForm').reset();
+                    }
+                })
+                .catch(err => {
+                    console.error('Error:', err);
+                });
+        });
+    </script>
+
+</body>
+
 </html>
-
