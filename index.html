@@ -2,1386 +2,1144 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahdi Hasan | Senior Full-Stack Engineer — React, Laravel & Vue.js</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        .profile-title,
-        .mobile-profile-title,
-        .display-5 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-        }
-
-        .sidebar .profile-title,
-        .sidebar .profile-subtitle,
-        .sidebar .nav-link {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .mobile-profile-title,
-        .mobile-profile-subtitle,
-        .mobile-nav .nav-link {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        /* --- General & Light Mode Styles --- */
-        :root {
-            --primary-bg: #e9ecef;
-            --secondary-bg: #ffffff;
-            --primary-text: #212529;
-            --secondary-text: #495057;
-            --border-color: #dee2e6;
-            --accent-color: #0d6efd;
-            --sidebar-width: 350px;
-        }
-
-        body {
-            color: var(--primary-text);
-            transition: background-color 0.4s, color 0.4s;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-        }
-
-        @keyframes gradientBG {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        /* --- Dark Mode Styles --- */
-        body.dark-mode {
-            --primary-bg: #1a1a1a;
-            --secondary-bg: #2c2c2c;
-            --primary-text: #e0e0e0;
-            --secondary-text: #a0a0a0;
-            --border-color: #444;
-            --accent-color: #4dabf7;
-        }
-
-        /* --- Scrollbar --- */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--primary-bg);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background-color: var(--accent-color);
-            border-radius: 20px;
-        }
-
-        /* --- Sidebar Styles --- */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: var(--sidebar-width);
-            height: 100vh;
-            background-color: var(--secondary-bg);
-            border-right: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            padding: 2rem 1.5rem;
-            transition: all 0.4s;
-            z-index: 1000;
-        }
-
-        .theme-toggle {
-            position: absolute;
-            top: 1rem;
-            left: 1.5rem;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--secondary-text);
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 1001;
-        }
-
-        .theme-toggle:hover {
-            color: var(--accent-color);
-            transform: scale(1.1);
-        }
-
-        .theme-toggle .bi-sun {
-            display: none;
-        }
-
-        .theme-toggle .bi-moon {
-            display: inline-block;
-        }
-
-        body.dark-mode .theme-toggle .bi-sun {
-            display: inline-block;
-        }
-
-        body.dark-mode .theme-toggle .bi-moon {
-            display: none;
-        }
-
-        .sidebar .profile-header {
-            text-align: center;
-            margin-bottom: 2rem;
-            margin-top: 2rem;
-        }
-
-        .sidebar .profile-pic {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid var(--border-color);
-            margin-bottom: 1rem;
-            object-fit: cover;
-        }
-
-        .sidebar .profile-title {
-            color: var(--primary-text);
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .sidebar .profile-subtitle {
-            font-size: 0.9rem;
-            color: var(--secondary-text);
-        }
-
-        .sidebar .skills {
-            margin: 2rem 0;
-            text-align: center;
-        }
-
-        .sidebar .skills .badge {
-            margin: 2px;
-        }
-
-        .sidebar .nav-link {
-            color: var(--secondary-text);
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            transition: color 0.2s, background-color 0.2s;
-            border-radius: 5px;
-        }
-
-        .sidebar .nav-link:hover {
-            color: var(--accent-color);
-        }
-
-        .sidebar .nav-link.active {
-            color: var(--accent-color);
-            font-weight: 500;
-        }
-
-        .sidebar-footer {
-            margin-top: auto;
-            text-align: center;
-        }
-
-        .sidebar-footer a {
-            font-size: 1.5rem;
-            color: var(--secondary-text);
-            margin: 0 0.75rem;
-            transition: color 0.2s;
-        }
-
-        .sidebar-footer a:hover {
-            color: var(--accent-color);
-        }
-
-        /* --- Main Content & Sections --- */
-        .main-content {
-            margin-left: var(--sidebar-width);
-            padding: 2rem 3rem;
-        }
-
-        .content-section {
-            padding: 4rem 0;
-            border-bottom: 1px solid var(--border-color);
-            background-color: var(--secondary-bg);
-            padding: 3rem;
-            margin-bottom: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        body.dark-mode .content-section {
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
-        }
-
-        .project-card,
-        .experience-item {
-            background-color: var(--primary-bg);
-            border: 1px solid var(--border-color);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-radius: 10px;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        body.dark-mode .project-card:hover {
-            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Project Card Titles */
-        .project-card .card-title {
-            color: var(--primary-text);
-        }
-
-        .project-card .card-text {
-            color: var(--secondary-text);
-        }
-
-        /* Tech Stack */
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin: 1rem 0;
-        }
-
-        .tech-item {
-            background-color: rgba(13, 110, 253, 0.1);
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            color: var(--accent-color);
-        }
-
-        body.dark-mode .tech-item {
-            background-color: rgba(77, 171, 247, 0.2);
-        }
-
-        /* GitHub Contributions */
-        .github-contributions {
-            margin-top: 3rem;
-            background-color: var(--primary-bg);
-            padding: 2rem;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-        }
-
-        .github-contributions img {
-            width: 100%;
-            border-radius: 6px;
-        }
-
-        /* --- Animation --- */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .fade-in-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- Mobile Header Styles --- */
-        .mobile-header {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: var(--secondary-bg);
-            z-index: 1001;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-            padding: 1rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .mobile-header-content {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .mobile-top-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-
-        .mobile-profile {
-            display: flex;
-            align-items: center;
-            flex: 1;
-        }
-
-        .mobile-profile-pic {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 2px solid var(--border-color);
-            margin-right: 1rem;
-            object-fit: cover;
-        }
-
-        .mobile-profile-info {
-            flex: 1;
-        }
-
-        .mobile-profile-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            color: var(--primary-text);
-        }
-
-        .mobile-profile-subtitle {
-            font-size: 0.8rem;
-            color: var(--secondary-text);
-            margin-bottom: 0;
-        }
-
-        .mobile-social-links {
-            display: flex;
-            align-items: center;
-            margin: 0 1rem;
-            gap: 1rem;
-        }
-
-        .mobile-social-links a {
-            color: var(--secondary-text);
-            font-size: 1.2rem;
-            transition: color 0.2s;
-        }
-
-        .mobile-social-links a:hover {
-            color: var(--accent-color);
-        }
-
-        .mobile-dark-mode {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--secondary-text);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .mobile-dark-mode:hover {
-            color: var(--accent-color);
-            transform: scale(1.1);
-        }
-
-        .mobile-dark-mode .bi-sun {
-            display: none;
-        }
-
-        .mobile-dark-mode .bi-moon {
-            display: inline-block;
-        }
-
-        body.dark-mode .mobile-dark-mode .bi-sun {
-            display: inline-block;
-        }
-
-        body.dark-mode .mobile-dark-mode .bi-moon {
-            display: none;
-        }
-
-        .mobile-skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.3rem;
-            margin: 0.5rem 0;
-            justify-content: center;
-        }
-
-        .mobile-skills .badge {
-            font-size: 0.7rem;
-            padding: 0.25em 0.4em;
-        }
-
-        .mobile-nav {
-            display: flex;
-            justify-content: space-between;
-            margin: 0.5rem 0;
-        }
-
-        .mobile-nav .nav-link {
-            padding: 0.5rem 0.25rem;
-            font-size: 0.9rem;
-            color: var(--secondary-text);
-            text-align: center;
-            flex: 1;
-            border-bottom: 2px solid transparent;
-            transition: all 0.2s;
-        }
-
-        .mobile-nav .nav-link:hover,
-        .mobile-nav .nav-link.active {
-            color: var(--accent-color);
-            border-bottom-color: var(--accent-color);
-        }
-
-        /* Contact Form Styles */
-        #contact form input,
-        #contact form select,
-        #contact form textarea {
-            background-color: var(--primary-bg);
-            color: var(--primary-text);
-            border: 1px solid var(--border-color);
-        }
-
-        #contact form input:focus,
-        #contact form select:focus,
-        #contact form textarea:focus {
-            background-color: var(--primary-bg);
-            color: var(--primary-text);
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-        }
-
-        body.dark-mode #contact form input:focus,
-        body.dark-mode #contact form select:focus,
-        body.dark-mode #contact form textarea:focus {
-            box-shadow: 0 0 0 0.25rem rgba(77, 171, 247, 0.25);
-        }
-
-        #contact form label {
-            color: var(--primary-text);
-        }
-
-        /* --- Responsive Design --- */
-        @media (max-width: 992px) {
-            .sidebar {
-                display: none;
-            }
-
-            .main-content {
-                margin-left: 0;
-                padding: 1.5rem;
-                margin-top: 180px;
-            }
-
-            .content-section {
-                padding: 2rem 1.5rem;
-            }
-
-            .mobile-header {
-                display: block;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .mobile-header {
-                height: auto;
-                padding: 0.75rem;
-            }
-
-            .mobile-profile-pic {
-                width: 45px;
-                height: 45px;
-            }
-
-            .mobile-profile-title {
-                font-size: 1rem;
-            }
-
-            .mobile-profile-subtitle {
-                font-size: 0.75rem;
-            }
-
-            .mobile-nav .nav-link {
-                font-size: 0.8rem;
-            }
-
-            .mobile-social-links {
-                gap: 0.75rem;
-                margin: 0 0.5rem;
-            }
-
-            .main-content {
-                margin-top: 200px;
-            }
-
-            .github-contributions {
-                padding: 1rem;
-            }
-        }
-
-        .lead {
-            font-size: 0.9rem;
-        }
-
-        .skills-list {
-            list-style-type: none;
-            padding-left: 1rem;
-        }
-
-        .skills-list li {
-            padding: 0.25rem 0;
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .skills-list li:before {
-            content: "▹";
-            position: absolute;
-            left: 0;
-            /* color: var(--bs-primary); */
-        }
-
-        /* Add to your stylesheet */
-        .text-highlight {
-            color: var(--bs-primary);
-            font-weight: 600;
-        }
-
-        .about-card {
-            background: white;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .footer-content {
-            text-align: center;
-            /* margin-top: 3rem; */
-            /* padding-top: 1.5rem; */
-            /* border-top: 1px solid var(--border-color); */
-            color: var(--secondary-text);
-        }
-
-        .skills-section {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 1.2rem 0.5rem;
-            /* reduced from 2.5rem 1rem */
-            color: #f5f5f5;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .skills-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 1rem;
-            /* reduced */
-            background: linear-gradient(90deg, #00b4db, #0083b0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* GRID */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.8rem 1rem;
-            /* tighter spacing */
-        }
-
-        /* ITEM */
-        .skill-item {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 8px;
-            padding: 0.7rem 0.9rem;
-            /* reduced */
-            transition: all 0.25s ease;
-        }
-
-        .skill-item:hover {
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateY(-2px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        /* HEADER */
-        .skill-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.4rem;
-        }
-
-        .skill-header i {
-            font-size: 1rem;
-            color: #00b4db;
-        }
-
-        .skill-header span {
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .skill-value {
-            font-size: 0.8rem;
-            color: #bbb;
-        }
-
-        /* PROGRESS BAR */
-        .skill-bar {
-            height: 5px;
-            /* slightly thinner */
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .skill-fill {
-            height: 100%;
-            width: 0;
-            border-radius: 10px;
-            background: linear-gradient(90deg, #00b4db, #0083b0, #00b4db);
-            animation: fillAnim 1.3s ease forwards;
-        }
-
-        @keyframes fillAnim {
-            to {
-                width: var(--value);
-            }
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 600px) {
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mahdi Hasan | Senior Full-Stack Engineer — 3D Interactive Portfolio</title>
+  <meta name="description"
+    content="Senior Full-Stack Software Engineer with 8+ years of enterprise experience in React, Laravel, Vue.js, PHP, and scalable cloud architectures.">
+  <meta name="keywords"
+    content="Mahdi Hasan, Senior Full-Stack Developer, Laravel Architect, React Developer, Vue.js, PHP, Fintech, 3D WebGL Portfolio">
+  <meta name="author" content="Mahdi Hasan">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:title" content="Mahdi Hasan | Senior Full-Stack Engineer">
+  <meta property="og:description"
+    content="8+ years crafting scalable, high-performance web systems and full-stack enterprise solutions.">
+  <meta property="og:image" content="images/profilepic4.jpeg">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="images/profilepic4.jpeg" type="image/jpeg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom 3D Portfolio Stylesheet -->
+  <link rel="stylesheet" href="css/3d-portfolio.css">
 </head>
 
-<body data-bs-spy="scroll" data-bs-target="#nav-menu" data-bs-offset="100">
+<body>
 
-    <!-- Mobile Header -->
-    <div class="mobile-header">
-        <div class="mobile-header-content">
-            <div class="mobile-top-row">
-                <div class="mobile-profile">
-                    <img src="/mahdi.jpg" alt="Profile Picture" class="mobile-profile-pic" id="mobile-github-avatar">
-                    <div class="mobile-profile-info">
-                        <h4 class="mobile-profile-title" id="mobile-github-name">Mahdi Hasan</h4>
-                        <p class="mobile-profile-subtitle" id="mobile-profile-subtitle-text">Senior Software Developer</p>
-                    </div>
-                </div>
+  <!-- Fullscreen 3D WebGL Background Canvas -->
+  <canvas id="webgl-canvas"></canvas>
 
-                <div class="mobile-social-links">
-                    <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="#" target="_blank" aria-label="Mail"><i class="fas fa-envelope"></i></a>
-                </div>
+  <!-- Custom 3D Mouse Cursor -->
+  <div class="custom-cursor-dot"></div>
+  <div class="custom-cursor-follower"></div>
 
-                <button class="mobile-dark-mode" id="mobileThemeToggle">
-                    <i class="bi bi-moon"></i>
-                    <i class="bi bi-sun"></i>
-                </button>
-            </div>
+  <!-- Floating 3D Glass Dock Header -->
+  <header class="glass-nav-header">
+    <a href="#hero" class="nav-brand">
+      <img src="images/profilepic4.jpeg" alt="Mahdi Hasan" class="brand-avatar">
+      <div class="brand-title">
+        <span class="brand-name gh-name-target">Mahdi Hasan</span>
+        <span class="brand-status"><span class="status-dot"></span> Available for Hire</span>
+      </div>
+    </a>
 
-            <div class="mobile-skills">
-                <span class="badge rounded-pill text-bg-primary">JavaScript</span>
-                <span class="badge rounded-pill text-bg-secondary">PHP</span>
-                <span class="badge rounded-pill text-bg-success">Laravel</span>
-                <span class="badge rounded-pill text-bg-warning">Vue Js</span>
-                <span class="badge rounded-pill text-bg-danger">MySQL</span>
-                <span class="badge rounded-pill text-bg-info">Bootstrap</span>
-            </div>
+    <!-- Desktop Navigation Links -->
+    <ul class="nav-menu-links">
+      <li><a href="#hero" class="nav-menu-link active">Home</a></li>
+      <li><a href="#about" class="nav-menu-link">About</a></li>
+      <li><a href="#skills" class="nav-menu-link">Skills</a></li>
+      <li><a href="#experience" class="nav-menu-link">Experience</a></li>
+      <li><a href="#education" class="nav-menu-link">Education</a></li>
+      <li><a href="#projects" class="nav-menu-link">Projects</a></li>
+      <li><a href="#contact" class="nav-menu-link">Contact</a></li>
+    </ul>
 
-            <div class="mobile-nav">
-                <a class="nav-link" href="#about">About</a>
-                <a class="nav-link" href="#experience">Experience</a>
-                <a class="nav-link" href="#education">Education</a>
-                <a class="nav-link" href="#projects">Projects</a>
-                <a class="nav-link" href="#contact">Contact</a>
-            </div>
-        </div>
+    <!-- Header Actions -->
+    <div class="nav-actions">
+      <!-- Web Audio Sound Toggle -->
+      <button class="action-btn-circle" id="audioToggleBtn" aria-label="Toggle Sound Effects">
+        <i class="fas fa-volume-mute"></i>
+      </button>
+
+      <!-- Theme Switcher (Dark / Light) -->
+      <button class="action-btn-circle" id="themeToggleBtn" aria-label="Toggle Cyber / Titanium Theme">
+        <i class="fas fa-sun"></i>
+      </button>
+
+      <!-- Resume Button -->
+      <a href="Mahdi_Hasan_Resume.pdf" target="_blank" class="nav-cta-btn">
+        <i class="fas fa-file-pdf"></i> Resume
+      </a>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open Navigation Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <div class="d-flex align-items-center gap-2">
+        <img src="images/profilepic4.jpeg" alt="Mahdi Hasan" class="brand-avatar">
+        <span class="brand-name" style="font-size: 1.2rem;">Mahdi Hasan</span>
+      </div>
+      <button class="action-btn-circle" id="drawerCloseBtn" aria-label="Close Menu">
+        <i class="fas fa-times"></i>
+      </button>
     </div>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <button class="theme-toggle" id="themeToggle">
-            <i class="bi bi-moon"></i>
-            <i class="bi bi-sun"></i>
-        </button>
-        <div class="profile-header">
-            <img src="/mahdi.jpg" alt="Profile Picture" class="profile-pic" id="github-avatar">
-            <h3 class="profile-title" id="github-name">Mahdi Hasan</h3>
-            <p class="profile-subtitle" id="profile-subtitle-text">Senior Software Developer</p>
-        </div>
-        <ul class="nav flex-column" id="nav-menu">
-            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
-            <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
-            <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-        </ul>
+    <ul class="mobile-drawer-links mb-4">
+      <li><a href="#hero"><i class="fas fa-cube"></i> Home</a></li>
+      <li><a href="#about"><i class="fas fa-user-astronaut"></i> About</a></li>
+      <li><a href="#skills"><i class="fas fa-layer-group"></i> Skills</a></li>
+      <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
+      <li><a href="#education"><i class="fas fa-graduation-cap"></i> Education</a></li>
+      <li><a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
+      <li><a href="#contact"><i class="fas fa-paper-plane"></i> Contact</a></li>
+    </ul>
 
-        <section class="skills-section">
-            <div class="skills-grid">
-                <div class="skill-item">
-                    <div class="skill-header">
-                        <i class="fab fa-php"></i>
-                        <span>PHP</span>
-                        <span class="skill-value">75%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-fill" style="--value:75%"></div>
-                    </div>
-                </div>
+    <div class="d-flex gap-2 mt-auto">
+      <button class="action-btn-circle w-50" id="mobileThemeToggleBtn">
+        <i class="fas fa-sun me-1"></i> Theme
+      </button>
+      <a href="Mahdi_Hasan_Resume.pdf" target="_blank" class="btn-3d-primary w-50 justify-content-center text-center" style="font-size: 0.9rem; padding: 0.6rem;">
+        <i class="fas fa-file-pdf me-1"></i> Resume
+      </a>
+    </div>
+  </aside>
 
-                <div class="skill-item">
-                    <div class="skill-header">
-                        <i class="fab fa-laravel"></i>
-                        <span>Laravel&nbsp;</span>
-                        <span class="skill-value">85%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-fill" style="--value:85%"></div>
-                    </div>
-                </div>
+  <!-- Main 3D Experience Container -->
+  <div class="portfolio-wrapper">
 
-                <div class="skill-item">
-                    <div class="skill-header">
-                        <i class="fas fa-database"></i>
-                        <span>MySQL</span>
-                        <span class="skill-value">85%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-fill" style="--value:85%"></div>
-                    </div>
-                </div>
-
-                <div class="skill-item">
-                    <div class="skill-header">
-                        <i class="fab fa-js"></i>
-                        <span>JS</span>
-                        <span class="skill-value">80%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-fill" style="--value:80%"></div>
-                    </div>
-                </div>
-
-                <div class="skill-item">
-                    <div class="skill-header">
-                        <i class="fa-brands fa-vuejs"></i>                        
-                        <span>Vue Js</span>
-                        <span class="skill-value">80%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-fill" style="--value:80%"></div>
-                    </div>
-                </div>
-
-                <div class="skill-item">
-                    <div class="skill-header">
-                        <i class="fa-brands fa-react"></i>
-                        <span>ReactJS</span>
-                        <span class="skill-value">80%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-fill" style="--value:80%"></div>
-                    </div>
-                </div>
-
-                <div class="skill-item">
-                    <div class="skill-header">
-                        <i class="fas fa-code"></i>
-                        <span>jQuery</span>
-                        <span class="skill-value">75%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-fill" style="--value:75%"></div>
-                    </div>
-                </div>
-
-                <div class="skill-item">
-                    <div class="skill-header">
-                        <i class="fas fa-retweet"></i>
-                        <span>Ajax</span>
-                        <span class="skill-value">80%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-fill" style="--value:80%"></div>
-                    </div>
-                </div>
+    <!-- ==========================================================================
+         HERO SECTION (3D QUANTUM CORE CENTERPIECE)
+         ========================================================================== -->
+    <section id="hero" class="hero-section">
+      <div class="container">
+        <div class="hero-grid">
+          
+          <!-- Left Column: Copy & CTAs -->
+          <div class="hero-text-content">
+            <div class="hero-badge-pill">
+              <i class="fas fa-atom"></i> Senior Full-Stack Engineer • 8+ Years
             </div>
-        </section>
 
-        <div class="sidebar-footer">
+            <h1 class="hero-title">
+              Crafting <span class="gradient-text">Scalable 3D</span> & Enterprise Systems
+            </h1>
+
+            <div class="hero-role-wrapper">
+              <span>I specialize in </span>
+              <span class="role-typing-text" id="heroRoleTyping">Senior Full-Stack Engineer</span>
+            </div>
+
+            <p class="hero-description">
+              Turning complex architectural challenges into lightning-fast, fault-tolerant web applications. From reactive frontend experiences in React & Vue.js to distributed Laravel and microservice APIs, I build software engineered for scale.
+            </p>
+
+            <div class="hero-cta-group">
+              <a href="#projects" class="btn-3d-primary">
+                <i class="fas fa-cubes"></i> Explore 3D Projects
+              </a>
+              <a href="Mahdi_Hasan_Resume.pdf" target="_blank" class="btn-3d-secondary">
+                <i class="fas fa-download"></i> Download Resume
+              </a>
+              <a href="#contact" class="btn-3d-secondary">
+                <i class="fas fa-envelope"></i> Let's Connect
+              </a>
+            </div>
+
+            <!-- Metric Highlights -->
+            <div class="hero-stats-row">
+              <div class="stat-item">
+                <span class="stat-number">8+</span>
+                <span class="stat-label">Years of Experience</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">Projects Delivered</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">99.9%</span>
+                <span class="stat-label">System Uptime</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">100k+</span>
+                <span class="stat-label">Users Served</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive 3D Quantum Core -->
+          <div class="hero-3d-container">
+            <div class="quantum-core-card tilt-card">
+              <canvas id="hero-quantum-canvas"></canvas>
+
+              <!-- Floating Orbital Tech Badges -->
+              <div class="orbital-badge orbital-react">
+                <i class="fab fa-react"></i> React 19
+              </div>
+              <div class="orbital-badge orbital-laravel">
+                <i class="fab fa-laravel"></i> Laravel 11
+              </div>
+              <div class="orbital-badge orbital-vue">
+                <i class="fab fa-vuejs"></i> Vue.js 3
+              </div>
+              <div class="orbital-badge orbital-typescript">
+                <i class="fas fa-code"></i> TypeScript
+              </div>
+
+              <!-- Interactive Controls Hint -->
+              <div class="core-interaction-hint">
+                <i class="fas fa-hand-pointer"></i> Drag to rotate in 3D • Click for quantum shockwave
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         ABOUT ME SECTION (3D HOLOGRAPHIC BIOGRAPHY)
+         ========================================================================== -->
+    <section id="about" class="content-section">
+      <div class="container">
+        
+        <div class="section-header-block">
+          <span class="section-tag">// Engineering Pedigree</span>
+          <h2 class="section-title">Architecting with Code & Passion</h2>
+          <p class="section-subtitle">A blend of deep backend craftsmanship and cutting-edge frontend elegance.</p>
+        </div>
+
+        <div class="about-grid">
+          
+          <!-- 3D Photo Frame -->
+          <div class="about-photo-wrapper">
+            <div class="about-photo-frame">
+              <img src="images/profilepic4.jpeg" alt="Mahdi Hasan Profile" class="about-photo-img">
+              <div class="photo-experience-badge">
+                <div class="experience-years">8+</div>
+                <div class="experience-text">Years Full-Stack</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3D Biography Card -->
+          <div class="tilt-card-wrapper">
+            <div class="tilt-card about-content-card">
+              <div class="layer-depth-1">
+                <h3 class="mb-3" style="font-size: 1.8rem;">Hi, I'm Mahdi Hasan</h3>
+                <p class="about-lead-text">
+                  A Senior Full-Stack Software Developer dedicated to creating resilient, high-volume digital solutions. Over 8+ years, I have architected financial portals, multi-tenant POS platforms, ERP ecosystems, and modern reactive dashboards.
+                </p>
+                <p>
+                  I bridge the gap between business imperatives and technical execution. Whether designing relational schemas in MySQL/PostgreSQL, engineering fault-tolerant message queues, or refining 60fps user interfaces in React and Vue, I take total ownership of the engineering lifecycle.
+                </p>
+              </div>
+
+              <!-- Feature Highlights -->
+              <div class="about-feature-boxes layer-depth-2">
+                <div class="about-feature-box">
+                  <i class="fas fa-server"></i>
+                  <h4>Enterprise Backend</h4>
+                  <p>PHP, Laravel, Python, REST & GraphQL APIs, microservices, secure authentication, and high-concurrency database design.</p>
+                </div>
+                <div class="about-feature-box">
+                  <i class="fas fa-laptop-code"></i>
+                  <h4>Modern Frontend</h4>
+                  <p>React, Next.js, Vue.js, TypeScript, WebGL/Three.js, state management, and pixel-perfect responsive styling.</p>
+                </div>
+                <div class="about-feature-box">
+                  <i class="fas fa-shield-alt"></i>
+                  <h4>Security & Performance</h4>
+                  <p>OWASP hardening, Redis caching layers, database indexing, latency reduction, and rigorous automated testing.</p>
+                </div>
+                <div class="about-feature-box">
+                  <i class="fas fa-users-cog"></i>
+                  <h4>Agile Leadership</h4>
+                  <p>Sprint planning, technical mentorship, cross-functional collaboration with product managers, and code review governance.</p>
+                </div>
+              </div>
+
+              <div class="d-flex gap-3 mt-3 layer-depth-3">
+                <a href="Mahdi_Hasan_Resume.pdf" target="_blank" class="btn-3d-primary" style="padding: 0.7rem 1.6rem; font-size: 0.95rem;">
+                  <i class="fas fa-file-pdf"></i> View Resume
+                </a>
+                <a href="#contact" class="btn-3d-secondary" style="padding: 0.7rem 1.6rem; font-size: 0.95rem;">
+                  <i class="fas fa-comments"></i> Initiate Dialogue
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SKILLS MATRIX (3D ORBITAL CARDS & CATEGORIZED BARS)
+         ========================================================================== -->
+    <section id="skills" class="content-section">
+      <div class="container">
+        
+        <div class="section-header-block">
+          <span class="section-tag">// Core Arsenal</span>
+          <h2 class="section-title">Technical Expertise & Capabilities</h2>
+          <p class="section-subtitle">Refined across 8+ years of production deployments and architectural leadership.</p>
+        </div>
+
+        <!-- Filter Navigation -->
+        <div class="skills-filter-nav">
+          <button class="skill-filter-btn active" data-filter="all">All Disciplines</button>
+          <button class="skill-filter-btn" data-filter="backend">Backend & APIs</button>
+          <button class="skill-filter-btn" data-filter="frontend">Frontend & UI</button>
+          <button class="skill-filter-btn" data-filter="database">Databases & Architecture</button>
+          <button class="skill-filter-btn" data-filter="tools">DevOps & Cloud</button>
+        </div>
+
+        <!-- 3D Skills Grid -->
+        <div class="skills-grid-3d">
+          
+          <!-- Skill: PHP -->
+          <div class="tilt-card-wrapper skill-3d-card-wrapper" data-category="backend">
+            <div class="tilt-card skill-3d-card">
+              <div class="layer-depth-1">
+                <div class="skill-card-top">
+                  <div class="skill-icon-box" style="color: #777bb4;"><i class="fab fa-php"></i></div>
+                  <span class="skill-percentage-badge">85%</span>
+                </div>
+                <h4 class="skill-info-title">PHP 8.x</h4>
+                <div class="skill-category-tag">Backend • OOP & Design Patterns</div>
+              </div>
+              <div class="skill-progress-track layer-depth-2">
+                <div class="skill-progress-bar" data-value="85"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skill: Laravel -->
+          <div class="tilt-card-wrapper skill-3d-card-wrapper" data-category="backend">
+            <div class="tilt-card skill-3d-card">
+              <div class="layer-depth-1">
+                <div class="skill-card-top">
+                  <div class="skill-icon-box" style="color: #ff2d20;"><i class="fab fa-laravel"></i></div>
+                  <span class="skill-percentage-badge">90%</span>
+                </div>
+                <h4 class="skill-info-title">Laravel</h4>
+                <div class="skill-category-tag">Eloquent • Queues • REST APIs</div>
+              </div>
+              <div class="skill-progress-track layer-depth-2">
+                <div class="skill-progress-bar" data-value="90"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skill: ReactJS -->
+          <div class="tilt-card-wrapper skill-3d-card-wrapper" data-category="frontend">
+            <div class="tilt-card skill-3d-card">
+              <div class="layer-depth-1">
+                <div class="skill-card-top">
+                  <div class="skill-icon-box" style="color: #61dafb;"><i class="fab fa-react"></i></div>
+                  <span class="skill-percentage-badge">85%</span>
+                </div>
+                <h4 class="skill-info-title">React.js</h4>
+                <div class="skill-category-tag">Hooks • Redux • Next.js • Vite</div>
+              </div>
+              <div class="skill-progress-track layer-depth-2">
+                <div class="skill-progress-bar" data-value="85"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skill: Vue.js -->
+          <div class="tilt-card-wrapper skill-3d-card-wrapper" data-category="frontend">
+            <div class="tilt-card skill-3d-card">
+              <div class="layer-depth-1">
+                <div class="skill-card-top">
+                  <div class="skill-icon-box" style="color: #42b883;"><i class="fab fa-vuejs"></i></div>
+                  <span class="skill-percentage-badge">85%</span>
+                </div>
+                <h4 class="skill-info-title">Vue.js 3</h4>
+                <div class="skill-category-tag">Composition API • Pinia • Nuxt</div>
+              </div>
+              <div class="skill-progress-track layer-depth-2">
+                <div class="skill-progress-bar" data-value="85"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skill: JavaScript & TypeScript -->
+          <div class="tilt-card-wrapper skill-3d-card-wrapper" data-category="frontend">
+            <div class="tilt-card skill-3d-card">
+              <div class="layer-depth-1">
+                <div class="skill-card-top">
+                  <div class="skill-icon-box" style="color: #f7df1e;"><i class="fab fa-js"></i></div>
+                  <span class="skill-percentage-badge">88%</span>
+                </div>
+                <h4 class="skill-info-title">TypeScript & JS</h4>
+                <div class="skill-category-tag">ES6+ • Strict Types • Async Patterns</div>
+              </div>
+              <div class="skill-progress-track layer-depth-2">
+                <div class="skill-progress-bar" data-value="88"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skill: MySQL & SQL -->
+          <div class="tilt-card-wrapper skill-3d-card-wrapper" data-category="database">
+            <div class="tilt-card skill-3d-card">
+              <div class="layer-depth-1">
+                <div class="skill-card-top">
+                  <div class="skill-icon-box" style="color: #00758f;"><i class="fas fa-database"></i></div>
+                  <span class="skill-percentage-badge">88%</span>
+                </div>
+                <h4 class="skill-info-title">MySQL & PostgreSQL</h4>
+                <div class="skill-category-tag">Schema Design • Indexing • Optimization</div>
+              </div>
+              <div class="skill-progress-track layer-depth-2">
+                <div class="skill-progress-bar" data-value="88"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skill: RESTful & Microservices -->
+          <div class="tilt-card-wrapper skill-3d-card-wrapper" data-category="backend">
+            <div class="tilt-card skill-3d-card">
+              <div class="layer-depth-1">
+                <div class="skill-card-top">
+                  <div class="skill-icon-box" style="color: #00f0ff;"><i class="fas fa-network-wired"></i></div>
+                  <span class="skill-percentage-badge">90%</span>
+                </div>
+                <h4 class="skill-info-title">APIs & Microservices</h4>
+                <div class="skill-category-tag">REST • WebSockets • OAuth • JSON:API</div>
+              </div>
+              <div class="skill-progress-track layer-depth-2">
+                <div class="skill-progress-bar" data-value="90"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skill: DevOps & Docker -->
+          <div class="tilt-card-wrapper skill-3d-card-wrapper" data-category="tools">
+            <div class="tilt-card skill-3d-card">
+              <div class="layer-depth-1">
+                <div class="skill-card-top">
+                  <div class="skill-icon-box" style="color: #2496ed;"><i class="fab fa-docker"></i></div>
+                  <span class="skill-percentage-badge">78%</span>
+                </div>
+                <h4 class="skill-info-title">Docker & CI/CD</h4>
+                <div class="skill-category-tag">Containerization • GitHub Actions • AWS</div>
+              </div>
+              <div class="skill-progress-track layer-depth-2">
+                <div class="skill-progress-bar" data-value="78"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CAREER EXPERIENCE (3D FIBER CONDUIT TIMELINE)
+         ========================================================================== -->
+    <section id="experience" class="content-section">
+      <div class="container">
+        
+        <div class="section-header-block">
+          <span class="section-tag">// Career Trajectory</span>
+          <h2 class="section-title">Professional Milestones</h2>
+          <p class="section-subtitle">Track record of leadership, full-stack innovation, and production scalability.</p>
+        </div>
+
+        <div class="experience-timeline">
+          
+          <!-- Milestone 1: Vivacom BD -->
+          <div class="timeline-milestone">
+            <div class="timeline-node-beacon"></div>
+            <div class="tilt-card-wrapper">
+              <div class="tilt-card">
+                <div class="layer-depth-1">
+                  <div class="milestone-header">
+                    <h3 class="milestone-role">Senior Software Developer</h3>
+                    <span class="milestone-period"><i class="far fa-calendar-alt me-1"></i> Jan 2023 — Present</span>
+                  </div>
+                  <div class="milestone-company">
+                    <i class="fas fa-building"></i> Vivacom BD • Dhaka, Bangladesh
+                  </div>
+                </div>
+
+                <div class="layer-depth-2">
+                  <ul class="milestone-achievements">
+                    <li>Architected and led end-to-end development of a client-facing financial dashboard using React, TypeScript, and stateful caching, reducing latency by 45%.</li>
+                    <li>Designed scalable backend microservice contracts in Laravel and optimized relational schemas to handle high transaction throughput.</li>
+                    <li>Established code review best practices, instituted CI/CD automated linting, and mentored junior developers to boost sprint delivery velocity by 30%.</li>
+                    <li>Drove strategic technical decision-making on component architecture, state management patterns, and system resilience.</li>
+                  </ul>
+
+                  <div class="milestone-tags">
+                    <span class="milestone-tech-pill">React 18</span>
+                    <span class="milestone-tech-pill">TypeScript</span>
+                    <span class="milestone-tech-pill">Laravel</span>
+                    <span class="milestone-tech-pill">Financial APIs</span>
+                    <span class="milestone-tech-pill">Docker</span>
+                    <span class="milestone-tech-pill">Redis</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Milestone 2: Fieldboosters Ltd -->
+          <div class="timeline-milestone">
+            <div class="timeline-node-beacon"></div>
+            <div class="tilt-card-wrapper">
+              <div class="tilt-card">
+                <div class="layer-depth-1">
+                  <div class="milestone-header">
+                    <h3 class="milestone-role">Software Developer</h3>
+                    <span class="milestone-period"><i class="far fa-calendar-alt me-1"></i> Jan 2020 — Dec 2022</span>
+                  </div>
+                  <div class="milestone-company">
+                    <i class="fas fa-building"></i> Fieldboosters Ltd • Dhaka, Bangladesh
+                  </div>
+                </div>
+
+                <div class="layer-depth-2">
+                  <ul class="milestone-achievements">
+                    <li>Engineered core features and merchant workflows for a high-traffic e-commerce marketplace platform, enhancing user retention and checkout speed.</li>
+                    <li>Partnered closely with product managers and UX designers to translate complex commercial needs into airtight technical specifications.</li>
+                    <li>Delivered end-to-end features combining reactive Vue.js frontends with robust Laravel backend microservices and MySQL indexing.</li>
+                    <li>Integrated diverse third-party payment gateways and automated webhook reconciliation engines.</li>
+                  </ul>
+
+                  <div class="milestone-tags">
+                    <span class="milestone-tech-pill">Vue.js</span>
+                    <span class="milestone-tech-pill">Laravel</span>
+                    <span class="milestone-tech-pill">MySQL</span>
+                    <span class="milestone-tech-pill">Payment Gateways</span>
+                    <span class="milestone-tech-pill">REST APIs</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Milestone 3: Creative Software Ltd -->
+          <div class="timeline-milestone">
+            <div class="timeline-node-beacon"></div>
+            <div class="tilt-card-wrapper">
+              <div class="tilt-card">
+                <div class="layer-depth-1">
+                  <div class="milestone-header">
+                    <h3 class="milestone-role">Junior Software Developer</h3>
+                    <span class="milestone-period"><i class="far fa-calendar-alt me-1"></i> Aug 2018 — Dec 2019</span>
+                  </div>
+                  <div class="milestone-company">
+                    <i class="fas fa-building"></i> Creative Software Ltd • Dhaka, Bangladesh
+                  </div>
+                </div>
+
+                <div class="layer-depth-2">
+                  <ul class="milestone-achievements">
+                    <li>Developed and maintained customized software modules and database structures in PHP and Laravel for corporate clients.</li>
+                    <li>Participated in client requirements elicitation workshops, converting functional requests into maintainable codebase deliverables.</li>
+                    <li>Conducted comprehensive system testing, debugging, and post-deployment maintenance.</li>
+                  </ul>
+
+                  <div class="milestone-tags">
+                    <span class="milestone-tech-pill">PHP</span>
+                    <span class="milestone-tech-pill">Laravel</span>
+                    <span class="milestone-tech-pill">JavaScript</span>
+                    <span class="milestone-tech-pill">Bootstrap</span>
+                    <span class="milestone-tech-pill">MySQL</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         EDUCATION SECTION
+         ========================================================================== -->
+    <section id="education" class="content-section">
+      <div class="container">
+        
+        <div class="section-header-block">
+          <span class="section-tag">// Academic Foundation</span>
+          <h2 class="section-title">Education & Degrees</h2>
+          <p class="section-subtitle">Rigorous academic training in Computer Science & Engineering.</p>
+        </div>
+
+        <div class="education-grid">
+          
+          <div class="tilt-card-wrapper">
+            <div class="tilt-card education-card">
+              <div class="layer-depth-1">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                  <i class="fas fa-user-graduate" style="font-size: 2rem; color: var(--accent-cyan);"></i>
+                  <span class="edu-period"><i class="far fa-calendar-alt me-1"></i> 2022 — 2023</span>
+                </div>
+                <h4 class="edu-degree">Master of Science in Computer Science & Engineering</h4>
+                <div class="edu-institution"><i class="fas fa-university"></i> Jahangirnagar University</div>
+                <p class="mt-3 text-secondary">
+                  Specialized in Advanced Algorithms, Distributed Systems Architecture, and Data Engineering. Completed graduate research with distinction.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="tilt-card-wrapper">
+            <div class="tilt-card education-card">
+              <div class="layer-depth-1">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                  <i class="fas fa-graduation-cap" style="font-size: 2rem; color: var(--accent-purple);"></i>
+                  <span class="edu-period"><i class="far fa-calendar-alt me-1"></i> 2013 — 2017</span>
+                </div>
+                <h4 class="edu-degree">Bachelor of Science in Computer Science & Engineering</h4>
+                <div class="edu-institution"><i class="fas fa-university"></i> IUBAT</div>
+                <p class="mt-3 text-secondary">
+                  Comprehensive grounding in Software Engineering, Object-Oriented Design, Relational Database Theory, Operating Systems, and Network Protocols.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PROJECTS SECTION (3D TILT CARDS, FILTERS & MODALS)
+         ========================================================================== -->
+    <section id="projects" class="content-section">
+      <div class="container">
+        
+        <div class="section-header-block">
+          <span class="section-tag">// Featured Works</span>
+          <h2 class="section-title">Flagship Enterprise Projects</h2>
+          <p class="section-subtitle">Production-grade systems delivering high throughput, security, and exceptional user delight.</p>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="projects-filter-bar">
+          <button class="project-filter-btn active" data-filter="all">All Solutions</button>
+          <button class="project-filter-btn" data-filter="enterprise">Enterprise & POS</button>
+          <button class="project-filter-btn" data-filter="fintech">Fintech & Trading</button>
+          <button class="project-filter-btn" data-filter="ecommerce">E-Commerce</button>
+          <button class="project-filter-btn" data-filter="ai">AI & SaaS</button>
+        </div>
+
+        <!-- 3D Projects Showcase Grid -->
+        <div class="projects-grid-3d">
+          
+          <!-- Project 1: Retail POS -->
+          <div class="tilt-card-wrapper project-3d-card-wrapper" data-category="enterprise">
+            <div class="tilt-card project-3d-card">
+              <div class="project-thumbnail-wrapper layer-depth-1">
+                <img src="images/pos.jpg" alt="Retail POS System" class="project-thumbnail-img">
+                <span class="project-category-overlay">Enterprise & POS</span>
+                <span class="project-stars-pill"><i class="fas fa-star"></i> 128</span>
+              </div>
+
+              <div class="project-content-body layer-depth-2">
+                <h4 class="project-title">Retail POS System</h4>
+                <p class="project-description">
+                  Enterprise-grade Point of Sale platform featuring automated inventory reconciliation, barcode scanner hardware integration, and multi-currency reporting.
+                </p>
+                <div class="project-tech-tags">
+                  <span class="project-tech-badge">Java</span>
+                  <span class="project-tech-badge">Spring Boot</span>
+                  <span class="project-tech-badge">MySQL</span>
+                </div>
+              </div>
+
+              <div class="project-actions-row layer-depth-3">
+                <button class="btn-project-details" data-project-key="pos">
+                  View 3D Specs <i class="fas fa-arrow-right"></i>
+                </button>
+                <div class="project-social-links">
+                  <a href="https://github.com/mahdihasan2011" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2: E-Commerce Platform -->
+          <div class="tilt-card-wrapper project-3d-card-wrapper" data-category="ecommerce">
+            <div class="tilt-card project-3d-card">
+              <div class="project-thumbnail-wrapper layer-depth-1">
+                <img src="images/ecom.jpg" alt="Enterprise E-Commerce" class="project-thumbnail-img">
+                <span class="project-category-overlay">E-Commerce</span>
+                <span class="project-stars-pill"><i class="fas fa-star"></i> 245</span>
+              </div>
+
+              <div class="project-content-body layer-depth-2">
+                <h4 class="project-title">Enterprise E-Commerce Platform</h4>
+                <p class="project-description">
+                  Scalable digital marketplace with instant search, faceted product filters, dynamic cart checkout, payment orchestration, and vendor dashboards.
+                </p>
+                <div class="project-tech-tags">
+                  <span class="project-tech-badge">React</span>
+                  <span class="project-tech-badge">Node.js</span>
+                  <span class="project-tech-badge">Redux</span>
+                </div>
+              </div>
+
+              <div class="project-actions-row layer-depth-3">
+                <button class="btn-project-details" data-project-key="ecommerce">
+                  View 3D Specs <i class="fas fa-arrow-right"></i>
+                </button>
+                <div class="project-social-links">
+                  <a href="https://github.com/mahdihasan2011" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3: Complaint Management -->
+          <div class="tilt-card-wrapper project-3d-card-wrapper" data-category="enterprise">
+            <div class="tilt-card project-3d-card">
+              <div class="project-thumbnail-wrapper layer-depth-1">
+                <img src="images/crm1.jpg" alt="Complaint Management System" class="project-thumbnail-img">
+                <span class="project-category-overlay">Enterprise SaaS</span>
+                <span class="project-stars-pill"><i class="fas fa-star"></i> 87</span>
+              </div>
+
+              <div class="project-content-body layer-depth-2">
+                <h4 class="project-title">Complaint & SLA Management</h4>
+                <p class="project-description">
+                  Automated incident ticketing platform with priority sentiment scoring, strict SLA timers, department escalation routes, and technician field tracking.
+                </p>
+                <div class="project-tech-tags">
+                  <span class="project-tech-badge">Python</span>
+                  <span class="project-tech-badge">Django</span>
+                  <span class="project-tech-badge">PostgreSQL</span>
+                </div>
+              </div>
+
+              <div class="project-actions-row layer-depth-3">
+                <button class="btn-project-details" data-project-key="complaint">
+                  View 3D Specs <i class="fas fa-arrow-right"></i>
+                </button>
+                <div class="project-social-links">
+                  <a href="https://github.com/mahdihasan2011" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4: Risk Management -->
+          <div class="tilt-card-wrapper project-3d-card-wrapper" data-category="fintech">
+            <div class="tilt-card project-3d-card">
+              <div class="project-thumbnail-wrapper layer-depth-1">
+                <img src="images/crm2.jpg" alt="Risk Management System" class="project-thumbnail-img">
+                <span class="project-category-overlay">Fintech & AI</span>
+                <span class="project-stars-pill"><i class="fas fa-star"></i> 156</span>
+              </div>
+
+              <div class="project-content-body layer-depth-2">
+                <h4 class="project-title">AI Risk & Compliance Engine</h4>
+                <p class="project-description">
+                  Machine-learning-driven financial transaction monitoring platform that scores risk in real time, detecting anomalies and generating automated compliance filings.
+                </p>
+                <div class="project-tech-tags">
+                  <span class="project-tech-badge">Python</span>
+                  <span class="project-tech-badge">TensorFlow</span>
+                  <span class="project-tech-badge">FastAPI</span>
+                </div>
+              </div>
+
+              <div class="project-actions-row layer-depth-3">
+                <button class="btn-project-details" data-project-key="risk">
+                  View 3D Specs <i class="fas fa-arrow-right"></i>
+                </button>
+                <div class="project-social-links">
+                  <a href="https://github.com/mahdihasan2011" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 5: Digital Money Transfer -->
+          <div class="tilt-card-wrapper project-3d-card-wrapper" data-category="fintech">
+            <div class="tilt-card project-3d-card">
+              <div class="project-thumbnail-wrapper layer-depth-1">
+                <img src="images/picture1.jpg" alt="Digital Money Transfer" class="project-thumbnail-img">
+                <span class="project-category-overlay">Fintech</span>
+                <span class="project-stars-pill"><i class="fas fa-star"></i> 203</span>
+              </div>
+
+              <div class="project-content-body layer-depth-2">
+                <h4 class="project-title">Digital Money Transfer</h4>
+                <p class="project-description">
+                  High-security remittance platform supporting instant peer-to-peer transfers, real-time FX currency lock, dual-approval disbursement, and audit logs.
+                </p>
+                <div class="project-tech-tags">
+                  <span class="project-tech-badge">Java</span>
+                  <span class="project-tech-badge">Spring Boot</span>
+                  <span class="project-tech-badge">Kafka</span>
+                </div>
+              </div>
+
+              <div class="project-actions-row layer-depth-3">
+                <button class="btn-project-details" data-project-key="transfer">
+                  View 3D Specs <i class="fas fa-arrow-right"></i>
+                </button>
+                <div class="project-social-links">
+                  <a href="https://github.com/mahdihasan2011" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 6: FX Trade Platform -->
+          <div class="tilt-card-wrapper project-3d-card-wrapper" data-category="fintech">
+            <div class="tilt-card project-3d-card">
+              <div class="project-thumbnail-wrapper layer-depth-1">
+                <img src="images/crm3.png" alt="FX Trade Platform" class="project-thumbnail-img">
+                <span class="project-category-overlay">Trading Systems</span>
+                <span class="project-stars-pill"><i class="fas fa-star"></i> 112</span>
+              </div>
+
+              <div class="project-content-body layer-depth-2">
+                <h4 class="project-title">FX Trade & Market Platform</h4>
+                <p class="project-description">
+                  High-frequency foreign exchange terminal providing streaming WebSocket quotes, interactive candlestick analytics, and automated stop-loss limit routing.
+                </p>
+                <div class="project-tech-tags">
+                  <span class="project-tech-badge">C#</span>
+                  <span class="project-tech-badge">.NET Core</span>
+                  <span class="project-tech-badge">WebSockets</span>
+                </div>
+              </div>
+
+              <div class="project-actions-row layer-depth-3">
+                <button class="btn-project-details" data-project-key="fxtrade">
+                  View 3D Specs <i class="fas fa-arrow-right"></i>
+                </button>
+                <div class="project-social-links">
+                  <a href="https://github.com/mahdihasan2011" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 7: Skilled Professional Hiring -->
+          <div class="tilt-card-wrapper project-3d-card-wrapper" data-category="ai">
+            <div class="tilt-card project-3d-card">
+              <div class="project-thumbnail-wrapper layer-depth-1">
+                <img src="images/crm4.png" alt="Professional Hiring System" class="project-thumbnail-img">
+                <span class="project-category-overlay">AI Recruitment</span>
+                <span class="project-stars-pill"><i class="fas fa-star"></i> 178</span>
+              </div>
+
+              <div class="project-content-body layer-depth-2">
+                <h4 class="project-title">Skilled Professional Hiring</h4>
+                <p class="project-description">
+                  Intelligent talent platform with automated resume parsing, interactive pair-programming interview rooms, and predictive candidate scoring.
+                </p>
+                <div class="project-tech-tags">
+                  <span class="project-tech-badge">React</span>
+                  <span class="project-tech-badge">Node.js</span>
+                  <span class="project-tech-badge">WebRTC</span>
+                </div>
+              </div>
+
+              <div class="project-actions-row layer-depth-3">
+                <button class="btn-project-details" data-project-key="hiring">
+                  View 3D Specs <i class="fas fa-arrow-right"></i>
+                </button>
+                <div class="project-social-links">
+                  <a href="https://github.com/mahdihasan2011" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 8: ISP Management -->
+          <div class="tilt-card-wrapper project-3d-card-wrapper" data-category="enterprise">
+            <div class="tilt-card project-3d-card">
+              <div class="project-thumbnail-wrapper layer-depth-1">
+                <img src="images/picture2.jpg" alt="ISP Management System" class="project-thumbnail-img">
+                <span class="project-category-overlay">Network Operations</span>
+                <span class="project-stars-pill"><i class="fas fa-star"></i> 142</span>
+              </div>
+
+              <div class="project-content-body layer-depth-2">
+                <h4 class="project-title">ISP & Radius Billing Engine</h4>
+                <p class="project-description">
+                  Automated subscriber billing and bandwidth provisioning system communicating directly with MikroTik routers. Supports 50,000+ active subscribers.
+                </p>
+                <div class="project-tech-tags">
+                  <span class="project-tech-badge">PHP</span>
+                  <span class="project-tech-badge">Laravel</span>
+                  <span class="project-tech-badge">MikroTik API</span>
+                </div>
+              </div>
+
+              <div class="project-actions-row layer-depth-3">
+                <button class="btn-project-details" data-project-key="isp">
+                  View 3D Specs <i class="fas fa-arrow-right"></i>
+                </button>
+                <div class="project-social-links">
+                  <a href="https://github.com/mahdihasan2011" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Live GitHub Activity Block -->
+        <div class="tilt-card-wrapper github-section-card">
+          <div class="tilt-card">
+            <div class="github-header-info layer-depth-1">
+              <div class="github-profile-preview">
+                <img src="images/profilepic4.jpeg" alt="Mahdi Hasan GitHub Avatar" class="github-avatar-circle" id="ghAvatarImg">
+                <div class="github-user-names">
+                  <h4 class="gh-name gh-name-target">Mahdi Hasan</h4>
+                  <p class="gh-handle">@mahdihasan2011</p>
+                </div>
+              </div>
+
+              <div class="github-stats-chips">
+                <span class="gh-stat-chip"><i class="fas fa-code-branch me-1"></i> Public Repos: <strong id="ghRepoCount">45+</strong></span>
+                <span class="gh-stat-chip"><i class="fas fa-users me-1"></i> Community Followers: <strong id="ghFollowersCount">80+</strong></span>
+                <span class="gh-stat-chip"><i class="fas fa-certificate me-1"></i> Verified Developer</span>
+              </div>
+            </div>
+
+            <p class="text-secondary mb-3 layer-depth-1" id="ghUserBio">
+              Full-Stack Software Developer passionate about high-availability web architectures and clean code.
+            </p>
+
+            <!-- Contributions Graph -->
+            <div class="github-chart-container layer-depth-2">
+              <img id="githubContributionsChart" src="https://ghchart.rshah.org/mahdihasan2011" alt="Mahdi Hasan GitHub Contributions">
+            </div>
+
+            <div class="layer-depth-3">
+              <a href="https://github.com/mahdihasan2011" target="_blank" class="btn-3d-secondary">
+                <i class="fab fa-github me-1"></i> View Verified GitHub Profile
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CONTACT SECTION (3D TERMINAL & WORKING TELEGRAM INTEGRATION)
+         ========================================================================== -->
+    <section id="contact" class="content-section">
+      <div class="container">
+        
+        <div class="section-header-block">
+          <span class="section-tag">// Transmission Terminal</span>
+          <h2 class="section-title">Let's Build Something Exceptional</h2>
+          <p class="section-subtitle">Open for Senior Full-Stack roles, architecture consulting, and high-impact partnerships.</p>
+        </div>
+
+        <div class="contact-grid">
+          
+          <!-- Contact Detail Cards & Map -->
+          <div class="contact-info-cards">
+            
+            <!-- Email -->
+            <div class="contact-detail-box">
+              <div class="contact-icon-circle"><i class="fas fa-envelope"></i></div>
+              <div class="contact-text-meta">
+                <h5>Electronic Mail</h5>
+                <a href="mailto:mmahdihasan2011@gmail.com">mmahdihasan2011@gmail.com</a>
+              </div>
+            </div>
+
             <!-- LinkedIn -->
-            <a href="https://bd.linkedin.com/in/mahdihasan2011" target="_blank" aria-label="LinkedIn"><i
-                    class="fab fa-linkedin-in"></i></a>
+            <div class="contact-detail-box">
+              <div class="contact-icon-circle"><i class="fab fa-linkedin-in"></i></div>
+              <div class="contact-text-meta">
+                <h5>LinkedIn Network</h5>
+                <a href="https://bd.linkedin.com/in/mahdihasan2011" target="_blank">in/mahdihasan2011</a>
+              </div>
+            </div>
 
             <!-- GitHub -->
-            <a href="https://github.com/mahdihasan2011" id="github-profile-link" target="_blank" aria-label="GitHub"><i
-                    class="fab fa-github"></i></a>
+            <div class="contact-detail-box">
+              <div class="contact-icon-circle"><i class="fab fa-github"></i></div>
+              <div class="contact-text-meta">
+                <h5>Code Repository</h5>
+                <a href="https://github.com/mahdihasan2011" target="_blank">github.com/mahdihasan2011</a>
+              </div>
+            </div>
 
-            <!-- Email -->
-            <a href="mailto:mmahdihasan2011@gmail.com" aria-label="Mail"><i class="fas fa-envelope"></i></a>
+            <!-- Location Map -->
+            <div class="contact-map-frame">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.509773020634!2d90.40409601536258!3d23.804093992289303!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c7c08f3ab429%3A0x5e888a2c8c34a1c2!2sDhaka!5e0!3m2!1sen!2sbd!4v1718796358823"
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Location Map: Dhaka, Bangladesh">
+              </iframe>
+            </div>
+
+          </div>
+
+          <!-- 3D Form Card -->
+          <div class="tilt-card-wrapper contact-form-card">
+            <div class="tilt-card">
+              <div class="layer-depth-1">
+                <h3 class="mb-4" style="font-size: 1.6rem;"><i class="fas fa-terminal me-2 text-primary"></i> Send a Direct Message</h3>
+                
+                <form id="contactForm">
+                  
+                  <div class="form-group-3d">
+                    <label for="nameInput">Your Full Name *</label>
+                    <input type="text" class="form-input-3d" id="nameInput" placeholder="e.g. Alex Johnson" required>
+                  </div>
+
+                  <div class="form-row-split">
+                    <div class="form-group-3d">
+                      <label for="emailInput">Email Address *</label>
+                      <input type="email" class="form-input-3d" id="emailInput" placeholder="name@company.com" required>
+                    </div>
+                    <div class="form-group-3d">
+                      <label for="phoneInput">Phone / WhatsApp</label>
+                      <input type="text" class="form-input-3d" id="phoneInput" placeholder="+1 (555) 000-0000">
+                    </div>
+                  </div>
+
+                  <div class="form-group-3d">
+                    <label for="subjectInput">Inquiry Scope *</label>
+                    <select class="form-input-3d" id="subjectInput" required>
+                      <option value="" selected disabled>Select an inquiry category</option>
+                      <option value="Senior Full-Stack Engineering Role">Senior Full-Stack Engineering Role</option>
+                      <option value="Architectural Consulting & Code Audit">Architectural Consulting & Code Audit</option>
+                      <option value="Enterprise Contract / Project">Enterprise Contract / Project</option>
+                      <option value="Technical Partnership">Technical Partnership</option>
+                      <option value="General Technical Inquiry">General Technical Inquiry</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group-3d">
+                    <label for="messageTextarea">Project Context & Message *</label>
+                    <textarea class="form-input-3d" id="messageTextarea" rows="4" placeholder="Describe the scope, goals, or timeline of your project..." required></textarea>
+                  </div>
+
+                  <button type="submit" class="btn-submit-telegram layer-depth-2">
+                    <i class="fas fa-paper-plane"></i> Send Direct Message
+                  </button>
+
+                </form>
+
+              </div>
+            </div>
+          </div>
+
         </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         FOOTER SECTION
+         ========================================================================== -->
+    <footer class="footer-cyber">
+      <div class="container">
+        <div class="footer-grid">
+          
+          <div class="footer-brand-info">
+            <h4 class="brand-name mb-1">Mahdi Hasan</h4>
+            <p class="text-muted mb-0">Senior Full-Stack Software Developer • React, Laravel, TypeScript & WebGL</p>
+          </div>
+
+          <div class="footer-social-icons">
+            <a href="https://bd.linkedin.com/in/mahdihasan2011" target="_blank" class="footer-icon-link" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://github.com/mahdihasan2011" target="_blank" class="footer-icon-link" aria-label="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:mmahdihasan2011@gmail.com" class="footer-icon-link" aria-label="Email">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </div>
+
+        </div>
+
+        <div class="footer-copyright">
+          <p class="mb-0">
+            &copy; 2018 — <span id="currentYearSpan">2026</span> Mahdi Hasan. Engineered with 3D WebGL, CSS 3D Transforms, and Vanilla JavaScript. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Project Details 3D Modal Dialog -->
+  <div class="modal-cyber-backdrop" id="projectModalBackdrop">
+    <div class="modal-cyber-dialog">
+      <button class="modal-close-btn modal-close btn-close-cyber" id="modalCloseBtn" aria-label="Close Modal">
+        <i class="fas fa-times"></i>
+      </button>
+      <div id="modalDetailContent">
+        <!-- Injected dynamically via JS -->
+      </div>
     </div>
+  </div>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <section id="about" class="content-section fade-in-up">
-            <h2 class="display-5 mb-5">About Me</h2>
-            <div class="project-card p-4">
-                <p class="lead mb-4">
-                    8+ years of turning complex requirements into fast, reliable web applications. From Laravel APIs to React dashboards, I own the full stack — and care as much about code quality as I do about the end user.
-                </p>
-
-                <div class="d-flex flex-wrap gap-3 mb-4">
-                    <!-- <a href="/Mahdi_Hasan_Resume.pdf" class="btn btn-primary" target="_blank">
-                        <i class="fas fa-file-pdf me-2"></i> My Resume
-                    </a> -->
-                    <a href="#contact" class="btn btn-outline-primary">
-                        <i class="fas fa-paper-plane me-2"></i> Contact Me
-                    </a>
-                </div>
-
-                <!-- Skills/Highlights Section (Optional) -->
-                <div class="row mt-3">
-                    <div class="col-md-6 mt-3">
-                        <h5><i class="fas fa-code me-2 text-primary"></i>Technical Strengths</h5>
-                        <ul class="skills-list">
-                            <li><strong>Backend:</strong> PHP, Laravel, MySQL, APIs</li>
-                            <li><strong>Frontend:</strong> JavaScript, React/Vue, Bootstrap</li>
-                            <li><strong>DevOps:</strong> Docker, AWS, CI/CD</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6 mt-3">
-                        <h5><i class="fas fa-medal me-2 text-primary"></i>Delivery Focus</h5>
-                        <ul class="skills-list">
-                            <li>User-centric solutions</li>
-                            <li>Agile/Scrum workflows</li>
-                            <li>Clean, maintainable code advocate</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="experience" class="content-section fade-in-up">
-            <h2 class="display-5 mb-5">Experience</h2>
-            <div class="project-card experience-item p-4 mb-4">
-                <h5>Senior Software Developer at Vivacom BD.</h5>
-                <p class="text-secondary"><em>Jan 2023 - Present</em></p>
-                <ul>
-                    <li>Architected and led end-to-end development of a client-facing financial dashboard using React and TypeScript, delivering a performant, scalable interface aligned with business requirements.</li>
-                    <li>Established code review practices and mentored junior developers, raising team code quality and accelerating onboarding for new hires.</li>
-                    <li>Drove technical decision-making on component architecture, state management, and frontend best practices across the team.</li>
-                </ul>
-            </div>
-            <div class="project-card experience-item p-4 mb-4">
-                <h5>Software Developer at Fieldboosters Ltd.</h5>
-                <p class="text-secondary"><em>Jan 2020 - Dec 2022</em></p>
-                <ul>
-                    <li>Built and maintained core features for a large-scale e-commerce platform, improving reliability and user experience across high-traffic product flows.</li>
-                    <li>Partnered with product managers and designers to break down business requirements into clear technical specifications, reducing ambiguity during sprint planning.</li>
-                    <li>Contributed to full-stack feature delivery using Vue.js on the frontend and Laravel on the backend, ensuring consistent API contracts and maintainable code.</li>
-                </ul>
-            </div>
-            <div class="project-card experience-item p-4">
-                <h5>Junior Software Developer at Creative Software Ltd.</h5>
-                <p class="text-secondary"><em>Aug 2018 - Dec 2019</em></p>
-                <ul>
-                    <li>Developed and maintained client-facing software features in PHP and Laravel, gaining hands-on experience across the full software development lifecycle.</li>
-                    <li>Led direct client-facing requirements gathering sessions, translating business needs into actionable development tasks.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="education" class="content-section fade-in-up">
-            <h2 class="display-5 mb-5">Education</h2>
-
-            <div class="project-card p-4 mb-4">
-                <h5>Master of Science in Computer Science & Engineering</h5>
-                <p class="text-secondary"><em>Jahangirnagar University, Fall 2022
-                        -
-                        Fall 2023</em></p>
-                <ul>
-                </ul>
-            </div>
-
-            <div class="project-card p-4 mb-4">
-                <h5>Bachelor of Science in Computer Science & Engineering</h5>
-                <p class="text-secondary"><em>International University of Business Agriculture and Technology, Fall 2013
-                        -
-                        Fall 2017</em></p>
-                <ul>
-                </ul>
-            </div>
-        </section>
-
-        <section id="projects" class="content-section fade-in-up">
-            <h2 class="display-5 mb-5">Projects</h2>
-            <div class="row" id="projects-container">
-                <!-- POS System -->
-                <div class="col-lg-6 mb-4">
-                    <div class="card project-card p-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Retail POS System</h5>
-                            <p class="card-text small text-secondary">
-                                A comprehensive Point of Sale system with inventory management, sales tracking,
-                                and customer relationship features. Supports barcode scanning, multiple payment
-                                methods, and real-time reporting.
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="badge bg-primary">Java</span>
-                                    <span class="badge bg-success ms-1"><i class="fas fa-star"></i> 128</span>
-                                </div>
-                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- E-commerce Platform -->
-                <div class="col-lg-6 mb-4">
-                    <div class="card project-card p-3">
-                        <div class="card-body">
-                            <h5 class="card-title">E-commerce Platform</h5>
-                            <p class="card-text small text-secondary">
-                                Full-featured online marketplace with product management, shopping cart,
-                                payment gateway integration, and admin dashboard. Supports multi-vendor
-                                operations and real-time analytics.
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="badge bg-primary">React</span>
-                                    <span class="badge bg-primary">Node.js</span>
-                                    <span class="badge bg-success ms-1"><i class="fas fa-star"></i> 245</span>
-                                </div>
-                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Complaint Management System -->
-                <div class="col-lg-6 mb-4">
-                    <div class="card project-card p-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Complaint Management System</h5>
-                            <p class="card-text small text-secondary">
-                                Enterprise-level ticketing system for tracking customer complaints with
-                                automated workflows, SLA monitoring, and resolution tracking. Includes
-                                customer portal and mobile app for field technicians.
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="badge bg-primary">Python</span>
-                                    <span class="badge bg-primary">Django</span>
-                                    <span class="badge bg-success ms-1"><i class="fas fa-star"></i> 87</span>
-                                </div>
-                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Risk Management Solution -->
-                <div class="col-lg-6 mb-4">
-                    <div class="card project-card p-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Risk Management System</h5>
-                            <p class="card-text small text-secondary">
-                                AI-powered risk assessment platform for institutions with
-                                real-time monitoring, predictive analytics, and compliance reporting.
-                                Integrates with multiple data sources for comprehensive risk profiling.
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="badge bg-primary">Python</span>
-                                    <span class="badge bg-primary">TensorFlow</span>
-                                    <span class="badge bg-success ms-1"><i class="fas fa-star"></i> 156</span>
-                                </div>
-                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Money Transfer System -->
-                <div class="col-lg-6 mb-4">
-                    <div class="card project-card p-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Digital Money Transfer</h5>
-                            <p class="card-text small text-secondary">
-                                Secure peer-to-peer payment system with multi-currency support,
-                                transaction tracking, and fraud detection. Features include
-                                scheduled payments, recurring transfers, and API for third-party integration.
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="badge bg-primary">Java</span>
-                                    <span class="badge bg-primary">Spring Boot</span>
-                                    <span class="badge bg-success ms-1"><i class="fas fa-star"></i> 203</span>
-                                </div>
-                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FX Trade Management -->
-                <div class="col-lg-6 mb-4">
-                    <div class="card project-card p-3">
-                        <div class="card-body">
-                            <h5 class="card-title">FX Trade Platform</h5>
-                            <p class="card-text small text-secondary">
-                                Foreign exchange trading system with real-time market data,
-                                automated trading strategies, and risk management tools.
-                                Includes trader dashboard, historical analysis, and regulatory reporting.
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="badge bg-primary">C#</span>
-                                    <span class="badge bg-primary">.NET Core</span>
-                                    <span class="badge bg-success ms-1"><i class="fas fa-star"></i> 112</span>
-                                </div>
-                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Hiring Platform -->
-                <div class="col-lg-6 mb-4">
-                    <div class="card project-card p-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Skilled Professional Hiring System</h5>
-                            <p class="card-text small text-secondary">
-                                AI-driven recruitment platform connecting companies with skilled professionals.
-                                Features include skills assessment, video interviewing, and candidate matching
-                                algorithms with 85% accuracy rate.
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="badge bg-primary">React</span>
-                                    <span class="badge bg-primary">Node.js</span>
-                                    <span class="badge bg-success ms-1"><i class="fas fa-star"></i> 178</span>
-                                </div>
-                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ride-hailing App -->
-                <div class="col-lg-6 mb-4">
-                    <div class="card project-card p-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Ride-Hailing Service</h5>
-                            <p class="card-text small text-secondary">
-                                Uber-like transportation platform with real-time GPS tracking,
-                                fare calculation, and payment processing. Includes driver and
-                                passenger apps with rating system and trip history.
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="badge bg-primary">Flutter</span>
-                                    <span class="badge bg-primary">Firebase</span>
-                                    <span class="badge bg-success ms-1"><i class="fas fa-star"></i> 231</span>
-                                </div>
-                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Smart Parking -->
-                <div class="col-lg-6 mb-4">
-                    <div class="card project-card p-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Smart Parking Solution</h5>
-                            <p class="card-text small text-secondary">
-                                IoT-based parking management system with license plate recognition,
-                                space availability tracking, and mobile payment. Reduced parking
-                                search time by 65% in pilot deployments.
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="badge bg-primary">Python</span>
-                                    <span class="badge bg-primary">Raspberry Pi</span>
-                                    <span class="badge bg-success ms-1"><i class="fas fa-star"></i> 94</span>
-                                </div>
-                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ISP Management -->
-                <div class="col-lg-6 mb-4">
-                    <div class="card project-card p-3">
-                        <div class="card-body">
-                            <h5 class="card-title">ISP Management System</h5>
-                            <p class="card-text small text-secondary">
-                                Comprehensive solution for internet service providers featuring
-                                customer management, bandwidth monitoring, billing automation,
-                                and ticketing system. Handles 50,000+ subscribers with 99.9% uptime.
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="badge bg-primary">PHP</span>
-                                    <span class="badge bg-primary">Laravel</span>
-                                    <span class="badge bg-success ms-1"><i class="fas fa-star"></i> 142</span>
-                                </div>
-                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="github-contributions project-card fade-in -up">
-                <h3 class="mb-4">My GitHub Contributions</h3>
-                <p>Here's a visualization of my coding activity over the past year:</p>
-                <img id="github-contributions-chart" src="" alt="GitHub Contributions Chart" class="img-fluid">
-                <div class="text-center mt-3">
-                    <a href="https://github.com/your-github-username" id="github-profile-link-2" target="_blank"
-                        class="btn btn-outline-primary">
-                        <i class="fab fa-github"></i> View Full GitHub Profile
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="content-section fade-in-up">
-            <h2 class="display-5">Get In Touch</h2>
-            <p class="lead text-secondary mb-5">Have a question or want to work together? Feel free to reach out!</p>
-
-            <div class="row">
-                <!-- Contact Form -->
-                <div class="col-12 col-md-6 mb-5">
-                    <form id="contactForm">
-                        <div class="mb-3">
-                            <label for="nameInput" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="nameInput" required>
-                        </div>
-                        <div class="mb-3 row">
-                            <div class="col-6">
-                                <label for="emailInput" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="emailInput" required>
-                            </div>
-                            <div class="col-6">
-                                <label for="phoneInput" class="form-label">Phone</label>
-                                <input type="text" class="form-control" id="phoneInput" required>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="subjectInput" class="form-label">Subject</label>
-                            <select class="form-control" id="subjectInput">
-                                <option value="" selected disabled>Select a topic</option>
-                                <option>Project Inquiry</option>
-                                <option>Job Opportunity</option>
-                                <option>Collaboration</option>
-                                <option>General Question</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="messageTextarea" class="form-label">Message</label>
-                            <textarea class="form-control" id="messageTextarea" rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary mt-2">Send Message</button>
-                    </form>
-                </div>
-
-                <!-- Map -->
-                <div class="col-12 col-md-6">
-                    <h5 class="mb-3">Location</h5>
-                    <div class="ratio ratio-4x3">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.509773020634!2d90.40409601536258!3d23.804093992289303!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c7c08f3ab429%3A0x5e888a2c8c34a1c2!2sDhaka!5e0!3m2!1sen!2sbd!4v1718796358823"
-                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <footer class="footer-content">
-            <p>
-                <small>Copyright &copy;
-                    2018 -
-                    <script>document.write(new Date().getFullYear());</script> |
-                    All rights reserved | Developed by
-                    <a class="text-decoration-none" href="https://github.com/mahdihasan2011" target="_blank">Mahdi
-                        Hasan</a>
-                </small>
-            </p>
-        </footer>
-
+  <!-- Floating Feedback Toast -->
+  <div class="toast-cyber" id="cyberToast">
+    <div class="toast-icon">
+      <i class="fas fa-check-circle"></i>
     </div>
+    <div class="toast-msg">
+      <h6>Message Transmitted</h6>
+      <p id="toastMsgText">Thank you! Your message was beamed directly to Mahdi Hasan.</p>
+    </div>
+  </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            // --- CONFIGURATION ---
-            const GITHUB_USERNAME = 'mahdihasan2011';
-
-            // --- DARK MODE TOGGLE ---
-            function toggleDarkMode(isDark) {
-                $('body').toggleClass('dark-mode', isDark);
-                localStorage.setItem('theme', isDark ? 'dark-mode' : 'light-mode');
-            }
-
-            // Initialize dark mode
-            const currentTheme = localStorage.getItem('theme');
-            const isDarkMode = currentTheme === 'dark-mode';
-            toggleDarkMode(isDarkMode);
-
-            // Theme toggle buttons
-            $('#themeToggle, #mobileThemeToggle').on('click', function () {
-                const isDark = !$('body').hasClass('dark-mode');
-                toggleDarkMode(isDark);
-            });
-
-            // --- SMOOTH SCROLLING ---
-            $('a[href^="#"]').on('click', function (e) {
-                e.preventDefault();
-                const targetId = $(this).attr('href');
-                const targetOffset = $(targetId).offset().top;
-                $('html, body').animate({ scrollTop: targetOffset - 160 }, 800);
-
-                // Add active class to clicked nav item
-                $('.mobile-nav .nav-link').removeClass('active');
-                $(this).addClass('active');
-            });
-
-            // --- GITHUB API INTEGRATION ---
-            const userApiUrl = `https://api.github.com/users/${GITHUB_USERNAME}`;
-            const reposApiUrl = `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&direction=desc`;
-
-            $.ajax({
-                url: userApiUrl, success: user => {
-                    const name = user.name || user.login;
-                    $('#github-name').text(name);
-                    $('#mobile-github-name').text(name);
-                    $('#github-avatar').attr('src', user.avatar_url);
-                    $('#mobile-github-avatar').attr('src', user.avatar_url);
-                    $('#github-profile-link').attr('href', user.html_url);
-                    $('#github-profile-link-2').attr('href', user.html_url);
-                    if (user.bio) $('#github-bio').text(user.bio);
-
-                    // Load GitHub contributions chart
-                    $('#github-contributions-chart').attr('src', `https://ghchart.rshah.org/${GITHUB_USERNAME}`);
-                }
-            });
-
-            // --- SCROLL-TRIGGERED ANIMATIONS ---
-            const animatedElements = $('.fade-in-up');
-            function checkAnimations() {
-                animatedElements.each(function () {
-                    const rect = this.getBoundingClientRect();
-                    if (rect.top < window.innerHeight && rect.bottom >= 0) {
-                        $(this).addClass('visible');
-                    }
-                });
-            }
-            $(window).on('scroll', checkAnimations);
-            checkAnimations(); // Initial check
-
-            // --- PROFILE SUBTITLE ROTATOR ---
-            const subtitles = [
-              "Full-Stack Software Developer",
-              "React & VueJs Developer",
-              "Laravel & PHP Developer",
-              "8+ Years of Web Development",
-              "Available for Freelance"
-            ];
-            let currentSubtitleIndex = 0;
-
-            function rotateSubtitle() {
-                $('#profile-subtitle-text').fadeOut(400, function () {
-                    $(this).text(subtitles[currentSubtitleIndex]).fadeIn(400);
-                });
-                $('#mobile-profile-subtitle-text').fadeOut(400, function () {
-                    $(this).text(subtitles[currentSubtitleIndex]).fadeIn(400);
-                });
-                currentSubtitleIndex = (currentSubtitleIndex + 1) % subtitles.length;
-            }
-            setInterval(rotateSubtitle, 5000); // Change every 5 seconds
-
-        });
-
-        document.getElementById('contactForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            // --- Replace with your own Bot Token and Chat ID ---
-            const BOT_TOKEN = '8289585552:AAEPZbLgJXH1Kf0OIzpQJmwasgqpMX3ETkg';
-            const CHAT_ID = '8553087905';
-
-            // --- Collect form data ---
-            const name = document.getElementById('nameInput').value;
-            const phone = document.getElementById('phoneInput').value;
-            const email = document.getElementById('emailInput').value;
-            const subject = document.getElementById('subjectInput').value;
-            const message = document.getElementById('messageTextarea').value;
-
-            // --- Create Telegram message ---
-            const text = `
-                📋 *New Contact Form Portfolio Site*
-
-                👤 *Name:* ${name}
-                📞 *Phone:* ${phone}
-                📧 *Email:* ${email}
-                📝 *Subject:* ${subject}
-                💬 *Message:* ${message}
-
-                ⏰ ${new Date().toLocaleString()}
-            `;
-
-            // --- Send to Telegram ---
-            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: CHAT_ID,
-                    text: text,
-                    parse_mode: 'Markdown'
-                })
-            })
-                .then(res => {
-                    if (res.ok) {
-                        document.getElementById('contactForm').reset();
-                    }
-                })
-                .catch(err => {
-                    console.error('Error:', err);
-                });
-        });
-    </script>
+  <!-- Scripts -->
+  <script>
+    document.getElementById('currentYearSpan').textContent = new Date().getFullYear();
+  </script>
+  <!-- Bootstrap 5 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Three.js (r128) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  
+  <!-- 3D Engines & Interaction Scripts -->
+  <script src="js/three-scene.js"></script>
+  <script src="js/hero-quantum.js"></script>
+  <script src="js/3d-interactions.js"></script>
 
 </body>
 
