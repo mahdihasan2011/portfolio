@@ -14,6 +14,8 @@ import {
   MapPin,
   MessageSquare,
   Sparkles,
+  ExternalLink,
+  MessageCircle,
 } from "lucide-react";
 
 export default function ContactSection() {
@@ -66,7 +68,7 @@ export default function ContactSection() {
 ${formState.message}
 
 ⏰ *Timestamp:* ${new Date().toLocaleString()}
-🌐 *Source:* Next.js 3D Portfolio
+🌐 *Source:* Next.js 3D Portfolio (Mahdi Hasan)
     `;
 
     try {
@@ -85,7 +87,7 @@ ${formState.message}
 
       if (response.ok) {
         setStatus("success");
-        setFeedbackMessage("Message transmitted successfully! Thank you for reaching out.");
+        setFeedbackMessage("Message transmitted directly! Mahdi will respond promptly.");
         setFormState({
           name: "",
           email: "",
@@ -96,13 +98,13 @@ ${formState.message}
       } else {
         setStatus("error");
         setFeedbackMessage(
-          `Message delivery notice: Please email ${personal.email} directly if direct network is restricted.`
+          `Message delivery notice: Please email ${personal.email} or WhatsApp ${personal.phoneFormatted} directly.`
         );
       }
     } catch {
       setStatus("error");
       setFeedbackMessage(
-        `Notice: Please send your inquiry directly to ${personal.email}.`
+        `Notice: Please send your inquiry directly to ${personal.email} or via WhatsApp.`
       );
     }
   };
@@ -114,10 +116,17 @@ ${formState.message}
   )}`;
 
   return (
-    <section id="contact" className="py-20 border-t" style={{ borderColor: "var(--border-color)", backgroundColor: "var(--bg-surface)" }}>
+    <section
+      id="contact"
+      className="py-20 border-t"
+      style={{
+        borderColor: "var(--border-color)",
+        backgroundColor: "var(--bg-surface)",
+      }}
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <SectionHeading
-          badge="Direct Inquiries"
+          badge="Direct Channels"
           title="Let's Build Something Exceptional"
           subtitle={contact.invitation}
         />
@@ -130,44 +139,130 @@ ${formState.message}
               style={{
                 backgroundColor: "var(--bg-card)",
                 borderColor: "var(--border-color)",
+                boxShadow: "var(--shadow-card)",
               }}
             >
-              <h3 className="font-display font-bold text-lg text-inherit mb-2">
-                Direct Channels
+              <h3
+                className="font-display font-bold text-lg mb-2"
+                style={{ color: "var(--text-primary)" }}
+              >
+                Contact Information
               </h3>
               <p
                 className="text-sm font-sans leading-relaxed mb-6"
                 style={{ color: "var(--text-secondary)" }}
               >
-                Reach out directly via email, phone, or connect on LinkedIn and GitHub.
+                Available for full-time engineering leadership, contracts, or technical consulting.
               </p>
 
-              <div className="space-y-4">
-                {/* Email */}
+              <div className="space-y-3.5">
+                {/* Phone & WhatsApp */}
+                <div
+                  className="flex items-center justify-between p-3.5 rounded-xl border transition-colors"
+                  style={{
+                    backgroundColor: "var(--bg-surface)",
+                    borderColor: "var(--border-color)",
+                  }}
+                >
+                  <a
+                    href={`tel:${personal.phone}`}
+                    className="flex items-center gap-3 group overflow-hidden"
+                  >
+                    <div
+                      className="p-2.5 rounded-lg border group-hover:scale-105 transition-transform shrink-0"
+                      style={{
+                        backgroundColor: "var(--bg-card)",
+                        borderColor: "var(--border-color)",
+                        color: "var(--accent-emerald)",
+                      }}
+                    >
+                      <Phone className="w-4 h-4" />
+                    </div>
+                    <div className="flex flex-col overflow-hidden">
+                      <span className="text-[10px] font-mono uppercase font-semibold" style={{ color: "var(--text-muted)" }}>
+                        Direct Call / WhatsApp
+                      </span>
+                      <span
+                        className="text-sm font-semibold truncate group-hover:text-cyan transition-colors"
+                        style={{ color: "var(--text-primary)" }}
+                      >
+                        {personal.phoneFormatted}
+                      </span>
+                    </div>
+                  </a>
+
+                  <a
+                    href={personal.whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-2.5 py-1 rounded-lg text-xs font-mono font-bold shrink-0 transition-transform hover:scale-105 text-charcoal-950"
+                    style={{ backgroundColor: "var(--accent-emerald)" }}
+                    title="Chat on WhatsApp"
+                  >
+                    WhatsApp
+                  </a>
+                </div>
+
+                {/* Primary Email */}
                 <a
                   href={`mailto:${personal.email}`}
-                  className="flex items-center gap-3.5 p-3.5 rounded-xl border transition-colors group"
+                  className="flex items-center gap-3 p-3.5 rounded-xl border transition-colors group"
                   style={{
                     backgroundColor: "var(--bg-surface)",
                     borderColor: "var(--border-color)",
                   }}
                 >
                   <div
-                    className="p-2.5 rounded-lg border group-hover:scale-105 transition-transform"
+                    className="p-2.5 rounded-lg border group-hover:scale-105 transition-transform shrink-0"
                     style={{
                       backgroundColor: "var(--bg-card)",
                       borderColor: "var(--border-color)",
                       color: "var(--accent-cyan)",
                     }}
                   >
-                    <Mail className="w-5 h-5" />
+                    <Mail className="w-4 h-4" />
                   </div>
                   <div className="flex flex-col overflow-hidden">
-                    <span className="text-[11px] font-mono uppercase" style={{ color: "var(--text-muted)" }}>
-                      Electronic Mail
+                    <span className="text-[10px] font-mono uppercase font-semibold" style={{ color: "var(--text-muted)" }}>
+                      Primary Email
                     </span>
-                    <span className="text-sm font-semibold text-inherit group-hover:text-cyan transition-colors truncate">
+                    <span
+                      className="text-sm font-semibold truncate group-hover:text-cyan transition-colors"
+                      style={{ color: "var(--text-primary)" }}
+                    >
                       {personal.email}
+                    </span>
+                  </div>
+                </a>
+
+                {/* Secondary Email */}
+                <a
+                  href={`mailto:${personal.secondaryEmail}`}
+                  className="flex items-center gap-3 p-3.5 rounded-xl border transition-colors group"
+                  style={{
+                    backgroundColor: "var(--bg-surface)",
+                    borderColor: "var(--border-color)",
+                  }}
+                >
+                  <div
+                    className="p-2.5 rounded-lg border group-hover:scale-105 transition-transform shrink-0"
+                    style={{
+                      backgroundColor: "var(--bg-card)",
+                      borderColor: "var(--border-color)",
+                      color: "var(--accent-violet)",
+                    }}
+                  >
+                    <Mail className="w-4 h-4" />
+                  </div>
+                  <div className="flex flex-col overflow-hidden">
+                    <span className="text-[10px] font-mono uppercase font-semibold" style={{ color: "var(--text-muted)" }}>
+                      Alternate Email
+                    </span>
+                    <span
+                      className="text-sm font-semibold truncate group-hover:text-cyan transition-colors"
+                      style={{ color: "var(--text-primary)" }}
+                    >
+                      {personal.secondaryEmail}
                     </span>
                   </div>
                 </a>
@@ -177,28 +272,31 @@ ${formState.message}
                   href={personal.linkedinUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3.5 p-3.5 rounded-xl border transition-colors group"
+                  className="flex items-center gap-3 p-3.5 rounded-xl border transition-colors group"
                   style={{
                     backgroundColor: "var(--bg-surface)",
                     borderColor: "var(--border-color)",
                   }}
                 >
                   <div
-                    className="p-2.5 rounded-lg border group-hover:scale-105 transition-transform"
+                    className="p-2.5 rounded-lg border group-hover:scale-105 transition-transform shrink-0"
                     style={{
                       backgroundColor: "var(--bg-card)",
                       borderColor: "var(--border-color)",
                       color: "var(--accent-cyan)",
                     }}
                   >
-                    <Linkedin className="w-5 h-5" />
+                    <Linkedin className="w-4 h-4" />
                   </div>
                   <div className="flex flex-col overflow-hidden">
-                    <span className="text-[11px] font-mono uppercase" style={{ color: "var(--text-muted)" }}>
+                    <span className="text-[10px] font-mono uppercase font-semibold" style={{ color: "var(--text-muted)" }}>
                       LinkedIn Network
                     </span>
-                    <span className="text-sm font-semibold text-inherit group-hover:text-cyan transition-colors truncate">
-                      {personal.linkedinUrl.replace("https://", "")}
+                    <span
+                      className="text-sm font-semibold truncate group-hover:text-cyan transition-colors"
+                      style={{ color: "var(--text-primary)" }}
+                    >
+                      bd.linkedin.com/in/mahdihasan2011
                     </span>
                   </div>
                 </a>
@@ -208,65 +306,71 @@ ${formState.message}
                   href={personal.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3.5 p-3.5 rounded-xl border transition-colors group"
+                  className="flex items-center gap-3 p-3.5 rounded-xl border transition-colors group"
                   style={{
                     backgroundColor: "var(--bg-surface)",
                     borderColor: "var(--border-color)",
                   }}
                 >
                   <div
-                    className="p-2.5 rounded-lg border group-hover:scale-105 transition-transform"
+                    className="p-2.5 rounded-lg border group-hover:scale-105 transition-transform shrink-0"
                     style={{
                       backgroundColor: "var(--bg-card)",
                       borderColor: "var(--border-color)",
                       color: "var(--accent-cyan)",
                     }}
                   >
-                    <Github className="w-5 h-5" />
+                    <Github className="w-4 h-4" />
                   </div>
                   <div className="flex flex-col overflow-hidden">
-                    <span className="text-[11px] font-mono uppercase" style={{ color: "var(--text-muted)" }}>
+                    <span className="text-[10px] font-mono uppercase font-semibold" style={{ color: "var(--text-muted)" }}>
                       GitHub Profile
                     </span>
-                    <span className="text-sm font-semibold text-inherit group-hover:text-cyan transition-colors truncate">
-                      {personal.githubUrl.replace("https://", "")}
+                    <span
+                      className="text-sm font-semibold truncate group-hover:text-cyan transition-colors"
+                      style={{ color: "var(--text-primary)" }}
+                    >
+                      github.com/mahdihasan2011
                     </span>
                   </div>
                 </a>
 
-                {/* Location */}
+                {/* Detailed Address */}
                 <div
-                  className="flex items-center gap-3.5 p-3.5 rounded-xl border"
+                  className="flex items-start gap-3 p-3.5 rounded-xl border"
                   style={{
                     backgroundColor: "var(--bg-surface)",
                     borderColor: "var(--border-color)",
                   }}
                 >
                   <div
-                    className="p-2.5 rounded-lg border"
+                    className="p-2.5 rounded-lg border shrink-0 mt-0.5"
                     style={{
                       backgroundColor: "var(--bg-card)",
                       borderColor: "var(--border-color)",
                       color: "var(--accent-cyan)",
                     }}
                   >
-                    <MapPin className="w-5 h-5" />
+                    <MapPin className="w-4 h-4" />
                   </div>
                   <div className="flex flex-col overflow-hidden">
-                    <span className="text-[11px] font-mono uppercase" style={{ color: "var(--text-muted)" }}>
-                      Location & Timezone
+                    <span className="text-[10px] font-mono uppercase font-semibold" style={{ color: "var(--text-muted)" }}>
+                      Office & Location Address
                     </span>
-                    <span className="text-sm font-semibold text-inherit truncate">
-                      {personal.location} (GMT+6)
+                    <span
+                      className="text-xs sm:text-sm font-medium leading-relaxed"
+                      style={{ color: "var(--text-secondary)" }}
+                    >
+                      {personal.fullAddress}
                     </span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Embedded Map Frame */}
+            {/* Embedded Location Map */}
             <div
-              className="h-52 rounded-2xl overflow-hidden border shadow-sm"
+              className="h-48 rounded-2xl overflow-hidden border shadow-sm"
               style={{
                 backgroundColor: "var(--bg-card)",
                 borderColor: "var(--border-color)",
@@ -279,7 +383,7 @@ ${formState.message}
                 style={{ border: 0 }}
                 allowFullScreen={false}
                 loading="lazy"
-                title="Location Map"
+                title="Location Map Dhaka"
               />
             </div>
           </div>
@@ -291,6 +395,7 @@ ${formState.message}
               style={{
                 backgroundColor: "var(--bg-card)",
                 borderColor: "var(--border-color)",
+                boxShadow: "var(--shadow-card)",
               }}
             >
               <div
@@ -299,13 +404,16 @@ ${formState.message}
               >
                 <div className="flex items-center gap-2">
                   <MessageSquare className="w-5 h-5 text-cyan" />
-                  <h3 className="font-display font-bold text-lg text-inherit">
-                    Send Direct Message
+                  <h3
+                    className="font-display font-bold text-lg"
+                    style={{ color: "var(--text-primary)" }}
+                  >
+                    Send Direct Transmission
                   </h3>
                 </div>
-                <span className="font-mono text-xs text-emerald-400 flex items-center gap-1 font-semibold">
+                <span className="font-mono text-xs text-emerald-400 flex items-center gap-1.5 font-semibold">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  Instant Direct Dispatch
+                  Live Dispatch
                 </span>
               </div>
 
@@ -434,7 +542,7 @@ ${formState.message}
                     value={formState.message}
                     onChange={handleChange}
                     required
-                    placeholder="Briefly describe your objectives, timeline, or engineering needs..."
+                    placeholder="Briefly describe your objectives, architecture requirements, or timeline..."
                     className="w-full px-4 py-3 rounded-xl border text-sm transition-colors focus:outline-none resize-y"
                     style={{
                       backgroundColor: "var(--bg-surface)",
@@ -480,7 +588,7 @@ ${formState.message}
                   <button
                     type="submit"
                     disabled={status === "submitting"}
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-sans font-bold text-sm text-charcoal-950 transition-all hover:scale-[1.02] disabled:opacity-60"
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-sans font-bold text-sm text-charcoal-950 transition-all hover:scale-[1.02] disabled:opacity-60 shadow-md"
                     style={{
                       backgroundColor: "var(--accent-cyan)",
                     }}
