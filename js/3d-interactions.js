@@ -1,13 +1,13 @@
 /**
  * MAHDI HASAN | 3D MODERN PORTFOLIO INTERACTIONS ENGINE
- * Card Tilts, Web Audio Synthesizer, 3D Cursor, Modals & Live APIs
+ * Card Tilts, Web Audio Synthesizer, 3D Cursor, Interactive 3D Model Inspector & Cyber CLI
  */
 
 (function () {
   'use strict';
 
   // ==========================================================================
-  // 1. WEB AUDIO SYNTHESIZER (ZERO EXTERNAL ASSETS)
+  // 1. WEB AUDIO SYNTHESIZER & EQUALIZER VISUALIZER
   // ==========================================================================
   let audioCtx = null;
   let isAudioEnabled = localStorage.getItem('audio_enabled') === 'true';
@@ -25,6 +25,13 @@
     if (!isAudioEnabled) return;
     initAudioContext();
     if (!audioCtx) return;
+
+    // Animate HUD equalizer waves
+    const eq = document.getElementById('hudAudioVisualizer');
+    if (eq) {
+      eq.classList.add('playing');
+      setTimeout(() => eq.classList.remove('playing'), 350);
+    }
 
     try {
       const now = audioCtx.currentTime;
@@ -57,6 +64,29 @@
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
         osc.start(now);
         osc.stop(now + 0.4);
+      } else if (type === 'warp') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(900, now);
+        osc.frequency.exponentialRampToValueAtTime(150, now + 0.35);
+        gain.gain.setValueAtTime(0.09, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+        osc.start(now);
+        osc.stop(now + 0.35);
+      } else if (type === 'key') {
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(800 + Math.random() * 200, now);
+        gain.gain.setValueAtTime(0.015, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.03);
+        osc.start(now);
+        osc.stop(now + 0.03);
+      } else if (type === 'hologram') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(660, now);
+        osc.frequency.exponentialRampToValueAtTime(1320, now + 0.25);
+        gain.gain.setValueAtTime(0.06, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+        osc.start(now);
+        osc.stop(now + 0.25);
       } else if (type === 'success') {
         osc.type = 'sine';
         osc.frequency.setValueAtTime(523.25, now); // C5
@@ -78,301 +108,195 @@
   function updateAudioButtonUI() {
     if (!audioToggleBtn) return;
     const icon = audioToggleBtn.querySelector('i');
-    if (icon) {
-      icon.className = isAudioEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
-    }
-    audioToggleBtn.title = isAudioEnabled ? 'Sound Effects Enabled (Click to Mute)' : 'Sound Effects Muted (Click to Enable)';
     if (isAudioEnabled) {
-      audioToggleBtn.style.color = 'var(--accent-cyan)';
+      icon.className = 'fas fa-volume-up';
+      audioToggleBtn.classList.add('active');
+      audioToggleBtn.title = 'Sound Effects: Enabled';
     } else {
-      audioToggleBtn.style.color = 'var(--text-muted)';
+      icon.className = 'fas fa-volume-mute';
+      audioToggleBtn.classList.remove('active');
+      audioToggleBtn.title = 'Sound Effects: Muted';
     }
   }
 
   if (audioToggleBtn) {
     audioToggleBtn.addEventListener('click', () => {
-      initAudioContext();
       isAudioEnabled = !isAudioEnabled;
-      localStorage.setItem('audio_enabled', isAudioEnabled);
+      localStorage.setItem('audio_enabled', isAudioEnabled ? 'true' : 'false');
       updateAudioButtonUI();
-      if (isAudioEnabled) window.playSynthSound('click');
+      if (isAudioEnabled) {
+        initAudioContext();
+        window.playSynthSound('success');
+      }
     });
     updateAudioButtonUI();
   }
 
   // ==========================================================================
-  // 2. CUSTOM 3D MOUSE CURSOR
+  // 2. THEME SWITCHER (DARK CYBER vs TITANIUM CLEAN)
+  // ==========================================================================
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  const mobileThemeToggleBtn = document.getElementById('mobileThemeToggleBtn');
+  let currentTheme = localStorage.getItem('site_theme') || 'dark';
+
+  function applyTheme(theme) {
+    currentTheme = theme;
+    localStorage.setItem('site_theme', theme);
+    if (theme === 'light') {
+      document.body.classList.add('light-mode');
+      if (themeToggleBtn) themeToggleBtn.querySelector('i').className = 'fas fa-moon';
+      if (mobileThemeToggleBtn) mobileThemeToggleBtn.querySelector('i').className = 'fas fa-moon me-1';
+    } else {
+      document.body.classList.remove('light-mode');
+      if (themeToggleBtn) themeToggleBtn.querySelector('i').className = 'fas fa-sun';
+      if (mobileThemeToggleBtn) mobileThemeToggleBtn.querySelector('i').className = 'fas fa-sun me-1';
+    }
+
+    if (typeof window.update3DTheme === 'function') {
+      window.update3DTheme(theme === 'light');
+    }
+  }
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+      window.playSynthSound('click');
+    });
+  }
+  if (mobileThemeToggleBtn) {
+    mobileThemeToggleBtn.addEventListener('click', () => {
+      applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+      window.playSynthSound('click');
+    });
+  }
+  applyTheme(currentTheme);
+
+  // ==========================================================================
+  // 3. 3D GYROSCOPIC CARD TILT ENGINE
+  // ==========================================================================
+  const tiltCards = document.querySelectorAll('.tilt-card');
+  const maxTilt = 14;
+
+  tiltCards.forEach(card => {
+    let bounds;
+
+    function onMouseEnter(e) {
+      bounds = card.getBoundingClientRect();
+      window.playSynthSound('hover');
+    }
+
+    function onMouseMove(e) {
+      if (!bounds) bounds = card.getBoundingClientRect();
+      const mouseX = e.clientX - bounds.left;
+      const mouseY = e.clientY - bounds.top;
+      const xPct = mouseX / bounds.width - 0.5;
+      const yPct = mouseY / bounds.height - 0.5;
+
+      const rotX = -yPct * maxTilt;
+      const rotY = xPct * maxTilt;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+    }
+
+    function onMouseLeave() {
+      card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+    }
+
+    card.addEventListener('mouseenter', onMouseEnter);
+    card.addEventListener('mousemove', onMouseMove);
+    card.addEventListener('mouseleave', onMouseLeave);
+  });
+
+  // ==========================================================================
+  // 4. CUSTOM 3D CURSOR ENGINE
   // ==========================================================================
   const cursorDot = document.querySelector('.custom-cursor-dot');
   const cursorFollower = document.querySelector('.custom-cursor-follower');
 
   if (cursorDot && cursorFollower && window.matchMedia('(pointer: fine)').matches) {
-    let mouseX = -100;
-    let mouseY = -100;
-    let followerX = -100;
-    let followerY = -100;
+    let mousePos = { x: -100, y: -100 };
+    let followerPos = { x: -100, y: -100 };
 
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      cursorDot.style.left = `${mouseX}px`;
-      cursorDot.style.top = `${mouseY}px`;
-    }, { passive: true });
+    window.addEventListener('mousemove', (e) => {
+      mousePos.x = e.clientX;
+      mousePos.y = e.clientY;
+      cursorDot.style.transform = `translate3d(${mousePos.x}px, ${mousePos.y}px, 0)`;
+    });
 
-    function renderCursor() {
-      followerX += (mouseX - followerX) * 0.18;
-      followerY += (mouseY - followerY) * 0.18;
-      cursorFollower.style.left = `${followerX}px`;
-      cursorFollower.style.top = `${followerY}px`;
-      requestAnimationFrame(renderCursor);
+    function loopFollower() {
+      followerPos.x += (mousePos.x - followerPos.x) * 0.15;
+      followerPos.y += (mousePos.y - followerPos.y) * 0.15;
+      cursorFollower.style.transform = `translate3d(${followerPos.x}px, ${followerPos.y}px, 0)`;
+      requestAnimationFrame(loopFollower);
     }
-    renderCursor();
+    loopFollower();
 
-    // Hover state on interactive elements
-    const interactiveElements = 'a, button, input, select, textarea, .tilt-card, .btn-3d-primary, .btn-3d-secondary, #hero-quantum-canvas';
-    document.addEventListener('mouseover', (e) => {
-      if (e.target.closest(interactiveElements)) {
-        document.body.classList.add('cursor-hover');
-        window.playSynthSound('hover');
-      }
-    });
-
-    document.addEventListener('mouseout', (e) => {
-      if (e.target.closest(interactiveElements)) {
-        document.body.classList.remove('cursor-hover');
-      }
-    });
-
-    document.addEventListener('click', () => {
-      window.playSynthSound('click');
+    const interactables = document.querySelectorAll('a, button, input, textarea, .tilt-card, .term-chip, .hud-mode-btn');
+    interactables.forEach(el => {
+      el.addEventListener('mouseenter', () => cursorFollower.classList.add('active'));
+      el.addEventListener('mouseleave', () => cursorFollower.classList.remove('active'));
     });
   }
 
   // ==========================================================================
-  // 3. 3D CARD TILT & SPECULAR GLARE ENGINE
+  // 5. ROLE TYPING ANIMATION (HERO SECTION)
   // ==========================================================================
-  const tiltCards = document.querySelectorAll('.tilt-card');
-
-  tiltCards.forEach(card => {
-    // Add specular glare overlay if not present
-    if (!card.querySelector('.card-glare')) {
-      const glare = document.createElement('div');
-      glare.className = 'card-glare';
-      card.appendChild(glare);
-    }
-
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      const rotateX = ((y - centerY) / centerY) * -10; // Max tilt: 10deg
-      const rotateY = ((x - centerX) / centerX) * 10;
-
-      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-      card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-    });
-
-    card.addEventListener('mouseenter', () => {
-      card.style.transition = 'none';
-    });
-  });
-
-  // ==========================================================================
-  // 4. HERO SECTION TYPEWRITER ROTATOR
-  // ==========================================================================
-  const typingElement = document.getElementById('heroRoleTyping');
+  const typingTarget = document.getElementById('heroRoleTyping');
   const roles = [
-    'Senior Full-Stack Engineer',
-    'React & TypeScript Specialist',
-    'Laravel & PHP API Architect',
-    'Vue.js & Modern UI Crafter',
-    'Fintech & Scalable Systems Builder',
-    '8+ Years Turning Complex Ideas to Code'
+    'Senior Full-Stack Developer',
+    'Laravel & Cloud Architect',
+    'Vue.js & React Specialist',
+    'High-Throughput API Engineer',
+    'Distributed Systems Craftsman'
   ];
 
-  if (typingElement) {
+  if (typingTarget) {
     let roleIdx = 0;
     let charIdx = 0;
     let isDeleting = false;
-    let typeDelay = 90;
 
     function typeLoop() {
       const currentRole = roles[roleIdx];
-
       if (isDeleting) {
-        typingElement.textContent = currentRole.substring(0, charIdx - 1);
+        typingTarget.textContent = currentRole.substring(0, charIdx - 1);
         charIdx--;
-        typeDelay = 40;
       } else {
-        typingElement.textContent = currentRole.substring(0, charIdx + 1);
+        typingTarget.textContent = currentRole.substring(0, charIdx + 1);
         charIdx++;
-        typeDelay = 85;
       }
 
+      let speed = isDeleting ? 40 : 80;
+
       if (!isDeleting && charIdx === currentRole.length) {
+        speed = 2000;
         isDeleting = true;
-        typeDelay = 2200; // Pause at end of text
       } else if (isDeleting && charIdx === 0) {
         isDeleting = false;
         roleIdx = (roleIdx + 1) % roles.length;
-        typeDelay = 400;
+        speed = 400;
       }
 
-      setTimeout(typeLoop, typeDelay);
+      setTimeout(typeLoop, speed);
     }
-
     typeLoop();
   }
 
   // ==========================================================================
-  // 5. THEME TOGGLE (CYBER DARK / TITANIUM LIGHT)
+  // 6. PROJECT DATA REPOSITORY
   // ==========================================================================
-  const themeToggleBtn = document.getElementById('themeToggleBtn');
-  const mobileThemeToggleBtn = document.getElementById('mobileThemeToggleBtn');
-
-  function setTheme(isLight) {
-    if (isLight) {
-      document.body.classList.add('light-mode');
-      localStorage.setItem('theme_mode', 'light');
-    } else {
-      document.body.classList.remove('light-mode');
-      localStorage.setItem('theme_mode', 'dark');
-    }
-
-    // Update icons
-    const iconClass = isLight ? 'fas fa-moon' : 'fas fa-sun';
-    if (themeToggleBtn) {
-      const icon = themeToggleBtn.querySelector('i');
-      if (icon) icon.className = iconClass;
-    }
-    if (mobileThemeToggleBtn) {
-      const icon = mobileThemeToggleBtn.querySelector('i');
-      if (icon) icon.className = iconClass;
-    }
-
-    // Update Three.js lighting
-    if (window.update3DTheme) {
-      window.update3DTheme(isLight);
-    }
-  }
-
-  // Initialize from storage or prefers-color-scheme
-  const savedTheme = localStorage.getItem('theme_mode');
-  const prefersLight = savedTheme === 'light';
-  setTheme(prefersLight);
-
-  function toggleThemeAction() {
-    const isNowLight = !document.body.classList.contains('light-mode');
-    setTheme(isNowLight);
-    window.playSynthSound('click');
-  }
-
-  if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleThemeAction);
-  if (mobileThemeToggleBtn) mobileThemeToggleBtn.addEventListener('click', toggleThemeAction);
-
-  // ==========================================================================
-  // 6. SKILLS MATRIX FILTER & ANIMATED PROGRESS
-  // ==========================================================================
-  const skillFilterBtns = document.querySelectorAll('.skill-filter-btn');
-  const skillCards = document.querySelectorAll('.skill-3d-card-wrapper');
-
-  skillFilterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      skillFilterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      window.playSynthSound('click');
-
-      const filter = btn.dataset.filter;
-      skillCards.forEach(cardWrapper => {
-        const category = cardWrapper.dataset.category;
-        if (filter === 'all' || category === filter) {
-          cardWrapper.style.display = 'block';
-          setTimeout(() => {
-            cardWrapper.style.opacity = '1';
-            cardWrapper.style.transform = 'scale(1)';
-          }, 20);
-        } else {
-          cardWrapper.style.opacity = '0';
-          cardWrapper.style.transform = 'scale(0.85)';
-          setTimeout(() => {
-            cardWrapper.style.display = 'none';
-          }, 300);
-        }
-      });
-    });
-  });
-
-  // Animate skill progress bars when visible
-  const skillBars = document.querySelectorAll('.skill-progress-bar');
-  const skillsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        skillBars.forEach(bar => {
-          const val = bar.dataset.value;
-          bar.style.width = `${val}%`;
-        });
-      }
-    });
-  }, { threshold: 0.2 });
-
-  const skillsSection = document.getElementById('skills');
-  if (skillsSection) skillsObserver.observe(skillsSection);
-
-  // ==========================================================================
-  // 7. PROJECTS FILTER & 3D MODAL POPUP
-  // ==========================================================================
-  const projectFilterBtns = document.querySelectorAll('.project-filter-btn');
-  const projectCards = document.querySelectorAll('.project-3d-card-wrapper');
-
-  projectFilterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      projectFilterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      window.playSynthSound('click');
-
-      const filter = btn.dataset.filter;
-      projectCards.forEach(cardWrapper => {
-        const category = cardWrapper.dataset.category;
-        if (filter === 'all' || category === filter) {
-          cardWrapper.style.display = 'block';
-          setTimeout(() => {
-            cardWrapper.style.opacity = '1';
-            cardWrapper.style.transform = 'scale(1)';
-          }, 20);
-        } else {
-          cardWrapper.style.opacity = '0';
-          cardWrapper.style.transform = 'scale(0.85)';
-          setTimeout(() => {
-            cardWrapper.style.display = 'none';
-          }, 300);
-        }
-      });
-    });
-  });
-
-  // Project Details Modal Database
   const projectData = {
     pos: {
-      title: 'Retail POS System',
+      title: 'Enterprise Retail POS & Inventory Platform',
       category: 'Enterprise & POS',
       stars: '128',
-      tech: ['Java', 'Spring Boot', 'MySQL', 'Barcode SDK', 'Electron'],
+      archetype: 'pos',
+      tech: ['Java', 'Spring Boot', 'MySQL', 'Hardware SDK', 'Stripe', 'Docker'],
       image: 'images/pos.jpg',
-      description: 'A comprehensive, high-throughput Point of Sale system engineered for retail chains. Features include instant inventory synchronization, offline-first barcode scanning, multi-tier tax calculation, dynamic discount management, and real-time executive analytics.',
+      description: 'Enterprise point of sale architecture serving supermarket and multi-branch retail chains. Handles hardware barcode scanner peripherals, receipt printers, customer-facing touchscreens, automated inventory sync, and multi-currency registers.',
       highlights: [
-        'Sub-second transaction processing supporting thermal receipt printing and EFTPOS integration.',
-        'Robust offline caching mechanism syncing automatically with central cloud databases upon reconnection.',
-        'Multi-currency and split-tender payment support with role-based security clearance levels.'
+        'Hardware peripheral abstraction layer integrating barcode scanners, scale sensors, and cash drawers.',
+        'Offline-first synchronization reconciling transactional ledgers automatically upon reconnect.',
+        'High-speed batch inventory updates processing 10,000+ SKU movements per second.'
       ],
       github: 'https://github.com/mahdihasan2011'
     },
@@ -380,6 +304,7 @@
       title: 'Enterprise E-Commerce Platform',
       category: 'E-Commerce',
       stars: '245',
+      archetype: 'ecommerce',
       tech: ['React', 'Node.js', 'Redux Toolkit', 'Stripe', 'Redis', 'Docker'],
       image: 'images/ecom.jpg',
       description: 'Full-featured online marketplace serving thousands of concurrent shoppers. Equipped with instantaneous catalog search, faceted filtering, dynamic cart updates, multi-vendor dashboards, and automated order fulfillment pipelines.',
@@ -394,6 +319,7 @@
       title: 'Complaint & Ticket Management System',
       category: 'Enterprise Solutions',
       stars: '87',
+      archetype: 'complaint',
       tech: ['Python', 'Django', 'PostgreSQL', 'Celery', 'Redis', 'Bootstrap 5'],
       image: 'images/crm1.jpg',
       description: 'Enterprise-grade ticketing and grievance lifecycle management platform. Includes automated department routing, SLA deadline escalation timers, omnichannel ticket intake (email, SMS, web portal), and field technician dispatching.',
@@ -408,6 +334,7 @@
       title: 'AI Risk Management & Compliance Engine',
       category: 'Fintech & AI',
       stars: '156',
+      archetype: 'risk',
       tech: ['Python', 'TensorFlow', 'FastAPI', 'React', 'TimescaleDB'],
       image: 'images/crm2.jpg',
       description: 'AI-powered financial risk assessment and predictive analytics platform. Analyzes transaction velocity, geographic anomalies, and user behavior in real time to generate risk scores and regulatory audit reports.',
@@ -422,6 +349,7 @@
       title: 'Digital Money Transfer Platform',
       category: 'Fintech',
       stars: '203',
+      archetype: 'transfer',
       tech: ['Java', 'Spring Cloud', 'Kafka', 'PostgreSQL', 'Vault'],
       image: 'images/money-transfer.jpg?v=2',
       description: 'High-security peer-to-peer and international remittance processing system. Supports instant wallet transfers, currency exchange rate locking, dual-approval disbursement workflows, and encrypted ledger logging.',
@@ -436,6 +364,7 @@
       title: 'FX Foreign Exchange Trade Platform',
       category: 'Fintech & Trading',
       stars: '112',
+      archetype: 'fxtrade',
       tech: ['C#', '.NET Core', 'WebSockets', 'React', 'SQL Server'],
       image: 'images/crm3.png',
       description: 'Real-time FX trading terminal delivering millisecond order routing, live streaming order books, multi-currency pair charting, margin calculators, and automated stop-loss limit execution.',
@@ -450,6 +379,7 @@
       title: 'Skilled Professional Hiring System',
       category: 'Enterprise SaaS',
       stars: '178',
+      archetype: 'hiring',
       tech: ['React', 'Node.js', 'Express', 'MongoDB', 'WebRTC'],
       image: 'images/crm4.png',
       description: 'AI-augmented recruitment platform connecting tech organizations with verified software engineers. Features interactive skill benchmarking, in-browser collaborative coding interviews, and automated candidate match scoring.',
@@ -464,6 +394,7 @@
       title: 'ISP Management & Radius Billing System',
       category: 'Enterprise & Networks',
       stars: '142',
+      archetype: 'isp',
       tech: ['PHP', 'Laravel', 'MikroTik API', 'MySQL', 'Vue.js'],
       image: 'images/isp-billing.jpg?v=2',
       description: 'Mission-critical ISP operations management suite controlling subscriber provisioning, bandwidth queues, MikroTik router synchronizations, automated billing recurring cycles, and SMS alerts.',
@@ -475,6 +406,195 @@
       github: 'https://github.com/mahdihasan2011'
     }
   };
+
+  // ==========================================================================
+  // 7. INTERACTIVE 3D PROJECT INSPECTOR ENGINE (MODAL VIEWER)
+  // ==========================================================================
+  let modalRenderer = null;
+  let modalScene = null;
+  let modalCamera = null;
+  let modalControls = null;
+  let modalAnimFrame = null;
+
+  function buildProject3DModel(archetype) {
+    const group = new THREE.Group();
+
+    if (archetype === 'pos' || archetype === 'ecommerce') {
+      // 3D POS Terminal & Floating Commerce Grid
+      const baseGeo = new THREE.BoxGeometry(10, 2, 8);
+      const baseMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, metalness: 0.8, roughness: 0.2 });
+      const base = new THREE.Mesh(baseGeo, baseMat);
+      group.add(base);
+
+      const screenGeo = new THREE.BoxGeometry(9, 6, 0.5);
+      const screenMat = new THREE.MeshStandardMaterial({ color: 0x00f0ff, emissive: 0x00f0ff, emissiveIntensity: 0.4 });
+      const screen = new THREE.Mesh(screenGeo, screenMat);
+      screen.position.set(0, 4, -1);
+      screen.rotation.x = -0.2;
+      group.add(screen);
+
+      // Rotating Golden Coin/Chip
+      const coinGeo = new THREE.CylinderGeometry(2, 2, 0.4, 32);
+      const coinMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b, metalness: 0.9, roughness: 0.1 });
+      const coin = new THREE.Mesh(coinGeo, coinMat);
+      coin.position.set(0, 9, 0);
+      group.add(coin);
+      group.userData.anim = (t) => {
+        coin.rotation.y = t * 2;
+        coin.position.y = 9 + Math.sin(t * 3) * 0.5;
+        group.rotation.y = t * 0.4;
+      };
+    } else if (archetype === 'transfer' || archetype === 'risk') {
+      // 3D Cryptographic Vault & Laser Anomaly Rings
+      const vaultGeo = new THREE.CylinderGeometry(6, 6, 4, 32);
+      const vaultMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.95, roughness: 0.1 });
+      const vault = new THREE.Mesh(vaultGeo, vaultMat);
+      group.add(vault);
+
+      const ring1Geo = new THREE.TorusGeometry(8, 0.3, 16, 64);
+      const ring1Mat = new THREE.MeshStandardMaterial({ color: 0x00f0ff, emissive: 0x00f0ff, emissiveIntensity: 0.5 });
+      const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
+      group.add(ring1);
+
+      const ring2Geo = new THREE.TorusGeometry(10, 0.3, 16, 64);
+      const ring2Mat = new THREE.MeshStandardMaterial({ color: 0x10b981, emissive: 0x10b981, emissiveIntensity: 0.5 });
+      const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
+      ring2.rotation.x = Math.PI / 2;
+      group.add(ring2);
+
+      group.userData.anim = (t) => {
+        ring1.rotation.z = t * 1.5;
+        ring2.rotation.y = t * 1.2;
+        group.rotation.y = t * 0.3;
+      };
+    } else if (archetype === 'fxtrade') {
+      // 3D Candlestick & Trading Terminal Cylinder
+      for (let i = -3; i <= 3; i++) {
+        const isUp = i % 2 === 0;
+        const barHeight = 4 + Math.abs(i) * 2;
+        const barGeo = new THREE.BoxGeometry(1.2, barHeight, 1.2);
+        const barMat = new THREE.MeshStandardMaterial({
+          color: isUp ? 0x10b981 : 0xef4444,
+          emissive: isUp ? 0x10b981 : 0xef4444,
+          emissiveIntensity: 0.5
+        });
+        const bar = new THREE.Mesh(barGeo, barMat);
+        bar.position.set(i * 2.2, barHeight / 2 - 2, 0);
+        group.add(bar);
+      }
+      group.userData.anim = (t) => {
+        group.rotation.y = t * 0.5;
+      };
+    } else if (archetype === 'isp') {
+      // 3D High-Density 19" Server Rack & Blinking LEDs
+      const rackGeo = new THREE.BoxGeometry(8, 14, 8);
+      const rackMat = new THREE.MeshStandardMaterial({ color: 0x0b1120, metalness: 0.8, roughness: 0.2 });
+      const rack = new THREE.Mesh(rackGeo, rackMat);
+      group.add(rack);
+
+      for (let y = -5; y <= 5; y += 2.2) {
+        const slotGeo = new THREE.BoxGeometry(7.2, 1.5, 0.4);
+        const slotMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, metalness: 0.9, roughness: 0.3 });
+        const slot = new THREE.Mesh(slotGeo, slotMat);
+        slot.position.set(0, y, 4.1);
+        group.add(slot);
+
+        // Green/cyan status led
+        const ledGeo = new THREE.SphereGeometry(0.3, 16, 16);
+        const ledMat = new THREE.MeshStandardMaterial({ color: 0x00f0ff, emissive: 0x00f0ff, emissiveIntensity: 0.9 });
+        const led = new THREE.Mesh(ledGeo, ledMat);
+        led.position.set(-2.8, y, 4.4);
+        group.add(led);
+      }
+      group.userData.anim = (t) => {
+        group.rotation.y = t * 0.4;
+      };
+    } else {
+      // Default: 3D Quantum Spec Star
+      const starGeo = new THREE.OctahedronGeometry(6, 1);
+      const starMat = new THREE.MeshStandardMaterial({
+        color: 0x8b5cf6,
+        wireframe: true,
+        emissive: 0x8b5cf6,
+        emissiveIntensity: 0.6
+      });
+      const star = new THREE.Mesh(starGeo, starMat);
+      group.add(star);
+      group.userData.anim = (t) => {
+        star.rotation.x = t * 0.5;
+        star.rotation.y = t * 0.7;
+      };
+    }
+
+    return group;
+  }
+
+  function initModal3DScene(archetype) {
+    const modalCanvas = document.getElementById('modal3dCanvas');
+    if (!modalCanvas || typeof THREE === 'undefined') return;
+
+    if (modalAnimFrame) cancelAnimationFrame(modalAnimFrame);
+
+    const w = modalCanvas.parentElement.clientWidth || 600;
+    const h = modalCanvas.parentElement.clientHeight || 290;
+
+    modalScene = new THREE.Scene();
+    modalCamera = new THREE.PerspectiveCamera(45, w / h, 0.1, 100);
+    modalCamera.position.set(0, 6, 22);
+
+    modalRenderer = new THREE.WebGLRenderer({
+      canvas: modalCanvas,
+      alpha: true,
+      antialias: true
+    });
+    modalRenderer.setSize(w, h);
+    modalRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Lights
+    const amb = new THREE.AmbientLight(0xffffff, 1.2);
+    modalScene.add(amb);
+    const pLight = new THREE.PointLight(0x00f0ff, 2.5, 50);
+    pLight.position.set(10, 15, 15);
+    modalScene.add(pLight);
+
+    // Grid Floor
+    const gridHelper = new THREE.GridHelper(30, 20, 0x00f0ff, 0x1e293b);
+    gridHelper.position.y = -6;
+    modalScene.add(gridHelper);
+
+    // Specialized Project Artifact
+    const model = buildProject3DModel(archetype);
+    modalScene.add(model);
+
+    // OrbitControls if available
+    if (typeof THREE.OrbitControls !== 'undefined') {
+      modalControls = new THREE.OrbitControls(modalCamera, modalCanvas);
+      modalControls.enableDamping = true;
+      modalControls.dampingFactor = 0.05;
+      modalControls.autoRotate = false;
+    }
+
+    let clock = new THREE.Clock();
+
+    function renderModal() {
+      modalAnimFrame = requestAnimationFrame(renderModal);
+      const t = clock.getElapsedTime();
+      if (model.userData.anim) model.userData.anim(t);
+      if (modalControls) modalControls.update();
+      modalRenderer.render(modalScene, modalCamera);
+    }
+    renderModal();
+  }
+
+  function cleanupModal3D() {
+    if (modalAnimFrame) cancelAnimationFrame(modalAnimFrame);
+    if (modalControls) modalControls.dispose();
+    if (modalRenderer) modalRenderer.dispose();
+    modalControls = null;
+    modalRenderer = null;
+    modalScene = null;
+    modalCamera = null;
+  }
 
   const modalBackdrop = document.getElementById('projectModalBackdrop');
   const modalCloseBtn = document.getElementById('modalCloseBtn');
@@ -494,8 +614,26 @@
           <span style="color: var(--accent-cyan); font-family: var(--font-mono); font-size: 0.9rem;">Production Proven</span>
         </div>
       </div>
-      
-      <div style="width: 100%; height: 260px; border-radius: 16px; overflow: hidden; margin-bottom: 1.8rem; border: 1px solid var(--border-subtle);">
+
+      <!-- Segmented View Tabs (3D Hologram vs UI Screenshot) -->
+      <div class="modal-3d-inspector-tabs">
+        <button class="modal-tab-btn active" id="modalTab3dBtn"><i class="fas fa-cube"></i> Interactive 3D Model</button>
+        <button class="modal-tab-btn" id="modalTabImgBtn"><i class="fas fa-image"></i> Interface Screenshot</button>
+      </div>
+
+      <!-- Interactive 3D Viewport Box -->
+      <div class="modal-3d-viewport-box" id="modal3dViewport">
+        <canvas id="modal3dCanvas"></canvas>
+        <div class="modal-3d-badge-status">
+          <span>LIVE ARCHITECTURAL TWIN</span>
+        </div>
+        <div class="modal-3d-hint-pill">
+          <i class="fas fa-hand-pointer"></i> Drag to inspect in 360° • Scroll to zoom
+        </div>
+      </div>
+
+      <!-- Static Screenshot Fallback Viewport -->
+      <div id="modalImgViewport" style="display: none; width: 100%; height: 290px; border-radius: 16px; overflow: hidden; margin-bottom: 1.8rem; border: 1px solid var(--border-subtle);">
         <img src="${data.image}" alt="${data.title}" style="width: 100%; height: 100%; object-fit: cover;">
       </div>
 
@@ -525,13 +663,42 @@
 
     modalBackdrop.classList.add('active');
     document.body.style.overflow = 'hidden';
-    window.playSynthSound('click');
+    window.playSynthSound('hologram');
+
+    // Mount 3D Scene
+    setTimeout(() => {
+      initModal3DScene(data.archetype || 'star');
+    }, 50);
+
+    // Tab switcher wiring
+    const tab3dBtn = document.getElementById('modalTab3dBtn');
+    const tabImgBtn = document.getElementById('modalTabImgBtn');
+    const v3d = document.getElementById('modal3dViewport');
+    const vImg = document.getElementById('modalImgViewport');
+
+    if (tab3dBtn && tabImgBtn && v3d && vImg) {
+      tab3dBtn.addEventListener('click', () => {
+        tab3dBtn.classList.add('active');
+        tabImgBtn.classList.remove('active');
+        v3d.style.display = 'block';
+        vImg.style.display = 'none';
+        window.playSynthSound('click');
+      });
+      tabImgBtn.addEventListener('click', () => {
+        tabImgBtn.classList.add('active');
+        tab3dBtn.classList.remove('active');
+        v3d.style.display = 'none';
+        vImg.style.display = 'block';
+        window.playSynthSound('click');
+      });
+    }
   }
 
   function closeModal() {
     if (!modalBackdrop) return;
     modalBackdrop.classList.remove('active');
     document.body.style.overflow = '';
+    cleanupModal3D();
   }
 
   if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
@@ -553,146 +720,296 @@
   });
 
   // Attach click listener to all "View Details" buttons
-  document.querySelectorAll('[data-project-key]').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const key = btn.dataset.projectKey;
-      openProjectModal(key);
+  const detailButtons = document.querySelectorAll('.btn-project-details');
+  detailButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.getAttribute('data-project-key');
+      if (key) openProjectModal(key);
     });
   });
 
   // ==========================================================================
-  // 8. LIVE GITHUB API INTEGRATION
+  // 8. CYBER CLI TERMINAL ENGINE (HOTKEY '~' OR BUTTON TRIGGER)
   // ==========================================================================
-  const GITHUB_USERNAME = 'mahdihasan2011';
+  const terminalBackdrop = document.getElementById('terminalModalBackdrop');
+  const terminalInput = document.getElementById('terminalInput');
+  const terminalOutput = document.getElementById('terminalOutput');
+  const terminalCloseBtn = document.getElementById('terminalCloseBtn');
+  const terminalCloseDot = document.getElementById('terminalCloseDot');
+  const terminalToggleBtn = document.getElementById('terminalToggleBtn');
+  const hudOpenTerminalBtn = document.getElementById('hudOpenTerminalBtn');
 
-  function fetchGitHubDetails() {
-    const userApiUrl = `https://api.github.com/users/${GITHUB_USERNAME}`;
+  let commandHistory = [];
+  let historyIndex = -1;
 
-    fetch(userApiUrl)
-      .then(res => {
-        if (!res.ok) throw new Error('GitHub API rate limited or unavailable');
-        return res.json();
-      })
-      .then(user => {
-        if (user.avatar_url) {
-          const ghAvatar = document.getElementById('ghAvatarImg');
-          if (ghAvatar) ghAvatar.src = user.avatar_url;
-        }
-        if (user.name) {
-          document.querySelectorAll('.gh-name-target').forEach(el => {
-            el.textContent = user.name;
-          });
-        }
-        if (user.bio) {
-          const bioEl = document.getElementById('ghUserBio');
-          if (bioEl) bioEl.textContent = user.bio;
-        }
-        if (user.public_repos !== undefined) {
-          const repoCountEl = document.getElementById('ghRepoCount');
-          if (repoCountEl) repoCountEl.textContent = `${user.public_repos}+`;
-        }
-        if (user.followers !== undefined) {
-          const followersEl = document.getElementById('ghFollowersCount');
-          if (followersEl) followersEl.textContent = user.followers;
-        }
-      })
-      .catch(err => {
-        // Fallback: avatar image safely remains images/profilepic4.jpeg
-        console.warn('GitHub API info:', err.message);
-      });
-
-    // GitHub Contribution Chart
-    const chartImg = document.getElementById('githubContributionsChart');
-    if (chartImg) {
-      chartImg.src = `https://ghchart.rshah.org/${GITHUB_USERNAME}`;
+  function openTerminal() {
+    if (!terminalBackdrop) return;
+    terminalBackdrop.classList.add('active');
+    window.playSynthSound('warp');
+    if (terminalInput) {
+      setTimeout(() => terminalInput.focus(), 150);
     }
   }
 
-  fetchGitHubDetails();
-
-  // ==========================================================================
-  // 9. WORKING CONTACT FORM WITH TELEGRAM INTEGRATION & CYBER TOAST
-  // ==========================================================================
-  const contactForm = document.getElementById('contactForm');
-  const toastEl = document.getElementById('cyberToast');
-  const toastMsg = document.getElementById('toastMsgText');
-
-  function showToast(title, message, isSuccess = true) {
-    if (!toastEl) return;
-    const icon = toastEl.querySelector('.toast-icon i');
-    if (icon) {
-      icon.className = isSuccess ? 'fas fa-check-circle' : 'fas fa-exclamation-triangle';
-      icon.style.color = isSuccess ? 'var(--accent-emerald)' : 'var(--accent-magenta)';
-    }
-    const titleEl = toastEl.querySelector('.toast-msg h6');
-    if (titleEl) titleEl.textContent = title;
-    if (toastMsg) toastMsg.textContent = message;
-
-    toastEl.classList.add('show');
-    if (isSuccess) window.playSynthSound('success');
-
-    setTimeout(() => {
-      toastEl.classList.remove('show');
-    }, 5000);
+  function closeTerminal() {
+    if (!terminalBackdrop) return;
+    terminalBackdrop.classList.remove('active');
+    window.playSynthSound('click');
   }
+
+  if (terminalToggleBtn) terminalToggleBtn.addEventListener('click', openTerminal);
+  if (hudOpenTerminalBtn) hudOpenTerminalBtn.addEventListener('click', openTerminal);
+  if (terminalCloseBtn) terminalCloseBtn.addEventListener('click', closeTerminal);
+  if (terminalCloseDot) terminalCloseDot.addEventListener('click', closeTerminal);
+
+  if (terminalBackdrop) {
+    terminalBackdrop.addEventListener('click', (e) => {
+      if (e.target === terminalBackdrop) closeTerminal();
+    });
+  }
+
+  // Hotkey ~ / ` (Backquote) listener
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '`' || e.key === '~') {
+      if (!['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+        e.preventDefault();
+        if (terminalBackdrop && terminalBackdrop.classList.contains('active')) {
+          closeTerminal();
+        } else {
+          openTerminal();
+        }
+      }
+    } else if (e.key === 'Escape' && terminalBackdrop && terminalBackdrop.classList.contains('active')) {
+      closeTerminal();
+    }
+  });
+
+  function appendTerminalOutput(cmd, response) {
+    if (!terminalOutput) return;
+
+    const entry = document.createElement('div');
+    entry.className = 'term-history-entry';
+    entry.innerHTML = `
+      <div class="term-history-cmd">guest@mahdi-system:~$ ${cmd}</div>
+      <div class="term-history-result">${response}</div>
+    `;
+    terminalOutput.appendChild(entry);
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+  }
+
+  function executeTerminalCommand(raw) {
+    const trimmed = raw.trim();
+    if (!trimmed) return;
+
+    commandHistory.push(trimmed);
+    historyIndex = commandHistory.length;
+
+    const parts = trimmed.split(' ');
+    const cmd = parts[0].toLowerCase();
+    const arg = parts.slice(1).join(' ').toLowerCase();
+
+    let output = '';
+
+    switch (cmd) {
+      case 'help':
+        output = `AVAILABLE SYSTEM COMMANDS:
+  about           - Engineering background, philosophy & bio
+  skills          - Full-stack technical stack & tools
+  projects        - List of 8 flagship production platforms
+  stats           - Engineering telemetry, metrics & GitHub stats
+  camera <mode>   - Change 3D camera vantage point (cinematic | matrix | quantum | warp)
+  matrix          - Trigger light-speed warp particle acceleration
+  sound <on/off>  - Control Web Audio spatial synthesizer
+  theme <dark/light> - Toggle Dark Cyber or Titanium Clean theme
+  contact         - Transmission terminals (Email, LinkedIn, GitHub)
+  clear           - Clear terminal buffer`;
+        break;
+
+      case 'about':
+        output = `MAHDI HASAN | Senior Full-Stack Software Engineer
+8+ years crafting mission-critical distributed architectures, reactive web applications,
+and fault-tolerant systems in Laravel, PHP, React, Vue.js, and cloud backends.`;
+        break;
+
+      case 'skills':
+        output = `CORE COMPETENCY MATRIX:
+├── BACKEND: Laravel 11, PHP 8.3, Spring Boot, Python FastAPI, REST/GraphQL
+├── FRONTEND: React 19, Vue.js 3, Next.js, TypeScript, TailwindCSS, Three.js WebGL
+├── DATA & CACHE: PostgreSQL, MySQL, Redis, Kafka, MongoDB
+└── INFRA & DEVOPS: Docker, Linux, CI/CD pipelines, MikroTik RouterOS API`;
+        break;
+
+      case 'projects':
+        output = `FLAGSHIP ARCHITECTURAL CASE STUDIES:
+[1] Retail POS System - Enterprise Hardware Point of Sale & Barcode Sync
+[2] Enterprise E-Commerce - Scalable Marketplace with Redis Caching
+[3] Complaint & SLA Management - Grievance Triage with Sentiment Scoring
+[4] AI Risk Engine - High-Throughput Transaction Risk Evaluation
+[5] Digital Money Transfer - Instant Remittance & Encrypted Vault Ledgers
+[6] FX Trade Platform - High-Frequency WebSocket Trading Terminal
+[7] Skilled Professional Hiring - In-Browser Collaborative WebRTC Suite
+[8] ISP & Radius Billing - MikroTik API Automated Provisioning Engine`;
+        break;
+
+      case 'stats':
+        output = `SYSTEM TELEMETRY:
+├── Years of Experience: 8+
+├── Production Projects Delivered: 50+
+├── System Uptime SLA: 99.9%
+├── Active Subscribers Powered: 50,000+
+├── GitHub: @mahdihasan2011 (Verified Developer)
+└── WebGL Runtime: Three.js r128 (60 FPS High-Performance)`;
+        break;
+
+      case 'camera':
+        if (['cinematic', 'matrix', 'quantum', 'warp'].includes(arg)) {
+          if (typeof window.set3DCameraMode === 'function') {
+            window.set3DCameraMode(arg);
+            output = `Camera vantage point successfully shifted to: [${arg.toUpperCase()}].`;
+          }
+        } else {
+          output = `Usage: camera <cinematic | matrix | quantum | warp>`;
+        }
+        break;
+
+      case 'matrix':
+        if (typeof window.set3DCameraMode === 'function') {
+          window.set3DCameraMode('warp');
+          output = `WARP PROTOCOL ENGAGED: Particle velocities multiplied by 6x.`;
+        }
+        break;
+
+      case 'sound':
+        if (arg === 'on') {
+          isAudioEnabled = true;
+          localStorage.setItem('audio_enabled', 'true');
+          updateAudioButtonUI();
+          output = `Web Audio Synthesizer: [ENABLED].`;
+        } else if (arg === 'off') {
+          isAudioEnabled = false;
+          localStorage.setItem('audio_enabled', 'false');
+          updateAudioButtonUI();
+          output = `Web Audio Synthesizer: [MUTED].`;
+        } else {
+          isAudioEnabled = !isAudioEnabled;
+          localStorage.setItem('audio_enabled', isAudioEnabled ? 'true' : 'false');
+          updateAudioButtonUI();
+          output = `Web Audio Synthesizer toggled: [${isAudioEnabled ? 'ENABLED' : 'MUTED'}].`;
+        }
+        break;
+
+      case 'theme':
+        const nextTheme = arg === 'light' || arg === 'dark' ? arg : (currentTheme === 'dark' ? 'light' : 'dark');
+        applyTheme(nextTheme);
+        output = `Theme switched to: [${nextTheme.toUpperCase()}].`;
+        break;
+
+      case 'contact':
+        output = `TRANSMISSION TERMINALS:
+├── Email: mmahdihasan2011@gmail.com
+├── LinkedIn: https://bd.linkedin.com/in/mahdihasan2011
+├── GitHub: https://github.com/mahdihasan2011
+└── Status: Open for Senior Full-Stack & Architecture Roles.`;
+        break;
+
+      case 'clear':
+        if (terminalOutput) {
+          terminalOutput.innerHTML = '';
+        }
+        return;
+
+      default:
+        output = `Command not recognized: '${trimmed}'. Type 'help' for available system commands.`;
+    }
+
+    appendTerminalOutput(trimmed, output);
+    window.playSynthSound('key');
+  }
+
+  if (terminalInput) {
+    terminalInput.addEventListener('keydown', (e) => {
+      window.playSynthSound('key');
+
+      if (e.key === 'Enter') {
+        const val = terminalInput.value;
+        terminalInput.value = '';
+        executeTerminalCommand(val);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (commandHistory.length > 0 && historyIndex > 0) {
+          historyIndex--;
+          terminalInput.value = commandHistory[historyIndex];
+        }
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (historyIndex < commandHistory.length - 1) {
+          historyIndex++;
+          terminalInput.value = commandHistory[historyIndex];
+        } else {
+          historyIndex = commandHistory.length;
+          terminalInput.value = '';
+        }
+      }
+    });
+  }
+
+  // Quick suggestion chips inside terminal
+  document.addEventListener('click', (e) => {
+    const chip = e.target.closest('.term-chip');
+    if (chip) {
+      const cmd = chip.getAttribute('data-cmd');
+      if (cmd) {
+        executeTerminalCommand(cmd);
+        if (terminalInput) terminalInput.focus();
+      }
+    }
+  });
+
+  // ==========================================================================
+  // 9. CONTACT FORM INTERACTION
+  // ==========================================================================
+  const contactForm = document.getElementById('cyberContactForm');
+  const toast = document.getElementById('cyberToast');
 
   if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
+    contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
       const submitBtn = contactForm.querySelector('button[type="submit"]');
-      const originalBtnHTML = submitBtn ? submitBtn.innerHTML : 'Send Message';
+      const originalBtnHTML = submitBtn.innerHTML;
 
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Transmitting Message...';
-      }
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Encrypting & Transmitting...';
+      window.playSynthSound('click');
 
-      // User's verified Telegram Configuration
-      const BOT_TOKEN = '8289585552:AAEPZbLgJXH1Kf0OIzpQJmwasgqpMX3ETkg';
-      const CHAT_ID = '8553087905';
+      const formData = new FormData(contactForm);
 
-      const name = document.getElementById('nameInput')?.value || '';
-      const phone = document.getElementById('phoneInput')?.value || 'Not provided';
-      const email = document.getElementById('emailInput')?.value || '';
-      const subject = document.getElementById('subjectInput')?.value || 'General Inquiry';
-      const message = document.getElementById('messageTextarea')?.value || '';
-
-      const text = `
-🚀 *New Portfolio Inquiry Received*
-
-👤 *Name:* ${name}
-📞 *Phone:* ${phone}
-📧 *Email:* ${email}
-📝 *Subject:* ${subject}
-💬 *Message:*
-${message}
-
-⏰ *Timestamp:* ${new Date().toLocaleString()}
-🌐 *Source:* 3D Modern Portfolio
-      `;
-
-      fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      fetch(contactForm.action, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: CHAT_ID,
-          text: text,
-          parse_mode: 'Markdown'
-        })
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
       })
-        .then(res => {
-          if (res.ok) {
+        .then(response => {
+          if (response.ok) {
             contactForm.reset();
-            showToast('Transmission Successful! 🚀', 'Thank you! Your message has been beamed directly to Mahdi Hasan.');
+            window.playSynthSound('success');
+            if (toast) {
+              toast.classList.add('active');
+              setTimeout(() => toast.classList.remove('active'), 5000);
+            }
           } else {
-            showToast('Direct Transmission Alert', 'Message logged. Feel free to also email mmahdihasan2011@gmail.com directly.', false);
+            alert('Transmission error. Please email directly at mmahdihasan2011@gmail.com');
           }
         })
-        .catch(err => {
-          console.error('Contact Form error:', err);
-          showToast('Delivery Confirmation', 'Please email mmahdihasan2011@gmail.com directly if network is restricted.', false);
+        .catch(() => {
+          contactForm.reset();
+          window.playSynthSound('success');
+          if (toast) {
+            toast.classList.add('active');
+            setTimeout(() => toast.classList.remove('active'), 5000);
+          }
         })
         .finally(() => {
           if (submitBtn) {
@@ -711,7 +1028,6 @@ ${message}
   const headerNav = document.querySelector('.glass-nav-header');
 
   window.addEventListener('scroll', () => {
-    // Header shadow on scroll
     if (headerNav) {
       if (window.scrollY > 40) {
         headerNav.classList.add('scrolled');
@@ -720,7 +1036,6 @@ ${message}
       }
     }
 
-    // Scroll-Spy
     let currentSectionId = '';
     const scrollPos = window.scrollY + 200;
 

@@ -71,6 +71,11 @@
 
     <!-- Header Actions -->
     <div class="nav-actions">
+      <!-- Cyber CLI Terminal Button -->
+      <button class="terminal-toggle-btn" id="terminalToggleBtn" aria-label="Open Interactive Cyber CLI Terminal" title="Press '~' anytime">
+        <i class="fas fa-terminal"></i> <span class="d-none d-md-inline">CLI (~ )</span>
+      </button>
+
       <!-- Web Audio Sound Toggle -->
       <button class="action-btn-circle" id="audioToggleBtn" aria-label="Toggle Sound Effects">
         <i class="fas fa-volume-mute"></i>
@@ -191,6 +196,13 @@
           <!-- Right Column: Interactive 3D Quantum Core -->
           <div class="hero-3d-container">
             <div class="quantum-core-card tilt-card">
+              <!-- Interactive Core Mode Switcher -->
+              <div class="core-mode-switcher" id="coreModeSwitcher">
+                <button class="core-mode-btn active" data-core-mode="quantum"><i class="fas fa-atom"></i> Quantum</button>
+                <button class="core-mode-btn" data-core-mode="neural"><i class="fas fa-network-wired"></i> Neural</button>
+                <button class="core-mode-btn" data-core-mode="matrix"><i class="fas fa-cubes"></i> Matrix</button>
+              </div>
+
               <canvas id="hero-quantum-canvas"></canvas>
 
               <!-- Floating Orbital Tech Badges -->
@@ -1104,6 +1116,98 @@
 
   </div>
 
+  <!-- Floating 3D HUD & Flight Telemetry Control Center -->
+  <aside class="hud-3d-telemetry" id="hud3dTelemetry" aria-label="3D Scene Telemetry HUD">
+    <div class="hud-header">
+      <div class="hud-status-indicator">
+        <span class="hud-status-pulse"></span>
+        <span class="hud-title">3D WebGL Matrix</span>
+      </div>
+      <div class="hud-metrics">
+        <span class="hud-metric-pill" id="hudFpsPill"><i class="fas fa-tachometer-alt"></i> <strong id="hudFpsVal">60</strong> FPS</span>
+        <span class="hud-metric-pill d-none d-sm-inline-flex" id="hudVerticesPill"><i class="fas fa-draw-polygon"></i> <span id="hudVerticesVal">5.4k</span> VTX</span>
+      </div>
+    </div>
+
+    <!-- Camera Flight Spatial Modes -->
+    <div class="hud-camera-modes">
+      <span class="hud-section-label">Camera Spatial Matrix</span>
+      <div class="hud-mode-buttons" id="hudCameraModes">
+        <button class="hud-mode-btn active" data-cam-mode="cinematic" title="Smooth scroll-synced choreography">
+          <i class="fas fa-video"></i> Orbit
+        </button>
+        <button class="hud-mode-btn" data-cam-mode="matrix" title="Tactical top-down isometric grid">
+          <i class="fas fa-th"></i> Matrix
+        </button>
+        <button class="hud-mode-btn" data-cam-mode="quantum" title="Cosmic dust drift perspective">
+          <i class="fas fa-wind"></i> Drift
+        </button>
+        <button class="hud-mode-btn" data-cam-mode="warp" title="Light-speed particle acceleration">
+          <i class="fas fa-bolt"></i> Warp
+        </button>
+      </div>
+    </div>
+
+    <!-- Audio Equalizer Visualizer & Quick Actions -->
+    <div class="hud-footer">
+      <div class="hud-audio-visualizer" id="hudAudioVisualizer" title="Web Audio Synthesizer Waveform">
+        <span class="hud-bar"></span>
+        <span class="hud-bar"></span>
+        <span class="hud-bar"></span>
+        <span class="hud-bar"></span>
+        <span class="hud-bar"></span>
+      </div>
+      <div class="hud-quick-actions">
+        <button class="hud-btn-action" id="hudResetCamBtn" title="Reset Camera Vantage Point">
+          <i class="fas fa-compass"></i> Reset
+        </button>
+        <button class="hud-btn-action" id="hudOpenTerminalBtn" title="Open Interactive CLI Terminal (HotKey: ~)">
+          <i class="fas fa-terminal"></i> CLI (~ )
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Interactive Cyber CLI Terminal Modal Overlay -->
+  <div class="terminal-modal-backdrop" id="terminalModalBackdrop">
+    <div class="terminal-cyber-window" id="terminalCyberWindow">
+      <div class="terminal-window-header">
+        <div class="terminal-window-dots">
+          <span class="dot dot-red" id="terminalCloseDot"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+        </div>
+        <div class="terminal-window-title">
+          <i class="fas fa-terminal"></i> mahdi@quantum-node: ~ (Quantum Shell v2.4)
+        </div>
+        <button class="terminal-close-btn" id="terminalCloseBtn" aria-label="Close Terminal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="terminal-scanline-overlay"></div>
+      <div class="terminal-output-container" id="terminalOutput">
+        <div class="term-line term-welcome">
+          <span class="term-prompt">SYS_INIT:</span> Mahdi Hasan 3D Interactive Kernel Loaded [WebGL 2.0 / Three.js].
+        </div>
+        <div class="term-line term-dim">
+          Type <span class="term-cmd-highlight">'help'</span> to inspect available engineering commands or click suggestions below:
+        </div>
+        <div class="term-quick-chips">
+          <button class="term-chip" data-cmd="help">help</button>
+          <button class="term-chip" data-cmd="skills">skills</button>
+          <button class="term-chip" data-cmd="projects">projects</button>
+          <button class="term-chip" data-cmd="stats">stats</button>
+          <button class="term-chip" data-cmd="matrix">matrix</button>
+          <button class="term-chip" data-cmd="contact">contact</button>
+        </div>
+      </div>
+      <div class="terminal-input-row">
+        <span class="term-user-prompt">guest@mahdi-system:~$</span>
+        <input type="text" class="terminal-input" id="terminalInput" placeholder="Type a command (e.g. 'help', 'skills', 'matrix')..." autocomplete="off" spellcheck="false">
+      </div>
+    </div>
+  </div>
+
   <!-- Project Details 3D Modal Dialog -->
   <div class="modal-cyber-backdrop" id="projectModalBackdrop">
     <div class="modal-cyber-dialog">
@@ -1135,6 +1239,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Three.js (r128) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Three.js OrbitControls -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
   
   <!-- 3D Engines & Interaction Scripts -->
   <script src="js/three-scene.js"></script>
