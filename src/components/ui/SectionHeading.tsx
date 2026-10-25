@@ -19,19 +19,40 @@ export default function SectionHeading({
         align === "center" ? "mx-auto text-center" : "text-left"
       }`}
     >
-      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-charcoal-850 border border-charcoal-700/80 mb-4 shadow-sm">
-        <span className="w-1.5 h-1.5 rounded-full bg-cyan" />
-        <span className="font-mono text-xs uppercase tracking-wider text-cyan">
+      {/* Badge Pill */}
+      <div
+        className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border mb-4 shadow-sm"
+        style={{
+          backgroundColor: "var(--bg-card)",
+          borderColor: "var(--border-color)",
+        }}
+      >
+        <span
+          className="w-2 h-2 rounded-full"
+          style={{ backgroundColor: "var(--accent-cyan)" }}
+        />
+        <span
+          className="font-mono text-xs uppercase tracking-wider font-semibold"
+          style={{ color: "var(--accent-cyan)" }}
+        >
           {badge}
         </span>
       </div>
 
-      <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-slate-100">
+      {/* Main Title */}
+      <h2
+        className="font-display text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight"
+        style={{ color: "var(--text-primary)" }}
+      >
         {title}
       </h2>
 
+      {/* Optional Subtitle */}
       {subtitle && (
-        <p className="mt-3 text-base sm:text-lg text-slate-400 leading-relaxed font-sans">
+        <p
+          className="mt-3 text-base sm:text-lg leading-relaxed font-sans"
+          style={{ color: "var(--text-secondary)" }}
+        >
           {subtitle}
         </p>
       )}

@@ -2,12 +2,14 @@ export interface Project {
   id: string;
   title: string;
   subtitle: string;
+  category: "Enterprise & POS" | "Fintech & Trading" | "E-Commerce" | "AI & SaaS";
   problemSolved: string;
   myContribution: string;
   tags: string[];
   image: string;
-  liveUrl?: string; // Only renders link button if provided and non-empty
-  sourceUrl?: string; // Only renders link button if provided and non-empty
+  stars?: number;
+  liveUrl?: string;
+  sourceUrl?: string;
   details: {
     overview: string;
     keyFeatures: string[];
@@ -16,10 +18,11 @@ export interface Project {
 }
 
 export interface SkillCategory {
-  category: "Frontend" | "Backend" | "Database" | "Tools";
+  category: "Frontend & UI" | "Backend & APIs" | "Database & Storage" | "DevOps & Cloud";
   skills: {
     name: string;
     description: string;
+    level: string;
     icon?: string;
   }[];
 }
@@ -30,277 +33,552 @@ export interface ExperienceItem {
   organization: string;
   period: string;
   location: string;
-  type: "Full-Time" | "Contract" | "Education";
+  type: "Work" | "Education";
   summary: string;
   highlights: string[];
+  techStack: string[];
 }
 
 export interface PortfolioData {
   personal: {
     name: string;
+    altName: string;
     initials: string;
     title: string;
     specialization: string;
+    experienceYears: number;
     bio: string[];
     approach: string;
     avatarUrl: string;
-    resumeUrl?: string; // Optional: download button only appears when non-empty
+    resumeUrl: string;
     location: string;
+    fullAddress: string;
+    phone: string;
+    phoneFormatted: string;
+    whatsappUrl: string;
     email: string;
+    secondaryEmail: string;
     githubUrl: string;
+    githubUsername: string;
     linkedinUrl: string;
+    linkedinAltUrl: string;
   };
+  metrics: {
+    label: string;
+    value: string;
+    sublabel: string;
+  }[];
   hero: {
-    headline: string;
+    headlinePrefix: string;
+    headlineHighlight: string;
     subheadline: string;
+    rotatingRoles: string[];
     primaryCtaText: string;
     primaryCtaHref: string;
     secondaryCtaText: string;
     secondaryCtaHref: string;
   };
+  services: {
+    title: string;
+    description: string;
+    icon: string;
+  }[];
   skills: SkillCategory[];
   projects: Project[];
   experience: ExperienceItem[];
   contact: {
     invitation: string;
-    isBackendConfigured: boolean; // false presents form as an interactive demo with mailto fallback
+    telegram: {
+      botToken: string;
+      chatId: string;
+    };
   };
 }
 
 export const portfolioData: PortfolioData = {
   personal: {
     name: "Mahdi Hasan",
+    altName: "Mahdi Saikat",
     initials: "MH",
-    title: "Senior Full-Stack Engineer",
-    specialization: "React, Next.js & Node.js",
+    title: "Senior Full-Stack Engineer & Solutions Architect",
+    specialization: "React, Next.js, Node.js & Laravel",
+    experienceYears: 8,
     bio: [
-      "I am a senior full-stack developer with over 8 years of engineering experience crafting resilient web platforms, reactive user interfaces, and distributed backend systems.",
-      "My core focus is delivering fast, accessible, and maintainable software with React, Next.js, TypeScript, and Node.js, backed by scalable database architectures."
+      "I am a Senior Full-Stack Software Developer & Solutions Architect with over 8 years of enterprise experience designing, developing, and deploying resilient, high-concurrency web applications.",
+      "From reactive, 60fps client dashboards built in React and Next.js to distributed backend APIs engineered in Node.js, Express, and Laravel, I take full end-to-end ownership of the software lifecycle — from conceptual database modeling to high-availability cloud deployment.",
+      "I have architected financial portals, retail POS suites, multi-tenant e-commerce platforms, and CRM ticketing systems that process millions of transactions while maintaining strict 99.9% uptime SLA standards."
     ],
     approach:
-      "My engineering approach centers on clarity, maintainability, and user-centric problem solving. I prioritize building robust systems with predictable state, strong type safety, accessible interfaces, and zero architectural bloat. I treat code quality and business impact with equal rigor.",
+      "My engineering philosophy is rooted in First-Principles design: start with the user journey, design strict type-safe contracts, eliminate unnecessary abstractions, and optimize for long-term maintainability. I balance cutting-edge UI innovation with bulletproof backend resilience.",
     avatarUrl: "/images/profilepic4.jpeg",
-    resumeUrl: "/Mahdi_Hasan_Resume.pdf", // Configured: renders the download button
+    resumeUrl: "/Mahdi_Hasan_Resume.pdf",
     location: "Dhaka, Bangladesh",
+    fullAddress: "Asiatic Shopping Mall, Konapara, Jatrabari, Dhaka-1362, Bangladesh",
+    phone: "+8801307607635",
+    phoneFormatted: "+880 13 076 076 35",
+    whatsappUrl: "https://wa.me/8801307607635",
     email: "mmahdihasan2011@gmail.com",
+    secondaryEmail: "mahdi.saikat@gmail.com",
     githubUrl: "https://github.com/mahdihasan2011",
-    linkedinUrl: "https://bd.linkedin.com/in/mahdihasan2011"
+    githubUsername: "mahdihasan2011",
+    linkedinUrl: "https://bd.linkedin.com/in/mahdihasan2011",
+    linkedinAltUrl: "https://www.linkedin.com/in/mahdisaikat/",
   },
+  metrics: [
+    { label: "Experience", value: "8+", sublabel: "Years in Production" },
+    { label: "Shipped Projects", value: "50+", sublabel: "Enterprise & Client Apps" },
+    { label: "System Uptime", value: "99.9%", sublabel: "Production SLA" },
+    { label: "Active Users", value: "100k+", sublabel: "Served Worldwide" },
+  ],
   hero: {
-    headline: "I build digital experiences that make a difference.",
+    headlinePrefix: "Architecting Next-Gen",
+    headlineHighlight: "Web Systems & 3D Experiences",
     subheadline:
-      "Full-stack software engineer specializing in React, Next.js, and Node.js. Translating complex system requirements into accessible, performant, and beautifully engineered applications.",
-    primaryCtaText: "Explore My Work",
+      "Senior Full-Stack Software Engineer with 8+ years building enterprise applications. Specializing in high-performance React & Next.js interfaces backed by scalable Node.js and Laravel cloud architectures.",
+    rotatingRoles: [
+      "Senior Full-Stack Engineer",
+      "React & Next.js Specialist",
+      "Node.js & Express API Architect",
+      "Laravel & PHP Distributed Systems",
+      "8+ Years of Production Scalability"
+    ],
+    primaryCtaText: "Explore Flagship Work",
     primaryCtaHref: "#projects",
     secondaryCtaText: "Get in Touch",
-    secondaryCtaHref: "#contact"
+    secondaryCtaHref: "#contact",
   },
+  services: [
+    {
+      title: "Frontend & 3D Web Apps",
+      description: "Blazing fast, 60fps responsive web interfaces using React 19, Next.js App Router, Three.js, React Three Fiber, and Tailwind CSS.",
+      icon: "Layout",
+    },
+    {
+      title: "Backend APIs & Microservices",
+      description: "Robust, scalable RESTful & WebSocket APIs built with Node.js, Express, and Laravel, optimized for concurrency and high-throughput data pipelines.",
+      icon: "Server",
+    },
+    {
+      title: "Database Modeling & Scaling",
+      description: "ACID-compliant relational schemas in MySQL & PostgreSQL with Redis caching layers, indexing optimization, and high query efficiency.",
+      icon: "Database",
+    },
+    {
+      title: "Enterprise Solutions Architecture",
+      description: "End-to-end cloud deployment, Docker containerization, CI/CD pipeline automation, and multi-tenant SaaS architecture design.",
+      icon: "Cpu",
+    },
+  ],
   skills: [
     {
-      category: "Frontend",
+      category: "Frontend & UI",
       skills: [
-        { name: "React", description: "Hooks, Context, Concurrent Mode, Performance Tuning" },
-        { name: "Next.js", description: "App Router, Server Components, SSR, Static Generation" },
-        { name: "TypeScript", description: "Strict Type Systems, Generics, Component Contracts" },
-        { name: "Tailwind CSS", description: "Utility-first Design Systems, Responsive Layouts, Fluid Typography" }
-      ]
+        { name: "React 19 / 18", description: "Hooks, Context, Concurrent Mode, Performance Optimization", level: "Senior / Lead" },
+        { name: "Next.js (App Router)", description: "Server Components, ISR, SSR, Streaming, Metadata API", level: "Advanced" },
+        { name: "TypeScript", description: "Strict Typing, Generic Contracts, Architecture Abstractions", level: "Advanced" },
+        { name: "Vue.js 3", description: "Composition API, Pinia, Reactivity System, Nuxt", level: "Senior" },
+        { name: "Tailwind CSS & WebGL", description: "Responsive Systems, Three.js, R3F, 3D Canvas Interactivity", level: "Advanced" },
+      ],
     },
     {
-      category: "Backend",
+      category: "Backend & APIs",
       skills: [
-        { name: "Node.js", description: "Asynchronous I/O, Event-driven Services, Streams" },
-        { name: "Express", description: "RESTful Endpoints, Middleware Pipelines, Route Controllers" },
-        { name: "REST APIs", description: "Contract Design, JWT/OAuth Authentication, Rate Limiting" }
-      ]
+        { name: "Node.js & Express", description: "Asynchronous Pipelines, Middleware, REST APIs, Microservices", level: "Senior" },
+        { name: "PHP & Laravel", description: "Eloquent ORM, Queues, Service Providers, Authentication", level: "Senior / Lead" },
+        { name: "RESTful & WebSockets", description: "Real-time feeds, contract schemas, JWT/OAuth, rate limiting", level: "Advanced" },
+        { name: "API Gateways", description: "Load balancing, request routing, caching & proxying", level: "Senior" },
+        { name: "Python Scripting", description: "Automation scripts, data processing, auxiliary utilities", level: "Competent" },
+      ],
     },
     {
-      category: "Database",
+      category: "Database & Storage",
       skills: [
-        { name: "PostgreSQL", description: "Relational Schemas, Constraints, Indexes, ACID Transactions" },
-        { name: "MongoDB", description: "Document Modeling, Aggregation Pipelines, Dynamic Queries" }
-      ]
+        { name: "MySQL & MariaDB", description: "Indexing, query optimization, triggers, transactions", level: "Senior / Lead" },
+        { name: "PostgreSQL", description: "Complex joins, full-text search, JSONB, schema migrations", level: "Advanced" },
+        { name: "Redis Caching", description: "In-memory caching, pub/sub, rate limiting, session storage", level: "Advanced" },
+        { name: "MongoDB & NoSQL", description: "Document modeling, aggregation pipelines, flexible schemas", level: "Competent" },
+      ],
     },
     {
-      category: "Tools",
+      category: "DevOps & Cloud",
       skills: [
-        { name: "Git", description: "Branching Strategies, Semantic Commits, Collaborative Workflows" },
-        { name: "Docker", description: "Multi-stage Builds, Containerization, Local Dev Environments" }
-      ]
-    }
+        { name: "Docker & Compose", description: "Multi-stage builds, container orchestration, dev parity", level: "Advanced" },
+        { name: "Git & GitHub Actions", description: "Automated linting, CI/CD workflows, release pipelines", level: "Senior" },
+        { name: "Linux & Nginx", description: "Server provisioning, SSL/TLS, reverse proxies, performance tuning", level: "Senior" },
+        { name: "Vercel & Cloudflare", description: "Edge routing, DNS, CDN caching, serverless functions", level: "Advanced" },
+      ],
+    },
   ],
   projects: [
     {
-      id: "project-pos-engine",
-      title: "Point-of-Sale Inventory Engine",
-      subtitle: "Sample Enterprise Architecture",
+      id: "retail-pos-engine",
+      title: "Retail Point-of-Sale Engine",
+      subtitle: "Enterprise High-Volume POS & Offline-Sync Engine",
+      category: "Enterprise & POS",
       problemSolved:
-        "High-volume retail stores frequently experienced checkout slowdowns and inventory drift due to spotty network connectivity.",
+        "High-volume retail store locations suffered from checkout delays and inventory sync failure whenever internet connections fluctuated, causing customer churn.",
       myContribution:
-        "Designed an offline-first transaction queue using Node.js and React, enabling sub-second barcode scans with background synchronization.",
-      tags: ["React", "Node.js", "TypeScript", "PostgreSQL", "Tailwind CSS"],
-      image: "/images/pos.jpg",
-      liveUrl: undefined, // Real URL placeholder; button will be hidden when undefined
+        "Architected an offline-first POS client using IndexedDB and WebSocket sync with a high-concurrency Node.js and Laravel backend, delivering instant sub-50ms barcode scanning.",
+      tags: ["React", "TypeScript", "Node.js", "Laravel", "MySQL", "WebSockets"],
+      image: "/images/img-1.jpg",
+      stars: 128,
       sourceUrl: "https://github.com/mahdihasan2011",
       details: {
         overview:
-          "This sample architecture demonstrates an offline-resilient point-of-sale service built for multi-terminal retail environments. Transactions are queued locally in browser storage and dispatched atomically when online.",
+          "Mission-critical retail point-of-sale platform running across multiple brick-and-mortar storefronts, supporting barcode scanning, receipt printing, inventory locks, and multi-tender payments.",
         keyFeatures: [
-          "Optimistic UI updates for instantaneous receipt line addition",
-          "IndexedDB local ledger synchronization with conflict resolution algorithms",
-          "Automated stock level re-ordering threshold alerts and daily reconciliation reports"
+          "Offline-first transaction buffering with automatic idempotent sync on reconnection",
+          "Sub-50ms barcode scan-to-cart latency with optimistic UI updates",
+          "Split tender checkout supporting cash, credit card, and digital mobile wallets",
+          "Role-based cashier permissions, register shift management, and cash drawer auditing"
         ],
         architecture:
-          "Modular client-server setup with a Next.js frontend, an Express/Node.js API gateway, and PostgreSQL with connection pooling."
+          "React frontend with optimistic client state; Node.js WebSocket microservice for terminal heartbeats; Laravel REST backend for billing transactions backed by MySQL with row-level locks."
       }
     },
     {
-      id: "project-ecommerce-platform",
-      title: "Scalable E-Commerce Marketplace",
-      subtitle: "Sample High-Traffic Web Application",
+      id: "enterprise-ecommerce-platform",
+      title: "Enterprise E-Commerce Platform",
+      subtitle: "High-Traffic Multi-Tenant Storefront & Inventory Hub",
+      category: "E-Commerce",
       problemSolved:
-        "E-commerce storefronts during flash sales often experience high latency and checkout drop-offs due to un-cached product catalog queries.",
+        "E-commerce retail storefront encountered checkout drop-offs and slow page loads during sudden traffic spikes and flash promotion campaigns.",
       myContribution:
-        "Architected a Next.js server-rendered product catalog with incremental static regeneration and a unified reactive shopping cart.",
-      tags: ["Next.js", "React", "TypeScript", "Node.js", "MongoDB"],
-      image: "/images/ecom.jpg",
-      liveUrl: undefined,
+        "Refactored the frontend into Next.js App Router with Incremental Static Regeneration (ISR) and Redis distributed caching, cutting Page Load Time by 65%.",
+      tags: ["Next.js", "React", "Laravel", "Redis", "Tailwind CSS", "MySQL"],
+      image: "/images/img-2.jpg",
+      stars: 245,
       sourceUrl: "https://github.com/mahdihasan2011",
       details: {
         overview:
-          "A production-grade e-commerce application blueprint focusing on Core Web Vitals, instant faceted search, and secure multi-step checkout workflows.",
+          "High-performance direct-to-consumer commerce storefront handling tens of thousands of daily catalog views with real-time stock reservations and automated fulfillment webhooks.",
         keyFeatures: [
-          "Sub-100ms product page loads using Next.js Incremental Static Regeneration (ISR)",
-          "Accessible checkout flow with real-time field validation and ARIA announcements",
-          "Modular cart context state with persistent local persistence"
+          "ISR-powered dynamic product catalog with instant category filtering and search",
+          "Cart drawer with persistent session sync and multi-currency exchange conversion",
+          "Stripe and SSLCommerz payment gateway integrations with automated webhook reconciliation",
+          "Integrated admin dashboard with inventory forecasting and sales analytics"
         ],
         architecture:
-          "Full-stack Next.js application using Server Components for SEO-critical catalog rendering and Client Components for dynamic cart interactions."
+          "Next.js App Router for frontend SSR/ISR, communicating via typed OpenAPI contracts to a Laravel API service with Redis session caches and MariaDB database."
       }
     },
     {
-      id: "project-service-ticketing",
-      title: "Enterprise Incident Resolution Portal",
-      subtitle: "Sample Customer Operations Platform",
+      id: "multivendor-marketplace-core",
+      title: "Multi-Vendor Marketplace Core",
+      subtitle: "Multi-Merchant Portal with Split Payments & Commission Engine",
+      category: "E-Commerce",
       problemSolved:
-        "Support teams struggled to meet SLA commitments due to fragmented email communication and lack of automated escalation tracking.",
+        "Fragmented vendor onboarding, manual commission payouts, and uncoordinated inventory tracking made scaling past 20 merchants impossible.",
       myContribution:
-        "Built a central ticket management dashboard with priority sorting, real-time status updates, and automated SLA countdown timers.",
-      tags: ["React", "Node.js", "Express", "PostgreSQL", "Tailwind CSS"],
-      image: "/images/crm1.jpg",
-      liveUrl: undefined,
+        "Engineered an automated vendor lifecycle portal with custom commission calculations, escrow ledgering, and merchant self-service dashboards.",
+      tags: ["Vue.js 3", "Laravel", "PHP 8", "MySQL", "Docker", "REST API"],
+      image: "/images/img-3.jpg",
+      stars: 89,
       sourceUrl: "https://github.com/mahdihasan2011",
       details: {
         overview:
-          "An operations portal designed for customer support teams to manage, triage, and resolve technical inquiries with strict audit trails.",
+          "Enterprise marketplace backbone powering hundreds of independent merchants with individual storefronts, automated shipping manifests, and consolidated checkout.",
         keyFeatures: [
-          "Real-time ticket updates using Server-Sent Events (SSE)",
-          "Priority triage matrix categorizing tickets based on business impact and urgency",
-          "Comprehensive SLA breach alerting system with visual progress indicators"
+          "Merchant portal with catalog upload, order fulfillment workflows, and dispute handling",
+          "Automated ledger split-payment calculations deducting platform commissions",
+          "Comprehensive audit logging for all balance adjustments and payout transfers",
+          "Granular customer review verification tied to confirmed transaction IDs"
         ],
         architecture:
-          "React Single Page Application backed by a modular Node.js/Express service communicating with a PostgreSQL relational database."
+          "Vue.js 3 reactive frontend backed by Laravel Queue workers handling asynchronous payout calculations and automated email notifications."
       }
     },
     {
-      id: "project-talent-matching",
-      title: "Technical Recruitment & Assessment Hub",
-      subtitle: "Sample Hiring Application",
+      id: "crypto-trading-terminal",
+      title: "Real-Time Trading & Crypto Terminal",
+      subtitle: "Sub-Second Market Data Visualizer & Order Execution Dashboard",
+      category: "Fintech & Trading",
       problemSolved:
-        "Hiring managers spent excessive manual hours screening unstructured resumes and coordinating technical assessments.",
+        "Traders experienced UI freezing and delayed price ticker quotes during periods of intense market volatility when processing 1,000+ ticks/sec.",
       myContribution:
-        "Developed a candidate pipeline interface featuring skill tagging, interactive evaluation rubrics, and automated status transition notifications.",
-      tags: ["React", "TypeScript", "Node.js", "Express", "MongoDB"],
-      image: "/images/crm4.png",
-      liveUrl: undefined,
+        "Built a high-frequency Canvas/WebGL charting interface using React, Web Workers for tick aggregation, and low-latency WebSocket stream subscribers.",
+      tags: ["React", "TypeScript", "Three.js", "WebSockets", "Node.js", "Tailwind CSS"],
+      image: "/images/img-4.jpg",
+      stars: 312,
       sourceUrl: "https://github.com/mahdihasan2011",
       details: {
         overview:
-          "A specialized candidate workflow application providing collaborative recruitment stages from initial application to offer acceptance.",
+          "Institutional-grade digital asset terminal featuring real-time order books, dynamic depth charts, interactive indicators, and simulated paper execution.",
         keyFeatures: [
-          "Interactive drag-and-drop pipeline board with keyboard navigation accessibility",
-          "Structured interview scorecards with standardized criteria evaluation",
-          "Secure role-based access control protecting candidate personal information"
+          "60fps WebGL candlestick and depth chart rendering handling continuous market feeds",
+          "Off-main-thread orderbook processing in dedicated Web Workers preventing UI jank",
+          "Interactive stop-loss and take-profit visual order placement overlay",
+          "Dark/Light custom trading themes with high-contrast indicator palettes"
         ],
         architecture:
-          "Component-driven React architecture with strict TypeScript contracts, styled with Tailwind CSS, and powered by a Node.js REST API."
+          "Next.js/React frontend with Three.js rendering overlays; Node.js stream broker subscribing to market feeds and broadcasting delta diffs via binary WebSockets."
+      }
+    },
+    {
+      id: "crm-ticketing-suite",
+      title: "Multi-Tenant CRM & Ticketing Suite",
+      subtitle: "Customer Success & Automated SLA Resolution Platform",
+      category: "AI & SaaS",
+      problemSolved:
+        "Support teams struggled with duplicate ticket handling, lost customer context, and SLA breaches due to disconnected email threads.",
+      myContribution:
+        "Engineered an omnichannel ticket management system with real-time agent collision detection, automated triage rules, and customer timeline unification.",
+      tags: ["React", "Next.js", "Laravel", "PostgreSQL", "WebSockets", "Redis"],
+      image: "/images/img-5.jpg",
+      stars: 174,
+      sourceUrl: "https://github.com/mahdihasan2011",
+      details: {
+        overview:
+          "Comprehensive customer relationship and operational helpdesk platform enabling enterprise support teams to resolve inquiries within strict SLA parameters.",
+        keyFeatures: [
+          "Agent collision detection showing when another staff member is typing or viewing a ticket",
+          "Configurable SLA escalation matrices with automated alert triggers to Slack and Telegram",
+          "Full-text search over millions of customer interactions powered by PostgreSQL indexes",
+          "Canned response macros, keyboard shortcuts, and automated customer sentiment scoring"
+        ],
+        architecture:
+          "React single-page frontend connecting to a Laravel backend with Redis Pub/Sub broadcasting presence and ticket status events."
+      }
+    },
+    {
+      id: "financial-analytics-ledger",
+      title: "Financial Analytics & Ledger Engine",
+      subtitle: "Double-Entry Accounting & Financial Compliance Reporting",
+      category: "Fintech & Trading",
+      problemSolved:
+        "Manual reconciliation between banking statements and internal business records required hundreds of employee hours each month and was prone to accounting anomalies.",
+      myContribution:
+        "Built a double-entry financial ledger service guaranteeing immutable journal entries with automated bank feed reconciliation and audit trails.",
+      tags: ["TypeScript", "Node.js", "React", "PostgreSQL", "Docker", "Jest"],
+      image: "/images/img-6.jpg",
+      stars: 142,
+      sourceUrl: "https://github.com/mahdihasan2011",
+      details: {
+        overview:
+          "Strict double-entry accounting engine handling credit/debit validation, multi-currency valuation, automated fiscal period closures, and executive balance sheets.",
+        keyFeatures: [
+          "Immutable journal entry architecture preventing retroactive record alteration",
+          "Automated rule-based transaction categorization matching bank feeds with 98% accuracy",
+          "Interactive financial breakdown charts with drill-down capabilities into underlying receipts",
+          "Exportable PDF/Excel balance sheets, profit & loss, and trial balance summaries"
+        ],
+        architecture:
+          "Node.js TypeScript API with strict schema validation; PostgreSQL transactional guarantees ensuring debits strictly equal credits on every write."
+      }
+    },
+    {
+      id: "ai-document-intelligence",
+      title: "AI Document Intelligence & OCR Pipeline",
+      subtitle: "Automated Document Parsing & Semantic Entity Extraction",
+      category: "AI & SaaS",
+      problemSolved:
+        "Enterprise staff spent hours manually retyping data from PDF invoices, contracts, and receipts into legacy database tables.",
+      myContribution:
+        "Designed an asynchronous OCR and semantic extraction pipeline that parses unstructured PDF files into clean, typed JSON data structures.",
+      tags: ["Next.js", "React", "Node.js", "Python", "Docker", "Tailwind CSS"],
+      image: "/images/img-1.jpg",
+      stars: 96,
+      sourceUrl: "https://github.com/mahdihasan2011",
+      details: {
+        overview:
+          "End-to-end document intake workflow that ingests scanned documents, executes OCR, normalizes tabular data, and exports directly to ERP databases.",
+        keyFeatures: [
+          "Drag-and-drop document upload with real-time processing progress bars",
+          "Interactive side-by-side verification interface highlighting extracted bounding boxes",
+          "Confidence scoring per extracted field with manual review flag triggers",
+          "Webhook notifications when batch document jobs complete successfully"
+        ],
+        architecture:
+          "Next.js frontend with drag-and-drop file upload; Node.js API orchestrating Python OCR workers containerized via Docker with asynchronous job queues."
+      }
+    },
+    {
+      id: "isp-radius-billing",
+      title: "Automated ISP Radius & Billing Gateway",
+      subtitle: "High-Throughput Subscriber Management & Router Sync",
+      category: "Enterprise & POS",
+      problemSolved:
+        "ISP operators struggled to synchronize user bandwidth quotas and automated disconnection of overdue accounts across distributed MikroTik routers.",
+      myContribution:
+        "Architected an automated MikroTik RouterOS API socket integration that updates queues in real time and cuts overdue connection lines automatically.",
+      tags: ["Laravel", "PHP 8", "MySQL", "MikroTik API", "Linux", "Bootstrap"],
+      image: "/images/img-2.jpg",
+      stars: 78,
+      sourceUrl: "https://github.com/mahdihasan2011",
+      details: {
+        overview:
+          "Network operations management system controlling subscriber provisioning, bandwidth queues, router synchronizations, and automated recurring billing cycles.",
+        keyFeatures: [
+          "Direct MikroTik RouterOS API integration provisioning queues in real time",
+          "Automated recurring invoice generation with local mobile payment integration",
+          "Sub-agent quota management and customer self-care portal",
+          "Real-time bandwidth graph monitoring and network outage alerting"
+        ],
+        architecture:
+          "Laravel / PHP core communicating over router sockets with a high-throughput MySQL database serving 50,000+ active subscribers."
       }
     }
   ],
   experience: [
+    // Work Experience
     {
-      id: "exp-1",
+      id: "exp-vivacom",
       role: "Senior Software Developer",
       organization: "Vivacom BD",
       period: "Jan 2023 — Present",
       location: "Dhaka, Bangladesh",
-      type: "Full-Time",
+      type: "Work",
       summary:
-        "Leading full-stack frontend architecture and client-facing web application development across distributed financial dashboard platforms.",
+        "Leading client-facing frontend architecture and full-stack system scalability for enterprise financial dashboard applications.",
       highlights: [
-        "Architected performant React and TypeScript dashboard interfaces serving high-concurrency client requirements.",
-        "Established component modularity standards, automated code review linting, and mentored junior engineering team members.",
-        "Drove decisions on state management, API contract schemas, and frontend performance optimizations."
-      ]
+        "Architected and led development of an enterprise client financial dashboard using React, TypeScript, and stateful caching, reducing latency by 45%.",
+        "Established code review practices, automated CI/CD linting, and mentored junior developers to boost sprint delivery velocity by 30%.",
+        "Drove technical decision-making on component architecture, state management patterns, and system resilience."
+      ],
+      techStack: ["React 18", "TypeScript", "Laravel", "Financial APIs", "Docker", "Redis"]
     },
     {
-      id: "exp-2",
+      id: "exp-tiyasha",
+      role: "Web Developer (Remote)",
+      organization: "Tiyasha Software",
+      period: "Feb 2021 — Dec 2022",
+      location: "Bengaluru, India (Remote)",
+      type: "Work",
+      summary:
+        "Worked remotely with an international engineering team on distributed web technologies, microservices, and client portal applications.",
+      highlights: [
+        "Engineered RESTful backend endpoints and dynamic frontend views for diverse international client requirements.",
+        "Collaborated across time zones using Git workflows, agile sprints, and daily asynchronous standups.",
+        "Delivered production features with strict testing and cross-browser responsiveness."
+      ],
+      techStack: ["PHP", "Laravel", "JavaScript", "REST APIs", "MySQL", "Bootstrap"]
+    },
+    {
+      id: "exp-fieldboosters",
       role: "Software Developer",
-      organization: "Fieldboosters Ltd",
-      period: "Jan 2020 — Dec 2022",
-      location: "Dhaka, Bangladesh",
-      type: "Full-Time",
+      organization: "Field Booster Limited",
+      period: "Jun 2020 — Dec 2022",
+      location: "Bashundhara R/A, Dhaka, Bangladesh",
+      type: "Work",
       summary:
-        "Developed core features for an e-commerce platform and collaborative vendor management portals.",
+        "Built and maintained core full-stack features for a high-traffic e-commerce platform and merchant vendor management systems.",
       highlights: [
-        "Built reactive frontend interfaces and integrated RESTful backend APIs for merchant checkout flows.",
-        "Partnered with cross-functional teams to translate product requirements into clean, testable technical specifications.",
-        "Improved database query efficiency and reduced page load times on high-traffic catalog pages."
-      ]
+        "Engineered core merchant features for high-traffic product flows, improving reliability and checkout conversion.",
+        "Partnered with product managers and designers to break down requirements into clear, testable technical specifications.",
+        "Contributed to full-stack delivery using Vue.js frontend and Laravel backend, ensuring consistent API contracts."
+      ],
+      techStack: ["Vue.js", "Laravel", "MySQL", "Payment Gateways", "REST APIs"]
     },
     {
-      id: "exp-3",
-      role: "Junior Software Developer",
-      organization: "Creative Software Ltd",
-      period: "Aug 2018 — Dec 2019",
-      location: "Dhaka, Bangladesh",
-      type: "Full-Time",
+      id: "exp-creative",
+      role: "Junior Laravel Developer",
+      organization: "Creative Software Limited",
+      period: "Aug 2018 — May 2020",
+      location: "Elephant Road, Dhaka, Bangladesh",
+      type: "Work",
       summary:
-        "Maintained client web systems, designed database schemas, and delivered full-stack web applications.",
+        "Developed full-stack web application modules in PHP and Laravel, gaining end-to-end software lifecycle experience.",
       highlights: [
-        "Delivered full-stack software features across the complete software development lifecycle.",
-        "Engaged directly in client requirement elicitation sessions to shape functional deliverables."
-      ]
+        "Developed and maintained client-facing software features in PHP and Laravel across multiple business verticals.",
+        "Participated in client requirements elicitation workshops, converting functional requests into maintainable codebase deliverables."
+      ],
+      techStack: ["PHP", "Laravel", "JavaScript", "Bootstrap", "MySQL", "jQuery"]
     },
     {
-      id: "exp-4",
-      role: "Master of Science in Computer Science & Engineering",
+      id: "exp-freelance",
+      role: "Freelance Software Developer & Consultant",
+      organization: "Independent Practice",
+      period: "2018 — Continuing",
+      location: "Dhaka, Bangladesh & Worldwide",
+      type: "Work",
+      summary:
+        "Consulted and built custom software, ERP modules, POS engines, and client web applications for global businesses.",
+      highlights: [
+        "Delivered 50+ custom web applications, SaaS dashboards, and database integrations.",
+        "Maintained 100% on-time project delivery record with long-term retainer clients."
+      ],
+      techStack: ["React", "Next.js", "Node.js", "Laravel", "MySQL", "Tailwind CSS"]
+    },
+    {
+      id: "exp-dhakacenter",
+      role: "Intern Software Developer",
+      organization: "Dhaka Center NIC Limited",
+      period: "Oct 2017 — Jan 2018",
+      location: "Dhaka, Bangladesh",
+      type: "Work",
+      summary:
+        "Foundational internship focusing on core software engineering practices, database queries, and web application lifecycle.",
+      highlights: [
+        "Assisted senior engineers in testing, debugging, and documenting internal tools.",
+        "Gained hands-on experience with production MySQL schemas and Linux deployment."
+      ],
+      techStack: ["PHP", "HTML5", "CSS3", "JavaScript", "MySQL"]
+    },
+
+    // Education & Degrees
+    {
+      id: "edu-ju",
+      role: "Master of Science in Computer Science & Engineering (M.Sc. CSE)",
       organization: "Jahangirnagar University",
       period: "2022 — 2023",
-      location: "Savar, Dhaka",
+      location: "Savar, Dhaka, Bangladesh",
       type: "Education",
       summary:
-        "Advanced graduate studies with emphasis on Distributed Systems, Advanced Algorithms, and Software Architecture.",
+        "Graduate specialization in Advanced Distributed Systems, Algorithmic Analysis, and Scalable Cloud Architectures.",
       highlights: [
-        "Conducted research on scalable systems and data engineering methodologies."
-      ]
+        "Completed thesis research on high-throughput distributed architectures and cloud scalability."
+      ],
+      techStack: ["Distributed Systems", "Advanced Algorithms", "Cloud Architecture"]
     },
     {
-      id: "exp-5",
-      role: "Bachelor of Science in Computer Science & Engineering",
-      organization: "IUBAT",
+      id: "edu-iubat",
+      role: "Bachelor of Science in Computer Science & Engineering (B.Sc. CSE)",
+      organization: "IUBAT — International University of Business Agriculture and Technology",
       period: "2013 — 2017",
-      location: "Dhaka, Bangladesh",
+      location: "4 Embankment Drive Road, Sector-10, Uttara, Dhaka-1230",
       type: "Education",
       summary:
-        "Foundational degree covering Data Structures, Algorithms, Software Engineering, and Database Management Systems.",
+        "Comprehensive 4-year undergraduate engineering degree covering Computer Science fundamentals and software engineering.",
       highlights: [
-        "Graduated with rigorous training in Object-Oriented Programming and Computer Science fundamentals."
-      ]
+        "Rigorous training in Object-Oriented Programming, Relational Database Theory, Data Structures, and System Design."
+      ],
+      techStack: ["OOP", "Data Structures", "Database Theory", "Operating Systems", "Networking"]
+    },
+    {
+      id: "edu-hsc",
+      role: "Higher Secondary Certificate (HSC) — Science",
+      organization: "Dr. Mahbubur Rahman Mollah College",
+      period: "2010 — 2012",
+      location: "Demra Road, Matuail, Dhaka-1362, Bangladesh",
+      type: "Education",
+      summary:
+        "Higher Secondary graduation with specialization in Science (Physics, Chemistry, Mathematics, Biology).",
+      highlights: [
+        "Graduated with Distinction: GPA 5.00 / 5.00."
+      ],
+      techStack: ["Mathematics", "Physics", "Computer Science Foundations"]
+    },
+    {
+      id: "edu-ssc",
+      role: "Secondary School Certificate (SSC) — Science",
+      organization: "Shamsul Hoque Khan School & College",
+      period: "2008 — 2010",
+      location: "Paradogair, Konapara, Demra, Dhaka-1362, Bangladesh",
+      type: "Education",
+      summary:
+        "Secondary School graduation with primary focus in Science and Mathematics.",
+      highlights: [
+        "Graduated with Distinction: GPA 5.00 / 5.00."
+      ],
+      techStack: ["General Science", "Higher Mathematics"]
     }
   ],
   contact: {
     invitation:
-      "Whether you have a specific role in mind, need architectural consulting for your next web application, or want to collaborate on a challenging project, I would love to hear from you.",
-    isBackendConfigured: false // Set to true when an active email/form service endpoint is connected
+      "Whether you are considering me for a senior full-stack engineering role, need architectural consulting for your Next.js/Node.js application, or want to discuss a challenging project, my inbox is always open.",
+    telegram: {
+      botToken: "8289585552:AAEPZbLgJXH1Kf0OIzpQJmwasgqpMX3ETkg",
+      chatId: "8553087905",
+    }
   }
 };

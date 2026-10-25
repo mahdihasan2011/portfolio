@@ -41,7 +41,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-charcoal-950/80 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/70 backdrop-blur-md animate-in fade-in duration-200"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-project-title"
@@ -51,33 +51,58 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
     >
       <div
         ref={dialogRef}
-        className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-charcoal-900 border border-charcoal-700 rounded-2xl p-6 sm:p-8 shadow-2xl shadow-black/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan"
+        className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto border rounded-2xl p-6 sm:p-8 shadow-2xl focus:outline-none"
+        style={{
+          backgroundColor: "var(--bg-card)",
+          borderColor: "var(--border-color)",
+          color: "var(--text-primary)",
+          boxShadow: "var(--shadow-card)",
+        }}
       >
         {/* Close Button */}
         <button
           ref={closeButtonRef}
           onClick={onClose}
-          className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-full bg-charcoal-800 text-slate-300 hover:text-white hover:bg-charcoal-700 transition-colors focus-visible:ring-2 focus-visible:ring-cyan"
+          className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-full border transition-all hover:scale-105"
+          style={{
+            backgroundColor: "var(--bg-surface)",
+            borderColor: "var(--border-color)",
+            color: "var(--text-secondary)",
+          }}
           aria-label="Close project details dialog"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Header Tag & Title */}
-        <div className="pr-10">
-          <span className="font-mono text-xs uppercase tracking-wider text-cyan bg-cyan/10 px-2.5 py-1 rounded-md border border-cyan/20">
+        <div className="pr-12">
+          <span
+            className="font-mono text-xs uppercase tracking-wider px-2.5 py-1 rounded-md border"
+            style={{
+              backgroundColor: "var(--bg-surface)",
+              borderColor: "var(--accent-cyan)",
+              color: "var(--accent-cyan)",
+            }}
+          >
             {project.subtitle}
           </span>
           <h3
             id="modal-project-title"
-            className="mt-3 font-display text-2xl sm:text-3xl font-bold text-slate-100"
+            className="mt-3 font-display text-2xl sm:text-3xl font-bold tracking-tight"
+            style={{ color: "var(--text-primary)" }}
           >
             {project.title}
           </h3>
         </div>
 
         {/* Project Preview Image */}
-        <div className="mt-5 relative w-full h-56 sm:h-72 rounded-xl overflow-hidden border border-charcoal-750 bg-charcoal-950">
+        <div
+          className="mt-5 relative w-full h-56 sm:h-72 rounded-xl overflow-hidden border"
+          style={{
+            backgroundColor: "var(--bg-surface)",
+            borderColor: "var(--border-color)",
+          }}
+        >
           <Image
             src={project.image}
             alt={`${project.title} preview illustration`}
@@ -88,101 +113,148 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         </div>
 
         {/* Detailed Content */}
-        <div className="mt-6 space-y-6 text-slate-300">
+        <div className="mt-6 space-y-6">
           {/* Problem & Contribution */}
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-400 font-display">
+            <h4
+              className="text-xs font-mono font-semibold uppercase tracking-wider"
+              style={{ color: "var(--text-muted)" }}
+            >
               Problem Solved
             </h4>
-            <p className="mt-1 text-sm sm:text-base leading-relaxed text-slate-300">
+            <p
+              className="mt-1 text-sm sm:text-base leading-relaxed font-sans"
+              style={{ color: "var(--text-secondary)" }}
+            >
               {project.problemSolved}
             </p>
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-400 font-display">
+            <h4
+              className="text-xs font-mono font-semibold uppercase tracking-wider"
+              style={{ color: "var(--text-muted)" }}
+            >
               Engineering Contribution
             </h4>
-            <p className="mt-1 text-sm sm:text-base leading-relaxed text-slate-300">
+            <p
+              className="mt-1 text-sm sm:text-base leading-relaxed font-sans"
+              style={{ color: "var(--text-secondary)" }}
+            >
               {project.myContribution}
             </p>
           </div>
 
-          {/* Overview */}
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-400 font-display">
-              Architectural Overview
-            </h4>
-            <p className="mt-1 text-sm leading-relaxed text-slate-400">
-              {project.details.overview}
-            </p>
-          </div>
+          {/* Key Features Bullet List */}
+          {project.details.keyFeatures && (
+            <div>
+              <h4
+                className="text-xs font-mono font-semibold uppercase tracking-wider mb-2.5"
+                style={{ color: "var(--text-muted)" }}
+              >
+                Key Architecture Deliverables
+              </h4>
+              <ul className="space-y-2">
+                {project.details.keyFeatures.map((feature, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-2.5 text-xs sm:text-sm font-sans"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
+                    <CheckCircle2 className="w-4 h-4 text-cyan shrink-0 mt-0.5" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-          {/* Key Features Checklist */}
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-400 font-display flex items-center gap-1.5">
-              <Layers className="w-4 h-4 text-cyan" /> Key Technical Capabilities
-            </h4>
-            <ul className="mt-2 space-y-2 text-sm text-slate-300">
-              {project.details.keyFeatures.map((feature, idx) => (
-                <li key={idx} className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-cyan shrink-0 mt-0.5" />
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* System Architecture Overview */}
+          {project.details.architecture && (
+            <div
+              className="p-4 rounded-xl border"
+              style={{
+                backgroundColor: "var(--bg-surface)",
+                borderColor: "var(--border-color)",
+              }}
+            >
+              <h4
+                className="text-xs font-mono font-semibold uppercase tracking-wider mb-1"
+                style={{ color: "var(--accent-cyan)" }}
+              >
+                Architecture & Infrastructure
+              </h4>
+              <p
+                className="text-xs sm:text-sm leading-relaxed font-sans"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                {project.details.architecture}
+              </p>
+            </div>
+          )}
 
-          {/* Technology Badges */}
+          {/* Tech Stack Pills */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 font-display mb-2">
-              Technologies Used
+            <h4
+              className="text-xs font-mono font-semibold uppercase tracking-wider mb-2"
+              style={{ color: "var(--text-muted)" }}
+            >
+              Technology Stack
             </h4>
             <div className="flex flex-wrap gap-2">
               {project.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-2.5 py-1 text-xs font-mono rounded bg-charcoal-800 text-cyan border border-charcoal-700"
+                  className="px-2.5 py-1 text-xs font-mono rounded-lg border font-medium"
+                  style={{
+                    backgroundColor: "var(--bg-surface)",
+                    borderColor: "var(--border-color)",
+                    color: "var(--text-primary)",
+                  }}
                 >
                   {tag}
                 </span>
               ))}
             </div>
           </div>
-        </div>
 
-        {/* Actions Footer */}
-        <div className="mt-8 pt-5 border-t border-charcoal-800 flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap gap-3">
-            {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-cyan text-charcoal-950 font-sans hover:bg-cyan/90 transition-colors focus-visible:ring-2 focus-visible:ring-cyan"
-              >
-                <ExternalLink className="w-4 h-4" /> Live Demo
-              </a>
-            )}
-
+          {/* Action Links */}
+          <div
+            className="pt-4 border-t flex items-center gap-3 justify-end"
+            style={{ borderColor: "var(--border-color)" }}
+          >
             {project.sourceUrl && (
               <a
                 href={project.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-charcoal-800 text-slate-200 border border-charcoal-700 hover:border-slate-500 transition-colors focus-visible:ring-2 focus-visible:ring-cyan"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border font-mono text-xs font-semibold transition-colors hover:border-cyan"
+                style={{
+                  backgroundColor: "var(--bg-surface)",
+                  borderColor: "var(--border-color)",
+                  color: "var(--text-primary)",
+                }}
               >
-                <Github className="w-4 h-4" /> Source Code
+                <Github className="w-4 h-4" />
+                <span>GitHub Repository</span>
+              </a>
+            )}
+
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-xl font-sans font-bold text-xs text-charcoal-950 transition-all hover:scale-105"
+                style={{
+                  backgroundColor: "var(--accent-cyan)",
+                }}
+              >
+                <span>Live Deployment</span>
+                <ExternalLink className="w-3.5 h-3.5" />
               </a>
             )}
           </div>
-
-          <button
-            onClick={onClose}
-            className="px-4 py-2 text-sm text-slate-400 hover:text-white transition-colors"
-          >
-            Close Details
-          </button>
         </div>
       </div>
     </div>

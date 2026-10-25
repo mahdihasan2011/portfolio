@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Outfit, Fira_Code } from "next/font/google";
 import { portfolioData } from "@/data/portfolioData";
+import { ThemeProvider } from "@/context/ThemeContext";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -24,13 +25,14 @@ const firaCode = Fira_Code({
 export const metadata: Metadata = {
   metadataBase: new URL("https://mahdihasan.dev"),
   title: `${portfolioData.personal.name} | ${portfolioData.personal.title} — ${portfolioData.personal.specialization}`,
-  description: `${portfolioData.personal.name} is a software developer specializing in React, Next.js, and Node.js. Explore featured projects, architectural skills, and contact information.`,
+  description: `${portfolioData.personal.name} is a senior full-stack engineer with 8+ years specializing in React, Next.js, and Node.js. Explore flagship enterprise projects, architectural capabilities, and contact channels.`,
   keywords: [
     "Mahdi Hasan",
+    "Senior Full-Stack Engineer",
     "React Developer",
     "Next.js Developer",
     "Node.js Developer",
-    "Full-Stack Engineer",
+    "Laravel Architect",
     "TypeScript",
     "Tailwind CSS",
     "3D Portfolio",
@@ -65,18 +67,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
       <body
-        className={`${outfit.variable} ${spaceGrotesk.variable} ${firaCode.variable} font-sans bg-charcoal-950 text-slate-100 min-h-screen selection:bg-cyan/30 selection:text-white`}
+        className={`${outfit.variable} ${spaceGrotesk.variable} ${firaCode.variable} font-sans min-h-screen selection:bg-cyan/30 selection:text-white transition-colors duration-300`}
+        style={{ backgroundColor: "var(--bg-main)", color: "var(--text-primary)" }}
       >
-        {/* Accessible Skip Link */}
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-cyan text-charcoal-950 font-bold rounded-lg shadow-lg"
-        >
-          Skip to main content
-        </a>
-        {children}
+        <ThemeProvider>
+          {/* Accessible Skip Link */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-cyan text-charcoal-950 font-bold rounded-lg shadow-lg"
+          >
+            Skip to main content
+          </a>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

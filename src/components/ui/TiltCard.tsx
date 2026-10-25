@@ -5,9 +5,10 @@ import React, { useRef, useState, useEffect } from "react";
 interface TiltCardProps {
   children: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
 }
 
-export default function TiltCard({ children, className = "" }: TiltCardProps) {
+export default function TiltCard({ children, className = "", style = {} }: TiltCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [transform, setTransform] = useState<string>("none");
   const [glarePosition, setGlarePosition] = useState<{ x: number; y: number } | null>(null);
@@ -32,9 +33,9 @@ export default function TiltCard({ children, className = "" }: TiltCardProps) {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    // Restrained tilt: max 4 degrees to maintain readability & professionalism
-    const rotateX = ((y - centerY) / centerY) * -4;
-    const rotateY = ((x - centerX) / centerX) * 4;
+    // Restrained tilt: max 3.5 degrees to maintain readability & professionalism
+    const rotateX = ((y - centerY) / centerY) * -3.5;
+    const rotateY = ((x - centerX) / centerX) * 3.5;
 
     setTransform(`perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`);
     setGlarePosition({ x, y });
@@ -52,16 +53,21 @@ export default function TiltCard({ children, className = "" }: TiltCardProps) {
       onMouseLeave={handleMouseLeave}
       style={{
         transform: isReducedMotion ? "none" : transform,
-        transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease",
+        transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease",
+        backgroundColor: "var(--bg-card)",
+        borderColor: "var(--border-color)",
+        boxShadow: "var(--shadow-card)",
+        color: "var(--text-primary)",
+        ...style,
       }}
-      className={`relative rounded-2xl bg-charcoal-850 border border-charcoal-700/70 p-6 md:p-8 shadow-card-glass hover:border-cyan/40 transition-colors duration-300 overflow-hidden ${className}`}
+      className={`relative rounded-2xl border p-6 md:p-8 hover:border-[var(--border-hover)] transition-colors duration-300 overflow-hidden ${className}`}
     >
-      {/* Subtle Specular Glint */}
+      {/* Dynamic Specular Glint */}
       {glarePosition && !isReducedMotion && (
         <div
           className="pointer-events-none absolute inset-0 z-10 transition-opacity duration-300"
           style={{
-            background: `radial-gradient(circle 280px at ${glarePosition.x}px ${glarePosition.y}px, rgba(0, 240, 255, 0.06), transparent 70%)`,
+            background: `radial-gradient(circle 260px at ${glarePosition.x}px ${glarePosition.y}px, var(--accent-cyan-glow), transparent 70%)`,
           }}
         />
       )}
