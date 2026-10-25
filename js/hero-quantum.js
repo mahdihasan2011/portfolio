@@ -25,7 +25,7 @@
     powerPreference: 'high-performance'
   });
   renderer.setSize(width, height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
   // Lighting
   const ambLight = new THREE.AmbientLight(0xffffff, 1.4);
@@ -260,15 +260,32 @@
   matrixGroup.add(cageMesh);
 
   // =========================================================================
-  // MODE SWITCHER ENGINE
+  // MODE SWITCHER ENGINE WITH SPRING SCALE MORPH
   // =========================================================================
   window.setHeroCoreMode = function (mode) {
+    masterGroup.scale.set(0.72, 0.72, 0.72);
+    let morphStep = 0;
+    function morphSpring() {
+      morphStep++;
+      const s = masterGroup.scale.x;
+      masterGroup.scale.setScalar(s + (1.0 - s) * 0.18);
+      if (morphStep < 20) {
+        requestAnimationFrame(morphSpring);
+      } else {
+        masterGroup.scale.set(1, 1, 1);
+      }
+    }
+    requestAnimationFrame(morphSpring);
+
     quantumGroup.visible = (mode === 'quantum');
     neuralGroup.visible = (mode === 'neural');
     matrixGroup.visible = (mode === 'matrix');
 
+    if (typeof window.trigger3DShockwave === 'function') {
+      window.trigger3DShockwave(width / 2, height / 2);
+    }
     if (typeof window.playSynthSound === 'function') {
-      window.playSynthSound('click');
+      window.playSynthSound('hologram');
     }
   };
 
@@ -375,11 +392,18 @@
   });
 
   // =========================================================================
-  // ANIMATION LOOP
+  // ANIMATION LOOP WITH VIEWPORT LIFECYCLE OBSERVER
   // =========================================================================
   let clock = new THREE.Clock();
+  let isHeroVisible = true;
+  let isLoopRunning = false;
 
   function animate() {
+    if (!isHeroVisible) {
+      isLoopRunning = false;
+      return;
+    }
+    isLoopRunning = true;
     requestAnimationFrame(animate);
 
     const delta = clock.getDelta();
@@ -452,7 +476,23 @@
     renderer.render(scene, camera);
   }
 
-  animate();
+  // Viewport Observer to preserve 60 FPS across whole website
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        isHeroVisible = entry.isIntersecting;
+        if (isHeroVisible && !isLoopRunning) {
+          clock.getDelta(); // reset delta step
+          animate();
+        }
+      });
+    }, { threshold: 0.05 });
+
+    const heroSection = document.getElementById('hero') || canvas;
+    observer.observe(heroSection);
+  } else {
+    animate();
+  }
 
   // Resize handler
   window.addEventListener('resize', () => {
@@ -461,6 +501,6 @@
     camera.aspect = newWidth / newHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(newWidth, newHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
   });
 })();

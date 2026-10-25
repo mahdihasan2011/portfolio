@@ -172,10 +172,10 @@
   applyTheme(currentTheme);
 
   // ==========================================================================
-  // 3. 3D GYROSCOPIC CARD TILT ENGINE
+  // 3. 3D GYROSCOPIC CARD TILT & HOLOGRAPHIC GLARE ENGINE
   // ==========================================================================
-  const tiltCards = document.querySelectorAll('.tilt-card');
-  const maxTilt = 14;
+  const tiltCards = document.querySelectorAll('.tilt-card, .project-card-3d, .stat-card-3d, .about-fact-card, .feature-box-3d');
+  const maxTilt = 10;
 
   tiltCards.forEach(card => {
     let bounds;
@@ -196,10 +196,13 @@
       const rotY = xPct * maxTilt;
 
       card.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+      card.style.setProperty('--mouse-x', `${mouseX}px`);
+      card.style.setProperty('--mouse-y', `${mouseY}px`);
     }
 
     function onMouseLeave() {
       card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+      bounds = null;
     }
 
     card.addEventListener('mouseenter', onMouseEnter);
@@ -1061,14 +1064,23 @@ and fault-tolerant systems in Laravel, PHP, React, Vue.js, and cloud backends.`;
     if (activeLink) updateNavIndicator(activeLink);
   });
 
+  const headerScrollProgressFill = document.getElementById('headerScrollProgressFill');
+
   window.addEventListener('scroll', () => {
     // Header shadow & shrink on scroll
     if (headerNav) {
-      if (window.scrollY > 40) {
+      if (window.scrollY > 30) {
         headerNav.classList.add('scrolled');
       } else {
         headerNav.classList.remove('scrolled');
       }
+    }
+
+    // Dynamic Header Scroll Reading Progress Bar Fill
+    if (headerScrollProgressFill) {
+      const scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPct = scrollTotal > 0 ? (window.scrollY / scrollTotal) * 100 : 0;
+      headerScrollProgressFill.style.width = `${Math.min(Math.max(scrollPct, 0), 100)}%`;
     }
 
     // Scroll-Spy
@@ -1092,7 +1104,7 @@ and fault-tolerant systems in Laravel, PHP, React, Vue.js, and cloud backends.`;
     });
   }, { passive: true });
 
-  // Mobile Drawer Toggle
+  // Mobile Drawer Toggle with 3D Morph Hamburger
   const mobileNavToggle = document.getElementById('mobileNavToggle');
   const mobileDrawer = document.getElementById('mobileDrawer');
   const drawerBackdrop = document.getElementById('drawerBackdrop');
@@ -1102,6 +1114,7 @@ and fault-tolerant systems in Laravel, PHP, React, Vue.js, and cloud backends.`;
     if (!mobileDrawer || !drawerBackdrop) return;
     mobileDrawer.classList.add('open');
     drawerBackdrop.classList.add('active');
+    if (mobileNavToggle) mobileNavToggle.classList.add('open');
     document.body.style.overflow = 'hidden';
     window.playSynthSound('click');
   }
@@ -1110,6 +1123,7 @@ and fault-tolerant systems in Laravel, PHP, React, Vue.js, and cloud backends.`;
     if (!mobileDrawer || !drawerBackdrop) return;
     mobileDrawer.classList.remove('open');
     drawerBackdrop.classList.remove('active');
+    if (mobileNavToggle) mobileNavToggle.classList.remove('open');
     document.body.style.overflow = '';
   }
 

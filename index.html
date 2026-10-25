@@ -48,9 +48,14 @@
   <div class="custom-cursor-dot"></div>
   <div class="custom-cursor-follower"></div>
 
-  <!-- Floating 3D Glass Dock Header with Magnetic Pill & Shimmer -->
+  <!-- Floating 3D Glass Dock Header with Magnetic Pill, Scroll Tracker & Shimmer -->
   <header class="glass-nav-header" id="glassNavHeader">
-    <a href="#hero" class="nav-brand">
+    <!-- Dynamic Scroll Progress Track at bottom edge of header dock -->
+    <div class="header-scroll-track" aria-hidden="true">
+      <div class="header-scroll-progress-fill" id="headerScrollProgressFill"></div>
+    </div>
+
+    <a href="#hero" class="nav-brand" title="Mahdi Hasan — Return to Top">
       <div class="brand-avatar-container">
         <img src="images/profilepic4.jpeg" alt="Mahdi Hasan" class="brand-avatar">
         <span class="avatar-ring"></span>
@@ -58,7 +63,13 @@
       </div>
       <div class="brand-title">
         <span class="brand-name gh-name-target">Mahdi Hasan</span>
-        <span class="brand-status"><span class="status-dot"></span> Available for Hire</span>
+        <span class="brand-status">
+          <span class="status-beacon">
+            <span class="beacon-ping"></span>
+            <span class="beacon-dot"></span>
+          </span>
+          <span class="status-text">Available for Hire</span>
+        </span>
       </div>
     </a>
 
@@ -78,14 +89,16 @@
     <div class="nav-actions">
       <!-- Cyber CLI Terminal Button -->
       <button class="terminal-toggle-btn" id="terminalToggleBtn" aria-label="Open Interactive Cyber CLI Terminal" title="Press '~' anytime">
-        <i class="fas fa-terminal"></i> <span class="d-none d-md-inline">CLI <span class="hotkey-badge">~</span></span>
+        <span class="cli-icon-glow"><i class="fas fa-terminal"></i></span>
+        <span class="d-none d-md-inline cli-label">CLI<span class="cli-cursor">_</span><span class="hotkey-badge">~</span></span>
       </button>
 
-      <!-- Web Audio Sound Toggle with Mini Equalizer -->
+      <!-- Web Audio Sound Toggle with 4-Bar Mini Equalizer -->
       <button class="action-btn-circle audio-toggle-btn" id="audioToggleBtn" aria-label="Toggle Sound Effects" title="Toggle Sound Effects">
         <div class="audio-btn-wrapper">
-          <i class="fas fa-volume-mute"></i>
+          <i class="fas fa-volume-mute" id="audioIcon"></i>
           <span class="header-mini-eq" id="headerMiniEq">
+            <span class="eq-bar"></span>
             <span class="eq-bar"></span>
             <span class="eq-bar"></span>
             <span class="eq-bar"></span>
@@ -94,19 +107,23 @@
       </button>
 
       <!-- Theme Switcher (Dark / Light) -->
-      <button class="action-btn-circle" id="themeToggleBtn" aria-label="Toggle Cyber / Titanium Theme" title="Switch Theme">
-        <i class="fas fa-sun"></i>
+      <button class="action-btn-circle theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Cyber / Titanium Theme" title="Switch Theme (Dark / Light)">
+        <i class="fas fa-sun" id="themeIcon"></i>
       </button>
 
-      <!-- Resume Button with Shimmer -->
-      <a href="Mahdi_Hasan_Resume.pdf" target="_blank" class="nav-cta-btn resume-shimmer-btn">
+      <!-- Resume Button with Continuous Shimmer & Download Icon -->
+      <a href="Mahdi_Hasan_Resume.pdf" target="_blank" class="nav-cta-btn resume-shimmer-btn" id="headerResumeBtn" title="Download Mahdi Hasan Resume (PDF)">
         <span class="btn-shimmer-sweep"></span>
-        <i class="fas fa-file-pdf"></i> <span>Resume</span>
+        <i class="fas fa-file-pdf"></i>
+        <span>Resume</span>
+        <i class="fas fa-arrow-down-to-line ms-1 resume-arrow-icon"></i>
       </a>
 
-      <!-- Mobile Hamburger Button -->
+      <!-- Mobile Hamburger Button with 3D Morph Bars -->
       <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open Navigation Menu">
-        <i class="fas fa-bars"></i>
+        <span class="hamburger-bar bar-1"></span>
+        <span class="hamburger-bar bar-2"></span>
+        <span class="hamburger-bar bar-3"></span>
       </button>
     </div>
   </header>

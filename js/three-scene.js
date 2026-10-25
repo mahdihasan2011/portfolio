@@ -25,7 +25,7 @@
     powerPreference: 'high-performance'
   });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
   // --- LIGHTING ---
   const ambientLight = new THREE.AmbientLight(0x0c162d, 1.8);
@@ -56,7 +56,7 @@
   scene.add(gridHelper);
 
   // --- 3D PARTICLE CONSTELLATION & CONNECTING MESH ---
-  const particleCount = window.innerWidth < 768 ? 600 : 1200;
+  const particleCount = window.innerWidth < 768 ? 450 : 850;
   const geometry = new THREE.BufferGeometry();
   const positions = new Float32Array(particleCount * 3);
   const basePositions = new Float32Array(particleCount * 3);
@@ -108,7 +108,7 @@
   scene.add(particleSystem);
 
   // --- DYNAMIC CURSOR CONSTELLATION WEB LINES ---
-  const maxLines = 160;
+  const maxLines = 70;
   const linePositions = new Float32Array(maxLines * 6);
   const lineColors = new Float32Array(maxLines * 6);
   const lineGeometry = new THREE.BufferGeometry();
@@ -144,7 +144,7 @@
   knotMesh.position.set(-140, 60, -120);
   shapesGroup.add(knotMesh);
 
-  // 2. Floating Octahedron
+  // 2. Dual-Shell Floating Octahedron (Outer Wireframe + Inner Glowing Crystal)
   const octGeo = new THREE.OctahedronGeometry(26, 1);
   const wireMat2 = new THREE.MeshStandardMaterial({
     color: 0x8b5cf6,
@@ -158,6 +158,17 @@
   });
   const octMesh = new THREE.Mesh(octGeo, wireMat2);
   octMesh.position.set(160, -90, -80);
+
+  const innerOctGeo = new THREE.OctahedronGeometry(13, 0);
+  const innerOctMat = new THREE.MeshStandardMaterial({
+    color: 0x8b5cf6,
+    emissive: 0x8b5cf6,
+    emissiveIntensity: 0.85,
+    roughness: 0.1,
+    metalness: 0.9
+  });
+  const innerOctMesh = new THREE.Mesh(innerOctGeo, innerOctMat);
+  octMesh.add(innerOctMesh);
   shapesGroup.add(octMesh);
 
   // 3. Floating Icosahedron
@@ -253,12 +264,13 @@
 
   // --- SCROLL-DRIVEN CAMERA CHOREOGRAPHY ---
   const waypoints = [
-    { scrollPct: 0.0, camX: 0, camY: 0, camZ: 120, rotX: 0, rotY: 0 },         // Hero
-    { scrollPct: 0.2, camX: -30, camY: -15, camZ: 140, rotX: 0.05, rotY: -0.15 }, // About
-    { scrollPct: 0.4, camX: 35, camY: 20, camZ: 130, rotX: -0.05, rotY: 0.2 },     // Skills
-    { scrollPct: 0.65, camX: 0, camY: -40, camZ: 150, rotX: 0.1, rotY: 0 },        // Experience
-    { scrollPct: 0.85, camX: -25, camY: 30, camZ: 135, rotX: -0.08, rotY: -0.1 },  // Projects
-    { scrollPct: 1.0, camX: 0, camY: -10, camZ: 110, rotX: 0, rotY: 0 }           // Contact
+    { scrollPct: 0.0, camX: 0, camY: 0, camZ: 120, rotX: 0, rotY: 0 },             // Hero
+    { scrollPct: 0.18, camX: -26, camY: -12, camZ: 135, rotX: 0.04, rotY: -0.12 }, // About
+    { scrollPct: 0.38, camX: 30, camY: 18, camZ: 128, rotX: -0.04, rotY: 0.18 },   // Skills
+    { scrollPct: 0.58, camX: 0, camY: -35, camZ: 145, rotX: 0.08, rotY: 0 },      // Experience
+    { scrollPct: 0.74, camX: -20, camY: 15, camZ: 130, rotX: -0.05, rotY: -0.08 }, // Education
+    { scrollPct: 0.88, camX: 24, camY: 24, camZ: 132, rotX: -0.06, rotY: 0.1 },    // Projects
+    { scrollPct: 1.0, camX: 0, camY: -8, camZ: 110, rotX: 0, rotY: 0 }            // Contact
   ];
 
   let currentScrollProgress = 0;
@@ -425,25 +437,33 @@
     // Scroll cyber horizon grid continuously
     gridHelper.position.z = ((elapsedTime * 25 * warpSpeedMultiplier) % 20) - 100;
 
-    // Rotate geometric shapes
-    knotMesh.rotation.x = elapsedTime * 0.35;
-    knotMesh.rotation.y = elapsedTime * 0.25;
+    // Rotate geometric shapes with cursor magnetic parallax
+    const tiltX = mouseY * 0.0025;
+    const tiltY = mouseX * 0.0025;
+
+    knotMesh.rotation.x = elapsedTime * 0.35 + tiltX;
+    knotMesh.rotation.y = elapsedTime * 0.25 + tiltY;
     knotMesh.position.y = 60 + Math.sin(elapsedTime * 0.8) * 10;
 
-    octMesh.rotation.x = elapsedTime * 0.25;
-    octMesh.rotation.z = elapsedTime * 0.35;
+    octMesh.rotation.x = elapsedTime * 0.25 - tiltX;
+    octMesh.rotation.z = elapsedTime * 0.35 + tiltY;
     octMesh.position.y = -90 + Math.cos(elapsedTime * 0.7) * 12;
+    if (typeof innerOctMesh !== 'undefined') {
+      innerOctMesh.rotation.y = -elapsedTime * 0.55;
+    }
 
-    icoMesh.rotation.y = elapsedTime * 0.28;
+    icoMesh.rotation.y = elapsedTime * 0.28 + tiltY;
+    icoMesh.rotation.x = elapsedTime * 0.2 + tiltX;
     icoMesh.position.y = 130 + Math.sin(elapsedTime * 0.6) * 14;
 
     ringMesh.rotation.z = elapsedTime * 0.18;
+    ringMesh.rotation.x = Math.PI / 3 + tiltX * 1.5;
 
-    // Shockwave animation
+    // Shockwave animation with smooth expansion
     if (shockwaveActive) {
-      shockwaveScale += 9;
+      shockwaveScale += 8.5;
       shockwaveMesh.scale.set(shockwaveScale, shockwaveScale, shockwaveScale);
-      shockwaveMat.opacity -= 0.025;
+      shockwaveMat.opacity -= 0.024;
       if (shockwaveMat.opacity <= 0) {
         shockwaveActive = false;
         shockwaveMat.opacity = 0;
