@@ -22,6 +22,7 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://mahdihasan.dev"),
   title: `${portfolioData.personal.name} | ${portfolioData.personal.title} — ${portfolioData.personal.specialization}`,
   description: `${portfolioData.personal.name} is a software developer specializing in React, Next.js, and Node.js. Explore featured projects, architectural skills, and contact information.`,
   keywords: [
