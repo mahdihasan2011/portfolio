@@ -1,0 +1,1 @@
+self.__REACT_LOADABLE_MANIFEST='{"components\\\\sections\\\\HeroSection.tsx -> @/components/3d/HeroLaptopScene":{"id":2435,"files":["static/chunks/b536a0f1.935d5b8596592681.js","static/chunks/496.f329146621fd7c16.js","static/chunks/435.442bf2686a375441.js"]}}';
