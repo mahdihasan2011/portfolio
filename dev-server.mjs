@@ -52,6 +52,9 @@ const server = http.createServer((req, res) => {
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
     
     res.setHeader('Content-Type', contentType);
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
     fs.createReadStream(filePath).pipe(res);
   });
 });

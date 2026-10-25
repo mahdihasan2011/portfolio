@@ -33,7 +33,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <!-- Custom Professional Stylesheet -->
-  <link rel="stylesheet" href="css/portfolio-pro.css?v=3.1">
+  <link rel="stylesheet" href="css/portfolio-pro.css?v=3.2">
 </head>
 
 <body>
@@ -105,6 +105,7 @@
          LEFT STICKY SIDEBAR (BRITTANY CHIANG ARCHITECTURE)
          ======================================================================== -->
     <aside class="sidebar-column">
+      <div>
         <!-- Hero Identity Row with Compact Avatar & Availability Beacon -->
         <div class="hero-profile-row">
           <div class="avatar-container">
@@ -1035,13 +1036,39 @@
     <span id="toastNoticeText">Email copied to clipboard!</span>
   </div>
 
+  <!-- ========================================================================
+       MOBILE FLOATING QUICK-DOCK (EMIL KOWALSKI CRAFT)
+       ======================================================================== -->
+  <nav class="mobile-bottom-dock" aria-label="Quick Mobile Navigation">
+    <a href="#about" class="dock-link active" data-section="about">
+      <i class="fas fa-user"></i>
+      <span>About</span>
+    </a>
+    <a href="#experience" class="dock-link" data-section="experience">
+      <i class="fas fa-briefcase"></i>
+      <span>Exp</span>
+    </a>
+    <a href="#projects" class="dock-link" data-section="projects">
+      <i class="fas fa-layer-group"></i>
+      <span>Projects</span>
+    </a>
+    <a href="#skills" class="dock-link" data-section="skills">
+      <i class="fas fa-code"></i>
+      <span>Skills</span>
+    </a>
+    <a href="#contact" class="dock-link" data-section="contact">
+      <i class="fas fa-envelope"></i>
+      <span>Contact</span>
+    </a>
+  </nav>
+
   <!-- Dynamic Year Script -->
   <script>
     document.getElementById('yearSpan').textContent = new Date().getFullYear();
   </script>
 
   <!-- Modular Portfolio Script -->
-  <script src="js/portfolio-pro.js?v=3.1"></script>
+  <script src="js/portfolio-pro.js?v=3.2"></script>
 
 </body>
 

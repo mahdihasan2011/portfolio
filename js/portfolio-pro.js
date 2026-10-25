@@ -59,7 +59,7 @@
   // --------------------------------------------------------------------------
   // 3. BRITTANY CHIANG SCROLLSPY NAVIGATION
   // --------------------------------------------------------------------------
-  const navLinks = document.querySelectorAll('.nav-item-link');
+  const navLinks = document.querySelectorAll('.nav-item-link, .dock-link');
   const sections = document.querySelectorAll('.section-block');
 
   if ('IntersectionObserver' in window && sections.length > 0) {
