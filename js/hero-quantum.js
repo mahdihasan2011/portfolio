@@ -1,7 +1,7 @@
 /**
  * MAHDI HASAN | 3D QUANTUM TECH CORE HERO ENGINE
  * Multi-Mode Centerpiece (Quantum Core, Neural Network, Cyber Matrix)
- * with Smooth Drag Inertia, Particle Shockwaves & PBR Shading
+ * with Smooth Drag Inertia, Particle Shockwaves, Floating Spark Vortex & Parallax
  */
 
 (function () {
@@ -28,18 +28,18 @@
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
   // Lighting
-  const ambLight = new THREE.AmbientLight(0xffffff, 1.2);
+  const ambLight = new THREE.AmbientLight(0xffffff, 1.4);
   scene.add(ambLight);
 
-  const keyLight = new THREE.PointLight(0x00f0ff, 3, 200);
+  const keyLight = new THREE.PointLight(0x00f0ff, 3.5, 220);
   keyLight.position.set(50, 50, 60);
   scene.add(keyLight);
 
-  const fillLight = new THREE.PointLight(0x8b5cf6, 2.5, 200);
+  const fillLight = new THREE.PointLight(0x8b5cf6, 2.8, 220);
   fillLight.position.set(-50, -40, 50);
   scene.add(fillLight);
 
-  // Master Core Group (Drag Rotatable)
+  // Master Core Group (Drag Rotatable & Parallax Responsive)
   const masterGroup = new THREE.Group();
   scene.add(masterGroup);
 
@@ -65,7 +65,7 @@
     roughness: 0.2,
     metalness: 0.9,
     emissive: 0x00f0ff,
-    emissiveIntensity: 0.35
+    emissiveIntensity: 0.4
   });
   const icoMesh = new THREE.Mesh(icoGeo, icoMat);
   quantumGroup.add(icoMesh);
@@ -77,9 +77,9 @@
     roughness: 0.1,
     metalness: 0.8,
     emissive: 0x8b5cf6,
-    emissiveIntensity: 0.6,
+    emissiveIntensity: 0.7,
     transparent: true,
-    opacity: 0.85
+    opacity: 0.88
   });
   const innerMesh = new THREE.Mesh(innerGeo, innerMat);
   quantumGroup.add(innerMesh);
@@ -93,7 +93,7 @@
       roughness: 0.2,
       metalness: 0.9,
       emissive: color,
-      emissiveIntensity: 0.3
+      emissiveIntensity: 0.35
     });
     const ringMesh = new THREE.Mesh(ringGeo, ringMat);
     ringMesh.rotation.set(rotX, rotY, rotZ);
@@ -118,7 +118,7 @@
     const satMat = new THREE.MeshStandardMaterial({
       color: satColor,
       emissive: satColor,
-      emissiveIntensity: 0.5
+      emissiveIntensity: 0.6
     });
     const satMesh = new THREE.Mesh(satGeo, satMat);
 
@@ -136,16 +136,49 @@
     });
   }
 
+  // Floating Spark Particle Vortex rising from Core
+  const sparkCount = 36;
+  const sparkGeo = new THREE.BufferGeometry();
+  const sparkPositions = new Float32Array(sparkCount * 3);
+  const sparkVelocities = [];
+
+  for (let s = 0; s < sparkCount; s++) {
+    const s3 = s * 3;
+    const angle = Math.random() * Math.PI * 2;
+    const r = Math.random() * 8;
+    sparkPositions[s3] = Math.cos(angle) * r;
+    sparkPositions[s3 + 1] = (Math.random() - 0.5) * 16;
+    sparkPositions[s3 + 2] = Math.sin(angle) * r;
+
+    sparkVelocities.push({
+      y: 0.15 + Math.random() * 0.25,
+      angle: angle,
+      radius: r,
+      spinSpeed: 0.03 + Math.random() * 0.04
+    });
+  }
+
+  sparkGeo.setAttribute('position', new THREE.BufferAttribute(sparkPositions, 3));
+  const sparkMat = new THREE.PointsMaterial({
+    color: 0x00f0ff,
+    size: 2.2,
+    transparent: true,
+    opacity: 0.85,
+    blending: THREE.AdditiveBlending
+  });
+  const sparkSystem = new THREE.Points(sparkGeo, sparkMat);
+  quantumGroup.add(sparkSystem);
+
   // =========================================================================
   // 2. NEURAL NETWORK MODE ASSETS
   // =========================================================================
-  const neuralNodeCount = 40;
+  const neuralNodeCount = 45;
   const neuralNodes = [];
   const neuralGeo = new THREE.SphereGeometry(1.2, 16, 16);
   const neuralMat = new THREE.MeshStandardMaterial({
     color: 0x10b981,
     emissive: 0x10b981,
-    emissiveIntensity: 0.6
+    emissiveIntensity: 0.7
   });
 
   for (let i = 0; i < neuralNodeCount; i++) {
@@ -162,7 +195,7 @@
   const neuralLineMat = new THREE.LineBasicMaterial({
     color: 0x00f0ff,
     transparent: true,
-    opacity: 0.4
+    opacity: 0.45
   });
   const neuralLineGeo = new THREE.BufferGeometry();
   const neuralLinePoints = [];
@@ -180,12 +213,12 @@
   neuralGroup.add(neuralLines);
 
   // Central Synapse Brain Core
-  const neuralCoreGeo = new THREE.DodecahedronGeometry(8, 1);
+  const neuralCoreGeo = new THREE.DodecahedronGeometry(8.5, 1);
   const neuralCoreMat = new THREE.MeshStandardMaterial({
     color: 0x00f0ff,
     wireframe: true,
     emissive: 0x00f0ff,
-    emissiveIntensity: 0.5
+    emissiveIntensity: 0.6
   });
   const neuralCoreMesh = new THREE.Mesh(neuralCoreGeo, neuralCoreMat);
   neuralGroup.add(neuralCoreMesh);
@@ -204,7 +237,7 @@
           color: 0x3b82f6,
           wireframe: true,
           emissive: (x === 0 && y === 0 && z === 0) ? 0x00f0ff : 0x8b5cf6,
-          emissiveIntensity: 0.4
+          emissiveIntensity: 0.45
         });
         const box = new THREE.Mesh(boxGeo, boxMat);
         box.position.set(x * 9, y * 9, z * 9);
@@ -219,9 +252,9 @@
     color: 0x00f0ff,
     wireframe: true,
     transparent: true,
-    opacity: 0.35,
+    opacity: 0.38,
     emissive: 0x00f0ff,
-    emissiveIntensity: 0.2
+    emissiveIntensity: 0.25
   });
   const cageMesh = new THREE.Mesh(cageGeo, cageMat);
   matrixGroup.add(cageMesh);
@@ -258,6 +291,8 @@
   let prevMouseY = 0;
   let velocityX = 0;
   let velocityY = 0;
+  let mouseHoverX = 0;
+  let mouseHoverY = 0;
 
   canvas.addEventListener('mousedown', (e) => {
     isDragging = true;
@@ -276,6 +311,12 @@
   });
 
   window.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom) {
+      mouseHoverX = ((e.clientX - rect.left) / rect.width - 0.5) * 0.4;
+      mouseHoverY = ((e.clientY - rect.top) / rect.height - 0.5) * 0.4;
+    }
+
     if (!isDragging) return;
     const deltaX = e.clientX - prevMouseX;
     const deltaY = e.clientY - prevMouseY;
@@ -320,10 +361,10 @@
 
   // Interactive Click Pulse / Shockwave
   canvas.addEventListener('click', () => {
-    innerMesh.scale.set(1.5, 1.5, 1.5);
+    innerMesh.scale.set(1.6, 1.6, 1.6);
     setTimeout(() => {
       innerMesh.scale.set(1, 1, 1);
-    }, 250);
+    }, 280);
 
     if (typeof window.trigger3DShockwave === 'function') {
       window.trigger3DShockwave(width / 2, height / 2);
@@ -344,12 +385,17 @@
     const delta = clock.getDelta();
     const elapsedTime = clock.getElapsedTime();
 
-    // Inertia damping when not actively dragging
+    // Inertia damping and gentle hover parallax tilt
     if (!isDragging) {
       velocityX *= 0.95;
       velocityY *= 0.95;
-      masterGroup.rotation.y += velocityX + 0.005; // Gentle constant rotation
+      masterGroup.rotation.y += velocityX + 0.006;
       masterGroup.rotation.x += velocityY;
+
+      // Subtle mouse hover tilt
+      camera.position.x += (mouseHoverX * 20 - camera.position.x) * 0.04;
+      camera.position.y += (-mouseHoverY * 20 - camera.position.y) * 0.04;
+      camera.lookAt(0, 0, 0);
     }
 
     // 1. Quantum mode animation
@@ -357,7 +403,7 @@
       icoMesh.rotation.x = elapsedTime * 0.4;
       icoMesh.rotation.y = elapsedTime * 0.6;
 
-      const pulse = 1 + Math.sin(elapsedTime * 3) * 0.08;
+      const pulse = 1 + Math.sin(elapsedTime * 3) * 0.09;
       innerMesh.scale.set(pulse, pulse, pulse);
 
       ring1.rotation.z = elapsedTime * 0.6;
@@ -371,11 +417,27 @@
         sat.mesh.position.z = Math.sin(sat.angle) * sat.radius;
         sat.mesh.position.y = sat.yOffset + Math.sin(sat.angle * 2) * 2;
       }
+
+      // Animate floating sparks vortex
+      const sPos = sparkGeo.attributes.position.array;
+      for (let s = 0; s < sparkCount; s++) {
+        const s3 = s * 3;
+        const vel = sparkVelocities[s];
+        vel.angle += vel.spinSpeed;
+        sPos[s3] = Math.cos(vel.angle) * (vel.radius + (sPos[s3 + 1] + 10) * 0.3);
+        sPos[s3 + 1] += vel.y;
+        sPos[s3 + 2] = Math.sin(vel.angle) * (vel.radius + (sPos[s3 + 1] + 10) * 0.3);
+
+        if (sPos[s3 + 1] > 20) {
+          sPos[s3 + 1] = -15;
+        }
+      }
+      sparkGeo.attributes.position.needsUpdate = true;
     }
 
     // 2. Neural mode animation
     if (neuralGroup.visible) {
-      neuralGroup.rotation.y = elapsedTime * 0.2;
+      neuralGroup.rotation.y = elapsedTime * 0.22;
       neuralCoreMesh.rotation.x = elapsedTime * 0.5;
       neuralCoreMesh.rotation.y = elapsedTime * 0.7;
     }

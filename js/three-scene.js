@@ -1,6 +1,7 @@
 /**
  * MAHDI HASAN | 3D WEBGL UNIVERSE & CAMERA CHOREOGRAPHER
  * Advanced Three.js Spatial Engine with Dynamic Point Lighting,
+ * Scrolling Cyber Horizon Grid, Interactive Cursor Constellations,
  * Real-Time Telemetry HUD, Shockwave Physics & Multi-Camera Modes
  */
 
@@ -12,6 +13,8 @@
 
   // --- SCENE SETUP ---
   const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x07090e, 0.0018);
+
   const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 2000);
   camera.position.set(0, 0, 120);
 
@@ -25,31 +28,38 @@
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
   // --- LIGHTING ---
-  const ambientLight = new THREE.AmbientLight(0x0c162d, 1.6);
+  const ambientLight = new THREE.AmbientLight(0x0c162d, 1.8);
   scene.add(ambientLight);
 
-  const cyanPoint = new THREE.PointLight(0x00f0ff, 3.5, 450);
-  cyanPoint.position.set(80, 100, 100);
+  const cyanPoint = new THREE.PointLight(0x00f0ff, 3.8, 500);
+  cyanPoint.position.set(90, 110, 100);
   scene.add(cyanPoint);
 
-  const purplePoint = new THREE.PointLight(0x8b5cf6, 3.0, 450);
-  purplePoint.position.set(-100, -80, 50);
+  const purplePoint = new THREE.PointLight(0x8b5cf6, 3.2, 500);
+  purplePoint.position.set(-110, -90, 60);
   scene.add(purplePoint);
 
-  const magentaPoint = new THREE.PointLight(0xec4899, 2.2, 350);
-  magentaPoint.position.set(0, -120, -50);
+  const magentaPoint = new THREE.PointLight(0xec4899, 2.5, 400);
+  magentaPoint.position.set(0, -130, -50);
   scene.add(magentaPoint);
 
-  // Dynamic Cursor Interactive Light
-  const cursorLight = new THREE.PointLight(0x00f0ff, 2.5, 200);
+  // Dynamic Interactive Cursor Light in 3D Space
+  const cursorLight = new THREE.PointLight(0x00f0ff, 3.0, 220);
   cursorLight.position.set(0, 0, 80);
   scene.add(cursorLight);
+
+  // --- SCROLLING 3D CYBER HORIZON GRID (TRON / SYNTHWAVE DEPTH FLOOR) ---
+  const gridHelper = new THREE.GridHelper(1000, 50, 0x00f0ff, 0x1e293b);
+  gridHelper.position.set(0, -160, -100);
+  gridHelper.material.transparent = true;
+  gridHelper.material.opacity = 0.28;
+  scene.add(gridHelper);
 
   // --- 3D PARTICLE CONSTELLATION & CONNECTING MESH ---
   const particleCount = window.innerWidth < 768 ? 600 : 1200;
   const geometry = new THREE.BufferGeometry();
   const positions = new Float32Array(particleCount * 3);
-  const originalPositions = new Float32Array(particleCount * 3);
+  const basePositions = new Float32Array(particleCount * 3);
   const velocities = new Float32Array(particleCount * 3);
   const colors = new Float32Array(particleCount * 3);
 
@@ -60,17 +70,17 @@
 
   for (let i = 0; i < particleCount; i++) {
     const i3 = i * 3;
-    const px = (Math.random() - 0.5) * 600;
-    const py = (Math.random() - 0.5) * 600;
-    const pz = (Math.random() - 0.5) * 600;
+    const px = (Math.random() - 0.5) * 650;
+    const py = (Math.random() - 0.5) * 650;
+    const pz = (Math.random() - 0.5) * 650;
 
     positions[i3] = px;
     positions[i3 + 1] = py;
     positions[i3 + 2] = pz;
 
-    originalPositions[i3] = px;
-    originalPositions[i3 + 1] = py;
-    originalPositions[i3 + 2] = pz;
+    basePositions[i3] = px;
+    basePositions[i3 + 1] = py;
+    basePositions[i3 + 2] = pz;
 
     velocities[i3] = (Math.random() - 0.5) * 0.35;
     velocities[i3 + 1] = (Math.random() - 0.5) * 0.35;
@@ -90,82 +100,99 @@
     size: 2.8,
     vertexColors: true,
     transparent: true,
-    opacity: 0.88,
+    opacity: 0.9,
     blending: THREE.AdditiveBlending
   });
 
   const particleSystem = new THREE.Points(geometry, pMaterial);
   scene.add(particleSystem);
 
+  // --- DYNAMIC CURSOR CONSTELLATION WEB LINES ---
+  const maxLines = 160;
+  const linePositions = new Float32Array(maxLines * 6);
+  const lineColors = new Float32Array(maxLines * 6);
+  const lineGeometry = new THREE.BufferGeometry();
+  lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+  lineGeometry.setAttribute('color', new THREE.BufferAttribute(lineColors, 3));
+
+  const lineMaterial = new THREE.LineBasicMaterial({
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.55,
+    blending: THREE.AdditiveBlending
+  });
+  const constellationLines = new THREE.LineSegments(lineGeometry, lineMaterial);
+  scene.add(constellationLines);
+
   // Floating Cyber Geometric Shapes in Space
   const shapesGroup = new THREE.Group();
   scene.add(shapesGroup);
 
   // 1. Floating Torus Knot
-  const knotGeo = new THREE.TorusKnotGeometry(18, 3.5, 100, 16);
+  const knotGeo = new THREE.TorusKnotGeometry(20, 3.8, 120, 16);
   const wireMat1 = new THREE.MeshStandardMaterial({
     color: 0x00f0ff,
     wireframe: true,
     transparent: true,
-    opacity: 0.3,
+    opacity: 0.35,
     roughness: 0.2,
     metalness: 0.9,
     emissive: 0x00f0ff,
-    emissiveIntensity: 0.2
+    emissiveIntensity: 0.25
   });
   const knotMesh = new THREE.Mesh(knotGeo, wireMat1);
   knotMesh.position.set(-140, 60, -120);
   shapesGroup.add(knotMesh);
 
   // 2. Floating Octahedron
-  const octGeo = new THREE.OctahedronGeometry(24, 1);
+  const octGeo = new THREE.OctahedronGeometry(26, 1);
   const wireMat2 = new THREE.MeshStandardMaterial({
     color: 0x8b5cf6,
     wireframe: true,
     transparent: true,
-    opacity: 0.35,
+    opacity: 0.38,
     roughness: 0.3,
-    metalness: 0.8,
+    metalness: 0.85,
     emissive: 0x8b5cf6,
-    emissiveIntensity: 0.25
+    emissiveIntensity: 0.3
   });
   const octMesh = new THREE.Mesh(octGeo, wireMat2);
   octMesh.position.set(160, -90, -80);
   shapesGroup.add(octMesh);
 
   // 3. Floating Icosahedron
-  const icoGeo = new THREE.IcosahedronGeometry(30, 1);
+  const icoGeo = new THREE.IcosahedronGeometry(32, 1);
   const wireMat3 = new THREE.MeshStandardMaterial({
     color: 0xec4899,
     wireframe: true,
     transparent: true,
-    opacity: 0.28,
+    opacity: 0.3,
     roughness: 0.4,
-    metalness: 0.7,
+    metalness: 0.75,
     emissive: 0xec4899,
-    emissiveIntensity: 0.2
+    emissiveIntensity: 0.25
   });
   const icoMesh = new THREE.Mesh(icoGeo, wireMat3);
   icoMesh.position.set(100, 130, -160);
   shapesGroup.add(icoMesh);
 
   // 4. Floating Concentric Rings
-  const ringGeo = new THREE.RingGeometry(38, 40, 64);
+  const ringGeo = new THREE.RingGeometry(40, 42, 64);
   const wireMat4 = new THREE.MeshStandardMaterial({
     color: 0x3b82f6,
     wireframe: true,
     transparent: true,
-    opacity: 0.3,
+    opacity: 0.35,
     side: THREE.DoubleSide,
     emissive: 0x3b82f6,
-    emissiveIntensity: 0.25
+    emissiveIntensity: 0.3
   });
   const ringMesh = new THREE.Mesh(ringGeo, wireMat4);
   ringMesh.position.set(-120, -140, -100);
   ringMesh.rotation.x = Math.PI / 3;
   shapesGroup.add(ringMesh);
 
-  // 5. Gravitational Shockwave Ring (Dynamic Pulse)
+  // 5. Gravitational Shockwave Ring
   const shockwaveGeo = new THREE.RingGeometry(1, 4, 64);
   const shockwaveMat = new THREE.MeshBasicMaterial({
     color: 0x00f0ff,
@@ -185,6 +212,7 @@
   let mouseY = 0;
   let targetMouseX = 0;
   let targetMouseY = 0;
+  let mouseWorldPos = new THREE.Vector3(0, 0, 80);
   const windowHalfX = window.innerWidth / 2;
   const windowHalfY = window.innerHeight / 2;
 
@@ -201,15 +229,15 @@
     vector.unproject(camera);
     const dir = vector.sub(camera.position).normalize();
     const distance = 80;
-    const pos = camera.position.clone().add(dir.multiplyScalar(distance));
-    cursorLight.position.copy(pos);
+    mouseWorldPos = camera.position.clone().add(dir.multiplyScalar(distance));
+    cursorLight.position.copy(mouseWorldPos);
   }, { passive: true });
 
   // Interactive Gravitational Shockwave trigger
   window.trigger3DShockwave = function (x, y) {
     shockwaveMesh.position.set(targetMouseX, -targetMouseY, 20);
     shockwaveScale = 1;
-    shockwaveMat.opacity = 0.85;
+    shockwaveMat.opacity = 0.9;
     shockwaveActive = true;
     if (typeof window.playSynthSound === 'function') {
       window.playSynthSound('burst');
@@ -217,7 +245,6 @@
   };
 
   window.addEventListener('click', (e) => {
-    // Avoid triggering if clicking on UI interactive controls
     if (e.target.closest('button, a, input, select, textarea, .nav-actions, .mobile-drawer, .hud-3d-telemetry, .terminal-cyber-window, .modal-cyber-dialog')) {
       return;
     }
@@ -266,24 +293,25 @@
   }
 
   // --- CAMERA SPATIAL MODES (HUD CONTROLLED) ---
-  let activeCameraMode = 'cinematic'; // 'cinematic', 'matrix', 'quantum', 'warp'
+  let activeCameraMode = 'cinematic';
   let warpSpeedMultiplier = 1;
 
   window.set3DCameraMode = function (mode) {
     activeCameraMode = mode;
     if (mode === 'warp') {
       warpSpeedMultiplier = 6;
-      pMaterial.size = 3.6;
+      pMaterial.size = 3.8;
+      gridHelper.material.opacity = 0.55;
     } else {
       warpSpeedMultiplier = 1;
       pMaterial.size = 2.8;
+      gridHelper.material.opacity = 0.28;
     }
     if (typeof window.playSynthSound === 'function') {
-      window.playSynthSound('hover');
+      window.playSynthSound('warp');
     }
   };
 
-  // Wire mode buttons from DOM HUD
   const modeButtons = document.querySelectorAll('#hudCameraModes .hud-mode-btn');
   modeButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -309,22 +337,24 @@
   window.update3DTheme = function (isLight) {
     if (isLight) {
       ambientLight.color.setHex(0xe2e8f0);
-      ambientLight.intensity = 2.2;
+      ambientLight.intensity = 2.4;
       cyanPoint.color.setHex(0x0284c7);
       purplePoint.color.setHex(0x7c3aed);
       cursorLight.color.setHex(0x0284c7);
+      gridHelper.material.color.setHex(0x0284c7);
       pMaterial.opacity = 0.55;
-      wireMat1.opacity = 0.15;
-      wireMat2.opacity = 0.18;
+      wireMat1.opacity = 0.16;
+      wireMat2.opacity = 0.2;
     } else {
       ambientLight.color.setHex(0x0c162d);
-      ambientLight.intensity = 1.6;
+      ambientLight.intensity = 1.8;
       cyanPoint.color.setHex(0x00f0ff);
       purplePoint.color.setHex(0x8b5cf6);
       cursorLight.color.setHex(0x00f0ff);
-      pMaterial.opacity = 0.88;
-      wireMat1.opacity = 0.3;
-      wireMat2.opacity = 0.35;
+      gridHelper.material.color.setHex(0x00f0ff);
+      pMaterial.opacity = 0.9;
+      wireMat1.opacity = 0.35;
+      wireMat2.opacity = 0.38;
     }
   };
 
@@ -345,7 +375,7 @@
   }
 
   if (hudVerticesVal) {
-    const totalVertices = particleCount + 100 * 16 + 24 + 30 + 64;
+    const totalVertices = particleCount + 1000 + 120 * 16 + 26 + 32 + 64;
     hudVerticesVal.textContent = (totalVertices / 1000).toFixed(1) + 'k';
   }
 
@@ -364,7 +394,7 @@
     mouseX += (targetMouseX - mouseX) * 0.05;
     mouseY += (targetMouseY - mouseY) * 0.05;
 
-    // Apply Camera Flight Mode Transitions
+    // Camera Mode Motion
     if (activeCameraMode === 'cinematic') {
       const wp = getInterpolatedWaypoint(currentScrollProgress);
       camera.position.x += (wp.camX + mouseX - camera.position.x) * 0.05;
@@ -373,29 +403,29 @@
       camera.rotation.x += (wp.rotX - camera.rotation.x) * 0.05;
       camera.rotation.y += (wp.rotY - camera.rotation.y) * 0.05;
     } else if (activeCameraMode === 'matrix') {
-      // Top-Down Tactical Matrix Grid View
       camera.position.x += (0 + mouseX * 0.5 - camera.position.x) * 0.05;
       camera.position.y += (180 - camera.position.y) * 0.05;
       camera.position.z += (70 - camera.position.z) * 0.05;
       camera.rotation.x += (-Math.PI / 3.5 - camera.rotation.x) * 0.05;
       camera.rotation.y += (0 - camera.rotation.y) * 0.05;
     } else if (activeCameraMode === 'quantum') {
-      // Deep Cosmic Dust Perspective
       camera.position.x += (Math.sin(elapsedTime * 0.3) * 60 + mouseX - camera.position.x) * 0.04;
       camera.position.y += (Math.cos(elapsedTime * 0.25) * 40 - mouseY - camera.position.y) * 0.04;
       camera.position.z += (90 - camera.position.z) * 0.05;
       camera.rotation.x += (Math.sin(elapsedTime * 0.2) * 0.08 - camera.rotation.x) * 0.05;
       camera.rotation.y += (Math.cos(elapsedTime * 0.2) * 0.08 - camera.rotation.y) * 0.05;
     } else if (activeCameraMode === 'warp') {
-      // Light-Speed Warp Flight
-      camera.position.x += (mouseX * 0.2 - camera.position.x) * 0.1;
-      camera.position.y += (-mouseY * 0.2 - camera.position.y) * 0.1;
+      camera.position.x += (mouseX * 0.25 - camera.position.x) * 0.1;
+      camera.position.y += (-mouseY * 0.25 - camera.position.y) * 0.1;
       camera.position.z += (70 - camera.position.z) * 0.05;
       camera.rotation.x += (0 - camera.rotation.x) * 0.1;
       camera.rotation.y += (0 - camera.rotation.y) * 0.1;
     }
 
-    // Rotate and animate geometric shapes
+    // Scroll cyber horizon grid continuously
+    gridHelper.position.z = ((elapsedTime * 25 * warpSpeedMultiplier) % 20) - 100;
+
+    // Rotate geometric shapes
     knotMesh.rotation.x = elapsedTime * 0.35;
     knotMesh.rotation.y = elapsedTime * 0.25;
     knotMesh.position.y = 60 + Math.sin(elapsedTime * 0.8) * 10;
@@ -411,7 +441,7 @@
 
     // Shockwave animation
     if (shockwaveActive) {
-      shockwaveScale += 8;
+      shockwaveScale += 9;
       shockwaveMesh.scale.set(shockwaveScale, shockwaveScale, shockwaveScale);
       shockwaveMat.opacity -= 0.025;
       if (shockwaveMat.opacity <= 0) {
@@ -420,26 +450,66 @@
       }
     }
 
-    // Animate individual particles with warp speed multiplier
+    // Particle dynamics with cursor attraction/repulsion
     const pos = geometry.attributes.position.array;
+    let lineIdx = 0;
+    const lPos = lineGeometry.attributes.position.array;
+    const lCol = lineGeometry.attributes.color.array;
+
     for (let i = 0; i < particleCount; i++) {
       const i3 = i * 3;
       pos[i3] += velocities[i3] * warpSpeedMultiplier;
       pos[i3 + 1] += velocities[i3 + 1] * warpSpeedMultiplier;
       pos[i3 + 2] += (velocities[i3 + 2] + (activeCameraMode === 'warp' ? 2.5 : 0)) * warpSpeedMultiplier;
 
-      // Boundary check & wrap around
-      if (pos[i3] < -300) pos[i3] = 300;
-      if (pos[i3] > 300) pos[i3] = -300;
-      if (pos[i3 + 1] < -300) pos[i3 + 1] = 300;
-      if (pos[i3 + 1] > 300) pos[i3 + 1] = -300;
-      if (pos[i3 + 2] < -300) pos[i3 + 2] = 300;
-      if (pos[i3 + 2] > 300) pos[i3 + 2] = -300;
+      // Mouse radial interaction
+      const dx = pos[i3] - mouseWorldPos.x;
+      const dy = pos[i3 + 1] - mouseWorldPos.y;
+      const dz = pos[i3 + 2] - mouseWorldPos.z;
+      const distSq = dx * dx + dy * dy + dz * dz;
+
+      if (distSq < 3600 && distSq > 10) { // Radius ~60 units
+        const dist = Math.sqrt(distSq);
+        const force = (1 - dist / 60) * 0.8;
+        pos[i3] += (dx / dist) * force;
+        pos[i3 + 1] += (dy / dist) * force;
+
+        // Form constellation connection line to nearby particle
+        if (lineIdx < maxLines && i % 4 === 0) {
+          const lIdx6 = lineIdx * 6;
+          lPos[lIdx6] = pos[i3];
+          lPos[lIdx6 + 1] = pos[i3 + 1];
+          lPos[lIdx6 + 2] = pos[i3 + 2];
+          lPos[lIdx6 + 3] = mouseWorldPos.x;
+          lPos[lIdx6 + 4] = mouseWorldPos.y;
+          lPos[lIdx6 + 5] = mouseWorldPos.z;
+
+          lCol[lIdx6] = 0; lCol[lIdx6 + 1] = 0.94; lCol[lIdx6 + 2] = 1;
+          lCol[lIdx6 + 3] = 0.54; lCol[lIdx6 + 4] = 0.36; lCol[lIdx6 + 5] = 0.96;
+          lineIdx++;
+        }
+      }
+
+      // Boundary wrap around
+      if (pos[i3] < -320) pos[i3] = 320;
+      if (pos[i3] > 320) pos[i3] = -320;
+      if (pos[i3 + 1] < -320) pos[i3 + 1] = 320;
+      if (pos[i3 + 1] > 320) pos[i3 + 1] = -320;
+      if (pos[i3 + 2] < -320) pos[i3 + 2] = 320;
+      if (pos[i3 + 2] > 320) pos[i3 + 2] = -320;
     }
     geometry.attributes.position.needsUpdate = true;
 
-    // Slow global particle system rotation
-    particleSystem.rotation.y = elapsedTime * (activeCameraMode === 'warp' ? 0.08 : 0.02);
+    // Clear remaining lines if fewer connections
+    for (let j = lineIdx; j < maxLines; j++) {
+      const lIdx6 = j * 6;
+      lPos[lIdx6] = 0; lPos[lIdx6 + 1] = 0; lPos[lIdx6 + 2] = 0;
+      lPos[lIdx6 + 3] = 0; lPos[lIdx6 + 4] = 0; lPos[lIdx6 + 5] = 0;
+    }
+    lineGeometry.attributes.position.needsUpdate = true;
+    lineGeometry.attributes.color.needsUpdate = true;
+
+    particleSystem.rotation.y = elapsedTime * (activeCameraMode === 'warp' ? 0.08 : 0.015);
 
     renderer.render(scene, camera);
   }

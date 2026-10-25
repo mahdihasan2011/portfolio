@@ -1021,13 +1021,48 @@ and fault-tolerant systems in Laravel, PHP, React, Vue.js, and cloud backends.`;
   }
 
   // ==========================================================================
-  // 10. NAVIGATION SCROLL-SPY & MOBILE DRAWER
+  // 10. MAGNETIC FLOATING NAV INDICATOR & SCROLL-SPY
   // ==========================================================================
+  const navMenuLinks = document.getElementById('navMenuLinks');
+  const navIndicatorPill = document.getElementById('navIndicatorPill');
   const navLinks = document.querySelectorAll('.nav-menu-link');
   const sections = document.querySelectorAll('.content-section, .hero-section');
   const headerNav = document.querySelector('.glass-nav-header');
 
+  function updateNavIndicator(targetLink) {
+    if (!navIndicatorPill || !targetLink || !navMenuLinks) return;
+    const parentRect = navMenuLinks.getBoundingClientRect();
+    const targetRect = targetLink.getBoundingClientRect();
+
+    navIndicatorPill.style.width = `${targetRect.width}px`;
+    navIndicatorPill.style.left = `${targetRect.left - parentRect.left}px`;
+    navIndicatorPill.classList.add('active');
+  }
+
+  const initialActiveLink = document.querySelector('.nav-menu-link.active');
+  if (initialActiveLink) {
+    setTimeout(() => updateNavIndicator(initialActiveLink), 150);
+  }
+
+  navLinks.forEach(link => {
+    link.addEventListener('mouseenter', () => updateNavIndicator(link));
+  });
+
+  if (navMenuLinks) {
+    navMenuLinks.addEventListener('mouseleave', () => {
+      const activeLink = document.querySelector('.nav-menu-link.active');
+      if (activeLink) updateNavIndicator(activeLink);
+      else if (navIndicatorPill) navIndicatorPill.classList.remove('active');
+    });
+  }
+
+  window.addEventListener('resize', () => {
+    const activeLink = document.querySelector('.nav-menu-link.active');
+    if (activeLink) updateNavIndicator(activeLink);
+  });
+
   window.addEventListener('scroll', () => {
+    // Header shadow & shrink on scroll
     if (headerNav) {
       if (window.scrollY > 40) {
         headerNav.classList.add('scrolled');
@@ -1036,6 +1071,7 @@ and fault-tolerant systems in Laravel, PHP, React, Vue.js, and cloud backends.`;
       }
     }
 
+    // Scroll-Spy
     let currentSectionId = '';
     const scrollPos = window.scrollY + 200;
 
@@ -1051,6 +1087,7 @@ and fault-tolerant systems in Laravel, PHP, React, Vue.js, and cloud backends.`;
       link.classList.remove('active');
       if (link.getAttribute('href') === `#${currentSectionId}`) {
         link.classList.add('active');
+        updateNavIndicator(link);
       }
     });
   }, { passive: true });

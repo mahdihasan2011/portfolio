@@ -48,18 +48,23 @@
   <div class="custom-cursor-dot"></div>
   <div class="custom-cursor-follower"></div>
 
-  <!-- Floating 3D Glass Dock Header -->
-  <header class="glass-nav-header">
+  <!-- Floating 3D Glass Dock Header with Magnetic Pill & Shimmer -->
+  <header class="glass-nav-header" id="glassNavHeader">
     <a href="#hero" class="nav-brand">
-      <img src="images/profilepic4.jpeg" alt="Mahdi Hasan" class="brand-avatar">
+      <div class="brand-avatar-container">
+        <img src="images/profilepic4.jpeg" alt="Mahdi Hasan" class="brand-avatar">
+        <span class="avatar-ring"></span>
+        <span class="avatar-ping"></span>
+      </div>
       <div class="brand-title">
         <span class="brand-name gh-name-target">Mahdi Hasan</span>
         <span class="brand-status"><span class="status-dot"></span> Available for Hire</span>
       </div>
     </a>
 
-    <!-- Desktop Navigation Links -->
-    <ul class="nav-menu-links">
+    <!-- Desktop Navigation Links with Magnetic Floating Indicator -->
+    <ul class="nav-menu-links" id="navMenuLinks">
+      <li class="nav-indicator-pill" id="navIndicatorPill"></li>
       <li><a href="#hero" class="nav-menu-link active">Home</a></li>
       <li><a href="#about" class="nav-menu-link">About</a></li>
       <li><a href="#skills" class="nav-menu-link">Skills</a></li>
@@ -73,22 +78,30 @@
     <div class="nav-actions">
       <!-- Cyber CLI Terminal Button -->
       <button class="terminal-toggle-btn" id="terminalToggleBtn" aria-label="Open Interactive Cyber CLI Terminal" title="Press '~' anytime">
-        <i class="fas fa-terminal"></i> <span class="d-none d-md-inline">CLI (~ )</span>
+        <i class="fas fa-terminal"></i> <span class="d-none d-md-inline">CLI <span class="hotkey-badge">~</span></span>
       </button>
 
-      <!-- Web Audio Sound Toggle -->
-      <button class="action-btn-circle" id="audioToggleBtn" aria-label="Toggle Sound Effects">
-        <i class="fas fa-volume-mute"></i>
+      <!-- Web Audio Sound Toggle with Mini Equalizer -->
+      <button class="action-btn-circle audio-toggle-btn" id="audioToggleBtn" aria-label="Toggle Sound Effects" title="Toggle Sound Effects">
+        <div class="audio-btn-wrapper">
+          <i class="fas fa-volume-mute"></i>
+          <span class="header-mini-eq" id="headerMiniEq">
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+          </span>
+        </div>
       </button>
 
       <!-- Theme Switcher (Dark / Light) -->
-      <button class="action-btn-circle" id="themeToggleBtn" aria-label="Toggle Cyber / Titanium Theme">
+      <button class="action-btn-circle" id="themeToggleBtn" aria-label="Toggle Cyber / Titanium Theme" title="Switch Theme">
         <i class="fas fa-sun"></i>
       </button>
 
-      <!-- Resume Button -->
-      <a href="Mahdi_Hasan_Resume.pdf" target="_blank" class="nav-cta-btn">
-        <i class="fas fa-file-pdf"></i> Resume
+      <!-- Resume Button with Shimmer -->
+      <a href="Mahdi_Hasan_Resume.pdf" target="_blank" class="nav-cta-btn resume-shimmer-btn">
+        <span class="btn-shimmer-sweep"></span>
+        <i class="fas fa-file-pdf"></i> <span>Resume</span>
       </a>
 
       <!-- Mobile Hamburger Button -->
