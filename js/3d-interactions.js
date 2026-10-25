@@ -1135,4 +1135,13 @@ and fault-tolerant systems in Laravel, PHP, React, Vue.js, and cloud backends.`;
     a.addEventListener('click', closeDrawer);
   });
 
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      closeDrawer();
+    }
+  });
+
+  // Ensure drawer is closed on load
+  closeDrawer();
+
 })();
