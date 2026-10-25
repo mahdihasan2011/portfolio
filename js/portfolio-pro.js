@@ -373,4 +373,66 @@
     });
   }
 
+  // --------------------------------------------------------------------------
+  // 8. KEYBOARD NAVIGATION & SHORTCUTS (EMIL KOWALSKI & ANTHONY FU CRAFT)
+  // --------------------------------------------------------------------------
+  const sectionIds = ['about', 'experience', 'projects', 'skills', 'education', 'contact'];
+  let currentSectionIdx = 0;
+
+  window.addEventListener('keydown', (e) => {
+    // Ignore keystrokes inside input / textarea
+    if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) {
+      return;
+    }
+
+    if (e.key === 'j' || e.key === 'J') {
+      currentSectionIdx = Math.min(currentSectionIdx + 1, sectionIds.length - 1);
+      const target = document.getElementById(sectionIds[currentSectionIdx]);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        showToast(`Jumped to ${sectionIds[currentSectionIdx].toUpperCase()}`);
+      }
+    } else if (e.key === 'k' || e.key === 'K') {
+      currentSectionIdx = Math.max(currentSectionIdx - 1, 0);
+      const target = document.getElementById(sectionIds[currentSectionIdx]);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        showToast(`Jumped to ${sectionIds[currentSectionIdx].toUpperCase()}`);
+      }
+    } else if (e.key === 't' || e.key === 'T') {
+      const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      setTheme(current === 'light' ? 'dark' : 'light');
+      showToast(`Switched to ${current === 'light' ? 'Dark Slate' : 'Titanium Light'} mode`);
+    } else if (e.key === 'c' || e.key === 'C') {
+      const email = 'mmahdihasan2011@gmail.com';
+      navigator.clipboard.writeText(email).then(() => {
+        showToast(`Copied ${email} to clipboard!`);
+      });
+    } else if (e.key === '?') {
+      showToast('Shortcuts: J/K (Navigate), T (Theme), C (Copy Email), Esc (Close Modal)');
+    }
+  });
+
+  // --------------------------------------------------------------------------
+  // 9. MOBILE NAVIGATION DRAWER TOGGLE
+  // --------------------------------------------------------------------------
+  const mobileNavToggle = document.getElementById('mobileNavToggle');
+  const mobileNavDrawer = document.getElementById('mobileNavDrawer');
+  const drawerCloseBtn = document.getElementById('drawerCloseBtn');
+  const drawerLinks = document.querySelectorAll('.drawer-nav-link');
+
+  function openDrawer() {
+    if (mobileNavDrawer) mobileNavDrawer.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDrawer() {
+    if (mobileNavDrawer) mobileNavDrawer.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  if (mobileNavToggle) mobileNavToggle.addEventListener('click', openDrawer);
+  if (drawerCloseBtn) drawerCloseBtn.addEventListener('click', closeDrawer);
+  drawerLinks.forEach(link => link.addEventListener('click', closeDrawer));
+
 })();

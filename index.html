@@ -33,7 +33,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <!-- Custom Professional Stylesheet -->
-  <link rel="stylesheet" href="css/portfolio-pro.css?v=3.0">
+  <link rel="stylesheet" href="css/portfolio-pro.css?v=3.1">
 </head>
 
 <body>
@@ -43,7 +43,12 @@
 
   <!-- Mobile Floating App Bar (< 1024px) -->
   <header class="mobile-app-bar">
-    <a href="#about" class="mobile-brand-title">Mahdi Hasan</a>
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <button class="mobile-nav-toggle-btn" id="mobileNavToggle" aria-label="Open Navigation Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <a href="#about" class="mobile-brand-title">Mahdi Hasan</a>
+    </div>
     <div class="mobile-bar-actions">
       <button class="theme-toggle-btn theme-toggle-trigger" aria-label="Toggle Theme" title="Switch Theme">
         <i class="fas fa-sun"></i>
@@ -54,6 +59,45 @@
     </div>
   </header>
 
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
+    <div>
+      <div class="drawer-header">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <div class="avatar-container" style="width: 44px; height: 44px;">
+            <img src="images/profilepic4.jpeg" alt="Mahdi Hasan" class="avatar-img">
+            <span class="avatar-status-beacon" style="width: 10px; height: 10px;"></span>
+          </div>
+          <div>
+            <span style="font-weight: 700; color: var(--text-primary); display: block; font-size: 1.05rem;">Mahdi Hasan</span>
+            <span style="font-size: 0.75rem; color: var(--accent); font-family: var(--font-mono);">Available for hire</span>
+          </div>
+        </div>
+        <button class="mobile-nav-toggle-btn" id="drawerCloseBtn" aria-label="Close Navigation Menu">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <ul class="drawer-nav-list">
+        <li><a href="#about" class="drawer-nav-link"><i class="fas fa-user" style="font-size: 0.9rem; color: var(--accent);"></i> 01 // About</a></li>
+        <li><a href="#experience" class="drawer-nav-link"><i class="fas fa-briefcase" style="font-size: 0.9rem; color: var(--accent);"></i> 02 // Experience</a></li>
+        <li><a href="#projects" class="drawer-nav-link"><i class="fas fa-layer-group" style="font-size: 0.9rem; color: var(--accent);"></i> 03 // Projects</a></li>
+        <li><a href="#skills" class="drawer-nav-link"><i class="fas fa-code" style="font-size: 0.9rem; color: var(--accent);"></i> 04 // Skills & Arsenal</a></li>
+        <li><a href="#education" class="drawer-nav-link"><i class="fas fa-graduation-cap" style="font-size: 0.9rem; color: var(--accent);"></i> 05 // Education</a></li>
+        <li><a href="#contact" class="drawer-nav-link"><i class="fas fa-paper-plane" style="font-size: 0.9rem; color: var(--accent);"></i> 06 // Contact</a></li>
+      </ul>
+    </div>
+
+    <div style="display: flex; gap: 0.75rem; margin-top: auto; padding-top: 2rem; border-top: 1px solid var(--card-border);">
+      <button class="btn-secondary theme-toggle-trigger" style="flex: 1; justify-content: center;">
+        <i class="fas fa-sun me-1"></i> Theme
+      </button>
+      <a href="Mahdi_Hasan_Resume.pdf" target="_blank" class="btn-primary" style="flex: 1; justify-content: center;">
+        <i class="fas fa-file-pdf me-1"></i> Résumé
+      </a>
+    </div>
+  </div>
+
   <!-- Master Split-Screen Layout Container -->
   <div class="site-container">
 
@@ -61,16 +105,23 @@
          LEFT STICKY SIDEBAR (BRITTANY CHIANG ARCHITECTURE)
          ======================================================================== -->
     <aside class="sidebar-column">
-      <div>
-        <!-- Availability Status Beacon -->
-        <div class="availability-badge">
+        <!-- Hero Identity Row with Compact Avatar & Availability Beacon -->
+        <div class="hero-profile-row">
+          <div class="avatar-container">
+            <img src="images/profilepic4.jpeg" alt="Mahdi Hasan" class="avatar-img">
+            <span class="avatar-status-beacon" title="Available for hire"></span>
+          </div>
+          <div>
+            <h1 class="hero-name" style="margin-bottom: 0.2rem;">Mahdi Hasan</h1>
+            <h2 class="hero-title" style="margin-bottom: 0;">Senior Full-Stack & Systems Engineer</h2>
+          </div>
+        </div>
+
+        <!-- Availability Status Beacon Pill -->
+        <div class="availability-badge" style="margin-bottom: 1.25rem;">
           <span class="pulse-beacon"></span>
           <span>Available for Senior Roles & Consulting</span>
         </div>
-
-        <!-- Name & Professional Title -->
-        <h1 class="hero-name">Mahdi Hasan</h1>
-        <h2 class="hero-title">Senior Full-Stack & Systems Engineer</h2>
 
         <!-- Concise, Punchy Introduction -->
         <p class="hero-bio">
@@ -130,23 +181,32 @@
         </nav>
       </div>
 
-      <!-- Sidebar Footer: Social Media & Theme Toggle -->
-      <footer class="sidebar-footer">
-        <div class="social-links">
-          <a href="https://github.com/mahdihasan2011" target="_blank" rel="noreferrer" class="social-icon-btn" aria-label="GitHub Profile" title="GitHub (@mahdihasan2011)">
-            <i class="fab fa-github"></i>
-          </a>
-          <a href="https://bd.linkedin.com/in/mahdihasan2011" target="_blank" rel="noreferrer" class="social-icon-btn" aria-label="LinkedIn Profile" title="LinkedIn (in/mahdihasan2011)">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-          <a href="mailto:mmahdihasan2011@gmail.com" class="social-icon-btn" aria-label="Send Direct Email" title="Email (mmahdihasan2011@gmail.com)">
-            <i class="fas fa-envelope"></i>
-          </a>
+      <!-- Sidebar Footer: Social Media & Theme Toggle + Keyboard Hints -->
+      <footer class="sidebar-footer" style="flex-direction: column; align-items: flex-start; gap: 0.75rem;">
+        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+          <div class="social-links">
+            <a href="https://github.com/mahdihasan2011" target="_blank" rel="noreferrer" class="social-icon-btn" aria-label="GitHub Profile" title="GitHub (@mahdihasan2011)">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://bd.linkedin.com/in/mahdihasan2011" target="_blank" rel="noreferrer" class="social-icon-btn" aria-label="LinkedIn Profile" title="LinkedIn (in/mahdihasan2011)">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="mailto:mmahdihasan2011@gmail.com" class="social-icon-btn" aria-label="Send Direct Email" title="Email (mmahdihasan2011@gmail.com)">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </div>
+
+          <button class="theme-toggle-btn theme-toggle-trigger" aria-label="Toggle Dark/Light Theme" title="Toggle Theme">
+            <i class="fas fa-sun"></i>
+          </button>
         </div>
 
-        <button class="theme-toggle-btn theme-toggle-trigger" aria-label="Toggle Dark/Light Theme" title="Toggle Theme">
-          <i class="fas fa-sun"></i>
-        </button>
+        <div class="keyboard-shortcuts-pill" title="Keyboard navigation enabled">
+          <span>Navigation:</span>
+          <span><span class="key-badge">J</span> / <span class="key-badge">K</span> Scroll</span>
+          <span><span class="key-badge">T</span> Theme</span>
+          <span><span class="key-badge">C</span> Email</span>
+        </div>
       </footer>
     </aside>
 
@@ -693,6 +753,40 @@
           </article>
 
         </div>
+
+        <!-- Verified GitHub Open-Source Activity Card (Lee Robinson & Anthony Fu Style) -->
+        <div class="github-activity-card">
+          <div class="github-header-row">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <i class="fab fa-github" style="font-size: 1.6rem; color: var(--accent);"></i>
+              <div>
+                <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin: 0;">Open-Source & GitHub Activity</h4>
+                <a href="https://github.com/mahdihasan2011" target="_blank" rel="noreferrer" style="font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono);">
+                  @mahdihasan2011 <span class="external-arrow">↗</span>
+                </a>
+              </div>
+            </div>
+            <div class="github-stats-chips">
+              <span class="gh-stat-chip"><i class="fas fa-code-branch me-1" style="color: var(--accent);"></i> 45+ Repos</span>
+              <span class="gh-stat-chip"><i class="fas fa-users me-1" style="color: var(--accent);"></i> 80+ Followers</span>
+              <span class="gh-stat-chip"><i class="fas fa-check-circle me-1" style="color: var(--accent);"></i> Verified</span>
+            </div>
+          </div>
+
+          <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+            Continuous contributions to scalable web architectures, microservice blueprints, and open-source packages.
+          </p>
+
+          <div class="github-chart-container">
+            <img src="https://ghchart.rshah.org/2dd4bf/mahdihasan2011" alt="Mahdi Hasan GitHub Contributions Chart" class="github-chart-img" loading="lazy">
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; margin-top: 0.85rem;">
+            <a href="https://github.com/mahdihasan2011" target="_blank" rel="noreferrer" class="project-btn-link" style="font-size: 0.82rem; padding: 0.4rem 0.85rem;">
+              <i class="fab fa-github"></i> Inspect GitHub Repositories <span class="external-arrow">↗</span>
+            </a>
+          </div>
+        </div>
       </section>
 
       <!-- --------------------------------------------------------------------
@@ -947,7 +1041,7 @@
   </script>
 
   <!-- Modular Portfolio Script -->
-  <script src="js/portfolio-pro.js?v=3.0"></script>
+  <script src="js/portfolio-pro.js?v=3.1"></script>
 
 </body>
 

@@ -1343,3 +1343,219 @@ img {
     gap: 0.75rem;
   }
 }
+
+/* --------------------------------------------------------------------------
+   18. BRITTANY CHIANG LIST FOCUS DIMMING EFFECT
+   -------------------------------------------------------------------------- */
+@media (hover: hover) and (min-width: 1024px) {
+  .experience-list:hover .experience-card {
+    opacity: 0.45;
+  }
+
+  .experience-list .experience-card:hover {
+    opacity: 1 !important;
+    background: var(--card-bg-hover);
+    border-color: var(--card-border-hover);
+    box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .flagship-projects-list:hover .project-flagship-card {
+    opacity: 0.45;
+  }
+
+  .flagship-projects-list .project-flagship-card:hover {
+    opacity: 1 !important;
+    transform: translateY(-4px);
+    border-color: var(--card-border-hover);
+    box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   19. HERO IDENTITY ROW & COMPACT AVATAR
+   -------------------------------------------------------------------------- */
+.hero-profile-row {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  margin-bottom: 1.25rem;
+}
+
+.avatar-container {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent-border);
+  box-shadow: 0 4px 14px var(--accent-glow);
+}
+
+.avatar-status-beacon {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  width: 13px;
+  height: 13px;
+  background-color: var(--status-available);
+  border: 2px solid var(--bg-primary);
+  border-radius: 50%;
+}
+
+/* --------------------------------------------------------------------------
+   20. GITHUB ACTIVITY SECTION (LEE ROBINSON & ANTHONY FU CRAFT)
+   -------------------------------------------------------------------------- */
+.github-activity-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 2.5rem;
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.github-activity-card:hover {
+  border-color: var(--accent-border);
+  transform: translateY(-2px);
+}
+
+.github-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.github-stats-chips {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.gh-stat-chip {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--card-border);
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+}
+
+.github-chart-container {
+  overflow-x: auto;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 1rem;
+  border: 1px solid var(--card-border);
+}
+
+.github-chart-img {
+  max-width: 100%;
+  height: auto;
+  min-width: 500px;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   21. KEYBOARD NAVIGATION & EASTER EGG BAR (EMIL KOWALSKI CRAFT)
+   -------------------------------------------------------------------------- */
+.keyboard-shortcuts-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--card-border);
+  padding: 0.4rem 0.85rem;
+  border-radius: 8px;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.key-badge {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--card-border);
+  color: var(--accent);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.72rem;
+}
+
+/* --------------------------------------------------------------------------
+   22. MOBILE NAVIGATION DRAWER
+   -------------------------------------------------------------------------- */
+.mobile-nav-toggle-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-primary);
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.mobile-nav-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  background: rgba(11, 15, 25, 0.96);
+  backdrop-filter: blur(16px);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-nav-drawer.active {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.drawer-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.drawer-nav-link {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.drawer-nav-link:hover {
+  color: var(--accent);
+}
