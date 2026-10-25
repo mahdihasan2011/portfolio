@@ -100,13 +100,18 @@ body.light-mode {
 html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--nav-height) + 20px);
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  width: 100% !important;
 }
 
 body {
   font-family: var(--font-body);
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  overflow-x: hidden;
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  width: 100% !important;
   line-height: 1.65;
   position: relative;
   transition: background-color 0.4s ease, color 0.4s ease;
@@ -225,9 +230,13 @@ a:hover {
   background: rgba(236, 72, 153, 0.05);
 }
 
-@media (pointer: coarse) {
+@media (hover: none), (pointer: coarse) {
   .custom-cursor-dot, .custom-cursor-follower {
     display: none !important;
+  }
+
+  a, button, .tilt-card, .skill-3d-card, .project-3d-card {
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
@@ -1022,6 +1031,96 @@ body.light-mode .resume-shimmer-btn:hover {
 .mobile-drawer-links a:hover {
   color: var(--accent-cyan);
   padding-left: 0.5rem;
+}
+
+.mobile-drawer-header .brand-status {
+  margin-top: 4px;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+  border-radius: 999px !important;
+  width: fit-content !important;
+  padding: 0.12rem 0.55rem !important;
+  font-size: 0.68rem !important;
+}
+
+/* Mobile Drawer Utilities */
+.mobile-drawer-utilities {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.drawer-utility-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 0.65rem 0.5rem;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.drawer-utility-btn:hover {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  background: rgba(0, 240, 255, 0.1);
+}
+
+body.light-mode .drawer-utility-btn {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #1e293b;
+}
+
+body.light-mode .drawer-utility-btn:hover {
+  border-color: #0284c7;
+  color: #0284c7;
+  background: rgba(2, 132, 199, 0.1);
+}
+
+.drawer-action-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 0.65rem 0.8rem;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+body.light-mode .drawer-action-btn {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #1e293b;
+}
+
+body.light-mode .mobile-drawer {
+  background: rgba(255, 255, 255, 0.95);
+  border-left-color: rgba(0, 0, 0, 0.1);
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
+}
+
+body.light-mode .mobile-drawer-links a {
+  color: #0f172a;
+}
+
+body.light-mode .mobile-drawer-links a:hover {
+  color: #0284c7;
 }
 
 .drawer-backdrop {
@@ -2541,13 +2640,36 @@ body.light-mode .contact-map-frame iframe {
 
 @media (max-width: 768px) {
   :root {
-    --nav-height: 70px;
+    --nav-height: 64px;
   }
 
   .glass-nav-header {
+    height: 60px;
     padding: 0 1rem;
     width: calc(100% - 1.2rem);
     top: 0.6rem;
+  }
+
+  .nav-brand {
+    gap: 0.65rem;
+  }
+
+  .brand-avatar-container {
+    width: 38px;
+    height: 38px;
+  }
+
+  .brand-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .brand-name {
+    font-size: 1.05rem;
+  }
+
+  .nav-actions {
+    gap: 0.45rem;
   }
 
   .nav-menu-links {
@@ -2558,48 +2680,276 @@ body.light-mode .contact-map-frame iframe {
     display: flex !important;
   }
 
-  .resume-shimmer-btn {
+  .glass-nav-header .resume-shimmer-btn {
     display: none !important;
   }
 
-  .hero-stats-row {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+  .mobile-drawer .resume-shimmer-btn {
+    display: inline-flex !important;
   }
 
-  .education-grid {
-    grid-template-columns: 1fr;
+  .content-section {
+    padding: 4rem 0 !important;
   }
 
-  .form-row-split {
-    grid-template-columns: 1fr;
+  .section-header-block {
+    margin: 0 auto 2.8rem auto !important;
   }
 
-  .projects-grid-3d {
-    grid-template-columns: 1fr;
+  .section-title {
+    font-size: clamp(1.8rem, 7vw, 2.4rem) !important;
   }
-}
 
-@media (max-width: 480px) {
+  .hero-section {
+    padding-top: calc(var(--nav-height) + 2.5rem) !important;
+    padding-bottom: 3.5rem !important;
+    min-height: auto !important;
+  }
+
   .hero-title {
-    font-size: 2.4rem;
+    font-size: clamp(2rem, 7.5vw, 2.8rem) !important;
+    line-height: 1.16 !important;
   }
 
   .hero-3d-container {
-    height: 350px;
+    height: 360px !important;
+    margin-top: 2rem !important;
+    touch-action: pan-y !important;
+  }
+
+  .quantum-core-card {
+    border-radius: 22px !important;
+    touch-action: pan-y !important;
+  }
+
+  #hero-quantum-canvas {
+    touch-action: pan-y !important;
+  }
+
+  .hero-stats-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+    max-width: 100% !important;
+    margin-top: 2rem !important;
+  }
+
+  .experience-timeline::before {
+    left: 20px !important;
+  }
+
+  .timeline-node-beacon {
+    left: 8px !important;
+    width: 26px !important;
+    height: 26px !important;
+    top: 18px !important;
+  }
+
+  .timeline-milestone {
+    padding-left: 56px !important;
+    margin-bottom: 2.5rem !important;
+  }
+
+  .education-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.4rem !important;
+  }
+
+  .projects-grid-3d {
+    grid-template-columns: 1fr !important;
+    gap: 1.8rem !important;
+  }
+
+  .github-section-card {
+    margin-top: 3rem !important;
+  }
+
+  .github-chart-container {
+    padding: 1rem !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .form-row-split {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .glass-nav-header {
+    height: 56px;
+    padding: 0 0.75rem;
+    width: calc(100% - 1rem);
+    top: 0.45rem;
+  }
+
+  .brand-avatar-container {
+    width: 32px;
+    height: 32px;
+  }
+
+  .brand-avatar {
+    width: 28px;
+    height: 28px;
+  }
+
+  .brand-name {
+    font-size: 0.95rem;
+  }
+
+  .brand-badge-pro {
+    font-size: 0.5rem;
+    padding: 1px 3px;
+  }
+
+  .nav-actions {
+    gap: 0.35rem;
+  }
+
+  .action-btn-circle,
+  .mobile-nav-toggle {
+    width: 35px;
+    height: 35px;
+    font-size: 0.82rem;
+  }
+
+  .terminal-toggle-btn {
+    height: 35px;
+    padding: 0 0.65rem;
+    font-size: 0.75rem;
+  }
+
+  /* Sound toggle available in mobile drawer */
+  .audio-toggle-btn {
+    display: none !important;
+  }
+
+  .hero-cta-group {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 0.75rem !important;
+  }
+
+  .hero-cta-group .btn-3d-primary,
+  .hero-cta-group .btn-3d-secondary {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 0.85rem 1.4rem !important;
+  }
+
+  .hero-3d-container {
+    height: 310px !important;
   }
 
   .orbital-badge {
-    display: none;
+    padding: 0.35rem 0.65rem !important;
+    font-size: 0.72rem !important;
   }
 
   .about-feature-boxes {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
   }
 
   .about-photo-frame {
-    width: 270px;
-    height: 320px;
+    width: 240px !important;
+    height: 290px !important;
+  }
+
+  .photo-experience-badge {
+    bottom: -10px !important;
+    right: -5px !important;
+    padding: 0.8rem 1.2rem !important;
+  }
+
+  .experience-years {
+    font-size: 1.8rem !important;
+  }
+
+  .skills-filter-nav,
+  .projects-filter-bar {
+    gap: 0.4rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .skill-filter-btn,
+  .project-filter-btn {
+    padding: 0.38rem 0.85rem !important;
+    font-size: 0.8rem !important;
+  }
+
+  .skills-grid-3d {
+    gap: 1.1rem !important;
+  }
+
+  .skill-3d-card {
+    padding: 1.2rem 1.1rem !important;
+  }
+
+  .timeline-milestone {
+    padding-left: 45px !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .timeline-node-beacon {
+    left: 7px !important;
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .milestone-role {
+    font-size: 1.12rem !important;
+  }
+
+  .milestone-period {
+    font-size: 0.75rem !important;
+  }
+
+  .modal-cyber-dialog {
+    padding: 1.4rem 1rem !important;
+    border-radius: 18px !important;
+    width: calc(100% - 16px) !important;
+    margin: 0 8px !important;
+  }
+
+  .modal-3d-viewport-box {
+    height: 220px !important;
+  }
+
+  .terminal-input-row {
+    padding: 0 0.8rem !important;
+    gap: 0.4rem !important;
+    height: 46px !important;
+  }
+
+  .term-user-prompt {
+    font-size: 0.76rem !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+  }
+
+  .terminal-input {
+    font-size: 0.78rem !important;
+    min-width: 0 !important;
+    flex: 1 !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero-title {
+    font-size: 1.95rem !important;
+  }
+
+  .hero-role-wrapper {
+    font-size: 1rem !important;
+  }
+
+  .orbital-badge {
+    display: none !important;
   }
 }
 
@@ -3219,18 +3569,74 @@ body.light-mode .core-mode-switcher {
   box-shadow: 0 0 8px #10b981;
 }
 
-/* Mobile HUD adjustments */
+/* Mobile HUD & Cyber Terminal adjustments */
 @media (max-width: 768px) {
   .hud-3d-telemetry {
-    width: calc(100% - 2rem);
-    bottom: 16px;
-    right: 1rem;
-    left: 1rem;
-    padding: 0.8rem;
+    position: fixed !important;
+    bottom: 14px !important;
+    right: 14px !important;
+    left: auto !important;
+    width: auto !important;
+    max-width: calc(100vw - 28px) !important;
+    padding: 0.45rem 0.85rem !important;
+    border-radius: 999px !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 240, 255, 0.25) !important;
+    z-index: 990 !important;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .hud-3d-telemetry .hud-header {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    border-bottom: none !important;
+    cursor: pointer !important;
+    gap: 0.7rem !important;
+  }
+
+  .hud-3d-telemetry .hud-collapsible-content {
+    display: none;
+  }
+
+  .hud-3d-telemetry.expanded {
+    left: 14px !important;
+    right: 14px !important;
+    width: auto !important;
+    border-radius: 18px !important;
+    padding: 1rem !important;
+  }
+
+  .hud-3d-telemetry.expanded .hud-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding-bottom: 0.6rem !important;
+    margin-bottom: 0.8rem !important;
+  }
+
+  .hud-3d-telemetry.expanded .hud-collapsible-content {
+    display: block !important;
+  }
+
+  .hud-mobile-toggle-btn {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--accent-cyan);
+    font-size: 0.75rem;
+    padding: 0 0.2rem;
+    cursor: pointer;
+  }
+
+  body.light-mode .hud-mobile-toggle-btn {
+    color: #0284c7 !important;
   }
 
   .terminal-cyber-window {
-    height: 90vh;
+    width: 95vw !important;
+    max-width: 95vw !important;
+    height: 85vh !important;
+    margin: 0 auto !important;
+    border-radius: 14px !important;
   }
 }
 

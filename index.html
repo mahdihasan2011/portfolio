@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
   <!-- Custom 3D Portfolio Stylesheet -->
-  <link rel="stylesheet" href="css/3d-portfolio.css?v=2.2">
+  <link rel="stylesheet" href="css/3d-portfolio.css?v=2.3">
 </head>
 
 <body>
@@ -137,14 +137,20 @@
     <div class="mobile-drawer-header">
       <div class="d-flex align-items-center gap-2">
         <img src="images/profilepic4.jpeg" alt="Mahdi Hasan" class="brand-avatar">
-        <span class="brand-name" style="font-size: 1.2rem;">Mahdi Hasan</span>
+        <div>
+          <span class="brand-name" style="font-size: 1.15rem; display: block;">Mahdi Hasan</span>
+          <span class="brand-status" style="font-size: 0.65rem; margin-top: 2px;">
+            <span class="status-beacon"><span class="beacon-dot"></span></span>
+            <span>Available for Hire</span>
+          </span>
+        </div>
       </div>
       <button class="action-btn-circle" id="drawerCloseBtn" aria-label="Close Menu">
         <i class="fas fa-times"></i>
       </button>
     </div>
 
-    <ul class="mobile-drawer-links mb-4">
+    <ul class="mobile-drawer-links mb-3">
       <li><a href="#hero"><i class="fas fa-cube"></i> Home</a></li>
       <li><a href="#about"><i class="fas fa-user-astronaut"></i> About</a></li>
       <li><a href="#skills"><i class="fas fa-layer-group"></i> Skills</a></li>
@@ -154,11 +160,21 @@
       <li><a href="#contact"><i class="fas fa-paper-plane"></i> Contact</a></li>
     </ul>
 
+    <!-- Quick Mobile Utilities (CLI, Sound, Theme, Resume) -->
+    <div class="mobile-drawer-utilities mb-3">
+      <button class="drawer-utility-btn" id="mobileDrawerCliBtn" aria-label="Open Cyber CLI Terminal">
+        <i class="fas fa-terminal"></i> <span>Cyber CLI</span>
+      </button>
+      <button class="drawer-utility-btn" id="mobileDrawerAudioBtn" aria-label="Toggle Sound Effects">
+        <i class="fas fa-volume-mute" id="mobileDrawerAudioIcon"></i> <span id="mobileDrawerAudioLabel">Audio: Muted</span>
+      </button>
+    </div>
+
     <div class="d-flex gap-2 mt-auto">
-      <button class="action-btn-circle w-50" id="mobileThemeToggleBtn">
+      <button class="drawer-action-btn w-50" id="mobileThemeToggleBtn" aria-label="Toggle Theme">
         <i class="fas fa-sun me-1"></i> Theme
       </button>
-      <a href="Mahdi_Hasan_Resume.pdf" target="_blank" class="btn-3d-primary w-50 justify-content-center text-center" style="font-size: 0.9rem; padding: 0.6rem;">
+      <a href="Mahdi_Hasan_Resume.pdf" target="_blank" class="resume-shimmer-btn w-50 justify-content-center text-center" style="font-size: 0.88rem; padding: 0.65rem;" title="Download Resume">
         <i class="fas fa-file-pdf me-1"></i> Resume
       </a>
     </div>
@@ -1151,7 +1167,7 @@
 
   <!-- Floating 3D HUD & Flight Telemetry Control Center -->
   <aside class="hud-3d-telemetry" id="hud3dTelemetry" aria-label="3D Scene Telemetry HUD">
-    <div class="hud-header">
+    <div class="hud-header" id="hudHeaderTrigger" title="Tap to toggle 3D telemetry controls">
       <div class="hud-status-indicator">
         <span class="hud-status-pulse"></span>
         <span class="hud-title">3D WebGL Matrix</span>
@@ -1159,44 +1175,49 @@
       <div class="hud-metrics">
         <span class="hud-metric-pill" id="hudFpsPill"><i class="fas fa-tachometer-alt"></i> <strong id="hudFpsVal">60</strong> FPS</span>
         <span class="hud-metric-pill d-none d-sm-inline-flex" id="hudVerticesPill"><i class="fas fa-draw-polygon"></i> <span id="hudVerticesVal">5.4k</span> VTX</span>
-      </div>
-    </div>
-
-    <!-- Camera Flight Spatial Modes -->
-    <div class="hud-camera-modes">
-      <span class="hud-section-label">Camera Spatial Matrix</span>
-      <div class="hud-mode-buttons" id="hudCameraModes">
-        <button class="hud-mode-btn active" data-cam-mode="cinematic" title="Smooth scroll-synced choreography">
-          <i class="fas fa-video"></i> Orbit
-        </button>
-        <button class="hud-mode-btn" data-cam-mode="matrix" title="Tactical top-down isometric grid">
-          <i class="fas fa-th"></i> Matrix
-        </button>
-        <button class="hud-mode-btn" data-cam-mode="quantum" title="Cosmic dust drift perspective">
-          <i class="fas fa-wind"></i> Drift
-        </button>
-        <button class="hud-mode-btn" data-cam-mode="warp" title="Light-speed particle acceleration">
-          <i class="fas fa-bolt"></i> Warp
+        <button class="hud-mobile-toggle-btn d-md-none" id="hudMobileToggleBtn" aria-label="Toggle 3D HUD controls">
+          <i class="fas fa-chevron-up" id="hudChevronIcon"></i>
         </button>
       </div>
     </div>
 
-    <!-- Audio Equalizer Visualizer & Quick Actions -->
-    <div class="hud-footer">
-      <div class="hud-audio-visualizer" id="hudAudioVisualizer" title="Web Audio Synthesizer Waveform">
-        <span class="hud-bar"></span>
-        <span class="hud-bar"></span>
-        <span class="hud-bar"></span>
-        <span class="hud-bar"></span>
-        <span class="hud-bar"></span>
+    <div class="hud-collapsible-content" id="hudCollapsibleContent">
+      <!-- Camera Flight Spatial Modes -->
+      <div class="hud-camera-modes">
+        <span class="hud-section-label">Camera Spatial Matrix</span>
+        <div class="hud-mode-buttons" id="hudCameraModes">
+          <button class="hud-mode-btn active" data-cam-mode="cinematic" title="Smooth scroll-synced choreography">
+            <i class="fas fa-video"></i> Orbit
+          </button>
+          <button class="hud-mode-btn" data-cam-mode="matrix" title="Tactical top-down isometric grid">
+            <i class="fas fa-th"></i> Matrix
+          </button>
+          <button class="hud-mode-btn" data-cam-mode="quantum" title="Cosmic dust drift perspective">
+            <i class="fas fa-wind"></i> Drift
+          </button>
+          <button class="hud-mode-btn" data-cam-mode="warp" title="Light-speed particle acceleration">
+            <i class="fas fa-bolt"></i> Warp
+          </button>
+        </div>
       </div>
-      <div class="hud-quick-actions">
-        <button class="hud-btn-action" id="hudResetCamBtn" title="Reset Camera Vantage Point">
-          <i class="fas fa-compass"></i> Reset
-        </button>
-        <button class="hud-btn-action" id="hudOpenTerminalBtn" title="Open Interactive CLI Terminal (HotKey: ~)">
-          <i class="fas fa-terminal"></i> CLI (~ )
-        </button>
+
+      <!-- Audio Equalizer Visualizer & Quick Actions -->
+      <div class="hud-footer">
+        <div class="hud-audio-visualizer" id="hudAudioVisualizer" title="Web Audio Synthesizer Waveform">
+          <span class="hud-bar"></span>
+          <span class="hud-bar"></span>
+          <span class="hud-bar"></span>
+          <span class="hud-bar"></span>
+          <span class="hud-bar"></span>
+        </div>
+        <div class="hud-quick-actions">
+          <button class="hud-btn-action" id="hudResetCamBtn" title="Reset Camera Vantage Point">
+            <i class="fas fa-compass"></i> Reset
+          </button>
+          <button class="hud-btn-action" id="hudOpenTerminalBtn" title="Open Interactive CLI Terminal (HotKey: ~)">
+            <i class="fas fa-terminal"></i> CLI (~ )
+          </button>
+        </div>
       </div>
     </div>
   </aside>

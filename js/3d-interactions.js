@@ -103,34 +103,49 @@
     }
   };
 
-  // Sound Toggle Button
+  // Sound Toggle Button & Mobile Drawer Audio Sync
   const audioToggleBtn = document.getElementById('audioToggleBtn');
+  const mobileDrawerAudioBtn = document.getElementById('mobileDrawerAudioBtn');
+  const mobileDrawerAudioIcon = document.getElementById('mobileDrawerAudioIcon');
+  const mobileDrawerAudioLabel = document.getElementById('mobileDrawerAudioLabel');
+
   function updateAudioButtonUI() {
-    if (!audioToggleBtn) return;
-    const icon = audioToggleBtn.querySelector('i');
-    if (isAudioEnabled) {
-      icon.className = 'fas fa-volume-up';
-      audioToggleBtn.classList.add('active');
-      audioToggleBtn.title = 'Sound Effects: Enabled';
-    } else {
-      icon.className = 'fas fa-volume-mute';
-      audioToggleBtn.classList.remove('active');
-      audioToggleBtn.title = 'Sound Effects: Muted';
+    if (audioToggleBtn) {
+      const icon = audioToggleBtn.querySelector('i');
+      if (isAudioEnabled) {
+        if (icon) icon.className = 'fas fa-volume-up';
+        audioToggleBtn.classList.add('active');
+        audioToggleBtn.title = 'Sound Effects: Enabled';
+      } else {
+        if (icon) icon.className = 'fas fa-volume-mute';
+        audioToggleBtn.classList.remove('active');
+        audioToggleBtn.title = 'Sound Effects: Muted';
+      }
+    }
+    if (mobileDrawerAudioIcon && mobileDrawerAudioLabel) {
+      if (isAudioEnabled) {
+        mobileDrawerAudioIcon.className = 'fas fa-volume-up';
+        mobileDrawerAudioLabel.textContent = 'Audio: Active';
+      } else {
+        mobileDrawerAudioIcon.className = 'fas fa-volume-mute';
+        mobileDrawerAudioLabel.textContent = 'Audio: Muted';
+      }
     }
   }
 
-  if (audioToggleBtn) {
-    audioToggleBtn.addEventListener('click', () => {
-      isAudioEnabled = !isAudioEnabled;
-      localStorage.setItem('audio_enabled', isAudioEnabled ? 'true' : 'false');
-      updateAudioButtonUI();
-      if (isAudioEnabled) {
-        initAudioContext();
-        window.playSynthSound('success');
-      }
-    });
+  function toggleAudio() {
+    isAudioEnabled = !isAudioEnabled;
+    localStorage.setItem('audio_enabled', isAudioEnabled ? 'true' : 'false');
     updateAudioButtonUI();
+    if (isAudioEnabled) {
+      initAudioContext();
+      window.playSynthSound('success');
+    }
   }
+
+  if (audioToggleBtn) audioToggleBtn.addEventListener('click', toggleAudio);
+  if (mobileDrawerAudioBtn) mobileDrawerAudioBtn.addEventListener('click', toggleAudio);
+  updateAudioButtonUI();
 
   // ==========================================================================
   // 2. THEME SWITCHER (DARK CYBER vs TITANIUM CLEAN)
@@ -760,8 +775,15 @@
     window.playSynthSound('click');
   }
 
+  const mobileDrawerCliBtn = document.getElementById('mobileDrawerCliBtn');
   if (terminalToggleBtn) terminalToggleBtn.addEventListener('click', openTerminal);
   if (hudOpenTerminalBtn) hudOpenTerminalBtn.addEventListener('click', openTerminal);
+  if (mobileDrawerCliBtn) {
+    mobileDrawerCliBtn.addEventListener('click', () => {
+      if (typeof closeDrawer === 'function') closeDrawer();
+      openTerminal();
+    });
+  }
   if (terminalCloseBtn) terminalCloseBtn.addEventListener('click', closeTerminal);
   if (terminalCloseDot) terminalCloseDot.addEventListener('click', closeTerminal);
 
@@ -1140,6 +1162,35 @@ and fault-tolerant systems in Laravel, PHP, React, Vue.js, and cloud backends.`;
       closeDrawer();
     }
   });
+
+  // Mobile HUD Telemetry Collapse / Expand Handler
+  const hud3dTelemetry = document.getElementById('hud3dTelemetry');
+  const hudHeaderTrigger = document.getElementById('hudHeaderTrigger');
+  const hudChevronIcon = document.getElementById('hudChevronIcon');
+
+  if (hud3dTelemetry && hudHeaderTrigger) {
+    function toggleHudMobile() {
+      if (window.innerWidth <= 768) {
+        hud3dTelemetry.classList.toggle('expanded');
+        const isExp = hud3dTelemetry.classList.contains('expanded');
+        if (hudChevronIcon) {
+          hudChevronIcon.className = isExp ? 'fas fa-chevron-down' : 'fas fa-chevron-up';
+        }
+        window.playSynthSound('click');
+      }
+    }
+
+    hudHeaderTrigger.addEventListener('click', toggleHudMobile);
+
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768 && hud3dTelemetry.classList.contains('expanded')) {
+        if (!hud3dTelemetry.contains(e.target)) {
+          hud3dTelemetry.classList.remove('expanded');
+          if (hudChevronIcon) hudChevronIcon.className = 'fas fa-chevron-up';
+        }
+      }
+    });
+  }
 
   // Ensure drawer is closed on load
   closeDrawer();
