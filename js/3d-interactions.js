@@ -1136,7 +1136,7 @@ and fault-tolerant systems in Laravel, PHP, React, Vue.js, and cloud backends.`;
   });
 
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
+    if (window.innerWidth > 1040) {
       closeDrawer();
     }
   });
