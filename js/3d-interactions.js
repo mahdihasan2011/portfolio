@@ -423,7 +423,7 @@
       category: 'Fintech',
       stars: '203',
       tech: ['Java', 'Spring Cloud', 'Kafka', 'PostgreSQL', 'Vault'],
-      image: 'images/money-transfer.jpg',
+      image: 'images/money-transfer.jpg?v=2',
       description: 'High-security peer-to-peer and international remittance processing system. Supports instant wallet transfers, currency exchange rate locking, dual-approval disbursement workflows, and encrypted ledger logging.',
       highlights: [
         'Bank-grade AES-256 data-at-rest encryption and mutual TLS (mTLS) inter-service communication.',
@@ -465,7 +465,7 @@
       category: 'Enterprise & Networks',
       stars: '142',
       tech: ['PHP', 'Laravel', 'MikroTik API', 'MySQL', 'Vue.js'],
-      image: 'images/isp-billing.jpg',
+      image: 'images/isp-billing.jpg?v=2',
       description: 'Mission-critical ISP operations management suite controlling subscriber provisioning, bandwidth queues, MikroTik router synchronizations, automated billing recurring cycles, and SMS alerts.',
       highlights: [
         'Direct MikroTik RouterOS API integration provisioning bandwidth profiles in real time.',
