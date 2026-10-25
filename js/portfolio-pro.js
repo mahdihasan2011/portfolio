@@ -376,7 +376,7 @@
   // --------------------------------------------------------------------------
   // 8. KEYBOARD NAVIGATION & SHORTCUTS (EMIL KOWALSKI & ANTHONY FU CRAFT)
   // --------------------------------------------------------------------------
-  const sectionIds = ['about', 'experience', 'projects', 'skills', 'education', 'contact'];
+  const sectionIds = ['about', 'skills', 'experience', 'projects', 'education', 'contact'];
   let currentSectionIdx = 0;
 
   window.addEventListener('keydown', (e) => {

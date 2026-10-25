@@ -80,9 +80,9 @@
 
       <ul class="drawer-nav-list">
         <li><a href="#about" class="drawer-nav-link"><i class="fas fa-user" style="font-size: 0.9rem; color: var(--accent);"></i> 01 // About</a></li>
-        <li><a href="#experience" class="drawer-nav-link"><i class="fas fa-briefcase" style="font-size: 0.9rem; color: var(--accent);"></i> 02 // Experience</a></li>
-        <li><a href="#projects" class="drawer-nav-link"><i class="fas fa-layer-group" style="font-size: 0.9rem; color: var(--accent);"></i> 03 // Projects</a></li>
-        <li><a href="#skills" class="drawer-nav-link"><i class="fas fa-code" style="font-size: 0.9rem; color: var(--accent);"></i> 04 // Skills & Arsenal</a></li>
+        <li><a href="#skills" class="drawer-nav-link"><i class="fas fa-code" style="font-size: 0.9rem; color: var(--accent);"></i> 02 // Skills & Arsenal</a></li>
+        <li><a href="#experience" class="drawer-nav-link"><i class="fas fa-briefcase" style="font-size: 0.9rem; color: var(--accent);"></i> 03 // Experience</a></li>
+        <li><a href="#projects" class="drawer-nav-link"><i class="fas fa-layer-group" style="font-size: 0.9rem; color: var(--accent);"></i> 04 // Projects</a></li>
         <li><a href="#education" class="drawer-nav-link"><i class="fas fa-graduation-cap" style="font-size: 0.9rem; color: var(--accent);"></i> 05 // Education</a></li>
         <li><a href="#contact" class="drawer-nav-link"><i class="fas fa-paper-plane" style="font-size: 0.9rem; color: var(--accent);"></i> 06 // Contact</a></li>
       </ul>
@@ -161,25 +161,100 @@
               </a>
             </li>
             <li>
-              <a href="#skills" class="nav-item-link">
-                <span class="nav-line"></span>
-                <span>04 // Skills & Arsenal</span>
-              </a>
-            </li>
-            <li>
               <a href="#education" class="nav-item-link">
                 <span class="nav-line"></span>
-                <span>05 // Education</span>
+                <span>04 // Education</span>
               </a>
             </li>
             <li>
               <a href="#contact" class="nav-item-link">
                 <span class="nav-line"></span>
-                <span>06 // Contact</span>
+                <span>05 // Contact</span>
               </a>
             </li>
           </ul>
         </nav>
+
+        <!-- Technical Skills & Arsenal in Left Sidebar -->
+        <div id="skills" class="sidebar-skills-section">
+          <div class="sidebar-skills-header">
+            <span class="section-label" style="margin-bottom: 0.25rem;">Core Stack</span>
+            <h3 class="sidebar-skills-title">Technical Arsenal</h3>
+          </div>
+
+          <div class="sidebar-skills-grid">
+            <!-- 1. Frontend & UI -->
+            <div class="sidebar-skill-group">
+              <div class="sidebar-skill-header">
+                <i class="fas fa-laptop-code sidebar-skill-icon"></i>
+                <span class="sidebar-skill-category">Frontend & UI</span>
+              </div>
+              <div class="skill-pills-list">
+                <span class="skill-pill highlight">React 19 / 18</span>
+                <span class="skill-pill highlight">Next.js</span>
+                <span class="skill-pill highlight">TypeScript</span>
+                <span class="skill-pill">Vue.js 3</span>
+                <span class="skill-pill">JavaScript (ES6+)</span>
+                <span class="skill-pill">Tailwind CSS</span>
+                <span class="skill-pill">Redux</span>
+                <span class="skill-pill">WebGL / Three.js</span>
+                <span class="skill-pill">Modern CSS</span>
+              </div>
+            </div>
+
+            <!-- 2. Backend & APIs -->
+            <div class="sidebar-skill-group">
+              <div class="sidebar-skill-header">
+                <i class="fas fa-server sidebar-skill-icon"></i>
+                <span class="sidebar-skill-category">Backend & APIs</span>
+              </div>
+              <div class="skill-pills-list">
+                <span class="skill-pill highlight">PHP 8.x</span>
+                <span class="skill-pill highlight">Laravel</span>
+                <span class="skill-pill highlight">Node.js & Express</span>
+                <span class="skill-pill">RESTful APIs</span>
+                <span class="skill-pill">WebSockets</span>
+                <span class="skill-pill">Microservices</span>
+                <span class="skill-pill">Python & FastAPI</span>
+                <span class="skill-pill">OAuth / JWT</span>
+              </div>
+            </div>
+
+            <!-- 3. Databases & Storage -->
+            <div class="sidebar-skill-group">
+              <div class="sidebar-skill-header">
+                <i class="fas fa-database sidebar-skill-icon"></i>
+                <span class="sidebar-skill-category">Databases & Caching</span>
+              </div>
+              <div class="skill-pills-list">
+                <span class="skill-pill highlight">PostgreSQL</span>
+                <span class="skill-pill highlight">MySQL & MariaDB</span>
+                <span class="skill-pill highlight">Redis Cache</span>
+                <span class="skill-pill">Schema Modeling</span>
+                <span class="skill-pill">Index Optimization</span>
+                <span class="skill-pill">ACID Transactions</span>
+                <span class="skill-pill">MongoDB</span>
+              </div>
+            </div>
+
+            <!-- 4. DevOps & Cloud -->
+            <div class="sidebar-skill-group">
+              <div class="sidebar-skill-header">
+                <i class="fas fa-cloud-upload-alt sidebar-skill-icon"></i>
+                <span class="sidebar-skill-category">DevOps & Cloud</span>
+              </div>
+              <div class="skill-pills-list">
+                <span class="skill-pill highlight">Docker & Compose</span>
+                <span class="skill-pill highlight">GitHub Actions CI/CD</span>
+                <span class="skill-pill highlight">Linux (Ubuntu)</span>
+                <span class="skill-pill">Nginx</span>
+                <span class="skill-pill">AWS (EC2, S3)</span>
+                <span class="skill-pill">Git</span>
+                <span class="skill-pill">Vercel & Edge</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Sidebar Footer: Social Media & Theme Toggle + Keyboard Hints -->
@@ -791,106 +866,15 @@
       </section>
 
       <!-- --------------------------------------------------------------------
-           4. SKILLS & ARSENAL (GROUPED INTO 4 EXACT CATEGORIES)
-           -------------------------------------------------------------------- -->
-      <section id="skills" class="section-block" aria-label="Technical Skills Matrix">
-        <div class="section-header-sticky">
-          <span class="section-label">04 // Arsenal</span>
-          <h2 class="section-heading" style="margin-bottom: 0;">Skills & Architecture</h2>
-        </div>
-
-        <span class="section-label d-none d-lg-block">04 // Core Arsenal</span>
-        <h2 class="section-heading d-none d-lg-block">Technical Expertise & Capabilities</h2>
-        <p class="projects-intro-text">
-          Refined across 8+ years of production deployments, systems architecture, and agile engineering leadership. Grouped into core disciplines:
-        </p>
-
-        <div class="skills-grouped-grid">
-
-          <!-- 1. Frontend & UI -->
-          <div class="skill-category-card">
-            <div class="skill-card-header">
-              <div class="skill-icon-wrap"><i class="fas fa-laptop-code"></i></div>
-              <h3 class="skill-category-title">Frontend & UI</h3>
-            </div>
-            <div class="skill-pills-list">
-              <span class="skill-pill highlight">React 19 / 18</span>
-              <span class="skill-pill highlight">Next.js (App Router)</span>
-              <span class="skill-pill highlight">TypeScript</span>
-              <span class="skill-pill">Vue.js 3 / Pinia</span>
-              <span class="skill-pill">JavaScript (ES6+)</span>
-              <span class="skill-pill">Tailwind CSS</span>
-              <span class="skill-pill">Redux Toolkit</span>
-              <span class="skill-pill">WebGL / Three.js</span>
-              <span class="skill-pill">HTML5 / Modern CSS</span>
-            </div>
-          </div>
-
-          <!-- 2. Backend & APIs -->
-          <div class="skill-category-card">
-            <div class="skill-card-header">
-              <div class="skill-icon-wrap"><i class="fas fa-server"></i></div>
-              <h3 class="skill-category-title">Backend & APIs</h3>
-            </div>
-            <div class="skill-pills-list">
-              <span class="skill-pill highlight">PHP 8.x</span>
-              <span class="skill-pill highlight">Laravel (Eloquent, Queues)</span>
-              <span class="skill-pill highlight">Node.js & Express</span>
-              <span class="skill-pill">RESTful API Architecture</span>
-              <span class="skill-pill">WebSockets & Realtime</span>
-              <span class="skill-pill">Microservices Design</span>
-              <span class="skill-pill">Python Scripting & FastAPI</span>
-              <span class="skill-pill">OAuth / JWT Authentication</span>
-            </div>
-          </div>
-
-          <!-- 3. Databases & Storage -->
-          <div class="skill-category-card">
-            <div class="skill-card-header">
-              <div class="skill-icon-wrap"><i class="fas fa-database"></i></div>
-              <h3 class="skill-category-title">Databases & Caching</h3>
-            </div>
-            <div class="skill-pills-list">
-              <span class="skill-pill highlight">PostgreSQL</span>
-              <span class="skill-pill highlight">MySQL & MariaDB</span>
-              <span class="skill-pill highlight">Redis In-Memory Cache</span>
-              <span class="skill-pill">Schema Modeling & Normalization</span>
-              <span class="skill-pill">Index Optimization & Partitioning</span>
-              <span class="skill-pill">ACID Transactions & Locking</span>
-              <span class="skill-pill">MongoDB & NoSQL</span>
-            </div>
-          </div>
-
-          <!-- 4. DevOps & Deployment -->
-          <div class="skill-category-card">
-            <div class="skill-card-header">
-              <div class="skill-icon-wrap"><i class="fas fa-cloud-upload-alt"></i></div>
-              <h3 class="skill-category-title">DevOps & Deployment</h3>
-            </div>
-            <div class="skill-pills-list">
-              <span class="skill-pill highlight">Docker & Compose</span>
-              <span class="skill-pill highlight">GitHub Actions & CI/CD</span>
-              <span class="skill-pill highlight">Linux (Ubuntu) & Shell</span>
-              <span class="skill-pill">Nginx Reverse Proxy</span>
-              <span class="skill-pill">AWS (EC2, S3, RDS)</span>
-              <span class="skill-pill">Git Version Control</span>
-              <span class="skill-pill">Vercel & Cloudflare Edge</span>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- --------------------------------------------------------------------
-           5. EDUCATION & ACADEMIC CREDENTIALS
+           4. EDUCATION & ACADEMIC CREDENTIALS
            -------------------------------------------------------------------- -->
       <section id="education" class="section-block" aria-label="Education and Degrees">
         <div class="section-header-sticky">
-          <span class="section-label">05 // Foundation</span>
+          <span class="section-label">04 // Foundation</span>
           <h2 class="section-heading" style="margin-bottom: 0;">Education</h2>
         </div>
 
-        <span class="section-label d-none d-lg-block">05 // Academic Foundation</span>
+        <span class="section-label d-none d-lg-block">04 // Academic Foundation</span>
         <h2 class="section-heading d-none d-lg-block">Education & Degrees</h2>
 
         <div class="education-cards-grid">
@@ -921,15 +905,15 @@
       </section>
 
       <!-- --------------------------------------------------------------------
-           6. CONTACT SECTION (EMAIL, GITHUB, LINKEDIN & FORM)
+           5. CONTACT SECTION (EMAIL, GITHUB, LINKEDIN & FORM)
            -------------------------------------------------------------------- -->
       <section id="contact" class="section-block" aria-label="Contact Mahdi Hasan">
         <div class="section-header-sticky">
-          <span class="section-label">06 // Connect</span>
+          <span class="section-label">05 // Connect</span>
           <h2 class="section-heading" style="margin-bottom: 0;">Get In Touch</h2>
         </div>
 
-        <span class="section-label d-none d-lg-block">06 // Direct Line</span>
+        <span class="section-label d-none d-lg-block">05 // Direct Line</span>
         <h2 class="section-heading d-none d-lg-block">Let's Build Something Exceptional</h2>
         <p class="projects-intro-text">
           I am actively exploring Senior Full-Stack Engineering roles, Distributed Systems consulting, and high-impact software partnerships. Feel free to copy my email or send a direct transmission below.
@@ -1044,6 +1028,10 @@
       <i class="fas fa-user"></i>
       <span>About</span>
     </a>
+    <a href="#skills" class="dock-link" data-section="skills">
+      <i class="fas fa-code"></i>
+      <span>Skills</span>
+    </a>
     <a href="#experience" class="dock-link" data-section="experience">
       <i class="fas fa-briefcase"></i>
       <span>Exp</span>
@@ -1051,10 +1039,6 @@
     <a href="#projects" class="dock-link" data-section="projects">
       <i class="fas fa-layer-group"></i>
       <span>Projects</span>
-    </a>
-    <a href="#skills" class="dock-link" data-section="skills">
-      <i class="fas fa-code"></i>
-      <span>Skills</span>
     </a>
     <a href="#contact" class="dock-link" data-section="contact">
       <i class="fas fa-envelope"></i>
