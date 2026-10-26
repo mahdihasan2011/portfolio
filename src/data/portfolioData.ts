@@ -95,6 +95,10 @@ export interface PortfolioData {
   };
 }
 
+const careerStartYear = 2018;
+const currentYear = new Date().getFullYear();
+export const calculatedExperienceYears = Math.max(1, currentYear - careerStartYear);
+
 export const portfolioData: PortfolioData = {
   personal: {
     name: "Mahdi Hasan",
@@ -102,9 +106,9 @@ export const portfolioData: PortfolioData = {
     initials: "MH",
     title: "Software Engineer",
     specialization: "Full-Stack Development • React, Next.js, Node.js & Laravel",
-    experienceYears: 8,
+    experienceYears: calculatedExperienceYears,
     bio: [
-      "I am a Software Engineer with over 8 years of production experience designing, building, and deploying scalable web applications and high-performance backend systems.",
+      `I am a Software Engineer with over ${calculatedExperienceYears} years of production experience designing, building, and deploying scalable web applications and high-performance backend systems.`,
       "From responsive client applications built with React and Next.js to robust backend APIs engineered in Node.js, Express, and Laravel, I take full end-to-end ownership of the software engineering lifecycle — from database modeling to production cloud deployment.",
       "I have built and delivered mission-critical software solutions including retail point-of-sale engines, real-time trading terminals, multi-vendor e-commerce marketplaces, and automated billing gateways that process millions of transactions with high reliability."
     ],
@@ -125,7 +129,7 @@ export const portfolioData: PortfolioData = {
     linkedinAltUrl: "https://www.linkedin.com/in/mahdisaikat/",
   },
   metrics: [
-    { label: "Experience", value: "8+", sublabel: "Years in Production" },
+    { label: "Experience", value: `${calculatedExperienceYears}+`, sublabel: "Years in Production" },
     { label: "Shipped Projects", value: "50+", sublabel: "Enterprise & Client Apps" },
     { label: "System Uptime", value: "99.9%", sublabel: "Production SLA" },
     { label: "Active Users", value: "100k+", sublabel: "Served Worldwide" },
@@ -134,7 +138,7 @@ export const portfolioData: PortfolioData = {
     headlinePrefix: "Building High-Performance",
     headlineHighlight: "Software & Scalable Systems",
     subheadline:
-      "Software Engineer with 8+ years of experience engineering production software. Specializing in high-performance web applications with React & Next.js, robust backend services in Node.js & Laravel, and distributed data systems.",
+      `Software Engineer with ${calculatedExperienceYears}+ years of experience engineering production software. Specializing in high-performance web applications with React & Next.js, robust backend services in Node.js & Laravel, and distributed data systems.`,
     rotatingRoles: [
       "Software Engineer",
       "Senior Full-Stack Engineer",
