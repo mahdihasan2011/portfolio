@@ -216,7 +216,7 @@ export default function SidebarHeader({ onOpenContactDrawer }: SidebarHeaderProp
               </div>
               <div className="mt-1 flex items-center gap-1.5 text-[11px] font-sans">
                 <span className="text-cyan font-semibold">Jahangirnagar University</span>
-                <span className="text-[var(--text-muted)] text-[10px]">• Savar, Dhaka</span>
+                <span className="text-[var(--text-muted)] text-[10px]">• Dhaka, Bangladesh</span>
               </div>
             </div>
 

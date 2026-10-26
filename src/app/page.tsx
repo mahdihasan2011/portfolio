@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import MouseSpotlight from "@/components/ui/MouseSpotlight";
 import SidebarHeader from "@/components/layout/SidebarHeader";
 import TimelineNav from "@/components/layout/TimelineNav";
-import TimelineNavMobile from "@/components/layout/TimelineNavMobile";
 import BrittanyContent from "@/components/sections/BrittanyContent";
 import FloatingContactButton from "@/components/ui/FloatingContactButton";
 import ContactDrawer from "@/components/ui/ContactDrawer";
@@ -43,14 +42,6 @@ export default function Home() {
 
       {/* Main Container */}
       <div className="mx-auto min-h-screen max-w-[1360px] px-4 sm:px-6 md:px-8 lg:px-8 xl:px-12 font-sans py-12 lg:py-0">
-        {/* Mobile Sticky Timeline Bar */}
-        <div className="lg:hidden mb-4">
-          <TimelineNavMobile
-            activeSection={isContactDrawerOpen ? "contact" : activeSection}
-            onOpenContactDrawer={() => setIsContactDrawerOpen(true)}
-          />
-        </div>
-
         <div className="lg:flex lg:justify-between lg:gap-6 xl:gap-10 relative">
           {/* Sticky Left Column: Profile, Title, Fixed Skills, Socials */}
           <div className="lg:w-[34%] xl:w-[32%] shrink-0">
