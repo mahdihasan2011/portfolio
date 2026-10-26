@@ -72,6 +72,7 @@ export default function RootLayout({
       <body
         className={`${outfit.variable} ${spaceGrotesk.variable} ${firaCode.variable} font-sans min-h-screen selection:bg-cyan/30 selection:text-white transition-colors duration-300`}
         style={{ backgroundColor: "var(--bg-main)", color: "var(--text-primary)" }}
+        suppressHydrationWarning
       >
         <ThemeProvider>
           {/* Accessible Skip Link */}
