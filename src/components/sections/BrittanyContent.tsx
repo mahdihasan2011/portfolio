@@ -199,7 +199,7 @@ export default function BrittanyContent({ onOpenContactDrawer }: BrittanyContent
               style={{
                 backgroundColor:
                   activeCategory === cat ? "var(--accent-cyan)" : "var(--bg-card)",
-                color: activeCategory === cat ? "#07090e" : "var(--text-secondary)",
+                color: activeCategory === cat ? "var(--accent-contrast)" : "var(--text-secondary)",
                 border: `1px solid ${
                   activeCategory === cat ? "var(--accent-cyan)" : "var(--border-color)"
                 }`,

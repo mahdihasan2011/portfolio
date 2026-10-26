@@ -158,7 +158,7 @@ export default function SidebarHeader({ onOpenContactDrawer }: SidebarHeaderProp
                   style={{
                     backgroundColor:
                       selectedSkillCategory === cat ? "var(--accent-cyan)" : "var(--bg-surface)",
-                    color: selectedSkillCategory === cat ? "#07090e" : "var(--text-secondary)",
+                    color: selectedSkillCategory === cat ? "var(--accent-contrast)" : "var(--text-secondary)",
                     border: `1px solid ${
                       selectedSkillCategory === cat ? "var(--accent-cyan)" : "var(--border-color)"
                     }`,

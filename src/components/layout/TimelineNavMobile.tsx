@@ -46,7 +46,7 @@ export default function TimelineNavMobile({
             {index > 0 && (
               <span
                 className={`w-2.5 h-[1.5px] transition-colors ${
-                  isActive ? "bg-[var(--accent-cyan)]" : "bg-slate-700"
+                  isActive ? "bg-[var(--accent-cyan)]" : "bg-[var(--border-color)]"
                 }`}
               />
             )}
@@ -63,7 +63,7 @@ export default function TimelineNavMobile({
                 className={`w-1.5 h-1.5 rounded-full ${
                   isActive
                     ? "bg-[var(--accent-cyan)] shadow-[0_0_6px_rgba(0,240,255,0.8)]"
-                    : "bg-slate-600"
+                    : "bg-[var(--border-color)]"
                 }`}
               />
               <span>{item.label}</span>

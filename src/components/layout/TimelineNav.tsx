@@ -19,7 +19,7 @@ const TIMELINE_ITEMS: TimelineItem[] = [
   { id: "about", label: "About", step: "01" },
   { id: "experience", label: "Experience", step: "02" },
   { id: "projects", label: "Projects", step: "03" },
-  { id: "contact", label: "Contact", step: "04", isDrawer: true },
+  // { id: "contact", label: "Contact", step: "04", isDrawer: true },
 ];
 
 export default function TimelineNav({
@@ -79,17 +79,17 @@ export default function TimelineNav({
       {/* Container holding the vertical track & nodes */}
       <div className="relative py-6">
         {/* Subtle Top Micro Header */}
-        <div className="mb-8 flex items-center gap-2 pl-1.5">
+        {/* <div className="mb-8 flex items-center gap-2 pl-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-cyan)] shadow-[0_0_8px_rgba(0,240,255,0.8)] animate-pulse" />
           <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--accent-cyan)] font-bold">
             Timeline
           </span>
-        </div>
+        </div> */}
 
         {/* Timeline Spine (Track + Animated Glowing Progress Bar) */}
         <div className="relative">
           {/* Base Track Line */}
-          <div className="absolute left-[7px] top-3 bottom-3 w-[1.5px] bg-slate-800/80 dark:bg-slate-800/80 rounded-full" />
+          <div className="absolute left-[7px] top-3 bottom-3 w-[1.5px] bg-[var(--border-color)] rounded-full" />
 
           {/* Active Liquid Gradient Glowing Progress Line */}
           <div
@@ -125,7 +125,7 @@ export default function TimelineNav({
                           ? "w-3 h-3 bg-[var(--accent-cyan)] shadow-[0_0_12px_rgba(0,240,255,0.9)] ring-2 ring-cyan/40 scale-125"
                           : isPassed
                           ? "w-2 h-2 bg-[var(--accent-cyan)]/60"
-                          : "w-2 h-2 bg-slate-700 dark:bg-slate-700 group-hover:bg-[var(--accent-cyan)] group-hover:scale-125"
+                          : "w-2 h-2 bg-[var(--border-color)] group-hover:bg-[var(--accent-cyan)] group-hover:scale-125"
                       }`}
                     />
                   </div>
@@ -138,7 +138,7 @@ export default function TimelineNav({
                           ? "w-5 bg-[var(--accent-cyan)] shadow-[0_0_6px_rgba(0,240,255,0.8)]"
                           : isPassed
                           ? "w-3.5 bg-[var(--accent-cyan)]/50"
-                          : "w-2.5 bg-slate-700 group-hover:w-4 group-hover:bg-[var(--accent-cyan)]"
+                          : "w-2.5 bg-[var(--border-color)] group-hover:w-4 group-hover:bg-[var(--accent-cyan)]"
                       }`}
                     />
                   </div>
@@ -155,7 +155,7 @@ export default function TimelineNav({
                       className={`font-mono text-[9px] transition-colors ${
                         isActive
                           ? "text-[var(--accent-cyan)] font-bold"
-                          : "text-slate-500 group-hover:text-slate-400"
+                          : "text-[var(--text-muted)] group-hover:text-[var(--text-secondary)]"
                       }`}
                     >
                       {item.step}
@@ -170,7 +170,7 @@ export default function TimelineNav({
                     {item.isDrawer && (
                       <Send
                         className={`w-2.5 h-2.5 ml-0.5 transition-transform group-hover:translate-x-0.5 ${
-                          isActive ? "text-[var(--accent-cyan)]" : "text-slate-500"
+                          isActive ? "text-[var(--accent-cyan)]" : "text-[var(--text-muted)] group-hover:text-[var(--accent-cyan)]"
                         }`}
                       />
                     )}
@@ -182,12 +182,12 @@ export default function TimelineNav({
         </div>
 
         {/* Bottom Minimalist Status / Pulse Note */}
-        <div className="mt-8 pl-1.5">
+        {/* <div className="mt-8 pl-1.5">
           <div className="inline-flex items-center gap-1.5 text-[9px] font-mono text-[var(--text-muted)] tracking-wider">
             <span className="w-1 h-1 rounded-full bg-slate-600" />
             <span className="uppercase tracking-[0.16em] opacity-80">Scroll Synced</span>
           </div>
-        </div>
+        </div> */}
       </div>
     </aside>
   );

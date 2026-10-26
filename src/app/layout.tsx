@@ -68,7 +68,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
+    <html lang="en" className="dark scroll-smooth" data-theme="dark" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem('theme_mode');
+                  var theme = saved === 'light' ? 'light' : 'dark';
+                  document.documentElement.classList.remove('light', 'dark');
+                  document.documentElement.classList.add(theme);
+                  document.documentElement.setAttribute('data-theme', theme);
+                  document.documentElement.style.colorScheme = theme;
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body
         className={`${outfit.variable} ${spaceGrotesk.variable} ${firaCode.variable} font-sans min-h-screen selection:bg-cyan/30 selection:text-white transition-colors duration-300`}
         style={{ backgroundColor: "var(--bg-main)", color: "var(--text-primary)" }}
