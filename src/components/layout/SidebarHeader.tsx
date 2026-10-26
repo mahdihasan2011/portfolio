@@ -286,10 +286,69 @@ export default function SidebarHeader({
         {/* Layout placeholder on mobile to prevent content jump when header docks to top */}
         {isScrolled && <div className="h-[96px] lg:hidden mb-4" />}
 
-        {/* Short Statement */}
-        <p className="mt-4 max-w-sm text-sm sm:text-base leading-relaxed text-[var(--text-secondary)] font-sans">
-          I design and build high-performance web applications, resilient backend architectures, and distributed enterprise software systems.
-        </p>
+        {/* Short Statement with Letter-by-Letter Reveal Transition */}
+        <motion.p
+          className="mt-4 max-w-sm text-sm sm:text-base leading-relaxed text-[var(--text-secondary)] font-sans"
+          initial="hidden"
+          animate="visible"
+          aria-label="I design and build high-performance web applications, resilient backend architectures, and distributed enterprise software systems."
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.015,
+                delayChildren: 0.1,
+              },
+            },
+          }}
+        >
+          {"I design and build high-performance web applications, resilient backend architectures, and distributed enterprise software systems."
+            .split(" ")
+            .map((word, wordIdx) => (
+              <span
+                key={wordIdx}
+                className="inline-block whitespace-nowrap mr-[0.28em]"
+              >
+                {Array.from(word).map((char, charIdx) => (
+                  <motion.span
+                    key={charIdx}
+                    className="inline-block"
+                    variants={{
+                      hidden: {
+                        opacity: 0,
+                        y: 4,
+                        filter: "blur(2px)",
+                      },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        filter: "blur(0px)",
+                        transition: {
+                          duration: 0.2,
+                          ease: "easeOut",
+                        },
+                      },
+                    }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </span>
+            ))}
+          <motion.span
+            aria-hidden="true"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 1, 0] }}
+            transition={{
+              duration: 0.7,
+              repeat: 4,
+              ease: "easeInOut",
+              delay: 0.1,
+            }}
+            className="inline-block w-[2px] h-[0.9em] bg-[var(--accent-cyan)] ml-0.5 align-middle shadow-[0_0_6px_rgba(0,240,255,0.9)] rounded-xs"
+          />
+        </motion.p>
 
         {/* Status Badge & Direct Contact CTA */}
         <div className="mt-5 flex flex-wrap items-center gap-2.5">
