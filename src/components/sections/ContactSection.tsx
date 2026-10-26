@@ -10,12 +10,7 @@ import {
   Send,
   AlertCircle,
   CheckCircle2,
-  Phone,
-  MapPin,
   MessageSquare,
-  Sparkles,
-  ExternalLink,
-  MessageCircle,
 } from "lucide-react";
 
 export default function ContactSection() {
@@ -98,13 +93,13 @@ ${formState.message}
       } else {
         setStatus("error");
         setFeedbackMessage(
-          `Message delivery notice: Please email ${personal.email} or WhatsApp ${personal.phoneFormatted} directly.`
+          `Message delivery notice: Please email ${personal.email} directly.`
         );
       }
     } catch {
       setStatus("error");
       setFeedbackMessage(
-        `Notice: Please send your inquiry directly to ${personal.email} or via WhatsApp.`
+        `Notice: Please send your inquiry directly to ${personal.email}.`
       );
     }
   };
@@ -156,53 +151,6 @@ ${formState.message}
               </p>
 
               <div className="space-y-3.5">
-                {/* Phone & WhatsApp */}
-                <div
-                  className="flex items-center justify-between p-3.5 rounded-xl border transition-colors"
-                  style={{
-                    backgroundColor: "var(--bg-surface)",
-                    borderColor: "var(--border-color)",
-                  }}
-                >
-                  <a
-                    href={`tel:${personal.phone}`}
-                    className="flex items-center gap-3 group overflow-hidden"
-                  >
-                    <div
-                      className="p-2.5 rounded-lg border group-hover:scale-105 transition-transform shrink-0"
-                      style={{
-                        backgroundColor: "var(--bg-card)",
-                        borderColor: "var(--border-color)",
-                        color: "var(--accent-emerald)",
-                      }}
-                    >
-                      <Phone className="w-4 h-4" />
-                    </div>
-                    <div className="flex flex-col overflow-hidden">
-                      <span className="text-[10px] font-mono uppercase font-semibold" style={{ color: "var(--text-muted)" }}>
-                        Direct Call / WhatsApp
-                      </span>
-                      <span
-                        className="text-sm font-semibold truncate group-hover:text-cyan transition-colors"
-                        style={{ color: "var(--text-primary)" }}
-                      >
-                        {personal.phoneFormatted}
-                      </span>
-                    </div>
-                  </a>
-
-                  <a
-                    href={personal.whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-2.5 py-1 rounded-lg text-xs font-mono font-bold shrink-0 transition-transform hover:scale-105 text-charcoal-950"
-                    style={{ backgroundColor: "var(--accent-emerald)" }}
-                    title="Chat on WhatsApp"
-                  >
-                    WhatsApp
-                  </a>
-                </div>
-
                 {/* Primary Email */}
                 <a
                   href={`mailto:${personal.email}`}
@@ -231,38 +179,6 @@ ${formState.message}
                       style={{ color: "var(--text-primary)" }}
                     >
                       {personal.email}
-                    </span>
-                  </div>
-                </a>
-
-                {/* Secondary Email */}
-                <a
-                  href={`mailto:${personal.secondaryEmail}`}
-                  className="flex items-center gap-3 p-3.5 rounded-xl border transition-colors group"
-                  style={{
-                    backgroundColor: "var(--bg-surface)",
-                    borderColor: "var(--border-color)",
-                  }}
-                >
-                  <div
-                    className="p-2.5 rounded-lg border group-hover:scale-105 transition-transform shrink-0"
-                    style={{
-                      backgroundColor: "var(--bg-card)",
-                      borderColor: "var(--border-color)",
-                      color: "var(--accent-violet)",
-                    }}
-                  >
-                    <Mail className="w-4 h-4" />
-                  </div>
-                  <div className="flex flex-col overflow-hidden">
-                    <span className="text-[10px] font-mono uppercase font-semibold" style={{ color: "var(--text-muted)" }}>
-                      Alternate Email
-                    </span>
-                    <span
-                      className="text-sm font-semibold truncate group-hover:text-cyan transition-colors"
-                      style={{ color: "var(--text-primary)" }}
-                    >
-                      {personal.secondaryEmail}
                     </span>
                   </div>
                 </a>
@@ -334,37 +250,6 @@ ${formState.message}
                     </span>
                   </div>
                 </a>
-
-                {/* Detailed Address */}
-                <div
-                  className="flex items-start gap-3 p-3.5 rounded-xl border"
-                  style={{
-                    backgroundColor: "var(--bg-surface)",
-                    borderColor: "var(--border-color)",
-                  }}
-                >
-                  <div
-                    className="p-2.5 rounded-lg border shrink-0 mt-0.5"
-                    style={{
-                      backgroundColor: "var(--bg-card)",
-                      borderColor: "var(--border-color)",
-                      color: "var(--accent-cyan)",
-                    }}
-                  >
-                    <MapPin className="w-4 h-4" />
-                  </div>
-                  <div className="flex flex-col overflow-hidden">
-                    <span className="text-[10px] font-mono uppercase font-semibold" style={{ color: "var(--text-muted)" }}>
-                      Office & Location Address
-                    </span>
-                    <span
-                      className="text-xs sm:text-sm font-medium leading-relaxed"
-                      style={{ color: "var(--text-secondary)" }}
-                    >
-                      {personal.fullAddress}
-                    </span>
-                  </div>
-                </div>
               </div>
             </div>
 

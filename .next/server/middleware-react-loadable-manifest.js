@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST='{"components\\\\sections\\\\HeroSection.tsx -> @/components/3d/HeroLaptopScene":{"id":2435,"files":["static/chunks/b536a0f1.935d5b8596592681.js","static/chunks/496.f329146621fd7c16.js","static/chunks/435.379c59495ef88bcc.js"]}}';
+self.__REACT_LOADABLE_MANIFEST="{\"components\\\\sections\\\\HeroSection.tsx -> @/components/3d/HeroLaptopScene\":{\"id\":\"components\\\\sections\\\\HeroSection.tsx -> @/components/3d/HeroLaptopScene\",\"files\":[\"static/chunks/_app-pages-browser_src_components_3d_HeroLaptopScene_tsx.js\"]}}"
