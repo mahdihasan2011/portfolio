@@ -187,7 +187,7 @@ ${formState.message}
         </div>
 
         <div>
-          <ol className="group/list">
+          <ol className="group/list list-none space-y-12">
             {workExperience.map((item) => (
               <li key={item.id} className="mb-12">
                 <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-40">
@@ -300,7 +300,7 @@ ${formState.message}
         </div>
 
         <div>
-          <ul className="group/list">
+          <ul className="group/list list-none space-y-12">
             {filteredProjects.map((project) => (
               <li key={project.id} className="mb-12">
                 <div
@@ -415,7 +415,7 @@ ${formState.message}
           </h2>
         </div>
 
-        <ol className="group/list">
+        <ol className="group/list list-none space-y-8">
           {educationItems.map((edu) => (
             <li key={edu.id} className="mb-8">
               <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-40">
