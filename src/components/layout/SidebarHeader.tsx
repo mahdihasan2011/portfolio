@@ -133,7 +133,7 @@ export default function SidebarHeader({
     (hoveredSkill ? displayedSkills.find((s) => s.name === hoveredSkill) : null);
 
   return (
-    <header className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:max-h-screen lg:w-full lg:flex-col lg:justify-between lg:py-12 shrink-0 lg:overflow-y-auto lg:pr-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+    <header className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:max-h-screen lg:w-full lg:flex-col lg:justify-between lg:py-12 shrink-0 lg:overflow-y-auto lg:pr-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
       <div>
         {/* Profile Avatar & Identity: Shortened and fixed on top when scrolled in mobile view */}
         <div

@@ -42,17 +42,17 @@ export default function Home() {
 
       {/* Main Container */}
       <div className="mx-auto min-h-screen max-w-[1360px] px-4 sm:px-6 md:px-8 lg:px-8 xl:px-12 font-sans py-12 lg:py-0 pb-20 lg:pb-0">
-        <div className="lg:flex lg:justify-between lg:gap-6 xl:gap-10 relative">
+        <div className="lg:flex lg:gap-3 xl:gap-5 relative">
           {/* Sticky Left Column: Profile, Title, Fixed Skills, Socials */}
-          <div className="lg:w-[34%] xl:w-[32%] shrink-0">
+          <div className="lg:w-[380px] xl:w-[410px] shrink-0">
             <SidebarHeader
               activeSection={activeSection}
               onOpenContactDrawer={() => setIsContactDrawerOpen(true)}
             />
           </div>
 
-          {/* Middle Line Area: Timeline Navigation with Line, Nodes & Labels */}
-          <div className="hidden lg:flex lg:w-[135px] xl:w-[155px] shrink-0 justify-center">
+          {/* Middle Line Area: Slim Timeline Navigation with Line, Nodes & Labels */}
+          <div className="hidden lg:flex shrink-0">
             <TimelineNav
               activeSection={isContactDrawerOpen ? "contact" : activeSection}
               onOpenContactDrawer={() => setIsContactDrawerOpen(true)}
@@ -60,7 +60,7 @@ export default function Home() {
           </div>
 
           {/* Scrollable Right Column: Content Sections */}
-          <main id="content" className="flex-1 lg:max-w-[53%] xl:max-w-[55%] lg:pl-2">
+          <main id="content" className="flex-1 min-w-0">
             <BrittanyContent
               onOpenContactDrawer={() => setIsContactDrawerOpen(true)}
             />
