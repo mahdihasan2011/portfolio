@@ -531,7 +531,15 @@ ${formState.message}
           </div>
 
           {/* Embedded Message Dispatch Form */}
-          <form onSubmit={handleFormSubmit} className="space-y-3.5" noValidate>
+          <form
+            action="#"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleFormSubmit(e);
+            }}
+            className="space-y-3.5"
+            noValidate
+          >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label

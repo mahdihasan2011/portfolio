@@ -64,8 +64,8 @@ export default function ContactDrawer({ isOpen, onClose }: ContactDrawerProps) {
     setFormState((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e?: React.FormEvent | React.MouseEvent) => {
+    e?.preventDefault?.();
 
     if (!formState.name.trim() || !formState.email.trim() || !formState.message.trim()) {
       setFeedbackMessage("Please provide your name, email, and message.");
@@ -273,7 +273,15 @@ ${formState.message}
               </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="flex-1 flex flex-col space-y-4" noValidate>
+            <form
+              action="#"
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit(e);
+              }}
+              className="flex-1 flex flex-col space-y-4"
+              noValidate
+            >
               {/* Name */}
               <div>
                 <label
