@@ -14,8 +14,6 @@ import {
   Volume2,
   VolumeX,
   Send,
-  Sparkles,
-  Layers,
   Code2,
 } from "lucide-react";
 
@@ -59,7 +57,6 @@ export default function SidebarHeader({ activeSection, onOpenContactDrawer }: Si
     { id: "experience", label: "Experience" },
     { id: "projects", label: "Projects" },
     { id: "education", label: "Education" },
-    { id: "contact", label: "Contact" },
   ];
 
   // Flattened or filtered skills
@@ -139,12 +136,7 @@ export default function SidebarHeader({ activeSection, onOpenContactDrawer }: Si
                 <li key={link.id}>
                   <a
                     href={`#${link.id}`}
-                    onClick={(e) => {
-                      playChime();
-                      if (link.id === "contact" && onOpenContactDrawer) {
-                        // User can jump to contact section or open drawer
-                      }
-                    }}
+                    onClick={playChime}
                     className="group flex items-center py-2.5"
                   >
                     <span

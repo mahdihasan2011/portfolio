@@ -13,7 +13,7 @@ export default function Home() {
 
   useEffect(() => {
     // In-page jump sections (skills is now fixed in the left sidebar)
-    const sectionIds = ["about", "experience", "projects", "education", "contact"];
+    const sectionIds = ["about", "experience", "projects", "education"];
 
     const handleScroll = () => {
       // Offset from top of viewport to detect active section
