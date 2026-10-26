@@ -25,17 +25,18 @@ const firaCode = Fira_Code({
 export const metadata: Metadata = {
   metadataBase: new URL("https://mahdihasan.dev"),
   title: `${portfolioData.personal.name} | ${portfolioData.personal.title} — ${portfolioData.personal.specialization}`,
-  description: `${portfolioData.personal.name} is a senior full-stack engineer with 8+ years specializing in React, Next.js, and Node.js. Explore flagship enterprise projects, architectural capabilities, and contact channels.`,
+  description: `${portfolioData.personal.name} is a Software Engineer with 8+ years of production experience specializing in React, Next.js, Node.js, and Laravel. Explore featured engineering projects, scalable systems, and direct contact channels.`,
   keywords: [
     "Mahdi Hasan",
-    "Senior Full-Stack Engineer",
+    "Software Engineer",
+    "Senior Software Engineer",
+    "Full-Stack Software Engineer",
     "React Developer",
     "Next.js Developer",
     "Node.js Developer",
-    "Laravel Architect",
+    "Laravel Developer",
     "TypeScript",
-    "Tailwind CSS",
-    "3D Portfolio",
+    "Web Application Development",
   ],
   authors: [{ name: portfolioData.personal.name }],
   openGraph: {

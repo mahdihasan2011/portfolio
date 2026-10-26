@@ -91,7 +91,7 @@ export default function HeroSection() {
                 className="font-mono text-xs font-semibold"
                 style={{ color: "var(--accent-cyan)" }}
               >
-                Available for Senior Roles & High-Impact Contracts
+                Available for Software Engineering Roles & Contracts
               </span>
             </div>
 

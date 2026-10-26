@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { portfolioData } from "@/data/portfolioData";
 import { useTheme } from "@/context/ThemeContext";
 import {
@@ -94,16 +95,24 @@ export default function Navigation() {
             aria-label={`${personal.name} home`}
           >
             <span
-              className="relative flex items-center justify-center w-10 h-10 rounded-xl border font-mono text-sm font-bold transition-all shadow-sm group-hover:scale-105"
+              className="relative flex items-center justify-center w-10 h-10 rounded-xl border transition-all shadow-sm group-hover:scale-105"
               style={{
                 backgroundColor: "var(--bg-card)",
                 borderColor: "var(--border-color)",
-                color: "var(--accent-cyan)",
               }}
             >
-              {personal.initials}
+              <div className="relative w-full h-full rounded-[10px] overflow-hidden">
+                <Image
+                  src={personal.avatarUrl}
+                  alt={personal.name}
+                  fill
+                  className="object-cover"
+                  sizes="40px"
+                  priority
+                />
+              </div>
               {/* Online Pulse Beacon */}
-              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[var(--bg-main)] animate-pulse" />
+              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[var(--bg-main)] animate-pulse z-10" />
             </span>
             <div className="flex flex-col">
               <span
@@ -116,7 +125,7 @@ export default function Navigation() {
                 className="text-[11px] font-mono leading-none"
                 style={{ color: "var(--text-muted)" }}
               >
-                {personal.specialization.split(",")[0]}
+                {personal.title}
               </span>
             </div>
           </Link>
@@ -267,14 +276,19 @@ export default function Navigation() {
           <div className="flex items-center justify-between pb-4 border-b" style={{ borderColor: "var(--border-color)" }}>
             <div className="flex items-center gap-2.5">
               <span
-                className="flex items-center justify-center w-8 h-8 rounded-lg border font-mono text-xs font-bold"
+                className="relative flex items-center justify-center w-8 h-8 rounded-lg border overflow-hidden"
                 style={{
                   backgroundColor: "var(--bg-card)",
                   borderColor: "var(--border-color)",
-                  color: "var(--accent-cyan)",
                 }}
               >
-                {personal.initials}
+                <Image
+                  src={personal.avatarUrl}
+                  alt={personal.name}
+                  fill
+                  className="object-cover"
+                  sizes="32px"
+                />
               </span>
               <span className="font-display font-bold text-sm">{personal.name}</span>
             </div>

@@ -100,16 +100,16 @@ export const portfolioData: PortfolioData = {
     name: "Mahdi Hasan",
     altName: "Mahdi Saikat",
     initials: "MH",
-    title: "Senior Full-Stack Engineer & Solutions Architect",
-    specialization: "React, Next.js, Node.js & Laravel",
+    title: "Software Engineer",
+    specialization: "Full-Stack Development • React, Next.js, Node.js & Laravel",
     experienceYears: 8,
     bio: [
-      "I am a Senior Full-Stack Software Developer & Solutions Architect with over 8 years of enterprise experience designing, developing, and deploying resilient, high-concurrency web applications.",
-      "From reactive, 60fps client dashboards built in React and Next.js to distributed backend APIs engineered in Node.js, Express, and Laravel, I take full end-to-end ownership of the software lifecycle — from conceptual database modeling to high-availability cloud deployment.",
-      "I have architected financial portals, retail POS suites, multi-tenant e-commerce platforms, and CRM ticketing systems that process millions of transactions while maintaining strict 99.9% uptime SLA standards."
+      "I am a Software Engineer with over 8 years of production experience designing, building, and deploying scalable web applications and high-performance backend systems.",
+      "From responsive client applications built with React and Next.js to robust backend APIs engineered in Node.js, Express, and Laravel, I take full end-to-end ownership of the software engineering lifecycle — from database modeling to production cloud deployment.",
+      "I have built and delivered mission-critical software solutions including retail point-of-sale engines, real-time trading terminals, multi-vendor e-commerce marketplaces, and automated billing gateways that process millions of transactions with high reliability."
     ],
     approach:
-      "My engineering philosophy is rooted in First-Principles design: start with the user journey, design strict type-safe contracts, eliminate unnecessary abstractions, and optimize for long-term maintainability. I balance cutting-edge UI innovation with bulletproof backend resilience.",
+      "My software engineering philosophy is grounded in First-Principles: writing clean, modular code, enforcing strict type-safety, designing efficient database schemas, and eliminating unnecessary abstractions. I focus on building reliable software engineered to scale seamlessly under demanding production workloads.",
     avatarUrl: "/images/profilepic4.jpeg",
     resumeUrl: "/Mahdi_Hasan_Resume.pdf",
     location: "Dhaka, Bangladesh",
@@ -131,41 +131,41 @@ export const portfolioData: PortfolioData = {
     { label: "Active Users", value: "100k+", sublabel: "Served Worldwide" },
   ],
   hero: {
-    headlinePrefix: "Architecting Next-Gen",
-    headlineHighlight: "Web Systems & 3D Experiences",
+    headlinePrefix: "Building High-Performance",
+    headlineHighlight: "Software & Scalable Systems",
     subheadline:
-      "Senior Full-Stack Software Engineer with 8+ years building enterprise applications. Specializing in high-performance React & Next.js interfaces backed by scalable Node.js and Laravel cloud architectures.",
+      "Software Engineer with 8+ years of experience engineering production software. Specializing in high-performance web applications with React & Next.js, robust backend services in Node.js & Laravel, and distributed data systems.",
     rotatingRoles: [
+      "Software Engineer",
       "Senior Full-Stack Engineer",
-      "React & Next.js Specialist",
-      "Node.js & Express API Architect",
-      "Laravel & PHP Distributed Systems",
-      "8+ Years of Production Scalability"
+      "React & Next.js Developer",
+      "Node.js & Laravel Backend Engineer",
+      "Distributed Systems & Cloud APIs"
     ],
-    primaryCtaText: "Explore Flagship Work",
+    primaryCtaText: "Explore Projects",
     primaryCtaHref: "#projects",
     secondaryCtaText: "Get in Touch",
     secondaryCtaHref: "#contact",
   },
   services: [
     {
-      title: "Frontend & 3D Web Apps",
-      description: "Blazing fast, 60fps responsive web interfaces using React 19, Next.js App Router, Three.js, React Three Fiber, and Tailwind CSS.",
+      title: "Frontend Engineering",
+      description: "High-performance, responsive web applications built with React, Next.js, TypeScript, and modern UI architectures with optimal UX and sub-second load times.",
       icon: "Layout",
     },
     {
-      title: "Backend APIs & Microservices",
-      description: "Robust, scalable RESTful & WebSocket APIs built with Node.js, Express, and Laravel, optimized for concurrency and high-throughput data pipelines.",
+      title: "Backend Systems & APIs",
+      description: "Robust, scalable RESTful & WebSocket APIs built with Node.js, Express, and Laravel, optimized for concurrency, data integrity, and low latency.",
       icon: "Server",
     },
     {
-      title: "Database Modeling & Scaling",
+      title: "Database Design & Optimization",
       description: "ACID-compliant relational schemas in MySQL & PostgreSQL with Redis caching layers, indexing optimization, and high query efficiency.",
       icon: "Database",
     },
     {
-      title: "Enterprise Solutions Architecture",
-      description: "End-to-end cloud deployment, Docker containerization, CI/CD pipeline automation, and multi-tenant SaaS architecture design.",
+      title: "Cloud & DevOps Engineering",
+      description: "End-to-end containerization with Docker, automated CI/CD pipelines, Linux server administration, and reliable cloud deployments maintaining 99.9% uptime.",
       icon: "Cpu",
     },
   ],
@@ -177,7 +177,7 @@ export const portfolioData: PortfolioData = {
         { name: "Next.js (App Router)", description: "Server Components, ISR, SSR, Streaming, Metadata API", level: "Advanced" },
         { name: "TypeScript", description: "Strict Typing, Generic Contracts, Architecture Abstractions", level: "Advanced" },
         { name: "Vue.js 3", description: "Composition API, Pinia, Reactivity System, Nuxt", level: "Senior" },
-        { name: "Tailwind CSS & WebGL", description: "Responsive Systems, Three.js, R3F, 3D Canvas Interactivity", level: "Advanced" },
+        { name: "Tailwind CSS & Modern UI", description: "Design Systems, Component Architecture, CSS3, Responsive Layouts", level: "Senior" },
       ],
     },
     {
@@ -543,39 +543,11 @@ export const portfolioData: PortfolioData = {
         "Rigorous training in Object-Oriented Programming, Relational Database Theory, Data Structures, and System Design."
       ],
       techStack: ["OOP", "Data Structures", "Database Theory", "Operating Systems", "Networking"]
-    },
-    {
-      id: "edu-hsc",
-      role: "Higher Secondary Certificate (HSC) — Science",
-      organization: "Dr. Mahbubur Rahman Mollah College",
-      period: "2010 — 2012",
-      location: "Demra Road, Matuail, Dhaka-1362, Bangladesh",
-      type: "Education",
-      summary:
-        "Higher Secondary graduation with specialization in Science (Physics, Chemistry, Mathematics, Biology).",
-      highlights: [
-        "Graduated with Distinction: GPA 5.00 / 5.00."
-      ],
-      techStack: ["Mathematics", "Physics", "Computer Science Foundations"]
-    },
-    {
-      id: "edu-ssc",
-      role: "Secondary School Certificate (SSC) — Science",
-      organization: "Shamsul Hoque Khan School & College",
-      period: "2008 — 2010",
-      location: "Paradogair, Konapara, Demra, Dhaka-1362, Bangladesh",
-      type: "Education",
-      summary:
-        "Secondary School graduation with primary focus in Science and Mathematics.",
-      highlights: [
-        "Graduated with Distinction: GPA 5.00 / 5.00."
-      ],
-      techStack: ["General Science", "Higher Mathematics"]
     }
   ],
   contact: {
     invitation:
-      "Whether you are considering me for a senior full-stack engineering role, need architectural consulting for your Next.js/Node.js application, or want to discuss a challenging project, my inbox is always open.",
+      "Whether you are considering me for a Software Engineering role, need technical consulting for your Next.js/Node.js/Laravel stack, or want to discuss a challenging project, my inbox is always open.",
     telegram: {
       botToken: "8289585552:AAEPZbLgJXH1Kf0OIzpQJmwasgqpMX3ETkg",
       chatId: "8553087905",

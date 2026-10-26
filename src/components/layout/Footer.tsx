@@ -33,7 +33,7 @@ export default function Footer() {
             className="text-xs mt-1 font-mono"
             style={{ color: "var(--text-muted)" }}
           >
-            © {currentYear} • Senior Full-Stack Engineer • React, Next.js, Node.js & Laravel Cloud Architectures.
+            © {currentYear} • Software Engineer • Full-Stack Systems, React, Next.js, Node.js & Laravel.
           </p>
         </div>
 

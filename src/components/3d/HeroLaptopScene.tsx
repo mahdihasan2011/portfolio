@@ -55,23 +55,23 @@ function useCodeScreenTexture(isDark: boolean) {
 
     // Code lines with rich syntax highlighting
     const codeLines = [
-      { text: "import { SeniorEngineer } from '@mahdi/core';", color: "#c084fc" },
-      { text: "import { React19, NextAppRouter, NodeAPI } from '@cloud/stack';", color: "#c084fc" },
+      { text: "import { SoftwareEngineer } from '@mahdi/core';", color: "#c084fc" },
+      { text: "import { React, Nextjs, NodeAPI, Laravel } from '@stack/core';", color: "#c084fc" },
       { text: "", color: "" },
       { text: "export const MahdiProfile = {", color: isDark ? "#00f0ff" : "#38bdf8" },
       { text: "  name: 'Mahdi Hasan',", color: "#34d399" },
-      { text: "  role: 'Senior Full-Stack Engineer & Solutions Architect',", color: "#fbbf24" },
-      { text: "  experience: '8+ Years Production Scalability',", color: "#facc15" },
+      { text: "  role: 'Software Engineer',", color: "#fbbf24" },
+      { text: "  experience: '8+ Years Production Engineering',", color: "#facc15" },
       { text: "  coreStack: ['React', 'Next.js', 'Node.js', 'Laravel', 'TypeScript'],", color: "#38bdf8" },
       { text: "  database: ['MySQL', 'PostgreSQL', 'Redis Distributed Cache'],", color: "#a78bfa" },
-      { text: "  architecture: ['Microservices', 'High-Concurrency POS', 'FinTech'],", color: "#ec4899" },
+      { text: "  projects: ['Retail POS', 'FinTech Terminal', 'E-Commerce', 'CRM'],", color: "#ec4899" },
       { text: "  productionSLA: '99.9%',", color: "#f43f5e" },
       { text: "  openToOpportunities: true,", color: "#22c55e" },
       { text: "};", color: isDark ? "#00f0ff" : "#38bdf8" },
       { text: "", color: "" },
-      { text: "// Deploying high-availability digital solutions...", color: "#64748b" },
-      { text: "export default async function renderProductionSystem() {", color: "#c084fc" },
-      { text: "  return await MahdiProfile.deploy({ latency: '<50ms', security: 'hardened' });", color: "#38bdf8" },
+      { text: "// Engineering scalable production software...", color: "#64748b" },
+      { text: "export default async function runSoftwareEngine() {", color: "#c084fc" },
+      { text: "  return await MahdiProfile.buildSystems({ status: 'resilient' });", color: "#38bdf8" },
       { text: "}", color: "#c084fc" },
     ];
 

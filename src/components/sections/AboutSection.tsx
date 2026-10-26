@@ -14,7 +14,7 @@ import {
   Layers,
   ShieldCheck,
   Zap,
-  Phone,
+  Linkedin,
   Mail,
   ExternalLink,
   Server,
@@ -104,7 +104,7 @@ export default function AboutSection() {
             {/* Quick Contact & CV Chips */}
             <div className="mt-5 w-full max-w-xs flex flex-col gap-2">
               <a
-                href={personal.whatsappUrl}
+                href={personal.linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 py-2 px-3 rounded-xl border text-xs font-mono font-semibold transition-colors hover:border-cyan"
@@ -114,8 +114,8 @@ export default function AboutSection() {
                   color: "var(--text-primary)",
                 }}
               >
-                <Phone className="w-3.5 h-3.5 text-emerald-400" />
-                <span>{personal.phoneFormatted}</span>
+                <Linkedin className="w-3.5 h-3.5 text-cyan" />
+                <span>LinkedIn Profile</span>
               </a>
 
               <a
@@ -140,7 +140,7 @@ export default function AboutSection() {
                 className="font-display text-xl sm:text-2xl font-bold mb-4"
                 style={{ color: "var(--text-primary)" }}
               >
-                Full-Stack Engineer with 8+ Years of Enterprise Delivery
+                Software Engineer with 8+ Years of Production Experience
               </h3>
 
               <div

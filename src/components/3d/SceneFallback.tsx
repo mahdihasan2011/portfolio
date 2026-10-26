@@ -52,7 +52,7 @@ export default function SceneFallback() {
         >
           <p>
             <span style={{ color: "var(--accent-violet)" }}>const</span>{" "}
-            <span style={{ color: "var(--accent-cyan)" }}>SeniorEngineer</span> = &#123;
+            <span style={{ color: "var(--accent-cyan)" }}>SoftwareEngineer</span> = &#123;
           </p>
           <p className="pl-4">
             name: <span className="text-emerald-400">&apos;Mahdi Hasan&apos;</span>,

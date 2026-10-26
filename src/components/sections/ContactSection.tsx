@@ -20,7 +20,7 @@ export default function ContactSection() {
     name: "",
     email: "",
     phone: "",
-    subject: "Senior Full-Stack Engineering Role",
+    subject: "Software Engineering Opportunity",
     message: "",
   });
 
@@ -87,7 +87,7 @@ ${formState.message}
           name: "",
           email: "",
           phone: "",
-          subject: "Senior Full-Stack Engineering Role",
+          subject: "Software Engineering Opportunity",
           message: "",
         });
       } else {
@@ -403,10 +403,10 @@ ${formState.message}
                       color: "var(--text-primary)",
                     }}
                   >
-                    <option value="Senior Full-Stack Engineering Role">Senior Full-Stack Engineering Role</option>
-                    <option value="Next.js / React Architecture Consulting">Next.js / React Architecture Consulting</option>
-                    <option value="Enterprise Contract / Freelance Project">Enterprise Contract / Freelance Project</option>
-                    <option value="Technical Partnership">Technical Partnership</option>
+                    <option value="Software Engineering Opportunity">Software Engineering Opportunity</option>
+                    <option value="Full-Stack Web Development">Full-Stack Web Development</option>
+                    <option value="Next.js / Node.js / Laravel Project">Next.js / Node.js / Laravel Project</option>
+                    <option value="Technical Consulting & Contracts">Technical Consulting & Contracts</option>
                     <option value="General Inquiry">General Inquiry</option>
                   </select>
                 </div>
