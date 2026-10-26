@@ -295,7 +295,7 @@ export default function SidebarHeader({
         <div className="mt-5 flex flex-wrap items-center gap-2.5">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-mono">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span>Available for new opportunities</span>
+            <span>Available for Hire</span>
           </div>
 
           {onOpenContactDrawer && (
@@ -304,10 +304,10 @@ export default function SidebarHeader({
                 onOpenContactDrawer();
                 playChime();
               }}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-cyan/40 bg-cyan/10 hover:bg-cyan/20 text-cyan text-xs font-mono font-medium transition-all hover:scale-105"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-cyan/40 bg-cyan/10 hover:bg-cyan/20 text-cyan text-xs font-mono font-medium transition-all hover:scale-105 cursor-pointer"
             >
               <Send className="w-3 h-3" />
-              <span>Contact Now</span>
+              <span>Get in Touch</span>
             </button>
           )}
         </div>
