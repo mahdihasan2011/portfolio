@@ -161,17 +161,23 @@ export default function SidebarHeader({
                   priority
                 />
               </div>
-              <div>
+              <div className="min-w-0">
                 <h1
-                  className={`font-display font-bold tracking-tight text-[var(--text-primary)] transition-all duration-300 ${
-                    isScrolled ? "text-lg sm:text-xl lg:text-4xl xl:text-5xl" : "text-4xl sm:text-5xl"
+                  className={`font-display font-bold tracking-tight text-[var(--text-primary)] whitespace-nowrap transition-all duration-300 ${
+                    isScrolled
+                      ? "text-lg sm:text-xl lg:text-3xl xl:text-4xl"
+                      : "text-2xl sm:text-3xl lg:text-3xl xl:text-4xl leading-tight"
                   }`}
                 >
-                  <a href="#about" onClick={playChime}>{personal.name}</a>
+                  <a href="#about" onClick={playChime} className="whitespace-nowrap">
+                    {personal.name}
+                  </a>
                 </h1>
                 <h2
-                  className={`font-mono font-semibold text-[var(--accent-cyan)] transition-all duration-300 ${
-                    isScrolled ? "text-xs sm:text-sm lg:text-base xl:text-lg" : "mt-1 text-base sm:text-lg"
+                  className={`font-mono font-semibold text-[var(--accent-cyan)] whitespace-nowrap transition-all duration-300 ${
+                    isScrolled
+                      ? "text-xs sm:text-sm lg:text-sm xl:text-base"
+                      : "mt-1 text-sm sm:text-base xl:text-lg"
                   }`}
                 >
                   {personal.title}
