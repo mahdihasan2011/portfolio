@@ -221,7 +221,7 @@ export default function SidebarHeader({ onOpenContactDrawer }: SidebarHeaderProp
           </div>
 
           {/* Skill Pills Grid */}
-          <div className="flex flex-wrap gap-1.5 max-h-52 overflow-y-auto pr-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          <div className="flex flex-wrap gap-1.5">
             {displayedSkills.map((skill) => (
               <span
                 key={skill.name}
