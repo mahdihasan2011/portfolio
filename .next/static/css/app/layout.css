@@ -1476,6 +1476,9 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(9 11 14 / var(--tw-bg-opacity, 1));
 }
+.bg-cyan\/5 {
+  background-color: rgb(0 240 255 / 0.05);
+}
 .fill-amber-400 {
   fill: #fbbf24;
 }

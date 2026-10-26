@@ -21,8 +21,12 @@ import {
   Cpu,
 } from "lucide-react";
 
-export default function BrittanyContent() {
-  const { personal, hero, experience, projects, skills, contact } = portfolioData;
+interface BrittanyContentProps {
+  onOpenContactDrawer?: () => void;
+}
+
+export default function BrittanyContent({ onOpenContactDrawer }: BrittanyContentProps) {
+  const { personal, hero, experience, projects, contact } = portfolioData;
 
   // Project modal state
   const [activeModalProject, setActiveModalProject] = useState<Project | null>(null);
@@ -371,46 +375,6 @@ ${formState.message}
       </section>
 
       {/* ========================================================
-          SECTION: SKILLS
-          ======================================================== */}
-      <section
-        id="skills"
-        className="mb-16 scroll-mt-16 md:mb-24 lg:mb-32 lg:scroll-mt-24"
-        aria-label="Technical skills"
-      >
-        {/* Mobile Sticky Header */}
-        <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-[var(--bg-main)]/90 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0 border-b border-[var(--border-color)] lg:border-none">
-          <h2 className="text-sm font-bold uppercase tracking-widest font-mono text-[var(--accent-cyan)] lg:sr-only">
-            Skills
-          </h2>
-        </div>
-
-        <div className="space-y-6">
-          {skills.map((category) => (
-            <div
-              key={category.category}
-              className="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)]"
-            >
-              <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[var(--accent-cyan)] mb-3">
-                {category.category}
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill) => (
-                  <span
-                    key={skill.name}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] text-xs font-mono font-medium text-[var(--text-primary)] hover:border-[var(--accent-cyan)] transition-colors"
-                  >
-                    <span>{skill.name}</span>
-                    <span className="text-[10px] text-[var(--text-muted)] font-sans">• {skill.level}</span>
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ========================================================
           SECTION: EDUCATION
           ======================================================== */}
       <section
@@ -497,6 +461,28 @@ ${formState.message}
           <p className="text-sm leading-relaxed text-[var(--text-secondary)] font-sans mb-6">
             {contact.invitation}
           </p>
+
+          {onOpenContactDrawer && (
+            <div className="mb-6 p-4 rounded-xl border border-cyan/30 bg-cyan/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <span className="text-xs font-mono font-bold text-cyan flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-cyan animate-pulse" />
+                  Instant Telegram Dispatch
+                </span>
+                <p className="text-xs text-[var(--text-secondary)] mt-0.5">
+                  Open the slide-over drawer with direct Telegram bot notification.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={onOpenContactDrawer}
+                className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-cyan text-charcoal-950 font-bold text-xs hover:scale-105 transition-all shadow-md shrink-0"
+              >
+                <Send className="w-3.5 h-3.5" />
+                <span>Contact Now</span>
+              </button>
+            </div>
+          )}
 
           {/* Quick Active Channels */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-6">
