@@ -42,7 +42,7 @@ export default function Home() {
           <SidebarHeader activeSection={activeSection} />
 
           {/* Scrollable Right Column: Content Sections */}
-          <main id="content" className="flex-1">
+          <main id="content" className="flex-1 lg:max-w-[55%]">
             <BrittanyContent />
           </main>
         </div>

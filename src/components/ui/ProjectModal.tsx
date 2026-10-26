@@ -99,6 +99,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         <div
           className="mt-5 relative w-full h-56 sm:h-72 rounded-xl overflow-hidden border"
           style={{
+            position: "relative",
             backgroundColor: "var(--bg-surface)",
             borderColor: "var(--border-color)",
           }}

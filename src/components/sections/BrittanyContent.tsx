@@ -124,7 +124,7 @@ ${formState.message}
   const educationItems = experience.filter((e) => e.type === "Education");
 
   return (
-    <div className="pt-24 lg:w-[52%] lg:py-24">
+    <div className="pt-24 lg:py-24 w-full">
       {/* ========================================================
           SECTION: ABOUT
           ======================================================== */}
@@ -312,13 +312,23 @@ ${formState.message}
 
                   {/* Left Column: Image Thumbnail */}
                   <div className="z-10 sm:order-1 sm:col-span-2 sm:translate-y-1">
-                    <div className="relative aspect-video w-full rounded-xl overflow-hidden border border-[var(--border-color)] group-hover:border-[var(--accent-cyan)] transition-colors">
+                    <div
+                      className="relative rounded-lg overflow-hidden border border-[var(--border-color)] group-hover:border-[var(--accent-cyan)] transition-colors shadow-sm"
+                      style={{
+                        position: "relative",
+                        width: "100%",
+                        maxWidth: "200px",
+                        aspectRatio: "16 / 10",
+                        height: "auto",
+                      }}
+                    >
                       <Image
                         src={project.image}
                         alt={`${project.title} screenshot`}
-                        fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
-                        sizes="(max-width: 640px) 100vw, 200px"
+                        width={400}
+                        height={250}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        loading="lazy"
                       />
                     </div>
                   </div>

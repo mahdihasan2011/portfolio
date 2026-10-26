@@ -13,18 +13,22 @@ import {
   Moon,
   Volume2,
   VolumeX,
-  Phone,
-  ArrowUpRight,
+  Send,
+  Sparkles,
+  Layers,
+  Code2,
 } from "lucide-react";
 
 interface SidebarHeaderProps {
   activeSection: string;
+  onOpenContactDrawer?: () => void;
 }
 
-export default function SidebarHeader({ activeSection }: SidebarHeaderProps) {
-  const { personal, hero } = portfolioData;
+export default function SidebarHeader({ activeSection, onOpenContactDrawer }: SidebarHeaderProps) {
+  const { personal, skills } = portfolioData;
   const { isDark, toggleTheme } = useTheme();
   const [soundEnabled, setSoundEnabled] = useState(false);
+  const [selectedSkillCategory, setSelectedSkillCategory] = useState<string>("All");
 
   const playChime = () => {
     if (!soundEnabled) return;
@@ -54,23 +58,39 @@ export default function SidebarHeader({ activeSection }: SidebarHeaderProps) {
     { id: "about", label: "About" },
     { id: "experience", label: "Experience" },
     { id: "projects", label: "Projects" },
-    { id: "skills", label: "Skills" },
     { id: "education", label: "Education" },
     { id: "contact", label: "Contact" },
   ];
 
+  // Flattened or filtered skills
+  const skillCategories = [
+    "All",
+    "Frontend & UI",
+    "Backend & APIs",
+    "Database & Storage",
+    "DevOps & Cloud",
+  ];
+
+  const displayedSkills =
+    selectedSkillCategory === "All"
+      ? skills.flatMap((c) => c.skills)
+      : skills.find((c) => c.category === selectedSkillCategory)?.skills || [];
+
   return (
-    <header className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-[48%] lg:flex-col lg:justify-between lg:py-24">
+    <header className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:max-h-screen lg:w-[42%] lg:flex-col lg:justify-between lg:py-16 shrink-0 lg:overflow-y-auto lg:pr-2">
       <div>
         {/* Profile Avatar & Identity */}
         <div className="flex items-center gap-4 mb-4">
-          <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 border-[var(--accent-cyan)] shadow-lg group shrink-0">
+          <div
+            className="relative rounded-2xl overflow-hidden border-2 border-[var(--accent-cyan)] shadow-lg group shrink-0"
+            style={{ position: "relative", width: "72px", height: "72px", minWidth: "72px", minHeight: "72px" }}
+          >
             <Image
               src={personal.avatarUrl}
               alt={personal.name}
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-300"
-              sizes="80px"
+              width={144}
+              height={144}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               priority
             />
           </div>
@@ -89,23 +109,43 @@ export default function SidebarHeader({ activeSection }: SidebarHeaderProps) {
           I design and build high-performance web applications, resilient backend architectures, and distributed enterprise software systems.
         </p>
 
-        {/* Status Badge */}
-        <div className="mt-5 inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-mono">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span>Available for new opportunities</span>
+        {/* Status Badge & Direct Contact CTA */}
+        <div className="mt-5 flex flex-wrap items-center gap-2.5">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-mono">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span>Available for new opportunities</span>
+          </div>
+
+          {onOpenContactDrawer && (
+            <button
+              onClick={() => {
+                onOpenContactDrawer();
+                playChime();
+              }}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-cyan/40 bg-cyan/10 hover:bg-cyan/20 text-cyan text-xs font-mono font-medium transition-all hover:scale-105"
+            >
+              <Send className="w-3 h-3" />
+              <span>Contact Now</span>
+            </button>
+          )}
         </div>
 
         {/* Brittany Chiang In-Page Nav (Desktop) */}
         <nav className="nav hidden lg:block" aria-label="In-page jump links">
-          <ul className="mt-14 w-max space-y-1">
+          <ul className="mt-10 w-max space-y-1">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
                 <li key={link.id}>
                   <a
                     href={`#${link.id}`}
-                    onClick={playChime}
-                    className="group flex items-center py-3"
+                    onClick={(e) => {
+                      playChime();
+                      if (link.id === "contact" && onOpenContactDrawer) {
+                        // User can jump to contact section or open drawer
+                      }
+                    }}
+                    className="group flex items-center py-2.5"
                   >
                     <span
                       className={`nav-indicator mr-4 h-px transition-all motion-reduce:transition-none ${
@@ -129,10 +169,77 @@ export default function SidebarHeader({ activeSection }: SidebarHeaderProps) {
             })}
           </ul>
         </nav>
+
+        {/* ========================================================
+            TECHNICAL SKILLS (Fixed In Left Sidebar)
+            ======================================================== */}
+        <div className="mt-10 pt-8 border-t border-[var(--border-color)]">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <Code2 className="w-3.5 h-3.5 text-cyan" />
+              <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[var(--accent-cyan)]">
+                Technical Arsenal
+              </h3>
+            </div>
+            <span className="text-[10px] font-mono text-[var(--text-muted)]">
+              {displayedSkills.length} Technologies
+            </span>
+          </div>
+
+          {/* Category Tabs */}
+          <div className="flex flex-wrap gap-1.5 mb-3.5">
+            {skillCategories.map((cat) => {
+              const shortLabel =
+                cat === "Frontend & UI"
+                  ? "Frontend"
+                  : cat === "Backend & APIs"
+                  ? "Backend"
+                  : cat === "Database & Storage"
+                  ? "Database"
+                  : cat === "DevOps & Cloud"
+                  ? "DevOps"
+                  : "All";
+
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedSkillCategory(cat)}
+                  className="px-2.5 py-1 rounded-lg text-[11px] font-mono font-medium transition-all"
+                  style={{
+                    backgroundColor:
+                      selectedSkillCategory === cat ? "var(--accent-cyan)" : "var(--bg-surface)",
+                    color: selectedSkillCategory === cat ? "#07090e" : "var(--text-secondary)",
+                    border: `1px solid ${
+                      selectedSkillCategory === cat ? "var(--accent-cyan)" : "var(--border-color)"
+                    }`,
+                  }}
+                >
+                  {shortLabel}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Skill Pills Grid */}
+          <div className="flex flex-wrap gap-1.5 max-h-56 overflow-y-auto pr-1">
+            {displayedSkills.map((skill) => (
+              <span
+                key={skill.name}
+                title={`${skill.name} • ${skill.description}`}
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-[var(--border-color)] bg-[var(--bg-surface)] text-xs font-mono text-[var(--text-primary)] hover:border-cyan hover:text-cyan transition-colors group cursor-default"
+              >
+                <span>{skill.name}</span>
+                <span className="text-[9px] text-[var(--text-muted)] font-sans group-hover:text-cyan/80">
+                  {skill.level === "Senior" ? "★ Sr" : "• Adv"}
+                </span>
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Bottom Footer Area in Left Column */}
-      <div className="mt-12 lg:mt-0 pt-6">
+      <div className="mt-8 pt-6 border-t border-[var(--border-color)]">
         <div className="flex flex-wrap items-center gap-4">
           {/* Social Icons */}
           <div className="flex items-center gap-3">

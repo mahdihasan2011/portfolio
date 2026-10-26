@@ -220,7 +220,7 @@ export const portfolioData: PortfolioData = {
       myContribution:
         "Architected an offline-first POS client using IndexedDB and WebSocket sync with a high-concurrency Node.js and Laravel backend, delivering instant sub-50ms barcode scanning.",
       tags: ["React", "TypeScript", "Node.js", "Laravel", "MySQL", "WebSockets"],
-      image: "/images/img-1.jpg",
+      image: "/images/pos.jpg",
       stars: 128,
       sourceUrl: "https://github.com/mahdihasan2011",
       details: {
@@ -246,7 +246,7 @@ export const portfolioData: PortfolioData = {
       myContribution:
         "Refactored the frontend into Next.js App Router with Incremental Static Regeneration (ISR) and Redis distributed caching, cutting Page Load Time by 65%.",
       tags: ["Next.js", "React", "Laravel", "Redis", "Tailwind CSS", "MySQL"],
-      image: "/images/img-2.jpg",
+      image: "/images/ecommerce.jpg",
       stars: 245,
       sourceUrl: "https://github.com/mahdihasan2011",
       details: {
@@ -272,7 +272,7 @@ export const portfolioData: PortfolioData = {
       myContribution:
         "Engineered an automated vendor lifecycle portal with custom commission calculations, escrow ledgering, and merchant self-service dashboards.",
       tags: ["Vue.js 3", "Laravel", "PHP 8", "MySQL", "Docker", "REST API"],
-      image: "/images/img-3.jpg",
+      image: "/images/ecom3.jpg",
       stars: 89,
       sourceUrl: "https://github.com/mahdihasan2011",
       details: {
@@ -298,7 +298,7 @@ export const portfolioData: PortfolioData = {
       myContribution:
         "Built a high-frequency Canvas/WebGL charting interface using React, Web Workers for tick aggregation, and low-latency WebSocket stream subscribers.",
       tags: ["React", "TypeScript", "Three.js", "WebSockets", "Node.js", "Tailwind CSS"],
-      image: "/images/img-4.jpg",
+      image: "/images/money-transfer.jpg",
       stars: 312,
       sourceUrl: "https://github.com/mahdihasan2011",
       details: {
@@ -324,7 +324,7 @@ export const portfolioData: PortfolioData = {
       myContribution:
         "Engineered an omnichannel ticket management system with real-time agent collision detection, automated triage rules, and customer timeline unification.",
       tags: ["React", "Next.js", "Laravel", "PostgreSQL", "WebSockets", "Redis"],
-      image: "/images/img-5.jpg",
+      image: "/images/crm1.jpg",
       stars: 174,
       sourceUrl: "https://github.com/mahdihasan2011",
       details: {
@@ -350,7 +350,7 @@ export const portfolioData: PortfolioData = {
       myContribution:
         "Built a double-entry financial ledger service guaranteeing immutable journal entries with automated bank feed reconciliation and audit trails.",
       tags: ["TypeScript", "Node.js", "React", "PostgreSQL", "Docker", "Jest"],
-      image: "/images/img-6.jpg",
+      image: "/images/money-transfer.jpg",
       stars: 142,
       sourceUrl: "https://github.com/mahdihasan2011",
       details: {
@@ -376,7 +376,7 @@ export const portfolioData: PortfolioData = {
       myContribution:
         "Designed an asynchronous OCR and semantic extraction pipeline that parses unstructured PDF files into clean, typed JSON data structures.",
       tags: ["Next.js", "React", "Node.js", "Python", "Docker", "Tailwind CSS"],
-      image: "/images/img-1.jpg",
+      image: "/images/crm2.jpg",
       stars: 96,
       sourceUrl: "https://github.com/mahdihasan2011",
       details: {
@@ -402,7 +402,7 @@ export const portfolioData: PortfolioData = {
       myContribution:
         "Architected an automated MikroTik RouterOS API socket integration that updates queues in real time and cuts overdue connection lines automatically.",
       tags: ["Laravel", "PHP 8", "MySQL", "MikroTik API", "Linux", "Bootstrap"],
-      image: "/images/img-2.jpg",
+      image: "/images/isp-billing.jpg",
       stars: 78,
       sourceUrl: "https://github.com/mahdihasan2011",
       details: {

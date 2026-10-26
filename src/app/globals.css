@@ -64,6 +64,11 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Core positioning safety */
+.relative {
+  position: relative;
+}
+
 /* Accessible focus ring defaults */
 :focus-visible {
   outline: 2px solid var(--accent-cyan);
