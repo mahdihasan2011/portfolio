@@ -14,8 +14,8 @@ export default function Home() {
   const [isContactDrawerOpen, setIsContactDrawerOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    // In-page jump sections (skills is now fixed in the left sidebar)
-    const sectionIds = ["about", "experience", "projects", "education"];
+    // In-page jump sections (skills and education are in left sidebar)
+    const sectionIds = ["about", "experience", "projects"];
 
     const handleScroll = () => {
       // Offset from top of viewport to detect active section

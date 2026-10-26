@@ -12,7 +12,6 @@ const MOBILE_ITEMS = [
   { id: "about", label: "About" },
   { id: "experience", label: "Exp" },
   { id: "projects", label: "Projects" },
-  { id: "education", label: "Edu" },
   { id: "contact", label: "Contact", isDrawer: true },
 ];
 

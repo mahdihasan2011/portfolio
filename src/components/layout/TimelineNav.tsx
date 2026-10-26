@@ -19,8 +19,7 @@ const TIMELINE_ITEMS: TimelineItem[] = [
   { id: "about", label: "About", step: "01" },
   { id: "experience", label: "Experience", step: "02" },
   { id: "projects", label: "Projects", step: "03" },
-  { id: "education", label: "Education", step: "04" },
-  { id: "contact", label: "Contact", step: "05", isDrawer: true },
+  { id: "contact", label: "Contact", step: "04", isDrawer: true },
 ];
 
 export default function TimelineNav({

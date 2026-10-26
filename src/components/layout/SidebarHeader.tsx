@@ -15,6 +15,7 @@ import {
   VolumeX,
   Send,
   Code2,
+  GraduationCap,
 } from "lucide-react";
 
 interface SidebarHeaderProps {
@@ -185,10 +186,61 @@ export default function SidebarHeader({ onOpenContactDrawer }: SidebarHeaderProp
             ))}
           </div>
         </div>
+
+        {/* ========================================================
+            EDUCATION & CREDENTIALS (Compact & Shortened)
+            ======================================================== */}
+        <div className="mt-6 pt-5 border-t border-[var(--border-color)]">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <GraduationCap className="w-3.5 h-3.5 text-cyan" />
+              <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[var(--accent-cyan)]">
+                Education
+              </h3>
+            </div>
+            <span className="text-[10px] font-mono text-[var(--text-muted)]">
+              M.Sc. & B.Sc.
+            </span>
+          </div>
+
+          <div className="space-y-2.5">
+            {/* M.Sc. */}
+            <div className="p-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] hover:border-cyan/40 transition-all group">
+              <div className="flex items-start justify-between gap-2">
+                <span className="font-mono text-xs font-bold text-[var(--text-primary)] group-hover:text-cyan transition-colors">
+                  M.Sc. in Computer Science & Engineering
+                </span>
+                <span className="font-mono text-[10px] text-[var(--text-muted)] shrink-0">
+                  2022 — 2023
+                </span>
+              </div>
+              <div className="mt-1 flex items-center gap-1.5 text-[11px] font-sans">
+                <span className="text-cyan font-semibold">Jahangirnagar University</span>
+                <span className="text-[var(--text-muted)] text-[10px]">• Savar, Dhaka</span>
+              </div>
+            </div>
+
+            {/* B.Sc. */}
+            <div className="p-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] hover:border-cyan/40 transition-all group">
+              <div className="flex items-start justify-between gap-2">
+                <span className="font-mono text-xs font-bold text-[var(--text-primary)] group-hover:text-cyan transition-colors">
+                  B.Sc. in Computer Science & Engineering
+                </span>
+                <span className="font-mono text-[10px] text-[var(--text-muted)] shrink-0">
+                  2013 — 2017
+                </span>
+              </div>
+              <div className="mt-1 flex items-center gap-1.5 text-[11px] font-sans">
+                <span className="text-cyan font-semibold">IUBAT</span>
+                <span className="text-[var(--text-muted)] text-[10px]">• Dhaka, Bangladesh</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Bottom Footer Area in Left Column */}
-      <div className="mt-8 pt-6 border-t border-[var(--border-color)]">
+      <div className="mt-6 pt-5 border-t border-[var(--border-color)]">
         <div className="flex flex-wrap items-center gap-4">
           {/* Social Icons */}
           <div className="flex items-center gap-3">

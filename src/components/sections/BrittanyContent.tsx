@@ -33,7 +33,6 @@ export default function BrittanyContent({ onOpenContactDrawer }: BrittanyContent
 
   // Filter work experience only (education has its own dedicated section)
   const workExperience = experience.filter((e) => e.type === "Work");
-  const educationItems = experience.filter((e) => e.type === "Education");
 
   return (
     <div className="pt-24 lg:py-24 w-full">
@@ -280,71 +279,6 @@ export default function BrittanyContent({ onOpenContactDrawer }: BrittanyContent
             ))}
           </ul>
         </div>
-      </section>
-
-      {/* ========================================================
-          SECTION: EDUCATION
-          ======================================================== */}
-      <section
-        id="education"
-        className="mb-16 scroll-mt-16 md:mb-24 lg:mb-32 lg:scroll-mt-24"
-        aria-label="Education & Degrees"
-      >
-        {/* Mobile Sticky Header */}
-        <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-[var(--bg-main)]/90 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0 border-b border-[var(--border-color)] lg:border-none">
-          <h2 className="text-sm font-bold uppercase tracking-widest font-mono text-[var(--accent-cyan)] lg:sr-only">
-            Education
-          </h2>
-        </div>
-
-        <ol className="group/list list-none space-y-8">
-          {educationItems.map((edu) => (
-            <li key={edu.id} className="mb-8">
-              <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-40">
-                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-2xl transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-[var(--bg-card)] lg:group-hover:shadow-md lg:group-hover:border lg:group-hover:border-[var(--border-color)]" />
-
-                <header className="z-10 mb-2 mt-1 text-xs font-mono font-semibold uppercase tracking-wide text-[var(--text-muted)] sm:col-span-2">
-                  {edu.period}
-                </header>
-
-                <div className="z-10 sm:col-span-6">
-                  <h3 className="font-display font-medium leading-snug text-[var(--text-primary)]">
-                    <div className="inline-flex items-baseline font-bold leading-tight group/link text-base text-[var(--text-primary)] group-hover:text-[var(--accent-cyan)] transition-colors">
-                      <span>
-                        {edu.role} ·{" "}
-                        <span className="inline-block text-[var(--accent-cyan)]">
-                          {edu.organization}
-                        </span>
-                      </span>
-                    </div>
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)] font-sans">
-                    {edu.summary}
-                  </p>
-                  {edu.highlights && (
-                    <ul className="mt-2 space-y-1 text-xs text-[var(--text-muted)] font-sans">
-                      {edu.highlights.map((h, i) => (
-                        <li key={i} className="flex items-start gap-1.5">
-                          <span className="text-[var(--accent-cyan)] font-bold">›</span>
-                          <span>{h}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                  <ul className="mt-3 flex flex-wrap gap-1.5">
-                    {edu.techStack.map((tech) => (
-                      <li key={tech}>
-                        <span className="inline-flex items-center rounded-full bg-[var(--accent-violet)]/10 px-3 py-1 text-xs font-mono font-medium text-[var(--accent-violet)] border border-[var(--accent-violet)]/20">
-                          {tech}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ol>
       </section>
 
       {/* ========================================================
