@@ -224,61 +224,9 @@ export default function SidebarHeader({
 
               {/* Traveling Glowing Laser Head Bead */}
               <div
-                className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[var(--accent-cyan)] shadow-[0_0_12px_rgba(0,240,255,1)] ring-2 ring-cyan/40 transition-all duration-150 z-20"
+                className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[var(--accent-cyan)] shadow-[0_0_10px_rgba(0,240,255,1)] ring-2 ring-cyan/40 transition-all duration-150 z-20"
                 style={{ left: `${scrollProgress}%` }}
               />
-
-              {/* Interactive Section Waypoints on the Horizon Line */}
-              <div className="absolute inset-0 flex justify-between items-center px-6 pointer-events-auto">
-                <a
-                  href="#about"
-                  onClick={playChime}
-                  title="01 About"
-                  className="group relative -translate-y-1/2 p-1"
-                >
-                  <span
-                    className={`block rounded-full transition-all ${
-                      activeSection === "about"
-                        ? "w-2.5 h-2.5 bg-[var(--accent-cyan)] shadow-[0_0_8px_rgba(0,240,255,0.9)] ring-1 ring-cyan/40"
-                        : "w-1.5 h-1.5 bg-[var(--bg-main)] border border-[var(--border-color)] group-hover:border-[var(--accent-cyan)]"
-                    }`}
-                  />
-                </a>
-                <a
-                  href="#experience"
-                  onClick={playChime}
-                  title="02 Experience"
-                  className="group relative -translate-y-1/2 p-1"
-                  style={{ position: "absolute", left: "38%" }}
-                >
-                  <span
-                    className={`block rounded-full transition-all ${
-                      activeSection === "experience"
-                        ? "w-2.5 h-2.5 bg-[var(--accent-cyan)] shadow-[0_0_8px_rgba(0,240,255,0.9)] ring-1 ring-cyan/40"
-                        : scrollProgress >= 30
-                        ? "w-2 h-2 bg-[var(--accent-cyan)]/70"
-                        : "w-1.5 h-1.5 bg-[var(--bg-main)] border border-[var(--border-color)] group-hover:border-[var(--accent-cyan)]"
-                    }`}
-                  />
-                </a>
-                <a
-                  href="#projects"
-                  onClick={playChime}
-                  title="03 Projects"
-                  className="group relative -translate-y-1/2 p-1"
-                  style={{ position: "absolute", left: "68%" }}
-                >
-                  <span
-                    className={`block rounded-full transition-all ${
-                      activeSection === "projects"
-                        ? "w-2.5 h-2.5 bg-[var(--accent-cyan)] shadow-[0_0_8px_rgba(0,240,255,0.9)] ring-1 ring-cyan/40"
-                        : scrollProgress >= 65
-                        ? "w-2 h-2 bg-[var(--accent-cyan)]/70"
-                        : "w-1.5 h-1.5 bg-[var(--bg-main)] border border-[var(--border-color)] group-hover:border-[var(--accent-cyan)]"
-                    }`}
-                  />
-                </a>
-              </div>
             </div>
           )}
         </div>
