@@ -281,29 +281,6 @@ export default function BrittanyContent({ onOpenContactDrawer }: BrittanyContent
         </div>
       </section>
 
-      {/* ========================================================
-          COLOPHON (Iconic Brittany Chiang Style Footer Note)
-          ======================================================== */}
-      <footer className="max-w-md pb-16 text-xs leading-relaxed text-[var(--text-muted)] font-sans">
-        <p>
-          Loosely designed in{" "}
-          <span className="font-medium text-[var(--text-primary)]">Figma</span> and coded in{" "}
-          <span className="font-medium text-[var(--text-primary)]">Visual Studio Code</span> by Mahdi Hasan. Built with{" "}
-          <span className="font-medium text-[var(--text-primary)]">Next.js</span> and{" "}
-          <span className="font-medium text-[var(--text-primary)]">Tailwind CSS</span>, deployed with 99.9% uptime SLA. Modeled after the iconic{" "}
-          <a
-            href="https://brittanychiang.com"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="font-medium text-[var(--text-primary)] hover:text-cyan transition-colors inline-flex items-baseline"
-          >
-            Brittany Chiang
-            <ArrowRight className="inline-block h-2.5 w-2.5 ml-0.5 -rotate-45" />
-          </a>{" "}
-          portfolio layout.
-        </p>
-      </footer>
-
       {/* Interactive Project Details Modal */}
       <ProjectModal
         project={activeModalProject}
