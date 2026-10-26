@@ -44,9 +44,9 @@ export default function BrittanyContent({ onOpenContactDrawer }: BrittanyContent
         className="mb-16 scroll-mt-16 md:mb-24 lg:mb-32 lg:scroll-mt-24"
         aria-label="About me"
       >
-        {/* Mobile Sticky Header */}
-        <div className="sticky top-[58px] z-20 -mx-6 mb-4 w-screen bg-[var(--bg-main)]/90 px-6 py-4 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0 border-b border-[var(--border-color)] lg:border-none">
-          <h2 className="text-sm font-bold uppercase tracking-widest font-mono text-[var(--accent-cyan)] lg:sr-only">
+        {/* In-flow Section Heading */}
+        <div className="mb-4 lg:sr-only">
+          <h2 className="text-sm font-bold uppercase tracking-widest font-mono text-[var(--accent-cyan)]">
             About
           </h2>
         </div>
@@ -90,9 +90,9 @@ export default function BrittanyContent({ onOpenContactDrawer }: BrittanyContent
         className="mb-16 scroll-mt-16 md:mb-24 lg:mb-32 lg:scroll-mt-24"
         aria-label="Work experience"
       >
-        {/* Mobile Sticky Header */}
-        <div className="sticky top-[58px] z-20 -mx-6 mb-4 w-screen bg-[var(--bg-main)]/90 px-6 py-4 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0 border-b border-[var(--border-color)] lg:border-none">
-          <h2 className="text-sm font-bold uppercase tracking-widest font-mono text-[var(--accent-cyan)] lg:sr-only">
+        {/* In-flow Section Heading */}
+        <div className="mb-4 lg:sr-only">
+          <h2 className="text-sm font-bold uppercase tracking-widest font-mono text-[var(--accent-cyan)]">
             Experience
           </h2>
         </div>
@@ -182,9 +182,9 @@ export default function BrittanyContent({ onOpenContactDrawer }: BrittanyContent
         className="mb-16 scroll-mt-16 md:mb-24 lg:mb-32 lg:scroll-mt-24"
         aria-label="Selected projects"
       >
-        {/* Mobile Sticky Header */}
-        <div className="sticky top-[58px] z-20 -mx-6 mb-4 w-screen bg-[var(--bg-main)]/90 px-6 py-4 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0 border-b border-[var(--border-color)] lg:border-none">
-          <h2 className="text-sm font-bold uppercase tracking-widest font-mono text-[var(--accent-cyan)] lg:sr-only">
+        {/* In-flow Section Heading */}
+        <div className="mb-4 lg:sr-only">
+          <h2 className="text-sm font-bold uppercase tracking-widest font-mono text-[var(--accent-cyan)]">
             Projects
           </h2>
         </div>

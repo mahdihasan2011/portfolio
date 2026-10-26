@@ -19,10 +19,14 @@ import {
 } from "lucide-react";
 
 interface SidebarHeaderProps {
+  activeSection?: string;
   onOpenContactDrawer?: () => void;
 }
 
-export default function SidebarHeader({ onOpenContactDrawer }: SidebarHeaderProps) {
+export default function SidebarHeader({
+  activeSection = "about",
+  onOpenContactDrawer,
+}: SidebarHeaderProps) {
   const { personal, skills } = portfolioData;
   const { isDark, toggleTheme } = useTheme();
   const [soundEnabled, setSoundEnabled] = useState(false);
@@ -125,18 +129,12 @@ export default function SidebarHeader({ onOpenContactDrawer }: SidebarHeaderProp
               </div>
             </div>
 
-            {/* Quick Contact CTA shown in the compact mobile top bar when scrolled */}
-            {isScrolled && onOpenContactDrawer && (
-              <button
-                onClick={() => {
-                  onOpenContactDrawer();
-                  playChime();
-                }}
-                className="lg:hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-cyan/40 bg-cyan/15 text-cyan text-xs font-mono font-medium transition-all hover:scale-105"
-              >
-                <Send className="w-3 h-3" />
-                <span>Contact</span>
-              </button>
+            {/* Active section indicator shown on the right side of mobile sticky header */}
+            {isScrolled && (
+              <div className="lg:hidden inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[var(--accent-cyan)]/30 bg-[var(--accent-cyan)]/10 text-[var(--accent-cyan)] text-xs font-mono font-bold tracking-wider uppercase shadow-sm transition-all duration-300">
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-cyan)] shadow-[0_0_6px_rgba(0,240,255,0.8)]" />
+                <span>{activeSection}</span>
+              </div>
             )}
           </div>
         </div>

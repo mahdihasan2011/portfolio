@@ -46,6 +46,7 @@ export default function Home() {
           {/* Sticky Left Column: Profile, Title, Fixed Skills, Socials */}
           <div className="lg:w-[34%] xl:w-[32%] shrink-0">
             <SidebarHeader
+              activeSection={activeSection}
               onOpenContactDrawer={() => setIsContactDrawerOpen(true)}
             />
           </div>
