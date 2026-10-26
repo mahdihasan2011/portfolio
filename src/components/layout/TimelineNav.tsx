@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Send } from "lucide-react";
 
 export interface TimelineNavProps {
@@ -19,13 +19,56 @@ const TIMELINE_ITEMS: TimelineItem[] = [
   { id: "about", label: "About", step: "01" },
   { id: "experience", label: "Experience", step: "02" },
   { id: "projects", label: "Projects", step: "03" },
-  // { id: "contact", label: "Contact", step: "04", isDrawer: true },
 ];
 
 export default function TimelineNav({
   activeSection,
   onOpenContactDrawer,
 }: TimelineNavProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const dotRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const activeIndex = TIMELINE_ITEMS.findIndex((item) => item.id === activeSection);
+  const safeActiveIndex = activeIndex >= 0 ? activeIndex : 0;
+
+  // Track metrics to accurately anchor the line between the first and last dots
+  const [lineMetrics, setLineMetrics] = useState({
+    top: 16,
+    totalHeight: 114,
+    activeHeight: 0,
+  });
+
+  useEffect(() => {
+    const updateMetrics = () => {
+      const container = containerRef.current;
+      if (!container) return;
+
+      const validDots = dotRefs.current.slice(0, TIMELINE_ITEMS.length).filter(Boolean) as HTMLDivElement[];
+      if (validDots.length < 2) return;
+
+      const containerRect = container.getBoundingClientRect();
+      const firstRect = validDots[0].getBoundingClientRect();
+      const lastRect = validDots[validDots.length - 1].getBoundingClientRect();
+
+      const top = firstRect.top + firstRect.height / 2 - containerRect.top;
+      const lastCenter = lastRect.top + lastRect.height / 2 - containerRect.top;
+      const totalHeight = Math.max(0, lastCenter - top);
+
+      const activeDot = validDots[safeActiveIndex];
+      let activeHeight = 0;
+      if (activeDot) {
+        const activeCenter = activeDot.getBoundingClientRect().top + activeDot.getBoundingClientRect().height / 2 - containerRect.top;
+        activeHeight = Math.min(totalHeight, Math.max(0, activeCenter - top));
+      }
+
+      setLineMetrics({ top, totalHeight, activeHeight });
+    };
+
+    updateMetrics();
+    window.addEventListener("resize", updateMetrics);
+    return () => window.removeEventListener("resize", updateMetrics);
+  }, [safeActiveIndex]);
+
   // Play subtle high-frequency synthesizer chime on node interaction
   const playChime = () => {
     try {
@@ -50,11 +93,6 @@ export default function TimelineNav({
     }
   };
 
-  const activeIndex = TIMELINE_ITEMS.findIndex((item) => item.id === activeSection);
-  const safeActiveIndex = activeIndex >= 0 ? activeIndex : 0;
-  // Percentage to fill the vertical timeline line down to current active node
-  const progressPercent = (safeActiveIndex / (TIMELINE_ITEMS.length - 1)) * 100;
-
   const handleClick = (e: React.MouseEvent, item: TimelineItem) => {
     playChime();
     if (item.isDrawer) {
@@ -78,23 +116,24 @@ export default function TimelineNav({
     >
       {/* Container holding the vertical track & nodes */}
       <div className="relative py-6">
-        {/* Subtle Top Micro Header */}
-        {/* <div className="mb-8 flex items-center gap-2 pl-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-cyan)] shadow-[0_0_8px_rgba(0,240,255,0.8)] animate-pulse" />
-          <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--accent-cyan)] font-bold">
-            Timeline
-          </span>
-        </div> */}
-
         {/* Timeline Spine (Track + Animated Glowing Progress Bar) */}
-        <div className="relative">
-          {/* Base Track Line */}
-          <div className="absolute left-[7px] top-3 bottom-3 w-[1.5px] bg-[var(--border-color)] rounded-full" />
-
-          {/* Active Liquid Gradient Glowing Progress Line */}
+        <div ref={containerRef} className="relative">
+          {/* Base Track Line - Stops exactly at the center of the last dot */}
           <div
-            className="absolute left-[7px] top-3 w-[1.5px] bg-gradient-to-b from-[var(--accent-cyan)] via-[var(--accent-cyan)] to-[var(--accent-violet)] rounded-full shadow-[0_0_8px_rgba(0,240,255,0.8)] transition-all duration-500 ease-out"
-            style={{ height: `${progressPercent}%` }}
+            className="absolute left-[7px] w-[1.5px] bg-[var(--border-color)] rounded-full pointer-events-none"
+            style={{
+              top: `${lineMetrics.top}px`,
+              height: `${lineMetrics.totalHeight}px`,
+            }}
+          />
+
+          {/* Active Liquid Gradient Glowing Progress Line - Never extends past active node */}
+          <div
+            className="absolute left-[7px] w-[1.5px] bg-[var(--accent-cyan)] rounded-full shadow-[0_0_8px_rgba(0,240,255,0.8)] transition-all duration-300 ease-out pointer-events-none"
+            style={{
+              top: `${lineMetrics.top}px`,
+              height: `${lineMetrics.activeHeight}px`,
+            }}
           />
 
           {/* Timeline Nodes & Clean Aligned Labels */}
@@ -112,7 +151,12 @@ export default function TimelineNav({
                   aria-current={isActive ? "page" : undefined}
                 >
                   {/* Timeline Node Marker (Fixed width slot centered on the spine) */}
-                  <div className="relative flex items-center justify-center w-4 h-4 shrink-0">
+                  <div
+                    ref={(el) => {
+                      dotRefs.current[index] = el;
+                    }}
+                    className="relative flex items-center justify-center w-4 h-4 shrink-0"
+                  >
                     {/* Active Pulsing Aura */}
                     {isActive && (
                       <span className="absolute -inset-1 rounded-full bg-[var(--accent-cyan)]/20 animate-ping opacity-75" />
