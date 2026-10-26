@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import { portfolioData } from "@/data/portfolioData";
 import { useTheme } from "@/context/ThemeContext";
 import {
@@ -16,11 +17,23 @@ import {
   Send,
   Code2,
   GraduationCap,
+  Sparkles,
+  Layout,
+  Server,
+  Database,
+  Cloud,
+  Star,
 } from "lucide-react";
 
 interface SidebarHeaderProps {
   activeSection?: string;
   onOpenContactDrawer?: () => void;
+}
+
+interface SkillItem {
+  name: string;
+  description: string;
+  level: string;
 }
 
 export default function SidebarHeader({
@@ -31,6 +44,8 @@ export default function SidebarHeader({
   const { isDark, toggleTheme } = useTheme();
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [selectedSkillCategory, setSelectedSkillCategory] = useState<string>("All");
+  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+  const [activeSkill, setActiveSkill] = useState<SkillItem | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -77,10 +92,45 @@ export default function SidebarHeader({
     "DevOps & Cloud",
   ];
 
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case "Frontend & UI":
+        return <Layout className="w-3 h-3 shrink-0" />;
+      case "Backend & APIs":
+        return <Server className="w-3 h-3 shrink-0" />;
+      case "Database & Storage":
+        return <Database className="w-3 h-3 shrink-0" />;
+      case "DevOps & Cloud":
+        return <Cloud className="w-3 h-3 shrink-0" />;
+      case "All":
+      default:
+        return <Sparkles className="w-3 h-3 shrink-0" />;
+    }
+  };
+
+  const getCategoryShortLabel = (cat: string) => {
+    switch (cat) {
+      case "Frontend & UI":
+        return "Frontend";
+      case "Backend & APIs":
+        return "Backend";
+      case "Database & Storage":
+        return "Database";
+      case "DevOps & Cloud":
+        return "DevOps";
+      default:
+        return "All";
+    }
+  };
+
   const displayedSkills =
     selectedSkillCategory === "All"
       ? skills.flatMap((c) => c.skills)
       : skills.find((c) => c.category === selectedSkillCategory)?.skills || [];
+
+  const currentSkill =
+    activeSkill ||
+    (hoveredSkill ? displayedSkills.find((s) => s.name === hoveredSkill) : null);
 
   return (
     <header className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:max-h-screen lg:w-full lg:flex-col lg:justify-between lg:py-12 shrink-0 lg:overflow-y-auto lg:pr-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
@@ -172,67 +222,146 @@ export default function SidebarHeader({
             TECHNICAL SKILLS (Fixed In Left Sidebar)
             ======================================================== */}
         <div className="mt-8 pt-6 border-t border-[var(--border-color)]">
-          <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center justify-between mb-3.5">
             <div className="flex items-center gap-2">
-              <Code2 className="w-3.5 h-3.5 text-cyan" />
+              <div className="p-1 rounded-md bg-[var(--accent-cyan)]/10 text-[var(--accent-cyan)] shadow-[0_0_8px_rgba(0,240,255,0.2)]">
+                <Code2 className="w-3.5 h-3.5" />
+              </div>
               <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[var(--accent-cyan)]">
                 Technical Arsenal
               </h3>
             </div>
-            <span className="text-[10px] font-mono text-[var(--text-muted)]">
-              {displayedSkills.length} Technologies
-            </span>
+            <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-color)] text-[10px] font-mono text-[var(--text-muted)] shadow-xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-cyan)] shadow-[0_0_4px_rgba(0,240,255,0.8)]" />
+              <span>{displayedSkills.length} Technologies</span>
+            </div>
           </div>
 
-          {/* Category Tabs */}
-          <div className="flex flex-wrap gap-1.5 mb-3.5">
+          {/* Animated Category Tabs with Framer Motion Sliding Pill */}
+          <div className="flex flex-wrap gap-1 p-1 rounded-xl bg-[var(--bg-surface)]/60 border border-[var(--border-color)] mb-3.5 backdrop-blur-sm shadow-xs">
             {skillCategories.map((cat) => {
-              const shortLabel =
-                cat === "Frontend & UI"
-                  ? "Frontend"
-                  : cat === "Backend & APIs"
-                  ? "Backend"
-                  : cat === "Database & Storage"
-                  ? "Database"
-                  : cat === "DevOps & Cloud"
-                  ? "DevOps"
-                  : "All";
+              const isActive = selectedSkillCategory === cat;
+              const shortLabel = getCategoryShortLabel(cat);
 
               return (
                 <button
                   key={cat}
-                  onClick={() => setSelectedSkillCategory(cat)}
-                  className="px-2.5 py-1 rounded-lg text-[11px] font-mono font-medium transition-all"
-                  style={{
-                    backgroundColor:
-                      selectedSkillCategory === cat ? "var(--accent-cyan)" : "var(--bg-surface)",
-                    color: selectedSkillCategory === cat ? "var(--accent-contrast)" : "var(--text-secondary)",
-                    border: `1px solid ${
-                      selectedSkillCategory === cat ? "var(--accent-cyan)" : "var(--border-color)"
-                    }`,
+                  onClick={() => {
+                    setSelectedSkillCategory(cat);
+                    setActiveSkill(null);
+                    playChime();
                   }}
+                  className={`relative px-2.5 py-1 rounded-lg text-[11px] font-mono font-medium transition-colors duration-150 flex items-center gap-1.5 z-10 select-none cursor-pointer ${
+                    isActive
+                      ? "text-[var(--accent-contrast)] font-bold"
+                      : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)]/80"
+                  }`}
                 >
-                  {shortLabel}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeSkillCategoryTab"
+                      className="absolute inset-0 rounded-lg bg-[var(--accent-cyan)] shadow-[0_0_12px_rgba(0,240,255,0.4)]"
+                      transition={{ type: "spring", stiffness: 450, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10 flex items-center gap-1">
+                    {getCategoryIcon(cat)}
+                    <span>{shortLabel}</span>
+                  </span>
                 </button>
               );
             })}
           </div>
 
-          {/* Skill Pills Grid */}
-          <div className="flex flex-wrap gap-1.5">
-            {displayedSkills.map((skill) => (
-              <span
-                key={skill.name}
-                title={`${skill.name} • ${skill.description}`}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-[var(--border-color)] bg-[var(--bg-surface)] text-xs font-mono text-[var(--text-primary)] hover:border-cyan hover:text-cyan transition-colors group cursor-default"
+          {/* Staggered & Fluid Animated Skill Badges */}
+          <motion.div layout className="flex flex-wrap gap-1.5">
+            <AnimatePresence mode="popLayout">
+              {displayedSkills.map((skill, index) => {
+                const isSelected = activeSkill?.name === skill.name;
+                const isHovered = hoveredSkill === skill.name;
+                const isSenior =
+                  skill.level.includes("Senior") || skill.level.includes("Lead");
+
+                return (
+                  <motion.button
+                    layout
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0.85, y: 10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.85, y: -6 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 420,
+                      damping: 26,
+                      delay: index * 0.015,
+                    }}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      setActiveSkill(isSelected ? null : skill);
+                      playChime();
+                    }}
+                    onMouseEnter={() => {
+                      setHoveredSkill(skill.name);
+                    }}
+                    onMouseLeave={() => setHoveredSkill(null)}
+                    className={`group relative inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-mono transition-all duration-200 text-left cursor-pointer ${
+                      isSelected
+                        ? "border-[var(--accent-cyan)] bg-[var(--accent-cyan)]/15 text-[var(--accent-cyan)] shadow-[0_0_14px_rgba(0,240,255,0.25)] ring-1 ring-[var(--accent-cyan)]/40"
+                        : isHovered
+                        ? "border-[var(--accent-cyan)]/70 bg-[var(--bg-surface)] text-[var(--accent-cyan)] shadow-[0_2px_12px_rgba(0,240,255,0.18)]"
+                        : "border-[var(--border-color)] bg-[var(--bg-surface)]/90 text-[var(--text-primary)] hover:border-[var(--accent-cyan)]/60 hover:text-[var(--accent-cyan)]"
+                    }`}
+                  >
+                    <span className="font-medium tracking-tight">{skill.name}</span>
+                    <span
+                      className={`text-[9px] px-1 py-0.2 rounded font-sans transition-colors inline-flex items-center gap-0.5 ${
+                        isSenior
+                          ? "bg-amber-400/10 text-amber-500 dark:text-amber-300 border border-amber-400/25 group-hover:border-amber-400/40"
+                          : "text-[var(--text-muted)] group-hover:text-[var(--accent-cyan)]/80"
+                      }`}
+                    >
+                      {isSenior && (
+                        <Star className="w-2.5 h-2.5 fill-current shrink-0" />
+                      )}
+                      <span>{isSenior ? "Sr" : "• Adv"}</span>
+                    </span>
+                  </motion.button>
+                );
+              })}
+            </AnimatePresence>
+          </motion.div>
+
+          {/* Micro-Inspector Drawer: Expands when a skill is clicked or hovered */}
+          <AnimatePresence>
+            {currentSkill && (
+              <motion.div
+                initial={{ opacity: 0, height: 0, y: -6 }}
+                animate={{ opacity: 1, height: "auto", y: 0 }}
+                exit={{ opacity: 0, height: 0, y: -6 }}
+                transition={{ duration: 0.22, ease: "easeOut" }}
+                className="mt-3 overflow-hidden rounded-xl border border-[var(--accent-cyan)]/35 bg-[var(--accent-cyan)]/5 backdrop-blur-md p-3 shadow-[0_4px_20px_rgba(0,240,255,0.08)]"
               >
-                <span>{skill.name}</span>
-                <span className="text-[9px] text-[var(--text-muted)] font-sans group-hover:text-cyan/80">
-                  {skill.level === "Senior" ? "★ Sr" : "• Adv"}
-                </span>
-              </span>
-            ))}
-          </div>
+                <div className="flex items-center justify-between gap-2 mb-1.5">
+                  <div className="flex items-center gap-2">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent-cyan)] opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent-cyan)]" />
+                    </span>
+                    <span className="font-mono text-xs font-bold text-[var(--text-primary)]">
+                      {currentSkill.name}
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded-full bg-[var(--accent-cyan)]/15 text-[var(--accent-cyan)] border border-[var(--accent-cyan)]/30">
+                    {currentSkill.level}
+                  </span>
+                </div>
+                <p className="text-xs text-[var(--text-secondary)] font-sans leading-relaxed">
+                  {currentSkill.description}
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* ========================================================
