@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { portfolioData } from "@/data/portfolioData";
 import { useTheme } from "@/context/ThemeContext";
@@ -27,6 +27,18 @@ export default function SidebarHeader({ onOpenContactDrawer }: SidebarHeaderProp
   const { isDark, toggleTheme } = useTheme();
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [selectedSkillCategory, setSelectedSkillCategory] = useState<string>("All");
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Trigger compact sticky header when scrolled past top hero space on mobile
+      setIsScrolled(window.scrollY > 40);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const playChime = () => {
     if (!soundEnabled) return;
@@ -69,30 +81,68 @@ export default function SidebarHeader({ onOpenContactDrawer }: SidebarHeaderProp
   return (
     <header className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:max-h-screen lg:w-full lg:flex-col lg:justify-between lg:py-12 shrink-0 lg:overflow-y-auto lg:pr-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
       <div>
-        {/* Profile Avatar & Identity */}
-        <div className="flex items-center gap-4 mb-4">
-          <div
-            className="relative rounded-2xl overflow-hidden border-2 border-[var(--accent-cyan)] shadow-lg group shrink-0"
-            style={{ position: "relative", width: "72px", height: "72px", minWidth: "72px", minHeight: "72px" }}
-          >
-            <Image
-              src={personal.avatarUrl}
-              alt={personal.name}
-              width={144}
-              height={144}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              priority
-            />
-          </div>
-          <div>
-            <h1 className="font-display text-4xl sm:text-5xl font-bold tracking-tight text-[var(--text-primary)]">
-              <a href="#about" onClick={playChime}>{personal.name}</a>
-            </h1>
-            <h2 className="mt-1 font-mono text-base sm:text-lg font-semibold text-[var(--accent-cyan)]">
-              {personal.title}
-            </h2>
+        {/* Profile Avatar & Identity: Shortened and fixed on top when scrolled in mobile view */}
+        <div
+          className={`transition-all duration-300 ease-in-out ${
+            isScrolled
+              ? "fixed top-0 left-0 right-0 z-30 bg-[var(--bg-glass)] backdrop-blur-md border-b border-[var(--border-color)] px-4 py-2.5 shadow-md lg:static lg:p-0 lg:bg-transparent lg:border-none lg:shadow-none"
+              : "relative mb-4"
+          }`}
+        >
+          <div className="flex items-center justify-between max-w-[1360px] mx-auto lg:max-w-none">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div
+                className={`relative rounded-xl overflow-hidden border-2 border-[var(--accent-cyan)] shadow-md group shrink-0 transition-all duration-300 ${
+                  isScrolled
+                    ? "w-10 h-10 min-w-10 min-h-10 lg:w-[72px] lg:h-[72px] lg:min-w-[72px] lg:min-h-[72px]"
+                    : "w-[72px] h-[72px] min-w-[72px] min-h-[72px]"
+                }`}
+              >
+                <Image
+                  src={personal.avatarUrl}
+                  alt={personal.name}
+                  width={144}
+                  height={144}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  priority
+                />
+              </div>
+              <div>
+                <h1
+                  className={`font-display font-bold tracking-tight text-[var(--text-primary)] transition-all duration-300 ${
+                    isScrolled ? "text-lg sm:text-xl lg:text-4xl xl:text-5xl" : "text-4xl sm:text-5xl"
+                  }`}
+                >
+                  <a href="#about" onClick={playChime}>{personal.name}</a>
+                </h1>
+                <h2
+                  className={`font-mono font-semibold text-[var(--accent-cyan)] transition-all duration-300 ${
+                    isScrolled ? "text-xs sm:text-sm lg:text-base xl:text-lg" : "mt-1 text-base sm:text-lg"
+                  }`}
+                >
+                  {personal.title}
+                </h2>
+              </div>
+            </div>
+
+            {/* Quick Contact CTA shown in the compact mobile top bar when scrolled */}
+            {isScrolled && onOpenContactDrawer && (
+              <button
+                onClick={() => {
+                  onOpenContactDrawer();
+                  playChime();
+                }}
+                className="lg:hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-cyan/40 bg-cyan/15 text-cyan text-xs font-mono font-medium transition-all hover:scale-105"
+              >
+                <Send className="w-3 h-3" />
+                <span>Contact</span>
+              </button>
+            )}
           </div>
         </div>
+
+        {/* Layout placeholder on mobile to prevent content jump when header docks to top */}
+        {isScrolled && <div className="h-[96px] lg:hidden mb-4" />}
 
         {/* Short Statement */}
         <p className="mt-4 max-w-sm text-sm sm:text-base leading-relaxed text-[var(--text-secondary)] font-sans">

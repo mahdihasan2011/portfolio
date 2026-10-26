@@ -45,7 +45,7 @@ export default function BrittanyContent({ onOpenContactDrawer }: BrittanyContent
         aria-label="About me"
       >
         {/* Mobile Sticky Header */}
-        <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-[var(--bg-main)]/90 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0 border-b border-[var(--border-color)] lg:border-none">
+        <div className="sticky top-[58px] z-20 -mx-6 mb-4 w-screen bg-[var(--bg-main)]/90 px-6 py-4 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0 border-b border-[var(--border-color)] lg:border-none">
           <h2 className="text-sm font-bold uppercase tracking-widest font-mono text-[var(--accent-cyan)] lg:sr-only">
             About
           </h2>
@@ -91,7 +91,7 @@ export default function BrittanyContent({ onOpenContactDrawer }: BrittanyContent
         aria-label="Work experience"
       >
         {/* Mobile Sticky Header */}
-        <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-[var(--bg-main)]/90 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0 border-b border-[var(--border-color)] lg:border-none">
+        <div className="sticky top-[58px] z-20 -mx-6 mb-4 w-screen bg-[var(--bg-main)]/90 px-6 py-4 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0 border-b border-[var(--border-color)] lg:border-none">
           <h2 className="text-sm font-bold uppercase tracking-widest font-mono text-[var(--accent-cyan)] lg:sr-only">
             Experience
           </h2>
@@ -183,7 +183,7 @@ export default function BrittanyContent({ onOpenContactDrawer }: BrittanyContent
         aria-label="Selected projects"
       >
         {/* Mobile Sticky Header */}
-        <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-[var(--bg-main)]/90 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0 border-b border-[var(--border-color)] lg:border-none">
+        <div className="sticky top-[58px] z-20 -mx-6 mb-4 w-screen bg-[var(--bg-main)]/90 px-6 py-4 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0 border-b border-[var(--border-color)] lg:border-none">
           <h2 className="text-sm font-bold uppercase tracking-widest font-mono text-[var(--accent-cyan)] lg:sr-only">
             Projects
           </h2>
