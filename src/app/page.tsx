@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from "react";
 import MouseSpotlight from "@/components/ui/MouseSpotlight";
 import SidebarHeader from "@/components/layout/SidebarHeader";
+import TimelineNav from "@/components/layout/TimelineNav";
+import TimelineNavMobile from "@/components/layout/TimelineNavMobile";
 import BrittanyContent from "@/components/sections/BrittanyContent";
 import FloatingContactButton from "@/components/ui/FloatingContactButton";
 import ContactDrawer from "@/components/ui/ContactDrawer";
@@ -40,16 +42,33 @@ export default function Home() {
       <MouseSpotlight />
 
       {/* Main Container */}
-      <div className="mx-auto min-h-screen max-w-screen-xl px-6 py-12 font-sans md:px-12 md:py-16 lg:py-0">
-        <div className="lg:flex lg:justify-between lg:gap-4">
-          {/* Sticky Left Column: Profile, Title, Jump Nav, Fixed Skills, Socials */}
-          <SidebarHeader
-            activeSection={activeSection}
+      <div className="mx-auto min-h-screen max-w-screen-xl px-4 sm:px-6 md:px-8 lg:px-6 xl:px-8 font-sans py-12 lg:py-0">
+        {/* Mobile Sticky Timeline Bar */}
+        <div className="lg:hidden mb-4">
+          <TimelineNavMobile
+            activeSection={isContactDrawerOpen ? "contact" : activeSection}
             onOpenContactDrawer={() => setIsContactDrawerOpen(true)}
           />
+        </div>
+
+        <div className="lg:flex lg:justify-between lg:gap-4 xl:gap-8 relative">
+          {/* Sticky Left Column: Profile, Title, Fixed Skills, Socials */}
+          <div className="lg:w-[38%] xl:w-[36%] shrink-0">
+            <SidebarHeader
+              onOpenContactDrawer={() => setIsContactDrawerOpen(true)}
+            />
+          </div>
+
+          {/* Middle Line Area: Timeline Navigation with Line, Nodes & Labels */}
+          <div className="hidden lg:flex lg:w-[150px] xl:w-[165px] shrink-0 justify-center">
+            <TimelineNav
+              activeSection={isContactDrawerOpen ? "contact" : activeSection}
+              onOpenContactDrawer={() => setIsContactDrawerOpen(true)}
+            />
+          </div>
 
           {/* Scrollable Right Column: Content Sections */}
-          <main id="content" className="flex-1 lg:max-w-[55%]">
+          <main id="content" className="flex-1 lg:max-w-[48%] xl:max-w-[50%]">
             <BrittanyContent
               onOpenContactDrawer={() => setIsContactDrawerOpen(true)}
             />

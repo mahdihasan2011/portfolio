@@ -6,14 +6,8 @@ import {
   Send,
   CheckCircle2,
   AlertCircle,
-  Mail,
-  Phone,
   Linkedin,
   Github,
-  MessageCircle,
-  Bot,
-  Sparkles,
-  ArrowRight,
 } from "lucide-react";
 import { portfolioData } from "@/data/portfolioData";
 
@@ -28,7 +22,6 @@ export default function ContactDrawer({ isOpen, onClose }: ContactDrawerProps) {
   const [formState, setFormState] = useState({
     name: "",
     email: "",
-    phone: "",
     subject: "Software Engineering Opportunity",
     message: "",
   });
@@ -85,7 +78,6 @@ export default function ContactDrawer({ isOpen, onClose }: ContactDrawerProps) {
 🚀 *New Direct Inquiry via Portfolio*
 👤 *From:* ${formState.name}
 📧 *Email:* ${formState.email}
-📞 *Phone:* ${formState.phone || "Not provided"}
 📝 *Subject:* ${formState.subject}
 💬 *Message:*
 ${formState.message}
@@ -128,7 +120,6 @@ ${formState.message}
     setFormState({
       name: "",
       email: "",
-      phone: "",
       subject: "Software Engineering Opportunity",
       message: "",
     });
@@ -191,41 +182,6 @@ ${formState.message}
             </button>
           </div>
 
-          {/* Quick Direct Communication Badges */}
-          <div className="grid grid-cols-2 gap-2.5 my-5">
-            <a
-              href={`mailto:${personal.email}`}
-              className="flex items-center gap-2.5 p-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] hover:border-cyan transition-all group"
-            >
-              <div className="p-1.5 rounded-lg bg-cyan/10 text-cyan shrink-0">
-                <Mail className="w-3.5 h-3.5" />
-              </div>
-              <div className="overflow-hidden">
-                <span className="text-[10px] font-mono text-[var(--text-muted)] block uppercase">Email</span>
-                <span className="text-xs font-semibold text-[var(--text-primary)] group-hover:text-cyan truncate block">
-                  {personal.email}
-                </span>
-              </div>
-            </a>
-
-            <a
-              href={personal.whatsappUrl}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="flex items-center gap-2.5 p-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] hover:border-emerald-400 transition-all group"
-            >
-              <div className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400 shrink-0">
-                <Phone className="w-3.5 h-3.5" />
-              </div>
-              <div className="overflow-hidden">
-                <span className="text-[10px] font-mono text-[var(--text-muted)] block uppercase">WhatsApp</span>
-                <span className="text-xs font-semibold text-[var(--text-primary)] group-hover:text-emerald-400 truncate block">
-                  {personal.phoneFormatted}
-                </span>
-              </div>
-            </a>
-          </div>
-
           {/* Form Content / Success State */}
           {formStatus === "success" ? (
             <div className="flex-1 flex flex-col items-center justify-center text-center py-8 px-4 space-y-4">
@@ -279,7 +235,7 @@ ${formState.message}
                 e.preventDefault();
                 handleSubmit(e);
               }}
-              className="flex-1 flex flex-col space-y-4"
+              className="flex-1 flex flex-col space-y-4 mt-6"
               noValidate
             >
               {/* Name */}
@@ -303,44 +259,24 @@ ${formState.message}
                 />
               </div>
 
-              {/* Email & Phone */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label
-                    htmlFor="drawer-email"
-                    className="block text-xs font-mono font-semibold uppercase text-[var(--text-secondary)] mb-1.5"
-                  >
-                    Email Address <span className="text-cyan">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    id="drawer-email"
-                    name="email"
-                    value={formState.email}
-                    onChange={handleInputChange}
-                    required
-                    placeholder="sarah@company.com"
-                    className="w-full px-4 py-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] text-sm text-[var(--text-primary)] focus:outline-none focus:border-cyan transition-colors"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="drawer-phone"
-                    className="block text-xs font-mono font-semibold uppercase text-[var(--text-secondary)] mb-1.5"
-                  >
-                    Phone / WhatsApp
-                  </label>
-                  <input
-                    type="tel"
-                    id="drawer-phone"
-                    name="phone"
-                    value={formState.phone}
-                    onChange={handleInputChange}
-                    placeholder="+1 (555) 000-0000"
-                    className="w-full px-4 py-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] text-sm text-[var(--text-primary)] focus:outline-none focus:border-cyan transition-colors"
-                  />
-                </div>
+              {/* Email */}
+              <div>
+                <label
+                  htmlFor="drawer-email"
+                  className="block text-xs font-mono font-semibold uppercase text-[var(--text-secondary)] mb-1.5"
+                >
+                  Email Address <span className="text-cyan">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="drawer-email"
+                  name="email"
+                  value={formState.email}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="sarah@company.com"
+                  className="w-full px-4 py-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] text-sm text-[var(--text-primary)] focus:outline-none focus:border-cyan transition-colors"
+                />
               </div>
 
               {/* Subject */}

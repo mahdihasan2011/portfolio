@@ -18,11 +18,10 @@ import {
 } from "lucide-react";
 
 interface SidebarHeaderProps {
-  activeSection: string;
   onOpenContactDrawer?: () => void;
 }
 
-export default function SidebarHeader({ activeSection, onOpenContactDrawer }: SidebarHeaderProps) {
+export default function SidebarHeader({ onOpenContactDrawer }: SidebarHeaderProps) {
   const { personal, skills } = portfolioData;
   const { isDark, toggleTheme } = useTheme();
   const [soundEnabled, setSoundEnabled] = useState(false);
@@ -52,13 +51,6 @@ export default function SidebarHeader({ activeSection, onOpenContactDrawer }: Si
     }
   };
 
-  const navLinks = [
-    { id: "about", label: "About" },
-    { id: "experience", label: "Experience" },
-    { id: "projects", label: "Projects" },
-    { id: "education", label: "Education" },
-  ];
-
   // Flattened or filtered skills
   const skillCategories = [
     "All",
@@ -74,7 +66,7 @@ export default function SidebarHeader({ activeSection, onOpenContactDrawer }: Si
       : skills.find((c) => c.category === selectedSkillCategory)?.skills || [];
 
   return (
-    <header className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:max-h-screen lg:w-[42%] lg:flex-col lg:justify-between lg:py-16 shrink-0 lg:overflow-y-auto lg:pr-2">
+    <header className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:max-h-screen lg:w-full lg:flex-col lg:justify-between lg:py-16 shrink-0 lg:overflow-y-auto lg:pr-2">
       <div>
         {/* Profile Avatar & Identity */}
         <div className="flex items-center gap-4 mb-4">
@@ -127,45 +119,10 @@ export default function SidebarHeader({ activeSection, onOpenContactDrawer }: Si
           )}
         </div>
 
-        {/* Brittany Chiang In-Page Nav (Desktop) */}
-        <nav className="nav hidden lg:block" aria-label="In-page jump links">
-          <ul className="mt-10 w-max space-y-1">
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.id;
-              return (
-                <li key={link.id}>
-                  <a
-                    href={`#${link.id}`}
-                    onClick={playChime}
-                    className="group flex items-center py-2.5"
-                  >
-                    <span
-                      className={`nav-indicator mr-4 h-px transition-all motion-reduce:transition-none ${
-                        isActive
-                          ? "w-16 bg-[var(--accent-cyan)]"
-                          : "w-8 bg-slate-600 group-hover:w-16 group-hover:bg-slate-200"
-                      }`}
-                    />
-                    <span
-                      className={`nav-text text-xs font-mono font-bold uppercase tracking-widest transition-colors ${
-                        isActive
-                          ? "text-[var(--accent-cyan)]"
-                          : "text-[var(--text-muted)] group-hover:text-[var(--text-primary)]"
-                      }`}
-                    >
-                      {link.label}
-                    </span>
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-
         {/* ========================================================
             TECHNICAL SKILLS (Fixed In Left Sidebar)
             ======================================================== */}
-        <div className="mt-10 pt-8 border-t border-[var(--border-color)]">
+        <div className="mt-8 pt-6 border-t border-[var(--border-color)]">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <Code2 className="w-3.5 h-3.5 text-cyan" />
