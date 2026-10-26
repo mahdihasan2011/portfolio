@@ -42,7 +42,7 @@ export default function Home() {
       <MouseSpotlight />
 
       {/* Main Container */}
-      <div className="mx-auto min-h-screen max-w-screen-xl px-4 sm:px-6 md:px-8 lg:px-6 xl:px-8 font-sans py-12 lg:py-0">
+      <div className="mx-auto min-h-screen max-w-[1360px] px-4 sm:px-6 md:px-8 lg:px-8 xl:px-12 font-sans py-12 lg:py-0">
         {/* Mobile Sticky Timeline Bar */}
         <div className="lg:hidden mb-4">
           <TimelineNavMobile
@@ -51,16 +51,16 @@ export default function Home() {
           />
         </div>
 
-        <div className="lg:flex lg:justify-between lg:gap-4 xl:gap-8 relative">
+        <div className="lg:flex lg:justify-between lg:gap-6 xl:gap-10 relative">
           {/* Sticky Left Column: Profile, Title, Fixed Skills, Socials */}
-          <div className="lg:w-[38%] xl:w-[36%] shrink-0">
+          <div className="lg:w-[34%] xl:w-[32%] shrink-0">
             <SidebarHeader
               onOpenContactDrawer={() => setIsContactDrawerOpen(true)}
             />
           </div>
 
           {/* Middle Line Area: Timeline Navigation with Line, Nodes & Labels */}
-          <div className="hidden lg:flex lg:w-[150px] xl:w-[165px] shrink-0 justify-center">
+          <div className="hidden lg:flex lg:w-[135px] xl:w-[155px] shrink-0 justify-center">
             <TimelineNav
               activeSection={isContactDrawerOpen ? "contact" : activeSection}
               onOpenContactDrawer={() => setIsContactDrawerOpen(true)}
@@ -68,7 +68,7 @@ export default function Home() {
           </div>
 
           {/* Scrollable Right Column: Content Sections */}
-          <main id="content" className="flex-1 lg:max-w-[48%] xl:max-w-[50%]">
+          <main id="content" className="flex-1 lg:max-w-[53%] xl:max-w-[55%] lg:pl-2">
             <BrittanyContent
               onOpenContactDrawer={() => setIsContactDrawerOpen(true)}
             />

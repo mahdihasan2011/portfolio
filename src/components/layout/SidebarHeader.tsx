@@ -66,7 +66,7 @@ export default function SidebarHeader({ onOpenContactDrawer }: SidebarHeaderProp
       : skills.find((c) => c.category === selectedSkillCategory)?.skills || [];
 
   return (
-    <header className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:max-h-screen lg:w-full lg:flex-col lg:justify-between lg:py-16 shrink-0 lg:overflow-y-auto lg:pr-2">
+    <header className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:max-h-screen lg:w-full lg:flex-col lg:justify-between lg:py-12 shrink-0 lg:overflow-y-auto lg:pr-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
       <div>
         {/* Profile Avatar & Identity */}
         <div className="flex items-center gap-4 mb-4">
@@ -170,7 +170,7 @@ export default function SidebarHeader({ onOpenContactDrawer }: SidebarHeaderProp
           </div>
 
           {/* Skill Pills Grid */}
-          <div className="flex flex-wrap gap-1.5 max-h-56 overflow-y-auto pr-1">
+          <div className="flex flex-wrap gap-1.5 max-h-52 overflow-y-auto pr-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             {displayedSkills.map((skill) => (
               <span
                 key={skill.name}

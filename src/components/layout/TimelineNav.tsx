@@ -42,7 +42,7 @@ export default function TimelineNav({
       osc.type = "sine";
       osc.frequency.setValueAtTime(587.33, ctx.currentTime);
       osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.1);
-      gain.gain.setValueAtTime(0.035, ctx.currentTime);
+      gain.gain.setValueAtTime(0.03, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
       osc.start();
       osc.stop(ctx.currentTime + 0.1);
@@ -74,35 +74,32 @@ export default function TimelineNav({
 
   return (
     <aside
-      className="hidden lg:flex lg:sticky lg:top-0 lg:h-screen lg:flex-col lg:justify-center shrink-0 z-20 select-none"
+      className="hidden lg:flex lg:sticky lg:top-0 lg:h-screen lg:flex-col lg:justify-center shrink-0 z-20 select-none px-2"
       aria-label="Timeline navigation"
     >
-      {/* Full-height subtle background vertical divider line */}
-      <div className="absolute left-[17px] top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-[var(--border-color)] to-transparent pointer-events-none" />
-
-      {/* Main Timeline Card / Column */}
-      <div className="relative py-8 pl-1 pr-4">
-        {/* Top Minimalist Header Tag */}
-        <div className="mb-6 flex items-center gap-2 pl-1">
+      {/* Container holding the vertical track & nodes */}
+      <div className="relative py-6">
+        {/* Subtle Top Micro Header */}
+        <div className="mb-8 flex items-center gap-2 pl-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-cyan)] shadow-[0_0_8px_rgba(0,240,255,0.8)] animate-pulse" />
-          <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--accent-cyan)] font-bold">
+          <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--accent-cyan)] font-bold">
             Timeline
           </span>
         </div>
 
-        {/* Timeline Spine (Track + Animated Progress Bar) */}
+        {/* Timeline Spine (Track + Animated Glowing Progress Bar) */}
         <div className="relative">
           {/* Base Track Line */}
-          <div className="absolute left-[16px] top-2 bottom-2 w-[2px] bg-slate-800/80 dark:bg-slate-800/80 rounded-full" />
+          <div className="absolute left-[7px] top-3 bottom-3 w-[1.5px] bg-slate-800/80 dark:bg-slate-800/80 rounded-full" />
 
-          {/* Active Gradient Glowing Progress Line */}
+          {/* Active Liquid Gradient Glowing Progress Line */}
           <div
-            className="absolute left-[16px] top-2 w-[2px] bg-gradient-to-b from-[var(--accent-cyan)] via-[var(--accent-cyan)] to-[var(--accent-violet)] rounded-full shadow-[0_0_10px_rgba(0,240,255,0.7)] transition-all duration-500 ease-out"
+            className="absolute left-[7px] top-3 w-[1.5px] bg-gradient-to-b from-[var(--accent-cyan)] via-[var(--accent-cyan)] to-[var(--accent-violet)] rounded-full shadow-[0_0_8px_rgba(0,240,255,0.8)] transition-all duration-500 ease-out"
             style={{ height: `${progressPercent}%` }}
           />
 
-          {/* Timeline Nodes & Labels */}
-          <nav className="flex flex-col space-y-7 relative z-10">
+          {/* Timeline Nodes & Clean Aligned Labels */}
+          <nav className="flex flex-col space-y-6 relative z-10">
             {TIMELINE_ITEMS.map((item, index) => {
               const isActive = activeSection === item.id;
               const isPassed = safeActiveIndex > index;
@@ -112,44 +109,46 @@ export default function TimelineNav({
                   key={item.id}
                   href={`#${item.id}`}
                   onClick={(e) => handleClick(e, item)}
-                  className="group flex items-center gap-3.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] rounded-lg py-1 px-1 transition-all"
+                  className="group flex items-center focus:outline-none focus-visible:ring-1 focus-visible:ring-[var(--accent-cyan)] rounded-lg py-1 transition-all"
                   aria-current={isActive ? "page" : undefined}
                 >
-                  {/* Timeline Node Marker */}
-                  <div className="relative flex items-center justify-center w-8 h-8 shrink-0">
-                    {/* Active Pulsing Ring */}
+                  {/* Timeline Node Marker (Fixed width slot centered on the spine) */}
+                  <div className="relative flex items-center justify-center w-4 h-4 shrink-0">
+                    {/* Active Pulsing Aura */}
                     {isActive && (
-                      <span className="absolute inset-0 rounded-full bg-[var(--accent-cyan)]/25 animate-ping opacity-75" />
+                      <span className="absolute -inset-1 rounded-full bg-[var(--accent-cyan)]/20 animate-ping opacity-75" />
                     )}
 
                     {/* Circular Node Dot */}
                     <div
-                      className={`relative rounded-full transition-all duration-300 ${
+                      className={`rounded-full transition-all duration-300 ${
                         isActive
-                          ? "w-4 h-4 bg-[var(--accent-cyan)] border-2 border-white dark:border-[#07090e] shadow-[0_0_14px_rgba(0,240,255,0.9)] scale-110"
+                          ? "w-3 h-3 bg-[var(--accent-cyan)] shadow-[0_0_12px_rgba(0,240,255,0.9)] ring-2 ring-cyan/40 scale-125"
                           : isPassed
-                          ? "w-3 h-3 bg-[var(--accent-cyan)]/60 border border-[var(--accent-cyan)]"
-                          : "w-3 h-3 bg-[var(--bg-main)] border-2 border-slate-600 dark:border-slate-700 group-hover:border-[var(--accent-cyan)] group-hover:scale-125"
+                          ? "w-2 h-2 bg-[var(--accent-cyan)]/60"
+                          : "w-2 h-2 bg-slate-700 dark:bg-slate-700 group-hover:bg-[var(--accent-cyan)] group-hover:scale-125"
                       }`}
                     />
                   </div>
 
-                  {/* Horizontal Connector Branch (Dash) */}
-                  <span
-                    className={`h-[1.5px] transition-all duration-300 ${
-                      isActive
-                        ? "w-6 bg-[var(--accent-cyan)] shadow-[0_0_8px_rgba(0,240,255,0.8)]"
-                        : isPassed
-                        ? "w-4 bg-[var(--accent-cyan)]/50"
-                        : "w-3 bg-slate-700 group-hover:w-5 group-hover:bg-[var(--accent-cyan)]"
-                    }`}
-                  />
+                  {/* Fixed-Width Horizontal Branch Slot (Ensures labels never jitter or jump) */}
+                  <div className="w-7 flex items-center pl-1.5 shrink-0">
+                    <span
+                      className={`h-[1.5px] transition-all duration-300 ${
+                        isActive
+                          ? "w-5 bg-[var(--accent-cyan)] shadow-[0_0_6px_rgba(0,240,255,0.8)]"
+                          : isPassed
+                          ? "w-3.5 bg-[var(--accent-cyan)]/50"
+                          : "w-2.5 bg-slate-700 group-hover:w-4 group-hover:bg-[var(--accent-cyan)]"
+                      }`}
+                    />
+                  </div>
 
-                  {/* Step Label & Numeric Tag */}
+                  {/* Aligned Monospace Label & Tag */}
                   <div
-                    className={`flex items-center gap-2 px-2.5 py-1 rounded-md transition-all duration-200 ${
+                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full transition-all duration-200 ${
                       isActive
-                        ? "bg-[var(--accent-cyan)]/10 border border-[var(--accent-cyan)]/30 text-[var(--accent-cyan)]"
+                        ? "bg-[var(--accent-cyan)]/10 text-[var(--accent-cyan)] border border-[var(--accent-cyan)]/25 shadow-[0_0_12px_rgba(0,240,255,0.08)]"
                         : "text-[var(--text-muted)] group-hover:text-[var(--text-primary)] group-hover:bg-[var(--bg-surface)]"
                     }`}
                   >
@@ -163,8 +162,8 @@ export default function TimelineNav({
                       {item.step}
                     </span>
                     <span
-                      className={`font-mono text-xs tracking-widest uppercase transition-colors ${
-                        isActive ? "font-extrabold" : "font-semibold"
+                      className={`font-mono text-[11px] tracking-[0.15em] uppercase transition-colors ${
+                        isActive ? "font-bold" : "font-medium"
                       }`}
                     >
                       {item.label}
@@ -184,10 +183,10 @@ export default function TimelineNav({
         </div>
 
         {/* Bottom Minimalist Status / Pulse Note */}
-        <div className="mt-8 pl-1">
-          <div className="inline-flex items-center gap-2 text-[10px] font-mono text-[var(--text-muted)]">
+        <div className="mt-8 pl-1.5">
+          <div className="inline-flex items-center gap-1.5 text-[9px] font-mono text-[var(--text-muted)] tracking-wider">
             <span className="w-1 h-1 rounded-full bg-slate-600" />
-            <span className="uppercase tracking-wider">Scroll Synced</span>
+            <span className="uppercase tracking-[0.16em] opacity-80">Scroll Synced</span>
           </div>
         </div>
       </div>
