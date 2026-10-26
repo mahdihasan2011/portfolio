@@ -47,11 +47,22 @@ export default function SidebarHeader({
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
   const [activeSkill, setActiveSkill] = useState<SkillItem | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       // Trigger compact sticky header when scrolled past top hero space on mobile
       setIsScrolled(window.scrollY > 40);
+
+      const totalHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        const current = Math.min(
+          100,
+          Math.max(0, Math.round((window.scrollY / totalHeight) * 100))
+        );
+        setScrollProgress(current);
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -185,14 +196,91 @@ export default function SidebarHeader({
               </div>
             </div>
 
-            {/* Active section indicator shown on the right side of mobile sticky header */}
+            {/* Active section indicator & depth gauge on mobile sticky header */}
             {isScrolled && (
-              <div className="lg:hidden inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[var(--accent-cyan)]/30 bg-[var(--accent-cyan)]/10 text-[var(--accent-cyan)] text-xs font-mono font-bold tracking-wider uppercase shadow-sm transition-all duration-300">
-                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-cyan)] shadow-[0_0_6px_rgba(0,240,255,0.8)]" />
-                <span>{activeSection}</span>
+              <div className="lg:hidden flex items-center gap-2 shrink-0">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-[var(--accent-cyan)]/30 bg-[var(--accent-cyan)]/10 text-[var(--accent-cyan)] text-xs font-mono font-bold tracking-wider uppercase shadow-xs transition-all duration-300">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-cyan)] shadow-[0_0_6px_rgba(0,240,255,0.8)] animate-pulse" />
+                  <span>{activeSection}</span>
+                </div>
+                <span className="font-mono text-[10px] font-bold text-[var(--accent-cyan)] tracking-wider">
+                  {scrollProgress}%
+                </span>
               </div>
             )}
           </div>
+
+          {/* Mobile Liquid Horizon Timeline Rail along the bottom edge of sticky header */}
+          {isScrolled && (
+            <div className="lg:hidden absolute bottom-0 left-0 right-0 h-[2.5px] overflow-visible pointer-events-none z-40">
+              {/* Background Track Line */}
+              <div className="absolute inset-0 bg-[var(--border-color)]/70" />
+
+              {/* Dynamic Liquid Glowing Fill Line */}
+              <div
+                className="absolute top-0 bottom-0 left-0 bg-gradient-to-r from-[var(--accent-cyan)] via-[var(--accent-cyan)] to-[var(--accent-cyan)] shadow-[0_0_10px_rgba(0,240,255,0.9)] transition-all duration-150"
+                style={{ width: `${scrollProgress}%` }}
+              />
+
+              {/* Traveling Glowing Laser Head Bead */}
+              <div
+                className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[var(--accent-cyan)] shadow-[0_0_12px_rgba(0,240,255,1)] ring-2 ring-cyan/40 transition-all duration-150 z-20"
+                style={{ left: `${scrollProgress}%` }}
+              />
+
+              {/* Interactive Section Waypoints on the Horizon Line */}
+              <div className="absolute inset-0 flex justify-between items-center px-6 pointer-events-auto">
+                <a
+                  href="#about"
+                  onClick={playChime}
+                  title="01 About"
+                  className="group relative -translate-y-1/2 p-1"
+                >
+                  <span
+                    className={`block rounded-full transition-all ${
+                      activeSection === "about"
+                        ? "w-2.5 h-2.5 bg-[var(--accent-cyan)] shadow-[0_0_8px_rgba(0,240,255,0.9)] ring-1 ring-cyan/40"
+                        : "w-1.5 h-1.5 bg-[var(--bg-main)] border border-[var(--border-color)] group-hover:border-[var(--accent-cyan)]"
+                    }`}
+                  />
+                </a>
+                <a
+                  href="#experience"
+                  onClick={playChime}
+                  title="02 Experience"
+                  className="group relative -translate-y-1/2 p-1"
+                  style={{ position: "absolute", left: "38%" }}
+                >
+                  <span
+                    className={`block rounded-full transition-all ${
+                      activeSection === "experience"
+                        ? "w-2.5 h-2.5 bg-[var(--accent-cyan)] shadow-[0_0_8px_rgba(0,240,255,0.9)] ring-1 ring-cyan/40"
+                        : scrollProgress >= 30
+                        ? "w-2 h-2 bg-[var(--accent-cyan)]/70"
+                        : "w-1.5 h-1.5 bg-[var(--bg-main)] border border-[var(--border-color)] group-hover:border-[var(--accent-cyan)]"
+                    }`}
+                  />
+                </a>
+                <a
+                  href="#projects"
+                  onClick={playChime}
+                  title="03 Projects"
+                  className="group relative -translate-y-1/2 p-1"
+                  style={{ position: "absolute", left: "68%" }}
+                >
+                  <span
+                    className={`block rounded-full transition-all ${
+                      activeSection === "projects"
+                        ? "w-2.5 h-2.5 bg-[var(--accent-cyan)] shadow-[0_0_8px_rgba(0,240,255,0.9)] ring-1 ring-cyan/40"
+                        : scrollProgress >= 65
+                        ? "w-2 h-2 bg-[var(--accent-cyan)]/70"
+                        : "w-1.5 h-1.5 bg-[var(--bg-main)] border border-[var(--border-color)] group-hover:border-[var(--accent-cyan)]"
+                    }`}
+                  />
+                </a>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Layout placeholder on mobile to prevent content jump when header docks to top */}
