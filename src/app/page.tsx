@@ -41,7 +41,7 @@ export default function Home() {
       <MouseSpotlight />
 
       {/* Main Container */}
-      <div className="mx-auto min-h-screen max-w-[1360px] px-4 sm:px-6 md:px-8 lg:px-8 xl:px-12 font-sans py-12 lg:py-0">
+      <div className="mx-auto min-h-screen max-w-[1360px] px-4 sm:px-6 md:px-8 lg:px-8 xl:px-12 font-sans py-12 lg:py-0 pb-20 lg:pb-0">
         <div className="lg:flex lg:justify-between lg:gap-6 xl:gap-10 relative">
           {/* Sticky Left Column: Profile, Title, Fixed Skills, Socials */}
           <div className="lg:w-[34%] xl:w-[32%] shrink-0">

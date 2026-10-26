@@ -12,7 +12,7 @@ export default function FloatingContactButton({ onClick }: FloatingContactButton
     <button
       onClick={onClick}
       aria-label="Open direct contact form"
-      className="fixed bottom-6 right-6 z-40 group flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-full bg-cyan text-charcoal-950 font-sans font-bold text-xs sm:text-sm tracking-wide shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-[0_0_25px_rgba(0,240,255,0.55)] cursor-pointer"
+      className="fixed bottom-16 right-4 sm:bottom-20 sm:right-6 lg:bottom-6 lg:right-6 z-40 group flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-full bg-cyan text-charcoal-950 font-sans font-bold text-xs sm:text-sm tracking-wide shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-[0_0_25px_rgba(0,240,255,0.55)] cursor-pointer"
     >
       {/* Online Beacon Indicator */}
       <span className="relative flex h-2.5 w-2.5">

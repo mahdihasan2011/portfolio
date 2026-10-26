@@ -239,9 +239,9 @@ export default function SidebarHeader({ onOpenContactDrawer }: SidebarHeaderProp
         </div>
       </div>
 
-      {/* Bottom Footer Area in Left Column */}
-      <div className="mt-6 pt-5 border-t border-[var(--border-color)]">
-        <div className="flex flex-wrap items-center gap-4">
+      {/* Bottom Footer Area: Fixed at bottom on mobile, pinned to sidebar on desktop */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--bg-card)]/90 backdrop-blur-md border-t border-[var(--border-color)] px-3 sm:px-4 py-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] shadow-xl lg:static lg:bottom-auto lg:left-auto lg:right-auto lg:z-auto lg:p-0 lg:bg-transparent lg:shadow-none lg:border-t lg:border-[var(--border-color)] lg:mt-6 lg:pt-5">
+        <div className="flex items-center justify-between lg:justify-start lg:gap-4 max-w-md mx-auto lg:mx-0">
           {/* Social Icons */}
           <div className="flex items-center gap-3">
             <a
