@@ -1,24 +1,24 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { Space_Grotesk, Outfit, Fira_Code } from "next/font/google";
 import { portfolioData } from "@/data/portfolioData";
 import { ThemeProvider } from "@/context/ThemeContext";
 import "./globals.css";
 
-const inter = Inter({
+const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-outfit",
   display: "swap",
 });
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-plus-jakarta",
+  variable: "--font-space-grotesk",
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const firaCode = Fira_Code({
   subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
+  variable: "--font-fira-code",
   display: "swap",
 });
 
@@ -88,7 +88,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${plusJakartaSans.variable} ${jetbrainsMono.variable} font-sans min-h-screen selection:bg-cyan/30 selection:text-white transition-colors duration-300`}
+        className={`${outfit.variable} ${spaceGrotesk.variable} ${firaCode.variable} font-sans min-h-screen selection:bg-cyan/30 selection:text-white transition-colors duration-300`}
         style={{ backgroundColor: "var(--bg-main)", color: "var(--text-primary)" }}
         suppressHydrationWarning
       >

@@ -34,9 +34,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
-        display: ["var(--font-plus-jakarta)", "system-ui", "-apple-system", "sans-serif"],
-        mono: ["var(--font-jetbrains-mono)", "monospace"],
+        sans: ["var(--font-outfit)", "system-ui", "-apple-system", "sans-serif"],
+        display: ["var(--font-space-grotesk)", "system-ui", "-apple-system", "sans-serif"],
+        mono: ["var(--font-fira-code)", "monospace"],
       },
       boxShadow: {
         "subtle-glow": "0 0 25px rgba(0, 240, 255, 0.08), 0 0 50px rgba(139, 92, 246, 0.05)",
