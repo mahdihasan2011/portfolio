@@ -23,7 +23,7 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mahdihasan.dev"),
+  metadataBase: new URL("https://mahdihasan2011.github.io"),
   title: `${portfolioData.personal.name} | ${portfolioData.personal.title} — ${portfolioData.personal.specialization}`,
   description: `${portfolioData.personal.name} is a Software Engineer with ${portfolioData.personal.experienceYears}+ years of production experience specializing in React, Next.js, Node.js, and Laravel. Explore featured engineering projects, scalable systems, and direct contact channels.`,
   keywords: [
@@ -38,22 +38,33 @@ export const metadata: Metadata = {
     "TypeScript",
     "Web Application Development",
   ],
-  authors: [{ name: portfolioData.personal.name }],
+  authors: [{ name: portfolioData.personal.name, url: "https://mahdihasan2011.github.io/portfolio/" }],
+  alternates: {
+    canonical: "https://mahdihasan2011.github.io/portfolio/",
+  },
   openGraph: {
-    title: `${portfolioData.personal.name} | ${portfolioData.personal.title}`,
-    description: portfolioData.hero.subheadline,
-    url: "https://github.com/mahdihasan2011",
+    title: `${portfolioData.personal.name} | ${portfolioData.personal.title} — ${portfolioData.personal.specialization}`,
+    description: `${portfolioData.personal.name} is a Software Engineer with ${portfolioData.personal.experienceYears}+ years of production experience specializing in React, Next.js, Node.js, and Laravel.`,
+    url: "https://mahdihasan2011.github.io/portfolio/",
     siteName: `${portfolioData.personal.name} Portfolio`,
     images: [
       {
-        url: portfolioData.personal.avatarUrl,
+        url: "https://mahdihasan2011.github.io/portfolio/images/profilepic4.jpeg",
+        secureUrl: "https://mahdihasan2011.github.io/portfolio/images/profilepic4.jpeg",
         width: 800,
         height: 800,
-        alt: `${portfolioData.personal.name} Portrait`,
+        type: "image/jpeg",
+        alt: `${portfolioData.personal.name} — ${portfolioData.personal.title}`,
       },
     ],
     locale: "en_US",
     type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: `${portfolioData.personal.name} | ${portfolioData.personal.title}`,
+    description: `${portfolioData.personal.name} is a Software Engineer with ${portfolioData.personal.experienceYears}+ years of production experience specializing in React, Next.js, Node.js, and Laravel.`,
+    images: ["https://mahdihasan2011.github.io/portfolio/images/profilepic4.jpeg"],
   },
   icons: {
     icon: portfolioData.personal.avatarUrl,
