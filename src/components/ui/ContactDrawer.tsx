@@ -101,9 +101,9 @@ ${formState.message}
       if (response.ok) {
         setTelegramDelivered(true);
         setFormStatus("success");
-        setFeedbackMessage("Message transmitted directly to Mahdi's Telegram! You will receive a prompt response.");
+        setFeedbackMessage("Your message has been sent directly to Mahdi! You will receive a prompt response.");
       } else {
-        // Fallback: Telegram API rejected or rate limited
+        // Fallback: API rejected or rate limited
         setTelegramDelivered(true);
         setFormStatus("success");
         setFeedbackMessage("Inquiry captured and transmitted to Mahdi's notifications channel! Expect a reply soon.");
@@ -158,9 +158,9 @@ ${formState.message}
           {/* Header */}
           <div className="flex items-start justify-between pb-5 border-b border-[var(--border-color)]">
             <div>
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-cyan/30 bg-cyan/10 text-cyan text-[11px] font-mono mb-2">
-                <span className="w-2 h-2 rounded-full bg-cyan animate-pulse" />
-                <span className="font-semibold">Telegram Bot Gateway</span>
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-[var(--accent-cyan)]/30 bg-[var(--accent-cyan)]/10 text-[var(--accent-cyan)] text-[11px] font-mono mb-2">
+                <span className="w-2 h-2 rounded-full bg-[var(--accent-cyan)] animate-pulse" />
+                <span className="font-semibold">Direct Contact Channel</span>
               </div>
               <h2
                 id="contact-drawer-title"
@@ -169,14 +169,14 @@ ${formState.message}
                 Let&apos;s Connect
               </h2>
               <p className="mt-1 text-xs sm:text-sm text-[var(--text-secondary)] font-sans">
-                Transmit a direct message to Mahdi&apos;s Telegram & personal notifications.
+                Send a direct message to Mahdi&apos;s personal notifications.
               </p>
             </div>
 
             <button
               onClick={onClose}
               aria-label="Close contact drawer"
-              className="p-2 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-cyan hover:border-cyan transition-all hover:scale-105 shrink-0"
+              className="p-2 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] hover:border-[var(--accent-cyan)] transition-all hover:scale-105 shrink-0"
             >
               <X className="w-5 h-5" />
             </button>
@@ -186,7 +186,7 @@ ${formState.message}
           {formStatus === "success" ? (
             <div className="flex-1 flex flex-col items-center justify-center text-center py-8 px-4 space-y-4">
               <div className="relative">
-                <div className="w-16 h-16 rounded-2xl bg-cyan/20 border-2 border-cyan flex items-center justify-center text-cyan shadow-xl animate-bounce">
+                <div className="w-16 h-16 rounded-2xl bg-[var(--accent-cyan)]/20 border-2 border-[var(--accent-cyan)] flex items-center justify-center text-[var(--accent-cyan)] shadow-xl animate-bounce">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
                 <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-emerald-400 flex items-center justify-center text-[10px] text-charcoal-950 font-bold">
@@ -195,7 +195,7 @@ ${formState.message}
               </div>
 
               <h3 className="font-display text-xl font-bold text-[var(--text-primary)]">
-                Dispatched to Telegram!
+                Message Sent!
               </h3>
 
               <p className="text-sm text-[var(--text-secondary)] max-w-sm font-sans leading-relaxed">
@@ -205,7 +205,7 @@ ${formState.message}
               <div className="p-3.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] text-left w-full space-y-1.5 text-xs font-mono">
                 <div className="text-[var(--text-muted)] flex items-center justify-between">
                   <span>Routing:</span>
-                  <span className="text-cyan">Telegram Bot API (SSL Encrypted)</span>
+                  <span className="text-[var(--accent-cyan)]">Direct Encrypted Relay (SSL)</span>
                 </div>
                 <div className="text-[var(--text-muted)] flex items-center justify-between">
                   <span>Delivery Status:</span>
@@ -216,13 +216,13 @@ ${formState.message}
               <div className="pt-4 flex gap-3 w-full">
                 <button
                   onClick={handleReset}
-                  className="flex-1 py-2.5 px-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] text-xs font-mono font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-cyan transition-colors"
+                  className="flex-1 py-2.5 px-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] text-xs font-mono font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent-cyan)] transition-colors"
                 >
                   Send Another Message
                 </button>
                 <button
                   onClick={onClose}
-                  className="flex-1 py-2.5 px-4 rounded-xl bg-cyan text-charcoal-950 font-bold text-xs font-sans hover:scale-105 transition-transform shadow-md"
+                  className="flex-1 py-2.5 px-4 rounded-full bg-[var(--accent-cyan)] text-charcoal-950 font-bold text-xs font-sans hover:scale-105 transition-transform shadow-md"
                 >
                   Done & Close
                 </button>
@@ -244,7 +244,7 @@ ${formState.message}
                   htmlFor="drawer-name"
                   className="block text-xs font-mono font-semibold uppercase text-[var(--text-secondary)] mb-1.5"
                 >
-                  Your Name <span className="text-cyan">*</span>
+                  Your Name <span className="text-[var(--accent-cyan)]">*</span>
                 </label>
                 <input
                   ref={nameInputRef}
@@ -255,7 +255,7 @@ ${formState.message}
                   onChange={handleInputChange}
                   required
                   placeholder="e.g. Sarah Jenkins"
-                  className="w-full px-4 py-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] text-sm text-[var(--text-primary)] focus:outline-none focus:border-cyan transition-colors"
+                  className="w-full px-4 py-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-cyan)] transition-colors"
                 />
               </div>
 
@@ -265,7 +265,7 @@ ${formState.message}
                   htmlFor="drawer-email"
                   className="block text-xs font-mono font-semibold uppercase text-[var(--text-secondary)] mb-1.5"
                 >
-                  Email Address <span className="text-cyan">*</span>
+                  Email Address <span className="text-[var(--accent-cyan)]">*</span>
                 </label>
                 <input
                   type="email"
@@ -275,7 +275,7 @@ ${formState.message}
                   onChange={handleInputChange}
                   required
                   placeholder="sarah@company.com"
-                  className="w-full px-4 py-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] text-sm text-[var(--text-primary)] focus:outline-none focus:border-cyan transition-colors"
+                  className="w-full px-4 py-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-cyan)] transition-colors"
                 />
               </div>
 
@@ -292,7 +292,7 @@ ${formState.message}
                   name="subject"
                   value={formState.subject}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] text-sm text-[var(--text-primary)] focus:outline-none focus:border-cyan transition-colors"
+                  className="w-full px-4 py-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-cyan)] transition-colors"
                 >
                   <option value="Software Engineering Opportunity">Software Engineering Opportunity</option>
                   <option value="Full-Stack Technical Consultation">Full-Stack Technical Consultation</option>
@@ -308,7 +308,7 @@ ${formState.message}
                   htmlFor="drawer-message"
                   className="block text-xs font-mono font-semibold uppercase text-[var(--text-secondary)] mb-1.5"
                 >
-                  Message <span className="text-cyan">*</span>
+                  Message <span className="text-[var(--accent-cyan)]">*</span>
                 </label>
                 <textarea
                   id="drawer-message"
@@ -318,7 +318,7 @@ ${formState.message}
                   onChange={handleInputChange}
                   required
                   placeholder="Outline your requirements, project scope, or opportunity details..."
-                  className="w-full flex-1 px-4 py-3 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] text-sm text-[var(--text-primary)] focus:outline-none focus:border-cyan transition-colors resize-y min-h-[110px]"
+                  className="w-full flex-1 px-4 py-3 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-cyan)] transition-colors resize-y min-h-[110px]"
                 />
               </div>
 
@@ -335,25 +335,37 @@ ${formState.message}
                 <button
                   type="submit"
                   disabled={formStatus === "submitting"}
-                  className="w-full py-3 px-6 rounded-xl font-sans font-bold text-sm text-charcoal-950 bg-cyan hover:bg-cyan/90 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60 shadow-lg flex items-center justify-center gap-2"
+                  className="w-full group flex items-center justify-center gap-2.5 pl-3 pr-5 py-2.5 rounded-full bg-[var(--accent-cyan)] text-charcoal-950 font-sans font-bold text-xs sm:text-sm tracking-wide shadow-2xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:shadow-[0_0_25px_rgba(0,240,255,0.65)] disabled:opacity-60 cursor-pointer"
                 >
                   {formStatus === "submitting" ? (
                     <>
                       <div className="w-4 h-4 border-2 border-charcoal-950 border-t-transparent rounded-full animate-spin" />
-                      <span>Transmitting to Telegram...</span>
+                      <span className="font-semibold text-charcoal-950">Sending Message...</span>
                     </>
                   ) : (
                     <>
-                      <Send className="w-4 h-4" />
-                      <span>Send Direct Message</span>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-charcoal-950/20 uppercase tracking-wider ml-1">
-                        Telegram
-                      </span>
+                      {/* Modern Circular Icon Disc with Embedded Live Beacon */}
+                      <div className="relative flex items-center justify-center w-7 h-7 rounded-full bg-charcoal-950/15 group-hover:bg-charcoal-950 group-hover:text-[var(--accent-cyan)] transition-all duration-300 shrink-0">
+                        <svg
+                          className="w-3.5 h-3.5 fill-current transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="m20.665 3.717-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l-.313 4.674c.458 0 .66-.21.916-.457l2.199-2.138 4.574 3.379c.843.464 1.45.225 1.66-.782l2.998-14.127c.307-1.23-.468-1.787-1.51-.516z" />
+                        </svg>
+
+                        {/* Live Active Status Pip */}
+                        <span className="absolute -top-0.5 -right-0.5 flex h-2 w-2">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 shadow-xs" />
+                        </span>
+                      </div>
+
+                      <span className="font-semibold text-charcoal-950">Send Direct Message</span>
                     </>
                   )}
                 </button>
                 <p className="mt-2 text-center text-[11px] text-[var(--text-muted)] font-mono">
-                  🔒 Encrypted bot relay • Notifications routed directly to mobile
+                  🔒 Encrypted direct relay • Notifications routed directly to mobile
                 </p>
               </div>
             </form>

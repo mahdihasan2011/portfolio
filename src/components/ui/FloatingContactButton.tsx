@@ -31,11 +31,6 @@ export default function FloatingContactButton({ onClick }: FloatingContactButton
       </div>
 
       <span className="font-semibold text-charcoal-950">Contact Now</span>
-
-      {/* Subtle Telegram pill badge */}
-      <span className="hidden sm:inline-flex items-center text-[10px] font-mono px-2 py-0.5 rounded-full bg-charcoal-950/15 text-charcoal-950 font-bold uppercase tracking-wider">
-        Telegram
-      </span>
     </button>
   );
 }
