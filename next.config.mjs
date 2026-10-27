@@ -3,9 +3,7 @@ const isGithubPages = process.env.GITHUB_ACTIONS === 'true' || process.env.GITHU
 const basePath = isGithubPages ? '/portfolio' : '';
 
 const nextConfig = {
-  output: 'export',
-  basePath,
-  assetPrefix: basePath,
+  ...(isGithubPages ? { output: 'export', basePath, assetPrefix: basePath } : {}),
   reactStrictMode: true,
   transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
   images: {
