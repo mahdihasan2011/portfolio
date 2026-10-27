@@ -98,6 +98,7 @@ export interface PortfolioData {
 const careerStartYear = 2018;
 const currentYear = new Date().getFullYear();
 export const calculatedExperienceYears = Math.max(1, currentYear - careerStartYear);
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export const portfolioData: PortfolioData = {
   personal: {
@@ -114,8 +115,8 @@ export const portfolioData: PortfolioData = {
     ],
     approach:
       "My software engineering philosophy is grounded in First-Principles: writing clean, modular code, enforcing strict type-safety, designing efficient database schemas, and eliminating unnecessary abstractions. I focus on building reliable software engineered to scale seamlessly under demanding production workloads.",
-    avatarUrl: "/images/profilepic4.jpeg",
-    resumeUrl: "/Mahdi_Hasan_Resume.pdf",
+    avatarUrl: `${basePath}/images/profilepic4.jpeg`,
+    resumeUrl: `${basePath}/Mahdi_Hasan_Resume.pdf`,
     location: "Dhaka, Bangladesh",
     fullAddress: "Asiatic Shopping Mall, Konapara, Jatrabari, Dhaka-1362, Bangladesh",
     phone: "+8801307607635",
@@ -224,7 +225,7 @@ export const portfolioData: PortfolioData = {
       myContribution:
         "Architected an offline-first POS client using IndexedDB and WebSocket sync with a high-concurrency Node.js and Laravel backend, delivering instant sub-50ms barcode scanning.",
       tags: ["React", "TypeScript", "Node.js", "Laravel", "MySQL", "WebSockets"],
-      image: "/images/pos.jpg",
+      image: `${basePath}/images/pos.jpg`,
       stars: 128,
       sourceUrl: "https://github.com/mahdihasan2011",
       details: {
@@ -250,7 +251,7 @@ export const portfolioData: PortfolioData = {
       myContribution:
         "Refactored the frontend into Next.js App Router with Incremental Static Regeneration (ISR) and Redis distributed caching, cutting Page Load Time by 65%.",
       tags: ["Next.js", "React", "Laravel", "Redis", "Tailwind CSS", "MySQL"],
-      image: "/images/ecommerce.jpg",
+      image: `${basePath}/images/ecommerce.jpg`,
       stars: 245,
       sourceUrl: "https://github.com/mahdihasan2011",
       details: {
@@ -276,7 +277,7 @@ export const portfolioData: PortfolioData = {
       myContribution:
         "Engineered an automated vendor lifecycle portal with custom commission calculations, escrow ledgering, and merchant self-service dashboards.",
       tags: ["Vue.js 3", "Laravel", "PHP 8", "MySQL", "Docker", "REST API"],
-      image: "/images/ecom3.jpg",
+      image: `${basePath}/images/ecom3.jpg`,
       stars: 89,
       sourceUrl: "https://github.com/mahdihasan2011",
       details: {
@@ -302,7 +303,7 @@ export const portfolioData: PortfolioData = {
       myContribution:
         "Built a high-frequency Canvas/WebGL charting interface using React, Web Workers for tick aggregation, and low-latency WebSocket stream subscribers.",
       tags: ["React", "TypeScript", "Three.js", "WebSockets", "Node.js", "Tailwind CSS"],
-      image: "/images/money-transfer.jpg",
+      image: `${basePath}/images/money-transfer.jpg`,
       stars: 312,
       sourceUrl: "https://github.com/mahdihasan2011",
       details: {
@@ -328,7 +329,7 @@ export const portfolioData: PortfolioData = {
       myContribution:
         "Engineered an omnichannel ticket management system with real-time agent collision detection, automated triage rules, and customer timeline unification.",
       tags: ["React", "Next.js", "Laravel", "PostgreSQL", "WebSockets", "Redis"],
-      image: "/images/crm1.jpg",
+      image: `${basePath}/images/crm1.jpg`,
       stars: 174,
       sourceUrl: "https://github.com/mahdihasan2011",
       details: {
@@ -354,7 +355,7 @@ export const portfolioData: PortfolioData = {
       myContribution:
         "Built a double-entry financial ledger service guaranteeing immutable journal entries with automated bank feed reconciliation and audit trails.",
       tags: ["TypeScript", "Node.js", "React", "PostgreSQL", "Docker", "Jest"],
-      image: "/images/money-transfer.jpg",
+      image: `${basePath}/images/money-transfer.jpg`,
       stars: 142,
       sourceUrl: "https://github.com/mahdihasan2011",
       details: {
@@ -380,7 +381,7 @@ export const portfolioData: PortfolioData = {
       myContribution:
         "Designed an asynchronous OCR and semantic extraction pipeline that parses unstructured PDF files into clean, typed JSON data structures.",
       tags: ["Next.js", "React", "Node.js", "Python", "Docker", "Tailwind CSS"],
-      image: "/images/crm2.jpg",
+      image: `${basePath}/images/crm2.jpg`,
       stars: 96,
       sourceUrl: "https://github.com/mahdihasan2011",
       details: {
@@ -406,7 +407,7 @@ export const portfolioData: PortfolioData = {
       myContribution:
         "Architected an automated MikroTik RouterOS API socket integration that updates queues in real time and cuts overdue connection lines automatically.",
       tags: ["Laravel", "PHP 8", "MySQL", "MikroTik API", "Linux", "Bootstrap"],
-      image: "/images/isp-billing.jpg",
+      image: `${basePath}/images/isp-billing.jpg`,
       stars: 78,
       sourceUrl: "https://github.com/mahdihasan2011",
       details: {

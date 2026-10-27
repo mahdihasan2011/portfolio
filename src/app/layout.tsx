@@ -56,9 +56,9 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/images/profilepic4.jpeg",
-    shortcut: "/images/profilepic4.jpeg",
-    apple: "/images/profilepic4.jpeg",
+    icon: portfolioData.personal.avatarUrl,
+    shortcut: portfolioData.personal.avatarUrl,
+    apple: portfolioData.personal.avatarUrl,
   },
 };
 

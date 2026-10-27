@@ -1,9 +1,18 @@
 /** @type {import('next').NextConfig} */
+const isGithubPages = process.env.GITHUB_ACTIONS === 'true' || process.env.GITHUB_PAGES === 'true';
+const basePath = isGithubPages ? '/portfolio' : '';
+
 const nextConfig = {
+  output: 'export',
+  basePath,
+  assetPrefix: basePath,
   reactStrictMode: true,
   transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
   images: {
     unoptimized: true,
+  },
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
   },
 };
 
