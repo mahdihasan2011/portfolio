@@ -192,7 +192,6 @@ export const portfolioData: PortfolioData = {
         { name: "PHP & Laravel", description: "Eloquent ORM, Queues, Service Providers, Authentication", level: "Senior / Lead" },
         { name: "RESTful & WebSockets", description: "Real-time feeds, contract schemas, JWT/OAuth, rate limiting", level: "Advanced" },
         { name: "API Gateways", description: "Load balancing, request routing, caching & proxying", level: "Senior" },
-        { name: "Python Scripting", description: "Automation scripts, data processing, auxiliary utilities", level: "Competent" },
       ],
     },
     {
@@ -201,7 +200,6 @@ export const portfolioData: PortfolioData = {
         { name: "MySQL & MariaDB", description: "Indexing, query optimization, triggers, transactions", level: "Senior / Lead" },
         { name: "PostgreSQL", description: "Complex joins, full-text search, JSONB, schema migrations", level: "Advanced" },
         { name: "Redis Caching", description: "In-memory caching, pub/sub, rate limiting, session storage", level: "Advanced" },
-        { name: "MongoDB & NoSQL", description: "Document modeling, aggregation pipelines, flexible schemas", level: "Competent" },
       ],
     },
     {
@@ -380,7 +378,7 @@ export const portfolioData: PortfolioData = {
         "Enterprise staff spent hours manually retyping data from PDF invoices, contracts, and receipts into legacy database tables.",
       myContribution:
         "Designed an asynchronous OCR and semantic extraction pipeline that parses unstructured PDF files into clean, typed JSON data structures.",
-      tags: ["Next.js", "React", "Node.js", "Python", "Docker", "Tailwind CSS"],
+      tags: ["Next.js", "React", "Node.js", "TypeScript", "Docker", "Tailwind CSS"],
       image: `${basePath}/images/crm2.jpg`,
       stars: 96,
       sourceUrl: "https://github.com/mahdihasan2011",
@@ -394,7 +392,7 @@ export const portfolioData: PortfolioData = {
           "Webhook notifications when batch document jobs complete successfully"
         ],
         architecture:
-          "Next.js frontend with drag-and-drop file upload; Node.js API orchestrating Python OCR workers containerized via Docker with asynchronous job queues."
+          "Next.js frontend with drag-and-drop file upload; Node.js API orchestrating OCR worker services containerized via Docker with asynchronous job queues."
       }
     },
     {
