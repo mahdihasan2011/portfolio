@@ -418,7 +418,7 @@ export const portfolioData: PortfolioData = {
       id: "exp-tiyasha",
       role: "Web Developer (Contractual)",
       organization: "Tiyasha Software",
-      period: "Dec 2022 — Jan 2023",
+      period: "Sep 2023 — Nov 2023",
       location: "Bengaluru, India (Contractual)",
       type: "Work",
       summary:
