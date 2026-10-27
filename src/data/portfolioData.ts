@@ -462,21 +462,6 @@ export const portfolioData: PortfolioData = {
       techStack: ["PHP", "Laravel", "JavaScript", "Bootstrap", "MySQL", "jQuery"]
     },
     {
-      id: "exp-freelance",
-      role: "Freelance Software Developer & Consultant",
-      organization: "Independent Practice",
-      period: "2018 — Continuing",
-      location: "Dhaka, Bangladesh & Worldwide",
-      type: "Work",
-      summary:
-        "Consulted and built custom software, ERP modules, POS engines, and client web applications for global businesses.",
-      highlights: [
-        "Delivered 50+ custom web applications, SaaS dashboards, and database integrations.",
-        "Maintained 100% on-time project delivery record with long-term retainer clients."
-      ],
-      techStack: ["React", "Next.js", "Node.js", "Laravel", "MySQL", "Tailwind CSS"]
-    },
-    {
       id: "exp-dhakacenter",
       role: "Intern Software Developer",
       organization: "Dhaka Center NIC Limited",
