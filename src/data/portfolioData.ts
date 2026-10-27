@@ -400,10 +400,10 @@ export const portfolioData: PortfolioData = {
     // Work Experience
     {
       id: "exp-vivacom",
-      role: "Senior Software Developer",
+      role: "Senior Software Developer (Remote)",
       organization: "Vivacom BD",
       period: "Dec 2023 — Present",
-      location: "Dhaka, Bangladesh",
+      location: "Dhaka, Bangladesh (Remote)",
       type: "Work",
       summary:
         "Leading client-facing frontend architecture and full-stack system scalability for enterprise financial dashboard applications.",
