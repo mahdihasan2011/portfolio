@@ -111,7 +111,7 @@ export const portfolioData: PortfolioData = {
     bio: [
       `I am a Software Engineer with over ${calculatedExperienceYears} years of production experience designing, building, and deploying scalable web applications and high-performance backend systems.`,
       "From responsive client applications built with React and Next.js to robust backend APIs engineered in Node.js, Express, and Laravel, I take full end-to-end ownership of the software engineering lifecycle — from database modeling to production cloud deployment.",
-      "I have built and delivered mission-critical software solutions including retail point-of-sale engines, real-time trading terminals, multi-vendor e-commerce marketplaces, and automated billing gateways that process millions of transactions with high reliability."
+      "I have built and delivered mission-critical software solutions including retail point-of-sale engines, financial analytics ledgers, multi-vendor e-commerce marketplaces, and automated billing gateways that process millions of transactions with high reliability."
     ],
     approach:
       "My software engineering philosophy is grounded in First-Principles: writing clean, modular code, enforcing strict type-safety, designing efficient database schemas, and eliminating unnecessary abstractions. I focus on building reliable software engineered to scale seamlessly under demanding production workloads.",
@@ -289,32 +289,6 @@ export const portfolioData: PortfolioData = {
         ],
         architecture:
           "Vue.js 3 reactive frontend backed by Laravel Queue workers handling asynchronous payout calculations and automated email notifications."
-      }
-    },
-    {
-      id: "crypto-trading-terminal",
-      title: "Real-Time Trading & Crypto Terminal",
-      subtitle: "Sub-Second Market Data Visualizer & Order Execution Dashboard",
-      category: "Fintech & Trading",
-      problemSolved:
-        "Traders experienced UI freezing and delayed price ticker quotes during periods of intense market volatility when processing 1,000+ ticks/sec.",
-      myContribution:
-        "Built a high-frequency Canvas/WebGL charting interface using React, Web Workers for tick aggregation, and low-latency WebSocket stream subscribers.",
-      tags: ["React", "TypeScript", "Three.js", "WebSockets", "Node.js", "Tailwind CSS"],
-      image: `${basePath}/images/money-transfer.jpg`,
-      stars: 312,
-      sourceUrl: "https://github.com/mahdihasan2011",
-      details: {
-        overview:
-          "Institutional-grade digital asset terminal featuring real-time order books, dynamic depth charts, interactive indicators, and simulated paper execution.",
-        keyFeatures: [
-          "60fps WebGL candlestick and depth chart rendering handling continuous market feeds",
-          "Off-main-thread orderbook processing in dedicated Web Workers preventing UI jank",
-          "Interactive stop-loss and take-profit visual order placement overlay",
-          "Dark/Light custom trading themes with high-contrast indicator palettes"
-        ],
-        architecture:
-          "Next.js/React frontend with Three.js rendering overlays; Node.js stream broker subscribing to market feeds and broadcasting delta diffs via binary WebSockets."
       }
     },
     {
