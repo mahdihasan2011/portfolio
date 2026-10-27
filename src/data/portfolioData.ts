@@ -432,10 +432,10 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "exp-fieldboosters",
-      role: "Software Developer",
+      role: "Software Developer (Hybrid)",
       organization: "Field Booster Limited",
       period: "Jun 2020 — Aug 2023",
-      location: "Bashundhara R/A, Dhaka, Bangladesh",
+      location: "Bashundhara R/A, Dhaka, Bangladesh (Hybrid)",
       type: "Work",
       summary:
         "Built and maintained core full-stack features for a high-traffic e-commerce platform and merchant vendor management systems.",
