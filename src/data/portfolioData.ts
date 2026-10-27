@@ -434,7 +434,7 @@ export const portfolioData: PortfolioData = {
       id: "exp-fieldboosters",
       role: "Software Developer",
       organization: "Field Booster Limited",
-      period: "Jun 2020 — Dec 2022",
+      period: "Jun 2020 — Aug 2023",
       location: "Bashundhara R/A, Dhaka, Bangladesh",
       type: "Work",
       summary:
