@@ -450,7 +450,7 @@ export const portfolioData: PortfolioData = {
       id: "exp-creative",
       role: "Junior Laravel Developer",
       organization: "Creative Software Limited",
-      period: "Aug 2018 — May 2020",
+      period: "Feb 2018 — May 2020",
       location: "Elephant Road, Dhaka, Bangladesh",
       type: "Work",
       summary:
