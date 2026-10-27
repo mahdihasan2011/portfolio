@@ -416,13 +416,13 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "exp-tiyasha",
-      role: "Web Developer (Remote)",
+      role: "Web Developer (Contractual)",
       organization: "Tiyasha Software",
       period: "Dec 2022 — Jan 2023",
-      location: "Bengaluru, India (Remote)",
+      location: "Bengaluru, India (Contractual)",
       type: "Work",
       summary:
-        "Worked remotely with an international engineering team on distributed web technologies, microservices, and client portal applications.",
+        "Worked on a contractual basis with an international engineering team on distributed web technologies, microservices, and client portal applications.",
       highlights: [
         "Engineered RESTful backend endpoints and dynamic frontend views for diverse international client requirements.",
         "Collaborated across time zones using Git workflows, agile sprints, and daily asynchronous standups.",
