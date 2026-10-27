@@ -402,7 +402,7 @@ export const portfolioData: PortfolioData = {
       id: "exp-vivacom",
       role: "Senior Software Developer",
       organization: "Vivacom BD",
-      period: "Jan 2023 — Present",
+      period: "Dec 2023 — Present",
       location: "Dhaka, Bangladesh",
       type: "Work",
       summary:
